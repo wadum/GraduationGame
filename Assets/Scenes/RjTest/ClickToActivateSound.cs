@@ -18,11 +18,14 @@ public class ClickToActivateSound : MonoBehaviour
         if (Input.GetMouseButtonUp(0) == true)
         {
             RaycastHit hit;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
             Physics.Raycast(ray, out hit, Mathf.Infinity);
 
-            if (hit.transform.gameObject.tag == "PlayOnClick")
+            if (hit.collider.tag == "PlayOnClick")
             {
+                Debug.Log("Sound!");
                 sound.Play();
             }
         }
