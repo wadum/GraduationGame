@@ -21,13 +21,18 @@ public class CharacterMovement : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
+                if (hit.collider.tag != "Terrain")
+                {
+                    return;
+                }
+
                 /*NavMeshHit navHit;
                 if (agent.Raycast(hit.point, out navHit)){
                     agent.SetDestination(navHit.position);
                 }
                 else
                 {*/
-                    agent.SetDestination(hit.point);
+                agent.SetDestination(hit.point);
                 //}
             }
         }

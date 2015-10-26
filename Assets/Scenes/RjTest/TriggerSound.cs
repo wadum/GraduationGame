@@ -12,15 +12,18 @@ public class TriggerSound : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
 
-    void OntriggerEnter (Collider player)
+    }
+
+    void OnTriggerEnter (Collider player)
     {
+
         if (player.tag != "Player")
         {
             return;
         }
+
+        Debug.Log("sound!");
         sound.Play();
     }
 }
