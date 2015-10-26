@@ -21,29 +21,20 @@ public class CharacterMovement : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-<<<<<<< HEAD
                 NavMeshHit navHit;
-=======
+
                 if (hit.collider.tag != "Terrain")
                 {
                     return;
                 }
 
-                /*NavMeshHit navHit;
->>>>>>> Sound
                 if (agent.Raycast(hit.point, out navHit)){
                     agent.SetDestination(navHit.position);
                 }
                 else
-<<<<<<< HEAD
                 {
-                    agent.SetDestination(hit.point);
-                }
-=======
-                {*/
                 agent.SetDestination(hit.point);
-                //}
->>>>>>> Sound
+                }
             }
         }
 	}
