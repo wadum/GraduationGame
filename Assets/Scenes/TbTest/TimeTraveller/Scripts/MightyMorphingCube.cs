@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MightyMorphingCube : TimeTraveller
+public class MightyMorphingCube : BaseTimeTraveller
 {
     public TimePeriod DefaultTimePeriod = TimePeriod.Present;
 

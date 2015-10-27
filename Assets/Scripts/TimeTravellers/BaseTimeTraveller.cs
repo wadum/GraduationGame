@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public abstract class TimeTraveller : MonoBehaviour, ITimeTraveller {
+public abstract class BaseTimeTraveller : MonoBehaviour, ITimeTraveller {
 
     public abstract TimePeriod GetCurrentTimePeriod();
     
