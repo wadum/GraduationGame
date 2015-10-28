@@ -4,13 +4,21 @@ using System.Collections;
 public class Cockpart : MonoBehaviour {
 
     GameObject player;
+    public float speed = 1.0F;
+    float startTime;
+    float journeyLength;
 
     bool pickedUp = false;
+    bool flyToCenterClock = false;
 
-	// Use this for initialization
-	void Start () {
+    Vector3 lerpStartingPos;
+    Vector3 lerpEndPos;
+
+    // Use this for initialization
+    void Start () {
 
         player = GameObject.FindGameObjectWithTag("Player");
+        transform.Rotate(Vector3.up, Random.Range(0.0f,360.0f));
 
     }
 	
@@ -24,6 +32,18 @@ public class Cockpart : MonoBehaviour {
             transform.position = player.transform.position;
         }
 
+        if (flyToCenterClock)
+        {
+            float distCovered = (Time.time - startTime) * speed;
+            float fracJourney = distCovered / journeyLength;
+            transform.position = Vector3.Lerp(lerpStartingPos, lerpEndPos, fracJourney);
+
+            if (fracJourney > 1)
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
 
     void OnTriggerEnter(Collider player)
@@ -35,6 +55,16 @@ public class Cockpart : MonoBehaviour {
         }
 
         pickedUp = true;
+        player.GetComponent<CharacterInventory>().AddClockPart(this.gameObject);
+    }
 
+    public void goToCenterClock(Vector3 CenterClockPos)
+    {
+        startTime = Time.time;
+        lerpEndPos = CenterClockPos;
+        lerpStartingPos = player.transform.position;
+        journeyLength = Vector3.Distance(lerpStartingPos, lerpEndPos);
+        pickedUp = false;
+        flyToCenterClock = true;
     }
 }
