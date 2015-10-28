@@ -30,12 +30,13 @@ public class TouchHandling : MonoBehaviour {
             var touches = GetTouches();
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
                 HandleTap(touches[0]);
-                break;
+                yield return null;
+                continue;
             }
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved)) {
                 yield return StartCoroutine(HandleGesture());
-                break;
+                continue;
             }
 
             yield return null;
