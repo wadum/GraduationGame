@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TouchHandling : MonoBehaviour
 {
@@ -10,17 +11,23 @@ public class TouchHandling : MonoBehaviour
         StartCoroutine(AwaitInput());
     }
 
-    IEnumerator AwaitInput()
+    private static List<Touch> GetTouches()
+    {
+        return Input.touches.Where(t => EventSystem.current.IsPointerOverGameObject(t.fingerId)).ToList();
+    } 
+
+    private IEnumerator AwaitInput()
     {
         while (true)
         {
-            if (Input.touchCount == 1 && Input.touches[0].phase == TouchPhase.Ended)
+            var touches = GetTouches();
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended)
             {
-                HandleTap(Input.touches[0]);
+                HandleTap(touches[0]);
                 break;
             }
 
-            if (Input.touchCount > 1 || Input.touches.Any(t => t.phase == TouchPhase.Moved))
+            if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved))
             {
                 yield return StartCoroutine(HandleGesture());
                 break;
@@ -34,10 +41,12 @@ public class TouchHandling : MonoBehaviour
     {
         while (Input.touchCount > 0)
         {
-            if (Input.touchCount == 1)
-                HandleSwipe(Input.touches[0]);
+            var touches = GetTouches();
+
+            if (touches.Count == 1)
+                HandleSwipe(touches[0]);
             else
-                HandlePinch(Input.touches.ToList());
+                HandlePinch(touches);
 
             yield return null;
         }
