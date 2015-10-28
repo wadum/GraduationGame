@@ -47,6 +47,7 @@ public class WorldViewController : MonoBehaviour {
 	}
 
 	public IEnumerator RunCloseUp(Camera cm){
+		if(Time.timeScale < 0.5) yield return null;
 		Vector3 mask = GetCloseUpPosition().transform.right * 
 			(GetCloseUpPosition().transform.rotation.eulerAngles.y > 181 ||
 			 GetCloseUpPosition().transform.rotation.eulerAngles.y < 1 ? -1 : 1) 
