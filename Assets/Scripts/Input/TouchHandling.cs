@@ -20,7 +20,7 @@ public class TouchHandling : MonoBehaviour
                 break;
             }
 
-            if (Input.touchCount > 2 || Input.touches.Any(t => t.phase == TouchPhase.Moved))
+            if (Input.touchCount > 1 || Input.touches.Any(t => t.phase == TouchPhase.Moved))
             {
                 yield return StartCoroutine(HandleGesture());
                 break;
