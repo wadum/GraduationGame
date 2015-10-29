@@ -18,13 +18,13 @@ public class WorldViewController : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
-	public void Run(Camera cm)
+	public void Run(GameObject cam)
 	{
 		if(moving) return;
 		if(closeUp) {
 			if(Input.GetKeyDown(KeyCode.S)){
 				closeUp = false;
-				StartCoroutine(Orbit(cm, Positions[currentPosition].transform));
+				StartCoroutine(Orbit(cam, Positions[currentPosition].transform));
 			}
 			else
 				return;
@@ -33,20 +33,20 @@ public class WorldViewController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.W))
 		{
 			closeUp = true;
-			StartCoroutine(RunCloseUp(cm));
+			StartCoroutine(RunCloseUp(cam));
 		}
 		if(Input.GetKeyDown(KeyCode.D))
 		{
-			StartCoroutine(Orbit(cm, PreviousPosition()));
+			StartCoroutine(Orbit(cam, PreviousPosition()));
 		}
 		if(Input.GetKeyDown(KeyCode.A))
 		{
-			StartCoroutine(Orbit(cm, NextPosition()));
+			StartCoroutine(Orbit(cam, NextPosition()));
 		}
 
 	}
 
-	public IEnumerator RunCloseUp(Camera cm){
+	public IEnumerator RunCloseUp(GameObject cam){
 		if(Time.timeScale < 0.5) yield return null;
 		Vector3 mask = GetCloseUpPosition().transform.right * 
 			(GetCloseUpPosition().transform.rotation.eulerAngles.y > 181 ||
@@ -60,8 +60,8 @@ public class WorldViewController : MonoBehaviour {
 			                                                  diff.y * mask.y,
 			                                                  diff.z * mask.z);
 			float movementLength = CloseUpTrackingLength / Vector3.Distance(
-				dest, cm.transform.position);
-			cm.transform.position = Vector3.Lerp(cm.transform.position, dest, movementLength);
+				dest, cam.transform.position);
+			cam.transform.position = Vector3.Lerp(cam.transform.position, dest, movementLength);
 			yield return null;
 		}
 	}
@@ -90,18 +90,18 @@ public class WorldViewController : MonoBehaviour {
 		return Positions[currentPosition].transform;
 	}
 
-	private IEnumerator Orbit(Camera cm, Transform dest)
+	private IEnumerator Orbit(GameObject cam, Transform dest)
 	{
-		Vector3 originPosition = cm.transform.localPosition;
-		Quaternion originRotation = cm.transform.localRotation;
+		Vector3 originPosition = cam.transform.localPosition;
+		Quaternion originRotation = cam.transform.localRotation;
 		float travelTime = 0;
 		moving = true;
 
 		while(moving && travelTime < TimeToTravelInSeconds)
 		{
 			travelTime += Time.deltaTime;
-			cm.transform.localPosition = Vector3.Slerp(originPosition, dest.localPosition, travelTime/TimeToTravelInSeconds);
-			cm.transform.localRotation = Quaternion.Slerp(originRotation, dest.localRotation, travelTime/TimeToTravelInSeconds);
+			cam.transform.localPosition = Vector3.Slerp(originPosition, dest.localPosition, travelTime/TimeToTravelInSeconds);
+			cam.transform.localRotation = Quaternion.Slerp(originRotation, dest.localRotation, travelTime/TimeToTravelInSeconds);
 			yield return null;
 		}
 		moving = false;
