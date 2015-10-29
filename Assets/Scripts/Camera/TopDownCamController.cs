@@ -19,7 +19,7 @@ public class TopDownCamController : MonoBehaviour {
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>().gameObject;
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
