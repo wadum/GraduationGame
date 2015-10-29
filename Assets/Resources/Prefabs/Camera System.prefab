@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 446126}
   - 114: {fileID: 11471460}
   - 114: {fileID: 11473890}
+  - 114: {fileID: 11478044}
   m_Layer: 0
   m_Name: Camera System
   m_TagString: Untagged
@@ -338,7 +339,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -413,7 +414,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WorldView: {fileID: 11473890}
-  cam: {fileID: 192850}
+  CameraContainer: {fileID: 192850}
+  Cam: {fileID: 165138}
+  TopDownView: {fileID: 11478044}
+  WorldViewMode: 0
 --- !u!114 &11473890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,6 +436,23 @@ MonoBehaviour:
   - {fileID: 186432}
   TimeToTravelInSeconds: 2
   CloseUpTrackingLength: 4
+--- !u!114 &11478044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f881481798e6b40a6118e6c21c29dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingPos: {x: 0, y: 0, z: -5}
+  ZoomSpeed: .5
+  RotateSpeed: 1
+  UpDownRotationLimit: 80
+  MaxZoomDistance: 100
+  MinZoomDistance: 3
 --- !u!114 &11485558
 MonoBehaviour:
   m_ObjectHideFlags: 1
