@@ -3,8 +3,11 @@ using System.Collections;
 
 public class Cockpart : MonoBehaviour {
 
+    public GameObject[] FloatWaypoints;
+
     GameObject player;
-    public float speed = 1.0F;
+    public GameObject clockPart;
+    public float speed = 1.0f;
     float startTime;
     float journeyLength;
 
@@ -25,11 +28,13 @@ public class Cockpart : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        transform.Rotate(Vector3.up,100*Time.deltaTime);
+        transform.Rotate(Vector3.up,100*Time.deltaTime);        
 
         if (pickedUp)
         {
+            clockPart.transform.localPosition = Vector3.right;
             transform.position = player.transform.position;
+
         }
 
         if (flyToCenterClock)
@@ -55,7 +60,9 @@ public class Cockpart : MonoBehaviour {
         }
 
         pickedUp = true;
+        this.GetComponent<Collider>().enabled = false;
         player.GetComponent<CharacterInventory>().AddClockPart(this.gameObject);
+       
     }
 
     public void goToCenterClock(Vector3 CenterClockPos)
