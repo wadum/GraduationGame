@@ -11,6 +11,8 @@ public class TimeTrackable : MonoBehaviour {
         public Quaternion rotation;
     }
 
+    public float TimeMultiplier = 1f;
+
     // Needs its own Time.time
     private float PrivateTime;
 
@@ -24,7 +26,10 @@ public class TimeTrackable : MonoBehaviour {
     // Helper value for when reversing time.
     private float freezeTime = 0;
 
+    public RecordMaster RM;
+
 	void Start () {
+        RM = FindObjectOfType<RecordMaster>();
         PrivateTime = Time.time;
         _body = GetComponent<Rigidbody>();
         queue = new Stack<TrackFragment>();
@@ -32,13 +37,14 @@ public class TimeTrackable : MonoBehaviour {
         TrackFragment fragment;
         fragment.velocity = _body.velocity;
         fragment.pos = transform.position;
-        fragment.time = Time.time;
+        fragment.time = PrivateTime;
         fragment.rotation = transform.rotation;
         // Add it to the stack.
         queue.Push(fragment);
     }
 
     void Update () {
+        float deltaTime = Time.deltaTime * TimeMultiplier;
         // If we're recording the object.
         if (tracking)
         {
@@ -67,7 +73,7 @@ public class TimeTrackable : MonoBehaviour {
         // Turn OFF unity's gravity, we're in control now.
         _body.isKinematic = true;
         // Keep track of the rewind time.
-        _reversedTime += Time.deltaTime;
+        _reversedTime += deltaTime;
 
         // See if there's a keyframe for the curret rewind period.
         if (freezeTime - _reversedTime <= queue.Peek().time)
