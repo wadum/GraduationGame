@@ -5,6 +5,7 @@ public class RecordMaster : MonoBehaviour {
 
 
     private TimeTrackable[] trackers;
+    public GameObject cylinder;
 
     // Use this for initialization
     void Start () {
@@ -13,6 +14,9 @@ public class RecordMaster : MonoBehaviour {
 	
     public void Track()
     {
+        cylinder.GetComponent<CapsuleCollider>().enabled = true;
+        cylinder.GetComponent<OneSecondScript>().StartTime();
+
         foreach (TimeTrackable track in trackers)
         {
             track.Record();

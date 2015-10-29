@@ -9,40 +9,45 @@ public class TimeTrackable : MonoBehaviour {
         public float time;
         public Vector3 velocity;
         public Quaternion rotation;
-//        public Transform transform;
     }
 
+    // Needs its own Time.time
     private float PrivateTime;
 
-    public bool tracking;
+    // If true, each frame which influences the object, will be tracked.
+    public bool tracking = false;
     public Stack<TrackFragment> queue;
+    public float _reversedTime = 0;
+
     private TrackFragment _lastFragment;
     private Rigidbody _body;
-
-    public float _reversedTime = 0;
+    // Helper value for when reversing time.
     private float freezeTime = 0;
 
-	// Use this for initialization
 	void Start () {
         PrivateTime = Time.time;
         _body = GetComponent<Rigidbody>();
         queue = new Stack<TrackFragment>();
+        // Get the 'original' frame.
         TrackFragment fragment;
         fragment.velocity = _body.velocity;
         fragment.pos = transform.position;
         fragment.time = Time.time;
         fragment.rotation = transform.rotation;
+        // Add it to the stack.
         queue.Push(fragment);
     }
 
-    // Update is called once per frame
-    void Update () { 
+    void Update () {
+        // If we're recording the object.
         if (tracking)
         {
-            _body.isKinematic = false;
+            // If the object didn't move, we dont care.
             if(queue.Count > 0)
                 if (transform.position == queue.Peek().pos && _body.velocity == queue.Peek().velocity)
                     return;
+            // Turn ON unity's movement, should prob me replaced by our custom system.
+            _body.isKinematic = false;
             PrivateTime += Time.deltaTime;
             TrackFragment fragment;
             fragment.velocity = _body.velocity;
@@ -52,14 +57,22 @@ public class TimeTrackable : MonoBehaviour {
             queue.Push(fragment);
             return;
         }
-        _body.isKinematic = true;
-        _reversedTime += Time.deltaTime;
+        // Now we reverse everything.
+
+        // If the stack is empty, return.
         if (queue.Count == 0)
         {
             return;
         }
+        // Turn OFF unity's gravity, we're in control now.
+        _body.isKinematic = true;
+        // Keep track of the rewind time.
+        _reversedTime += Time.deltaTime;
+
+        // See if there's a keyframe for the curret rewind period.
         if (freezeTime - _reversedTime <= queue.Peek().time)
         {
+            // Rewind the frame.
             _lastFragment = queue.Pop();
             transform.position = _lastFragment.pos;
             _body.velocity = _lastFragment.velocity;
@@ -67,6 +80,7 @@ public class TimeTrackable : MonoBehaviour {
         }
     }
 
+    // Start rewinding.
     public void Reverse()
     {
         if (tracking)
@@ -77,10 +91,9 @@ public class TimeTrackable : MonoBehaviour {
         }
     }
 
+    // Start recording.
     public void Record()
     {
-        if (queue.Count > 0)
-            Debug.Log("I got stuff in me");
         tracking = true;
     }
 }
