@@ -40,7 +40,7 @@ public class TopDownCamController : MonoBehaviour {
 	public void Run(GameObject cam)
 	{
 		_cam = cam;
-		_oldPlayerPos = _player.transform.position;
+		_oldPlayerPos = _player ? _player.transform.position : (_player = GameObject.FindGameObjectWithTag("Player")).transform.position;
 
 	    TouchHandling touchHandling = null;
         if (InputSystem)
