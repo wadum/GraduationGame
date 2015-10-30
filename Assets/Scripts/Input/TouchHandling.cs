@@ -5,15 +5,16 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TouchHandling : MonoBehaviour {
-    private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
-    private Action<Touch> _swipeHandler;
-    private Action<List<Touch>> _pinchHandler;
+public class TouchHandling : MonoBehaviour
+{
+    public float SwipeSensitivity = 4f;
 
-    void Start() {
+    private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
+    private Action<Touch> _swipeHandler = (s) => { };
+    private Action<List<Touch>> _pinchHandler = (p) => { };
+
+    void Awake() {
         _tapEventHandlers = new Dictionary<string, Action<RaycastHit>>();
-        ClearSwipeHandler();
-        ClearPinchHandler();
     }
 
     void OnEnable() {
@@ -34,7 +35,7 @@ public class TouchHandling : MonoBehaviour {
                 continue;
             }
 
-            if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved)) {
+            if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
                 yield return StartCoroutine(HandleGesture());
                 continue;
             }
@@ -82,9 +83,13 @@ public class TouchHandling : MonoBehaviour {
     #endregion
 
     #region registration of handlers
-    public void RegisterTapHandlerByTag(string tag, Action<RaycastHit> handler) {
+    public void RegisterTapHandlerByTag(string objTag, Action<RaycastHit> handler)
+    {
+        if (string.IsNullOrEmpty(objTag))
+            return;
+
         // Overwrites old one if it exists
-        _tapEventHandlers[tag] = handler;
+        _tapEventHandlers[objTag] = handler;
     }
 
     public void RegisterSwipeHandler(Action<Touch> handler) {
@@ -122,8 +127,9 @@ public class TouchHandling : MonoBehaviour {
     #endregion
 
     #region private helpers
-    private static List<Touch> GetTouches() {
-        return Input.touches.Where(t => EventSystem.current.IsPointerOverGameObject(t.fingerId)).ToList();
+    private static List<Touch> GetTouches()
+    {
+        return Input.touches.Where(t => !EventSystem.current.IsPointerOverGameObject(t.fingerId)).ToList();
     }
     #endregion
 }
