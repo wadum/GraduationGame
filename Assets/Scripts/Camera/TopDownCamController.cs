@@ -5,7 +5,7 @@ using System;
 public class TopDownCamController : MonoBehaviour {
 
     public Vector3 StartingPos;
-    public const float ZoomSpeed = 100f;
+    public const float ZoomSpeed = 0.5f;
 	public const float RotateSpeed = 1f;
     public float UpDownRotationLimit = 80;
 
@@ -56,14 +56,14 @@ public class TopDownCamController : MonoBehaviour {
 		
 		if (Input.GetKey(KeyCode.D))
 			RotateLeft();
-		
-		if (Input.GetKey(KeyCode.W))
-		{
-			if(Input.GetKey(KeyCode.LeftShift))
-				ZoomIn();
-			else
-				RotateUp();
-		}
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
+                ZoomIn();
+            else
+                RotateUp(); 
+		}   
 		
 		if (Input.GetKey(KeyCode.S))
 		{
