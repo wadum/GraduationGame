@@ -5,8 +5,8 @@ using System;
 public class TopDownCamController : MonoBehaviour {
 
     public Vector3 StartingPos;
-    public float ZoomSpeed = 100f;
-    public float RotateSpeed = 1f;
+    public const float ZoomSpeed = 100f;
+	public const float RotateSpeed = 1f;
     public float UpDownRotationLimit = 80;
 
     private GameObject _player;
@@ -16,6 +16,7 @@ public class TopDownCamController : MonoBehaviour {
     public float MinZoomDistance = 3f;
 
     private Vector3 _oldPlayerPos;
+	private Vector3 _oldMousePos;
 
     void Start()
     {
@@ -24,27 +25,8 @@ public class TopDownCamController : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-			RotateRight();
-
-        if (Input.GetKey(KeyCode.D))
-			RotateLeft();
-
-        if (Input.GetKey(KeyCode.W))
-        {
-			if(Input.GetKey(KeyCode.LeftShift))
-				ZoomIn();
-			else
-				RotateUp();
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-			if(Input.GetKey(KeyCode.LeftShift))
-				ZoomOut();
-			else
-				RotateDown();
-        }
+		HandleKeyboardInput();
+		HandleMouseInput();
     }
 
 	public void Run(GameObject cam)
@@ -54,46 +36,82 @@ public class TopDownCamController : MonoBehaviour {
 		StartCoroutine(AlwaysLookAt(_player));
 	}
 
+	private void HandleMouseInput()
+	{
+		if(Input.GetMouseButtonDown(0))
+			_oldMousePos = Input.mousePosition;
+
+		if(Input.GetMouseButton(0)){
+			RotateUp(-1 * (Input.mousePosition.y - _oldMousePos.y));
+			RotateRight(Input.mousePosition.x - _oldMousePos.x);
+			_oldMousePos = Input.mousePosition;
+		}
+		ZoomIn(Input.mouseScrollDelta.y);
+	}
+
+	private void HandleKeyboardInput()
+	{
+		if (Input.GetKey(KeyCode.A))
+			RotateRight();
+		
+		if (Input.GetKey(KeyCode.D))
+			RotateLeft();
+		
+		if (Input.GetKey(KeyCode.W))
+		{
+			if(Input.GetKey(KeyCode.LeftShift))
+				ZoomIn();
+			else
+				RotateUp();
+		}
+		
+		if (Input.GetKey(KeyCode.S))
+		{
+			if(Input.GetKey(KeyCode.LeftShift))
+				ZoomOut();
+			else
+				RotateDown();
+		}
+	}
+
 	private void StayWithPlayer ()
 	{
 		_cam.transform.position += _player.transform.position - _oldPlayerPos;
 		_oldPlayerPos = _player.transform.position;
 	}
 
-	private void ZoomOut ()
+	private void ZoomOut (float distance = ZoomSpeed)
 	{
-		if (Vector3.Distance(_cam.transform.position, _player.transform.position) > MaxZoomDistance) return;
-		_cam.transform.position += -_cam.transform.forward * ZoomSpeed;
+		if (Vector3.Distance(_cam.transform.position, _player.transform.position) + distance > MaxZoomDistance) return;
+		_cam.transform.position += -_cam.transform.forward * distance;
 	}
 
-	private void ZoomIn ()
+	private void ZoomIn (float distance = ZoomSpeed)
 	{
-		if (Vector3.Distance(_cam.transform.position, _player.transform.position) < MinZoomDistance) return;
-		_cam.transform.position += _cam.transform.forward * ZoomSpeed;
+		if (Vector3.Distance(_cam.transform.position, _player.transform.position) - distance < MinZoomDistance) return;
+		_cam.transform.position += _cam.transform.forward * distance;
 	}
 
-	private void RotateDown ()
+	private void RotateDown (float distance = RotateSpeed)
 	{
-		if (_cam.transform.localRotation.eulerAngles.x < UpDownRotationLimit + 10 
-		    || _cam.transform.localRotation.eulerAngles.x - RotateSpeed > 360 - UpDownRotationLimit)
-			_cam.transform.RotateAround(_player.transform.position, _cam.transform.right, -RotateSpeed);
+		RotateUp(-distance);
 	}
 
-	private void RotateUp ()
+	private void RotateUp(float distance = RotateSpeed)
 	{
-		if (_cam.transform.localRotation.eulerAngles.x + RotateSpeed < UpDownRotationLimit 
+		if (_cam.transform.localRotation.eulerAngles.x + distance < UpDownRotationLimit 
 		    || _cam.transform.localRotation.eulerAngles.x > 360 - UpDownRotationLimit - 10)
-			_cam.transform.RotateAround(_player.transform.position, _cam.transform.right, RotateSpeed);
+			_cam.transform.RotateAround(_player.transform.position, _cam.transform.right, distance);
 	}
 
-	private void RotateRight ()
+	private void RotateLeft (float distance = RotateSpeed)
 	{
-		_cam.transform.RotateAround(_player.transform.position, _cam.transform.up, RotateSpeed);
+		RotateRight(-distance);
 	}
 
-	private void RotateLeft ()
+	private void RotateRight (float distance = RotateSpeed)
 	{
-		_cam.transform.RotateAround(_player.transform.position, _cam.transform.up, -RotateSpeed);
+		_cam.transform.RotateAround(_player.transform.position, _cam.transform.up, distance);
 	}
 
     private IEnumerator AlwaysLookAt(GameObject go)
