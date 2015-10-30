@@ -19,66 +19,88 @@ public class TopDownCamController : MonoBehaviour {
 
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>().gameObject;
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        // Stay with the player
-        _cam.transform.position += _player.transform.position - _oldPlayerPos;
-        _oldPlayerPos = _player.transform.position;
-
-        //ROTATION LEFT RIGHT
-        if (Input.GetKey(KeyCode.D))
-        {
-            _cam.transform.RotateAround(_player.transform.position, _cam.transform.up, RotateSpeed);
-        }
         if (Input.GetKey(KeyCode.A))
-        {
-            _cam.transform.RotateAround(_player.transform.position, _cam.transform.up, -RotateSpeed);
-        }
+			RotateRight();
 
-        //ZOOMING
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
-        {
-            if (Vector3.Distance(_cam.transform.position, _player.transform.position) > MaxZoomDistance) return;
-            _cam.transform.position += -_cam.transform.forward * ZoomSpeed;
-            _oldPlayerPos = _player.transform.position;
-            return;
-        }
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
-        {
-            if (Vector3.Distance(_cam.transform.position, _player.transform.position) < MinZoomDistance) return;
-            _cam.transform.position += _cam.transform.forward * ZoomSpeed;
-            _oldPlayerPos = _player.transform.position;
-            return;
-        }
+        if (Input.GetKey(KeyCode.D))
+			RotateLeft();
 
-        //ROTATION UP DOWN
         if (Input.GetKey(KeyCode.W))
         {
-            if (_cam.transform.localRotation.eulerAngles.x + RotateSpeed < UpDownRotationLimit || _cam.transform.localRotation.eulerAngles.x > 360 - UpDownRotationLimit - 10)
-                _cam.transform.RotateAround(_player.transform.position, _cam.transform.right, RotateSpeed);
+			if(Input.GetKey(KeyCode.LeftShift))
+				ZoomIn();
+			else
+				RotateUp();
         }
+
         if (Input.GetKey(KeyCode.S))
         {
-            if (_cam.transform.localRotation.eulerAngles.x < UpDownRotationLimit + 10 || _cam.transform.localRotation.eulerAngles.x - RotateSpeed > 360 - UpDownRotationLimit)
-                _cam.transform.RotateAround(_player.transform.position, _cam.transform.right, -RotateSpeed);
+			if(Input.GetKey(KeyCode.LeftShift))
+				ZoomOut();
+			else
+				RotateDown();
         }
-        
     }
 
-    public void Run(GameObject cam)
-    {
-        _cam = cam;
-        _oldPlayerPos = _player.transform.position;
-        StartCoroutine(AlwaysLookAt(_player));
-    }
+	public void Run(GameObject cam)
+	{
+		_cam = cam;
+		_oldPlayerPos = _player.transform.position;
+		StartCoroutine(AlwaysLookAt(_player));
+	}
+
+	private void StayWithPlayer ()
+	{
+		_cam.transform.position += _player.transform.position - _oldPlayerPos;
+		_oldPlayerPos = _player.transform.position;
+	}
+
+	private void ZoomOut ()
+	{
+		if (Vector3.Distance(_cam.transform.position, _player.transform.position) > MaxZoomDistance) return;
+		_cam.transform.position += -_cam.transform.forward * ZoomSpeed;
+	}
+
+	private void ZoomIn ()
+	{
+		if (Vector3.Distance(_cam.transform.position, _player.transform.position) < MinZoomDistance) return;
+		_cam.transform.position += _cam.transform.forward * ZoomSpeed;
+	}
+
+	private void RotateDown ()
+	{
+		if (_cam.transform.localRotation.eulerAngles.x < UpDownRotationLimit + 10 
+		    || _cam.transform.localRotation.eulerAngles.x - RotateSpeed > 360 - UpDownRotationLimit)
+			_cam.transform.RotateAround(_player.transform.position, _cam.transform.right, -RotateSpeed);
+	}
+
+	private void RotateUp ()
+	{
+		if (_cam.transform.localRotation.eulerAngles.x + RotateSpeed < UpDownRotationLimit 
+		    || _cam.transform.localRotation.eulerAngles.x > 360 - UpDownRotationLimit - 10)
+			_cam.transform.RotateAround(_player.transform.position, _cam.transform.right, RotateSpeed);
+	}
+
+	private void RotateRight ()
+	{
+		_cam.transform.RotateAround(_player.transform.position, _cam.transform.up, RotateSpeed);
+	}
+
+	private void RotateLeft ()
+	{
+		_cam.transform.RotateAround(_player.transform.position, _cam.transform.up, -RotateSpeed);
+	}
 
     private IEnumerator AlwaysLookAt(GameObject go)
     {
         while(true)
         {
+			StayWithPlayer();
             _cam.transform.LookAt(go.transform);
             yield return null;
         }

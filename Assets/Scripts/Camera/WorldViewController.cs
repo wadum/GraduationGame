@@ -10,7 +10,7 @@ public class WorldViewController : MonoBehaviour {
 
 	private int currentPosition = 0;
 	private bool moving;
-	private bool closeUp;
+	private bool closeUp = false;
 	private GameObject player;
 
 	void Start()
@@ -22,24 +22,20 @@ public class WorldViewController : MonoBehaviour {
 	{
 		if(moving) return;
 		if(closeUp) {
-			if(Input.GetKeyDown(KeyCode.S)){
-				closeUp = false;
-				StartCoroutine(Orbit(cam, Positions[currentPosition].transform));
-			}
-			else
-				return;
+			if(!Input.GetKey(KeyCode.S)) return;
+			closeUp = false;
+			StartCoroutine(Orbit(cam, Positions[currentPosition].transform));
 		}
 
-		if(Input.GetKeyDown(KeyCode.W))
+		if(Input.GetKey(KeyCode.W))
 		{
-			closeUp = true;
 			StartCoroutine(RunCloseUp(cam));
 		}
-		if(Input.GetKeyDown(KeyCode.D))
+		if(Input.GetKey(KeyCode.D))
 		{
 			StartCoroutine(Orbit(cam, PreviousPosition()));
 		}
-		if(Input.GetKeyDown(KeyCode.A))
+		if(Input.GetKey(KeyCode.A))
 		{
 			StartCoroutine(Orbit(cam, NextPosition()));
 		}
@@ -47,7 +43,8 @@ public class WorldViewController : MonoBehaviour {
 	}
 
 	public IEnumerator RunCloseUp(GameObject cam){
-		if(Time.timeScale < 0.5) yield return null;
+		//if(Time.timeScale < 0.5) yield return null;
+		closeUp = true;
 		Vector3 mask = GetCloseUpPosition().transform.right * 
 			(GetCloseUpPosition().transform.rotation.eulerAngles.y > 181 ||
 			 GetCloseUpPosition().transform.rotation.eulerAngles.y < 1 ? -1 : 1) 
@@ -84,7 +81,7 @@ public class WorldViewController : MonoBehaviour {
 	public Transform PreviousPosition()
 	{
 		if(currentPosition == 0)
-			currentPosition = 3;
+			currentPosition = Positions.Length - 1;
 		else
 			currentPosition = Mathf.Abs((currentPosition - 1) % Positions.Length);
 		return Positions[currentPosition].transform;
