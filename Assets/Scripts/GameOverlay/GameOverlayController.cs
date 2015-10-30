@@ -5,8 +5,9 @@ public class GameOverlayController : MonoBehaviour {
 
 	public GameObject StoryText;
 	public GameObject PauseMenu;
+    public GameObject StoreScreen;
 
-	private Canvas _canvas;
+    private Canvas _canvas;
 
 	void Start()
 	{
@@ -26,7 +27,17 @@ public class GameOverlayController : MonoBehaviour {
 		StoryText.GetComponent<StoryTextController>().Show(textFile);
 	}
 
-	public void TogglePauseMenu()
+    public void ShowStore()
+    {
+        StoreScreen.SetActive(true);
+    }
+
+    public void HideStore()
+    {
+        StoreScreen.SetActive(false);
+    }
+
+    public void TogglePauseMenu()
 	{
 		if(PauseMenu.activeSelf) HidePauseMenu();
 		else ShowPauseMenu();
