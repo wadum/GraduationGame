@@ -38,10 +38,10 @@ public class TopDownCamController : MonoBehaviour {
 
 	private void HandleMouseInput()
 	{
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonDown(1))
 			_oldMousePos = Input.mousePosition;
 
-		if(Input.GetMouseButton(0)){
+		if(Input.GetMouseButton(1)){
 			RotateUp(-1 * (Input.mousePosition.y - _oldMousePos.y));
 			RotateRight(Input.mousePosition.x - _oldMousePos.x);
 			_oldMousePos = Input.mousePosition;
