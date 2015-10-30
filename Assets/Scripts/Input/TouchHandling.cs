@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class TouchHandling : MonoBehaviour
 {
     public float SwipeSensitivity = 4f;
+    public bool SimulateMouseTapInEditor = true;
 
     private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
     private Action<Touch> _swipeHandler = (s) => { };
@@ -29,11 +30,26 @@ public class TouchHandling : MonoBehaviour
     private IEnumerator AwaitInput() {
         while (true) {
             var touches = GetTouches();
+
+            if (SimulateMouseTapInEditor && Application.isEditor && Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("test");
+                HandleMouseTap(Input.mousePosition);
+                yield return null;
+                continue;
+            }
+
+            if (!touches.Any()) {
+                yield return null;
+                continue;
+            }
+
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
                 HandleTap(touches[0]);
                 yield return null;
                 continue;
             }
+
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
                 yield return StartCoroutine(HandleGesture());
@@ -44,9 +60,15 @@ public class TouchHandling : MonoBehaviour
         }
     }
 
+
     private IEnumerator HandleGesture() {
         while (Input.touchCount > 0) {
             var touches = GetTouches();
+
+            if (!touches.Any()) {
+                yield return null;
+                continue;
+            }
 
             if (touches.Count == 1)
                 HandleSwipe(touches[0]);
@@ -69,6 +91,16 @@ public class TouchHandling : MonoBehaviour
         // Right now we just do this, as we are pretty certain we only need one swipe handler,
         // specifically for the camera. Keep in mind that we ignore UI touches, so UI swipes should still function.
         _swipeHandler(touch);
+    }
+
+    private void HandleMouseTap(Vector3 mousePosition)
+    {
+        var ray = Camera.main.ScreenPointToRay(mousePosition);
+        RaycastHit hit;
+        Action<RaycastHit> handler;
+        if (Physics.Raycast(ray, out hit) &&
+            _tapEventHandlers.TryGetValue(hit.collider.tag, out handler))
+                handler(hit);
     }
 
     private void HandleTap(Touch tap) {
