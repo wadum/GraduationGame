@@ -8,10 +8,13 @@ public class DeconstructWall : MonoBehaviour {
 
     private Transform[] _bricks;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         _bricks = this.GetComponentsInChildren<Transform>().Where(b => b != transform).OrderBy(b => b.position.y).ToArray();
-	}
+        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
+        touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit => FindObjectOfType<GameOverlayController>().ToggleWallSlider());
+    }
 	
 	public void SetConstructionLevel(float level)
     {

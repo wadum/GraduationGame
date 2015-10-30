@@ -6,6 +6,7 @@ public class GameOverlayController : MonoBehaviour {
 	public GameObject StoryText;
 	public GameObject PauseMenu;
     public GameObject StoreScreen;
+    public GameObject WallSlider;
 
     private Canvas _canvas;
 
@@ -52,4 +53,20 @@ public class GameOverlayController : MonoBehaviour {
 	{
 		PauseMenu.SetActive(false);
 	}
+
+    public void ToggleWallSlider()
+    {
+        if (WallSlider.activeSelf) HideWallSlider();
+        else ShowWallSlider();
+    }
+
+    public void ShowWallSlider()
+    {
+        WallSlider.SetActive(true);
+    }
+
+    public void HideWallSlider()
+    {
+        WallSlider.SetActive(false);
+    }
 }
