@@ -1,97 +1,82 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class CharacterMovement : MonoBehaviour {
-
+public class CharacterMovement : MonoBehaviour
+{
+    public GameObject InputSystem;
     public GameObject Terrain;
     public GameObject DeliverClockPartArea;
     public GameObject[] FloatWaypoints;
 
-    NavMeshAgent agent;
+    NavMeshAgent _agent;
 
+    public float WaypointFloatSpeed = 1.0f;
+    float _startTime;
+    float _journeyLength;
+    float _distCovered;
+    float _fracJourney;
+    int _currentWaypoint;
+    bool _flyToCenterClock;
 
-    public float waypointFloatSpeed = 1.0f;
-    float startTime;
-    float journeyLength;
-    float distCovered;
-    float fracJourney;
-    int CurrentWaypoint;
-    bool flyToCenterClock = false;
-
-    Vector3 lerpStartingPos;
-    Vector3 lerpEndPos;
+    Vector3 _lerpStartingPos;
+    Vector3 _lerpEndPos;
 
     // Use this for initialization
     void Start () {
-        agent = this.gameObject.GetComponent<NavMeshAgent>();
-        CurrentWaypoint = 0;
+        _agent = gameObject.GetComponent<NavMeshAgent>();
+        _currentWaypoint = 0;
+
+        TouchHandling touchHandling = null;
+        if (InputSystem)
+            touchHandling = InputSystem.GetComponent<TouchHandling>();
+        if (touchHandling)
+        {
+            touchHandling.RegisterTapHandlerByTag("Terrain", hit => GoTo(hit.point));
+            touchHandling.RegisterTapHandlerByTag("Clockpart", hit => GoTo(hit.collider.transform.position));
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
+	    if (!_flyToCenterClock)
+            return;
 
-        if (flyToCenterClock)
-        {
-            agent.enabled = false;
+	    _agent.enabled = false;
 
-            distCovered = (Time.time - startTime) * waypointFloatSpeed;
-            fracJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(lerpStartingPos, lerpEndPos, fracJourney);
+	    _distCovered = (Time.time - _startTime) * WaypointFloatSpeed;
+	    _fracJourney = _distCovered / _journeyLength;
+	    transform.position = Vector3.Lerp(_lerpStartingPos, _lerpEndPos, _fracJourney);
 
-            if (fracJourney >= 1)
-            {
-                startTime = Time.time;
-                CurrentWaypoint++;
-                lerpStartingPos = FloatWaypoints[CurrentWaypoint-1].transform.position;
+	    if (!(_fracJourney >= 1))
+            return;
 
-                if (lerpStartingPos == DeliverClockPartArea.transform.position)
-                {
-                    agent.enabled = true;
-                    flyToCenterClock = false;
-                    return;
-                }
+	    _startTime = Time.time;
+	    _currentWaypoint++;
+	    _lerpStartingPos = FloatWaypoints[_currentWaypoint-1].transform.position;
 
-                lerpEndPos = FloatWaypoints[CurrentWaypoint].transform.position;
-                journeyLength = Vector3.Distance(lerpStartingPos, lerpEndPos);
-            }
+	    if (_lerpStartingPos == DeliverClockPartArea.transform.position)
+	    {
+	        _agent.enabled = true;
+	        _flyToCenterClock = false;
+	        return;
+	    }
 
-        }
+	    _lerpEndPos = FloatWaypoints[_currentWaypoint].transform.position;
+	    _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
+	}
 
-        if (Input.GetMouseButtonUp(0) == true)
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                //NavMeshHit navHit;
-
-                /*if (hit.collider.tag != "Terrain")
-                {
-                    return;
-                }*/
-
-                agent.SetDestination(hit.point);
-
-                /*if (agent.Raycast(hit.point, out navHit)){
-                    agent.SetDestination(navHit.position);
-                }
-                else
-                {
-                agent.SetDestination(hit.point);
-                }*/
-            }
-        }
+    public void GoTo(Vector3 position)
+    {
+        if (_agent.enabled)
+            _agent.SetDestination(position);
     }
 
-    public void goToCenterClock(GameObject[] Waypoints)
+    public void GoToCenterClock(GameObject[] waypoints)
     {
-        FloatWaypoints = Waypoints;
-        startTime = Time.time;
-        lerpEndPos = FloatWaypoints[CurrentWaypoint].transform.position;
-        lerpStartingPos = transform.position;
-        journeyLength = Vector3.Distance(lerpStartingPos, FloatWaypoints[0].transform.position);
-        flyToCenterClock = true;
-
+        FloatWaypoints = waypoints;
+        _startTime = Time.time;
+        _lerpEndPos = FloatWaypoints[_currentWaypoint].transform.position;
+        _lerpStartingPos = transform.position;
+        _journeyLength = Vector3.Distance(_lerpStartingPos, FloatWaypoints[0].transform.position);
+        _flyToCenterClock = true;
     }
 }
