@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -8,6 +11,8 @@ public class TopDownCamController : MonoBehaviour {
     public const float ZoomSpeed = 0.5f;
 	public const float RotateSpeed = 1f;
     public float UpDownRotationLimit = 80;
+    public GameObject InputSystem;
+    public bool ForceTouch = false;
 
     private GameObject _player;
     private GameObject _cam;
@@ -25,14 +30,28 @@ public class TopDownCamController : MonoBehaviour {
 
     void Update()
     {
-		HandleKeyboardInput();
-		HandleMouseInput();
+        if (!Application.isMobilePlatform && !ForceTouch)
+        {
+    		HandleKeyboardInput();
+    		HandleMouseInput();
+        }
     }
 
 	public void Run(GameObject cam)
 	{
 		_cam = cam;
 		_oldPlayerPos = _player.transform.position;
+
+	    TouchHandling touchHandling = null;
+        if (InputSystem)
+            touchHandling = InputSystem.GetComponent<TouchHandling>();
+
+	    if (touchHandling)
+	    {
+            touchHandling.RegisterSwipeHandler(HandleSwipe);
+            touchHandling.RegisterPinchHandler(HandlePinch);
+	    }
+
 		StartCoroutine(AlwaysLookAt(_player));
 	}
 
@@ -122,5 +141,35 @@ public class TopDownCamController : MonoBehaviour {
             _cam.transform.LookAt(go.transform);
             yield return null;
         }
+    }
+
+    private void HandleSwipe(Touch touch)
+    {
+        var directions = touch.deltaPosition;
+        RotateUp(-directions.y * 0.5f);
+        RotateRight(directions.x * 0.5f);
+    }
+
+    private void HandlePinch(List<Touch> touches)
+    {
+        // takes the average vector of a list of vectors
+        Func<List<Vector2>, Vector2> avg = vectors => vectors.Aggregate((v1, v2) => v1 + v2) / vectors.Count;
+        // takes the average distance between a list of vectors and a point
+        Func<List<Vector2>, Vector2, float> avgDist = (vectors, point) => vectors.Select(p => Vector2.Distance(p, point)).Average();
+
+        // transforms the list of touches to a list of positions
+        var pos = touches.Select(t => t.position).ToList();
+        // transforms the list of touches to a list of the previous positions
+        var prevPos = touches.Select(t => t.position - t.deltaPosition).ToList();
+
+        // calculate the difference between the average distance to the centers for the current and previous positions
+        var distDiff = avgDist(pos, avg(pos)) - avgDist(prevPos, avg(prevPos));
+
+        if (distDiff <= 0)
+            // if the difference is negative, the distance from the center became larger, indicating a pinch out
+            ZoomOut(Mathf.Abs(distDiff) * 0.2f);
+        else
+            // else the distance became smaller, indicating a pinch in
+            ZoomIn(Mathf.Abs(distDiff) * 0.2f);
     }
 }
