@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class TouchHandling : MonoBehaviour
 {
     public float SwipeSensitivity = 4f;
-    public bool BlockedByUi;
     public bool SimulateMouseTapInEditor = true;
 
     private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
