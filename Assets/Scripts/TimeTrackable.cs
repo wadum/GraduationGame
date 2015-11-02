@@ -10,7 +10,7 @@ public class TimeTrackable : MonoBehaviour {
         public Vector3 velocity;
         public Quaternion rotation;
     }
-
+    public int StackSize = 0;
     public float TimeMultiplier = 1f;
 
     // Needs its own Time.time
@@ -25,11 +25,8 @@ public class TimeTrackable : MonoBehaviour {
     private Rigidbody _body;
     // Helper value for when reversing time.
     private float freezeTime = 0;
-
-    public RecordMaster RM;
-
+    
 	void Start () {
-        RM = FindObjectOfType<RecordMaster>();
         PrivateTime = Time.time;
         _body = GetComponent<Rigidbody>();
         queue = new Stack<TrackFragment>();
@@ -41,6 +38,8 @@ public class TimeTrackable : MonoBehaviour {
         fragment.rotation = transform.rotation;
         // Add it to the stack.
         queue.Push(fragment);
+        StackSize = queue.Count;
+
     }
 
     void Update () {
@@ -52,8 +51,6 @@ public class TimeTrackable : MonoBehaviour {
             if(queue.Count > 0)
                 if (transform.position == queue.Peek().pos && _body.velocity == queue.Peek().velocity)
                     return;
-            // Turn ON unity's movement, should prob me replaced by our custom system.
-            _body.isKinematic = false;
             PrivateTime += Time.deltaTime;
             TrackFragment fragment;
             fragment.velocity = _body.velocity;
@@ -61,8 +58,10 @@ public class TimeTrackable : MonoBehaviour {
             fragment.time = PrivateTime;
             fragment.rotation = transform.rotation;
             queue.Push(fragment);
+            StackSize = queue.Count;
             return;
         }
+
         // Now we reverse everything.
 
         // If the stack is empty, return.
@@ -80,6 +79,8 @@ public class TimeTrackable : MonoBehaviour {
         {
             // Rewind the frame.
             _lastFragment = queue.Pop();
+            StackSize = queue.Count;
+
             transform.position = _lastFragment.pos;
             _body.velocity = _lastFragment.velocity;
             transform.rotation = _lastFragment.rotation;

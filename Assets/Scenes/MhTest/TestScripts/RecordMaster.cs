@@ -8,9 +8,28 @@ public class RecordMaster : MonoBehaviour {
     public GameObject cylinder;
 
     // Use this for initialization
-    void Start () {
+    void Awake()
+    {
         trackers = GameObject.FindObjectsOfType<TimeTrackable>();
-	}
+
+    }
+    void Start () {
+        foreach (TimeTrackable track in trackers)
+        {
+            track.tracking = true;
+            track.GetComponent<Rigidbody>().isKinematic = true;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.anyKey)
+        {
+            if(Input.GetKeyDown(KeyCode.A)){ Track(); }
+            if (Input.GetKeyDown(KeyCode.S)) { Detrack(); }
+            if (Input.GetKeyDown(KeyCode.D)) { Reset(); }
+        }
+    }
 	
     public void Track()
     {
@@ -19,6 +38,7 @@ public class RecordMaster : MonoBehaviour {
 
         foreach (TimeTrackable track in trackers)
         {
+            track.GetComponent<Rigidbody>().isKinematic = false;
             track.Record();
         }
     }
@@ -27,6 +47,7 @@ public class RecordMaster : MonoBehaviour {
     {
         foreach(TimeTrackable track in trackers)
         {
+//            track.GetComponent<Rigidbody>().isKinematic = false;
             track.Reverse();
         }
     }
