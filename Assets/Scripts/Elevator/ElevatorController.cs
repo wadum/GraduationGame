@@ -11,7 +11,7 @@ public class ElevatorController : MonoBehaviour {
     GameObject _elevatorModel;
     ElevatorDoor _elevatorDoor;
     GameObject _player;
-    Electrified _electrode;
+    ElectrifiedElevator _electrode;
     bool _moving;
     bool _inDefaultPos = true;
 
@@ -19,11 +19,10 @@ public class ElevatorController : MonoBehaviour {
 	void Start () {
         _player = GameObject.FindGameObjectWithTag("Player");
         _elevatorDoor = GetComponentInChildren<ElevatorDoor>();
-        _electrode = GetComponentInChildren<Electrified>();
+        _electrode = GetComponentInChildren<ElectrifiedElevator>();
         _elevatorModel = gameObject.transform.FindChild("ElevatorModel").gameObject;
         _elevatorModel.transform.position = DefaultPosition.transform.position;
         _elevatorModel.transform.rotation = DefaultPosition.transform.rotation;
-        _elevatorDoor.open();
     }
 
     public void changePosition()
