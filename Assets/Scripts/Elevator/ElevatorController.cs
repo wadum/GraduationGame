@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ElevatorController : MonoBehaviour {
 
-    public bool Active;
     public float AnimationTimer;
     public bool MoveUp;
 
@@ -12,6 +11,7 @@ public class ElevatorController : MonoBehaviour {
     GameObject _elevatorModel;
     ElevatorDoor _elevatorDoor;
     GameObject _player;
+    Electrified _electrode;
     bool _moving;
     bool _inDefaultPos = true;
 
@@ -19,6 +19,7 @@ public class ElevatorController : MonoBehaviour {
 	void Start () {
         _player = GameObject.FindGameObjectWithTag("Player");
         _elevatorDoor = GetComponentInChildren<ElevatorDoor>();
+        _electrode = GetComponentInChildren<Electrified>();
         _elevatorModel = gameObject.transform.FindChild("ElevatorModel").gameObject;
         _elevatorModel.transform.position = DefaultPosition.transform.position;
         _elevatorModel.transform.rotation = DefaultPosition.transform.rotation;
@@ -28,7 +29,7 @@ public class ElevatorController : MonoBehaviour {
     public void changePosition()
     {
         //Don do anything if we arent active
-        if (!Active) return;
+        if (!_electrode.Active) return;
 
         if (_moving) return;
 
@@ -57,7 +58,7 @@ public class ElevatorController : MonoBehaviour {
         }
 
         startPos = _elevatorModel.transform.position;
-        endPos = position.transform.position + Vector3.down * 4f * (MoveUp ? -1 : 1);
+        endPos = position.transform.position + Vector3.up * 4f * (MoveUp ? -1 : 1);
         time = Time.time + (AnimationTimer);
 
         foreach (var mr in _elevatorModel.GetComponentsInChildren<MeshRenderer>())
