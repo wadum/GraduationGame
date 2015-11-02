@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TouchHandling : MonoBehaviour
 {
     public float SwipeSensitivity = 4f;
     public bool SimulateMouseTapInEditor = true;
+    public Canvas Gui;
 
     private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
     private Action<Touch> _swipeHandler = (s) => { };
@@ -158,9 +160,34 @@ public class TouchHandling : MonoBehaviour
     #endregion
 
     #region private helpers
-    private static List<Touch> GetTouches()
+    private List<Touch> GetTouches()
     {
-        return Input.touches.Where(t => !EventSystem.current.IsPointerOverGameObject(t.fingerId)).ToList();
+        return Input.touches.Where(t => !IsPointerOverGui(t.position)).ToList();
+    }
+
+    /// <summary>
+    /// Since unity has marked the bug where IsPointerOverGameObject as "by design"
+    /// we have to make our own replacement raycasting against the canvas.
+    /// 
+    /// *bleep* Unity.
+    /// </summary>
+    /// <param name="pointer">The position of the pointer in screen pixel coordinates</param>
+    /// <returns>Whether or not the pointer is over an active ui element</returns>
+    private bool IsPointerOverGui(Vector2 pointer)
+    {
+        if (!Gui)
+        {
+            Debug.Log("No Gui Registered - is this By Design?");
+            return false;
+        }
+
+        var fakePointer = new PointerEventData(EventSystem.current) {position = pointer};
+        var uiCaster = Gui.gameObject.GetComponent<GraphicRaycaster>();
+        
+        var hits = new List<RaycastResult>();
+        uiCaster.Raycast(fakePointer, hits);
+
+        return hits.Any();
     }
     #endregion
 }
