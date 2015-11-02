@@ -769,11 +769,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2044531853}
   m_RootOrder: 1
---- !u!223 &987832752 stripped
-Canvas:
-  m_PrefabParentObject: {fileID: 22375596, guid: ef49f7414f3aa472582dd471e609dd24,
-    type: 2}
-  m_PrefabInternal: {fileID: 1411224203}
 --- !u!1 &999589003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,6 +1337,10 @@ Prefab:
       propertyPath: m_ForceModuleActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 145054, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
+      propertyPath: m_TagString
+      value: Gui
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
   m_IsPrefabParent: 0
@@ -1551,8 +1550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwipeSensitivity: 5
+  BlockedByUi: 0
   SimulateMouseTapInEditor: 0
-  Gui: {fileID: 987832752}
 --- !u!4 &1786186510
 Transform:
   m_ObjectHideFlags: 0

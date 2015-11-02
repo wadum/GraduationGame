@@ -9,15 +9,35 @@ using UnityEngine.UI;
 public class TouchHandling : MonoBehaviour
 {
     public float SwipeSensitivity = 4f;
+    public bool BlockedByUi;
     public bool SimulateMouseTapInEditor = true;
-    public Canvas Gui;
 
     private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
     private Action<Touch> _swipeHandler = (s) => { };
     private Action<List<Touch>> _pinchHandler = (p) => { };
+    private GraphicRaycaster _guiCaster;
 
     void Awake() {
         _tapEventHandlers = new Dictionary<string, Action<RaycastHit>>();
+    }
+
+    void Start()
+    {
+        var gui = GameObject.FindGameObjectWithTag("Gui");
+        if (!gui)
+        {
+            Debug.Log("No tagged canvas Gui, getting canvas by fallback...");
+            var canvas = FindObjectOfType<Canvas>();
+            if (canvas)
+                gui = canvas.gameObject;
+            else
+                Debug.Log("No canvas found for fallback.");
+        }
+        if (gui)
+            _guiCaster = gui.GetComponent<GraphicRaycaster>();
+        
+        if (!_guiCaster)
+            Debug.Log("GraphicRaycaster could not be gotten from canvas, ui blocking will not be available.");
     }
 
     void OnEnable() {
@@ -175,17 +195,12 @@ public class TouchHandling : MonoBehaviour
     /// <returns>Whether or not the pointer is over an active ui element</returns>
     private bool IsPointerOverGui(Vector2 pointer)
     {
-        if (!Gui)
-        {
-            Debug.Log("No Gui Registered - is this By Design?");
+        if (!_guiCaster)
             return false;
-        }
 
-        var fakePointer = new PointerEventData(EventSystem.current) {position = pointer};
-        var uiCaster = Gui.gameObject.GetComponent<GraphicRaycaster>();
-        
+        var fakePointerEvent = new PointerEventData(EventSystem.current) {position = pointer};;
         var hits = new List<RaycastResult>();
-        uiCaster.Raycast(fakePointer, hits);
+        _guiCaster.Raycast(fakePointerEvent, hits);
 
         return hits.Any();
     }
