@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TouchHandling : MonoBehaviour
 {
@@ -13,9 +14,29 @@ public class TouchHandling : MonoBehaviour
     private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
     private Action<Touch> _swipeHandler = (s) => { };
     private Action<List<Touch>> _pinchHandler = (p) => { };
+    private GraphicRaycaster _guiCaster;
 
     void Awake() {
         _tapEventHandlers = new Dictionary<string, Action<RaycastHit>>();
+    }
+
+    void Start()
+    {
+        var gui = GameObject.FindGameObjectWithTag("Gui");
+        if (!gui)
+        {
+            Debug.Log("No tagged canvas Gui, getting canvas by fallback...");
+            var canvas = FindObjectOfType<Canvas>();
+            if (canvas)
+                gui = canvas.gameObject;
+            else
+                Debug.Log("No canvas found for fallback.");
+        }
+        if (gui)
+            _guiCaster = gui.GetComponent<GraphicRaycaster>();
+        
+        if (!_guiCaster)
+            Debug.Log("GraphicRaycaster could not be gotten from canvas, ui blocking will not be available.");
     }
 
     void OnEnable() {
@@ -158,9 +179,29 @@ public class TouchHandling : MonoBehaviour
     #endregion
 
     #region private helpers
-    private static List<Touch> GetTouches()
+    private List<Touch> GetTouches()
     {
-        return Input.touches.Where(t => !EventSystem.current.IsPointerOverGameObject(t.fingerId)).ToList();
+        return Input.touches.Where(t => !IsPointerOverGui(t.position)).ToList();
+    }
+
+    /// <summary>
+    /// Since unity has marked the bug where IsPointerOverGameObject as "by design"
+    /// we have to make our own replacement raycasting against the canvas.
+    /// 
+    /// *bleep* Unity.
+    /// </summary>
+    /// <param name="pointer">The position of the pointer in screen pixel coordinates</param>
+    /// <returns>Whether or not the pointer is over an active ui element</returns>
+    private bool IsPointerOverGui(Vector2 pointer)
+    {
+        if (!_guiCaster)
+            return false;
+
+        var fakePointerEvent = new PointerEventData(EventSystem.current) {position = pointer};;
+        var hits = new List<RaycastResult>();
+        _guiCaster.Raycast(fakePointerEvent, hits);
+
+        return hits.Any();
     }
     #endregion
 }

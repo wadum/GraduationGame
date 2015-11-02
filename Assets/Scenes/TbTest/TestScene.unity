@@ -960,6 +960,8 @@ GameObject:
   - 54: {fileID: 1207698631}
   - 114: {fileID: 1207698625}
   - 114: {fileID: 1207698632}
+  - 114: {fileID: 1207698634}
+  - 114: {fileID: 1207698633}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1092,6 +1094,28 @@ MonoBehaviour:
   centerClock: {fileID: 1425692340}
   clockpartsToCollect: 3
   clockPartCounter: 0
+--- !u!114 &1207698633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1207698624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713874cf18c8ad049b62c05936311a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1207698634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1207698624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635e2d649a0184046b931a430a97cbb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1281163574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1574,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwipeSensitivity: 5
-  BlockedByUi: 0
   SimulateMouseTapInEditor: 0
 --- !u!4 &1786186510
 Transform:
