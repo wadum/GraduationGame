@@ -39,6 +39,8 @@ public class LightningGenerator : MonoBehaviour {
         //Find the closest lightning conducter
         for (int i = 0; i < LightningConductors.Length; i++)
         {
+            LightningConductors[i].GetComponent<Electrified>().Deactivate();
+
             if (Vector3.Distance(transform.position, LightningConductors[i].transform.position) < conductorDistance) {
                 conductorDistance = Vector3.Distance(transform.position, LightningConductors[i].transform.position);
                 lightningConductor = LightningConductors[i];
@@ -47,12 +49,14 @@ public class LightningGenerator : MonoBehaviour {
             }
         }
 
-        //If the conductors are to fa away dont shoot lightning
+        //If the conductors are to far away dont shoot lightning
         if (conductorDistance == maxConductorDistance)
         {
             lineRenderer.enabled = false;
             return;
         }
+
+        lightningConductor.GetComponent<Electrified>().Activate();
 
         //if enough ime has passed update the line
         if (timePassed > frecuency)

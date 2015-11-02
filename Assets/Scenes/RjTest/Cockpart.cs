@@ -59,6 +59,7 @@ public class Cockpart : MonoBehaviour {
             return;
         }
 
+        transform.parent = player.transform;
         pickedUp = true;
         this.GetComponent<Collider>().enabled = false;
         player.GetComponent<CharacterInventory>().AddClockPart(this.gameObject);
@@ -67,6 +68,7 @@ public class Cockpart : MonoBehaviour {
 
     public void goToCenterClock(Vector3 CenterClockPos)
     {
+        transform.parent = null;
         startTime = Time.time;
         lerpEndPos = CenterClockPos;
         lerpStartingPos = player.transform.position;
