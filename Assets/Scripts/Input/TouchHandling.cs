@@ -33,7 +33,6 @@ public class TouchHandling : MonoBehaviour
 
             if (SimulateMouseTapInEditor && Application.isEditor && Input.GetMouseButtonDown(0))
             {
-                Debug.Log("test");
                 HandleMouseTap(Input.mousePosition);
                 yield return null;
                 continue;
