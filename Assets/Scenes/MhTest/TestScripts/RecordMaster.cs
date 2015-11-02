@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.IO;
 
 public class RecordMaster : MonoBehaviour {
-
-
     private TimeTrackable[] trackers;
     public GameObject cylinder;
+
 
     // Use this for initialization
     void Awake()
@@ -16,6 +15,10 @@ public class RecordMaster : MonoBehaviour {
     void Start () {
         foreach (TimeTrackable track in trackers)
         {
+            if (File.Exists(track.path + track.name + ".dat"))
+            {
+                return;
+            }
             track.tracking = true;
             track.GetComponent<Rigidbody>().isKinematic = true;
         }
@@ -28,6 +31,18 @@ public class RecordMaster : MonoBehaviour {
             if(Input.GetKeyDown(KeyCode.A)){ Track(); }
             if (Input.GetKeyDown(KeyCode.S)) { Detrack(); }
             if (Input.GetKeyDown(KeyCode.D)) { Reset(); }
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                foreach(TimeTrackable track in trackers)
+                {
+                    track.Save();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.W)) {
+                foreach (TimeTrackable track in trackers)
+                {
+                    track.Load();
+                }
+            }
         }
     }
 	
@@ -47,7 +62,6 @@ public class RecordMaster : MonoBehaviour {
     {
         foreach(TimeTrackable track in trackers)
         {
-//            track.GetComponent<Rigidbody>().isKinematic = false;
             track.Reverse();
         }
     }

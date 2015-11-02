@@ -15,7 +15,7 @@ public class TimeZone : MonoBehaviour {
 	
 	}
 
-    void OnTriggerExit(Collider collider)
+/*    void OnTriggerExit(Collider collider)
     {
         TimeTrackable timescript = collider.GetComponent<TimeTrackable>();
         if (timescript)
@@ -32,5 +32,5 @@ public class TimeZone : MonoBehaviour {
         {
             timescript.TimeMultiplier = TimeMultiplier;
         }
-    }
+    }*/
 }

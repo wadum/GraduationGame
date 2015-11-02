@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class TimeTrackable : MonoBehaviour {
 
-    public struct TrackFragment{
-        public Vector3 pos;
-        public float time;
-        public Vector3 velocity;
-        public Quaternion rotation;
-    }
+    public string path;
+    public static TimeTrackable current;
+
     public int StackSize = 0;
     public float TimeMultiplier = 1f;
 
@@ -17,7 +16,7 @@ public class TimeTrackable : MonoBehaviour {
     private float PrivateTime;
 
     // If true, each frame which influences the object, will be tracked.
-    public bool tracking = false;
+    public bool tracking;
     public Stack<TrackFragment> queue;
     public float _reversedTime = 0;
 
@@ -25,21 +24,57 @@ public class TimeTrackable : MonoBehaviour {
     private Rigidbody _body;
     // Helper value for when reversing time.
     private float freezeTime = 0;
-    
-	void Start () {
-        PrivateTime = Time.time;
+
+    public void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(path + this.name + ".dat");
+        TimeData data = new TimeData();
+        data.queue = this.queue;
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    public void Load()
+    {
+        tracking = false;
+        if (File.Exists(path + this.name + ".dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(path + this.name + ".dat", FileMode.Open);
+            TimeData data = (TimeData)bf.Deserialize(file);
+            file.Close();
+            queue = data.queue;
+            if (queue.Count == 0)
+                return;
+            // Rewind the frame.
+            _lastFragment = queue.Pop();
+            StackSize = queue.Count;
+
+            transform.position = (Vector3)_lastFragment.pos;
+            transform.rotation = _lastFragment.rotation;
+        }
+    }
+
+    void Start () {
+        if(Application.platform == RuntimePlatform.Android)
+            path = "jar:file://" + Application.dataPath + "!/assets/";
+        else
+            path = Application.dataPath + "/Scenes/MhTest/WallCrumble/Recording/";
         _body = GetComponent<Rigidbody>();
         queue = new Stack<TrackFragment>();
-        // Get the 'original' frame.
-        TrackFragment fragment;
-        fragment.velocity = _body.velocity;
-        fragment.pos = transform.position;
-        fragment.time = PrivateTime;
-        fragment.rotation = transform.rotation;
-        // Add it to the stack.
-        queue.Push(fragment);
-        StackSize = queue.Count;
-
+        if (File.Exists(path + this.name + ".dat"))
+        {
+            Load();
+        }
+            // Get the 'original' frame.
+            TrackFragment fragment = new TrackFragment();
+            fragment.pos = transform.position;
+            fragment.time = PrivateTime;
+            fragment.rotation = transform.rotation;
+            // Add it to the stack.
+            queue.Push(fragment);
+            StackSize = queue.Count;
     }
 
     void Update () {
@@ -49,14 +84,13 @@ public class TimeTrackable : MonoBehaviour {
         {
             // If the object didn't move, we dont care.
             if(queue.Count > 0)
-                if (transform.position == queue.Peek().pos && _body.velocity == queue.Peek().velocity)
+                if (transform.position == queue.Peek().pos)
                     return;
             PrivateTime += Time.deltaTime;
-            TrackFragment fragment;
-            fragment.velocity = _body.velocity;
-            fragment.pos = transform.position;
+            TrackFragment fragment = new TrackFragment();
+            fragment.pos = (SerializableVector3)transform.position;
             fragment.time = PrivateTime;
-            fragment.rotation = transform.rotation;
+            fragment.rotation = (SerializableQuaternion)transform.rotation;
             queue.Push(fragment);
             StackSize = queue.Count;
             return;
@@ -69,6 +103,7 @@ public class TimeTrackable : MonoBehaviour {
         {
             return;
         }
+
         // Turn OFF unity's gravity, we're in control now.
         _body.isKinematic = true;
         // Keep track of the rewind time.
@@ -82,8 +117,7 @@ public class TimeTrackable : MonoBehaviour {
             StackSize = queue.Count;
 
             transform.position = _lastFragment.pos;
-            _body.velocity = _lastFragment.velocity;
-            transform.rotation = _lastFragment.rotation;
+            transform.rotation = (Quaternion)_lastFragment.rotation;
         }
     }
 
@@ -103,4 +137,10 @@ public class TimeTrackable : MonoBehaviour {
     {
         tracking = true;
     }
+}
+
+[System.Serializable]
+class TimeData
+{
+    public Stack<TrackFragment> queue;
 }
