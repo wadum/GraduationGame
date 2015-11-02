@@ -35,28 +35,33 @@ public class LightningGenerator : MonoBehaviour {
 
         // reset conductor max distance
         conductorDistance = maxConductorDistance;
+            
 
         //Find the closest lightning conducter
         for (int i = 0; i < LightningConductors.Length; i++)
         {
-            LightningConductors[i].GetComponent<Electrified>().Deactivate();
+            //LightningConductors[i].GetComponent<Electrified>().Deactivate();
 
-            if (Vector3.Distance(transform.position, LightningConductors[i].transform.position) < conductorDistance) {
+            if (Vector3.Distance(transform.position, LightningConductors[i].transform.position) < conductorDistance && Vector3.Distance(transform.position, LightningConductors[i].transform.position) > 1) {
                 conductorDistance = Vector3.Distance(transform.position, LightningConductors[i].transform.position);
+                if(lightningConductor && lightningConductor != LightningConductors[i])
+                    lightningConductor.GetComponent<Electrified>().Deactivate();
                 lightningConductor = LightningConductors[i];
+                lightningConductor.GetComponent<Electrified>().Activate();
                 LengthForEachSection = conductorDistance / lengthOfLineRenderer;
                 lineRenderer.enabled = true;
             }
         }
 
         //If the conductors are to far away dont shoot lightning
-        if (conductorDistance == maxConductorDistance)
+        if (conductorDistance >= maxConductorDistance)
         {
+            if(lightningConductor)
+                lightningConductor.GetComponent<Electrified>().Deactivate();
+            lightningConductor = null;
             lineRenderer.enabled = false;
             return;
         }
-
-        lightningConductor.GetComponent<Electrified>().Activate();
 
         //if enough ime has passed update the line
         if (timePassed > frecuency)
@@ -74,5 +79,11 @@ public class LightningGenerator : MonoBehaviour {
             lineRenderer.SetPosition(lengthOfLineRenderer - 1, lastPos);
             timePassed = 0.0f;
         }
+    }
+    void OnDisable()
+    {
+        lineRenderer.enabled = false;
+        if (lightningConductor)
+            lightningConductor.GetComponent<Electrified>().Deactivate();
     }
 }
