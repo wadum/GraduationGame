@@ -5,14 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CharacterJumping : MonoBehaviour
 {
-    public float MaximumVerticalJumpFactor = 2f;
-    public float MaximumHorizonalJumpFactor = 5f;
+    public float MaximumVerticalJump = 2f;
+    public float MaximumHorizonalJump = 5f;
+    public float MaximumDrop = 10f;
     public float JumpingSpeed = 2f;
 
     public string[] TagsToJumpOnto;
 
     private float _jumpHeight;
     private float _jumpWidth;
+    private float _dropHeight;
     private TouchHandling _inputSystem;
     private bool _jumping = false;
     private NavMeshAgent _nav;
@@ -40,8 +42,9 @@ public class CharacterJumping : MonoBehaviour
 	    }
 
         var scale = transform.lossyScale.y;
-        _jumpHeight = MaximumVerticalJumpFactor * scale;
-        _jumpWidth = MaximumHorizonalJumpFactor * scale;
+        _jumpHeight = MaximumVerticalJump * scale;
+        _jumpWidth = MaximumHorizonalJump * scale;
+        _dropHeight = MaximumDrop * scale;
 
 	    if (TagsToJumpOnto.Length == 0)
 	    {
@@ -74,13 +77,18 @@ public class CharacterJumping : MonoBehaviour
         return true;
     }
 
-    private bool CanReach(Vector3 v1, Vector3 v2)
+    private bool CanReach(Vector3 from, Vector3 to)
     {
-        var verticalDist = Mathf.Abs(v1.y - v2.y);
-        if (verticalDist > _jumpHeight)
+        var heightDiff = to.y - from.y;
+        var verticalDist = Mathf.Abs(from.y - to.y);
+
+        if (heightDiff > 0 && verticalDist > _jumpHeight)
             return false;
 
-        var horizontalDist = Vector2.Distance(new Vector2(v1.x, v1.z), new Vector2(v2.x, v2.z));
+        if (heightDiff <= 0 && verticalDist > _dropHeight)
+            return false;
+
+        var horizontalDist = Vector2.Distance(new Vector2(from.x, from.z), new Vector2(to.x, to.z));
         if (horizontalDist > _jumpWidth)
             return false;
 
@@ -110,7 +118,7 @@ public class CharacterJumping : MonoBehaviour
         // Get distance from feet of character
         var v2 = transform.position - new Vector3(0, transform.lossyScale.y / 2, 0);
 
-        if (!CanReach(v1, v2))
+        if (!CanReach(v2, v1))
         {
             // Put the player back :|
             transform.parent = currentParent;
@@ -142,7 +150,7 @@ public class CharacterJumping : MonoBehaviour
         // Get distance from feet of character
         var v2 = transform.position - new Vector3(0, transform.lossyScale.y / 2, 0);
 
-        if (!CanReach(v1, v2))
+        if (!CanReach(v2, v1))
         {
             // Put the player back :|
             transform.parent = currentParent;
