@@ -12,7 +12,8 @@ public class TimeTrackable : MonoBehaviour {
     {
         public List<TrackFragment> queue;
     }
-    public int index = 0;
+    [SerializeField]
+    public int index = -1;
 //    public string path;
     public static TimeTrackable current;
     public bool forward;
@@ -20,7 +21,7 @@ public class TimeTrackable : MonoBehaviour {
     public float TimeMultiplier = 1f;
 
     // Needs its own Time.time
-    private float PrivateTime;
+//    private float PrivateTime;
 
     // If true, each frame which influences the object, will be tracked.
     public bool tracking;
@@ -76,7 +77,7 @@ public class TimeTrackable : MonoBehaviour {
         // Get the 'original' frame.
         TrackFragment fragment = new TrackFragment();
         fragment.pos = transform.localPosition;
-        fragment.time = PrivateTime;
+        fragment.time = RecordMaster.time;
         fragment.rotation = transform.localRotation;
         // Add it to the stack.
         queue.Add(fragment);
@@ -89,12 +90,13 @@ public class TimeTrackable : MonoBehaviour {
         {
             // If the object didn't move, we dont care.
             if(queue.Count > 0)
-                if (transform.localPosition == queue[queue.Count - 1].pos)
+                if (transform.localPosition == queue[index].pos)// queue[queue.Count - 1].pos)
                     return;
-            PrivateTime += Time.deltaTime;
+//            PrivateTime = RecordMaster.time;
+//            PrivateTime += Time.deltaTime;
             TrackFragment fragment = new TrackFragment();
             fragment.pos = (SerializableVector3)transform.localPosition;
-            fragment.time = PrivateTime;
+            fragment.time = RecordMaster.time;
             fragment.rotation = (SerializableQuaternion)transform.localRotation;
             queue.Add(fragment);
             index += 1;
@@ -113,12 +115,13 @@ public class TimeTrackable : MonoBehaviour {
         // Turn OFF unity's gravity, we're in control now.
         _body.isKinematic = true;
         // Keep track of the rewind time.
-        _reversedTime += deltaTime;
 
         if (forward)
         {
             if (index <= 0 )//|| index > queue.Count - 1)
                 return;
+
+            _reversedTime += deltaTime;
 
             // See if there's a keyframe for the curret rewind period.
             if (freezeTime - _reversedTime <= queue[index-1].time)
@@ -137,8 +140,10 @@ public class TimeTrackable : MonoBehaviour {
             if (index >= queue.Count -1)
                 return;
 
+            _reversedTime += deltaTime;
+
             // See if there's a keyframe for the curret rewind period.
-            if (freezeTime - _reversedTime <= queue[index].time)
+            if (_reversedTime > queue[index].time)
             {
                 index += 1;
                 // Rewind the frame.
@@ -154,7 +159,7 @@ public class TimeTrackable : MonoBehaviour {
     // Start rewinding.
     public void Move()
     { 
-        freezeTime = PrivateTime;
+        freezeTime = RecordMaster.time;
         _reversedTime = 0;
         tracking = false;
     }
