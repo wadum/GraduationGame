@@ -39,13 +39,16 @@ public class Respawnable : MonoBehaviour {
     {
         if (_nav)
         {
+            _nav.enabled = true;
             _nav.Warp(_respawnLocation.GetPosition());
             _nav.SetDestination(transform.position);
+            _nav.Resume();
         }
         else
             transform.position = _respawnLocation.GetPosition();
 
         transform.rotation = _respawnLocation.GetRotation();
+
     }
 
     public void SetCurrentLocationAsRespawn()
