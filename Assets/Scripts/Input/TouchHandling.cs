@@ -11,13 +11,13 @@ public class TouchHandling : MonoBehaviour
     public float SwipeSensitivity = 4f;
     public bool SimulateMouseTapInEditor = true;
 
-    private Dictionary<string, Action<RaycastHit>> _tapEventHandlers;
+    private Dictionary<string, List<Action<RaycastHit>>> _tapEventHandlers;
     private Action<Touch> _swipeHandler = (s) => { };
     private Action<List<Touch>> _pinchHandler = (p) => { };
     private GraphicRaycaster _guiCaster;
 
     void Awake() {
-        _tapEventHandlers = new Dictionary<string, Action<RaycastHit>>();
+        _tapEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
     }
 
     void Start()
@@ -115,21 +115,20 @@ public class TouchHandling : MonoBehaviour
 
     private void HandleMouseTap(Vector3 mousePosition)
     {
-        var ray = Camera.main.ScreenPointToRay(mousePosition);
-        RaycastHit hit;
-        Action<RaycastHit> handler;
-        if (Physics.Raycast(ray, out hit) &&
-            _tapEventHandlers.TryGetValue(hit.collider.tag, out handler))
-                handler(hit);
+        HandleTapRaycast(mousePosition);
     }
 
     private void HandleTap(Touch tap) {
-        // We get the handler for the type of gameobject we tapped based on its tag.
-        var ray = Camera.main.ScreenPointToRay(tap.position);
+        HandleTapRaycast(tap.position);
+    }
+
+    private void HandleTapRaycast(Vector3 position)
+    {
+        var ray = Camera.main.ScreenPointToRay(position);
         RaycastHit hit;
-        Action<RaycastHit> handler;
-        if (Physics.Raycast(ray, out hit) &&
-            _tapEventHandlers.TryGetValue(hit.collider.tag, out handler))
+        List<Action<RaycastHit>> handlers;
+        if (Physics.Raycast(ray, out hit) && _tapEventHandlers.TryGetValue(hit.collider.tag, out handlers))
+            foreach(var handler in handlers)
                 handler(hit);
     }
     #endregion
@@ -140,8 +139,10 @@ public class TouchHandling : MonoBehaviour
         if (string.IsNullOrEmpty(objTag))
             return;
 
-        // Overwrites old one if it exists
-        _tapEventHandlers[objTag] = handler;
+        if (!_tapEventHandlers.ContainsKey(objTag))
+            _tapEventHandlers[objTag] = new List<Action<RaycastHit>>();
+
+        _tapEventHandlers[objTag].Add(handler);
     }
 
     public void RegisterSwipeHandler(Action<Touch> handler) {
