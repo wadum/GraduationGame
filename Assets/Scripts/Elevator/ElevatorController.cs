@@ -12,7 +12,7 @@ public class ElevatorController : MonoBehaviour {
     ElevatorDoor _elevatorDoor;
     GameObject _player;
     ElectrifiedElevator _electrode;
-    bool _moving;
+    public bool _moving { get; private set;}
     bool _inDefaultPos = true;
 
 	// Use this for initialization
@@ -43,6 +43,9 @@ public class ElevatorController : MonoBehaviour {
 
     IEnumerator moveElevator(GameObject position)
     {
+        _player.GetComponent<NavMeshAgent>().enabled = false;
+        _player.transform.parent = _elevatorModel.transform;
+
         _elevatorDoor.close();
 
         _moving = true;
