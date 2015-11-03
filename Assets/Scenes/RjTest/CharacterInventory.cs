@@ -20,7 +20,7 @@ public class CharacterInventory : MonoBehaviour
     {
         deliver = false;
         doOnce = true;
-
+        if (!centerClock) centerClock = gameObject;
         playerMovement = gameObject.GetComponent<CharacterMovement>();
     }
 

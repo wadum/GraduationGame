@@ -3,7 +3,6 @@
 public class CharacterMovement : MonoBehaviour
 {
     public GameObject InputSystem;
-    public GameObject Terrain;
     public GameObject DeliverClockPartArea;
     public GameObject[] FloatWaypoints;
 
@@ -37,7 +36,13 @@ public class CharacterMovement : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	    if (!_flyToCenterClock)
+        if (!DeliverClockPartArea)
+        {
+            Debug.Log("Add DeliverClockPartArea");
+            return;
+        }
+
+        if (!_flyToCenterClock)
             return;
 
 	    _agent.enabled = false;
