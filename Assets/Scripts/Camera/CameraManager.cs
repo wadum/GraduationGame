@@ -4,25 +4,28 @@ using System.Collections;
 public class CameraManager : MonoBehaviour {
 
 	public WorldViewController WorldView;
+    public GameObject CameraContainer;
+    public GameObject Cam;
+    public TopDownCamController TopDownView;
 
-	private Camera _mainCamera;
+    public bool WorldViewMode;
 
-	// Use this for initialization
 	void Start ()
 	{
-		_mainCamera = Camera.main;
-		_mainCamera.transform.position = WorldView.GetCurrentTransform().position;
-		_mainCamera.transform.rotation = WorldView.GetCurrentTransform().rotation;
+        if (WorldViewMode)
+        {
+			TopDownView.enabled = false;
+			WorldView.enabled = true;
+            CameraContainer.transform.position = WorldView.GetCurrentTransform().position;
+            CameraContainer.transform.rotation = WorldView.GetCurrentTransform().rotation;
+            WorldView.Run(CameraContainer);
+        } else
+        {
+			WorldView.enabled = false;
+			TopDownView.enabled = true;
+            Cam.transform.position = TopDownView.StartingPos;
+            TopDownView.Run(Cam);
+        }
 	}
 	
-	void Update ()
-	{
-		if(_mainCamera != null)
-			WorldView.Run(_mainCamera);
-		else {
-			_mainCamera = Camera.main;
-			_mainCamera.transform.position = WorldView.GetCurrentTransform().position;
-			_mainCamera.transform.rotation = WorldView.GetCurrentTransform().rotation;
-		}
-	}
 }

@@ -10,7 +10,7 @@ public class WorldViewController : MonoBehaviour {
 
 	private int currentPosition = 0;
 	private bool moving;
-	private bool closeUp;
+	private bool closeUp = false;
 	private GameObject player;
 
 	void Start()
@@ -18,35 +18,33 @@ public class WorldViewController : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
-	public void Run(Camera cm)
+	public void Run(GameObject cam)
 	{
 		if(moving) return;
 		if(closeUp) {
-			if(Input.GetKeyDown(KeyCode.S)){
-				closeUp = false;
-				StartCoroutine(Orbit(cm, Positions[currentPosition].transform));
-			}
-			else
-				return;
+			if(!Input.GetKey(KeyCode.S)) return;
+			closeUp = false;
+			StartCoroutine(Orbit(cam, Positions[currentPosition].transform));
 		}
 
-		if(Input.GetKeyDown(KeyCode.W))
+		if(Input.GetKey(KeyCode.W))
 		{
-			closeUp = true;
-			StartCoroutine(RunCloseUp(cm));
+			StartCoroutine(RunCloseUp(cam));
 		}
-		if(Input.GetKeyDown(KeyCode.D))
+		if(Input.GetKey(KeyCode.D))
 		{
-			StartCoroutine(Orbit(cm, PreviousPosition()));
+			StartCoroutine(Orbit(cam, PreviousPosition()));
 		}
-		if(Input.GetKeyDown(KeyCode.A))
+		if(Input.GetKey(KeyCode.A))
 		{
-			StartCoroutine(Orbit(cm, NextPosition()));
+			StartCoroutine(Orbit(cam, NextPosition()));
 		}
 
 	}
 
-	public IEnumerator RunCloseUp(Camera cm){
+	public IEnumerator RunCloseUp(GameObject cam){
+		//if(Time.timeScale < 0.5) yield return null;
+		closeUp = true;
 		Vector3 mask = GetCloseUpPosition().transform.right * 
 			(GetCloseUpPosition().transform.rotation.eulerAngles.y > 181 ||
 			 GetCloseUpPosition().transform.rotation.eulerAngles.y < 1 ? -1 : 1) 
@@ -59,8 +57,8 @@ public class WorldViewController : MonoBehaviour {
 			                                                  diff.y * mask.y,
 			                                                  diff.z * mask.z);
 			float movementLength = CloseUpTrackingLength / Vector3.Distance(
-				dest, cm.transform.position);
-			cm.transform.position = Vector3.Lerp(cm.transform.position, dest, movementLength);
+				dest, cam.transform.position);
+			cam.transform.position = Vector3.Lerp(cam.transform.position, dest, movementLength);
 			yield return null;
 		}
 	}
@@ -83,24 +81,24 @@ public class WorldViewController : MonoBehaviour {
 	public Transform PreviousPosition()
 	{
 		if(currentPosition == 0)
-			currentPosition = 3;
+			currentPosition = Positions.Length - 1;
 		else
 			currentPosition = Mathf.Abs((currentPosition - 1) % Positions.Length);
 		return Positions[currentPosition].transform;
 	}
 
-	private IEnumerator Orbit(Camera cm, Transform dest)
+	private IEnumerator Orbit(GameObject cam, Transform dest)
 	{
-		Vector3 originPosition = cm.transform.localPosition;
-		Quaternion originRotation = cm.transform.localRotation;
+		Vector3 originPosition = cam.transform.localPosition;
+		Quaternion originRotation = cam.transform.localRotation;
 		float travelTime = 0;
 		moving = true;
 
 		while(moving && travelTime < TimeToTravelInSeconds)
 		{
 			travelTime += Time.deltaTime;
-			cm.transform.localPosition = Vector3.Slerp(originPosition, dest.localPosition, travelTime/TimeToTravelInSeconds);
-			cm.transform.localRotation = Quaternion.Slerp(originRotation, dest.localRotation, travelTime/TimeToTravelInSeconds);
+			cam.transform.localPosition = Vector3.Slerp(originPosition, dest.localPosition, travelTime/TimeToTravelInSeconds);
+			cam.transform.localRotation = Quaternion.Slerp(originRotation, dest.localRotation, travelTime/TimeToTravelInSeconds);
 			yield return null;
 		}
 		moving = false;
