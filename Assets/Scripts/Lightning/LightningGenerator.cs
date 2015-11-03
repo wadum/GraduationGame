@@ -42,6 +42,8 @@ public class LightningGenerator : MonoBehaviour {
         {
             //LightningConductors[i].GetComponent<Electrified>().Deactivate();
 
+            if (LightningConductors[i].GetComponentInParent<RiftScript>() && !LightningConductors[i].GetComponentInParent<RiftScript>().Partner) continue;
+
             if (Vector3.Distance(transform.position, LightningConductors[i].transform.position) < conductorDistance && Vector3.Distance(transform.position, LightningConductors[i].transform.position) > 1) {
                 conductorDistance = Vector3.Distance(transform.position, LightningConductors[i].transform.position);
                 if(lightningConductor && lightningConductor != LightningConductors[i])
