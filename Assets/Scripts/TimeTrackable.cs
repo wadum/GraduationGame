@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+
 public class TimeTrackable : MonoBehaviour {
 
-    public string path;
+    [System.Serializable]
+    class TimeData : ScriptableObject
+    {
+        public List<TrackFragment> queue;
+    }
+    public int index = 0;
+//    public string path;
     public static TimeTrackable current;
     public bool forward;
     public bool frozen = false;
-    public int StackSize = 0;
     public float TimeMultiplier = 1f;
 
     // Needs its own Time.time
@@ -18,8 +24,9 @@ public class TimeTrackable : MonoBehaviour {
 
     // If true, each frame which influences the object, will be tracked.
     public bool tracking;
-    public Stack<TrackFragment> queue;
-    public Stack<TrackFragment> backup_queue;
+
+    [SerializeField]
+    public List<TrackFragment> queue;
     public float _reversedTime = 0;
 
     private TrackFragment _lastFragment;
@@ -27,7 +34,7 @@ public class TimeTrackable : MonoBehaviour {
     // Helper value for when reversing time.
     private float freezeTime = 0;
 
-    public void Save()
+/*    public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(path + this.name + ".dat");
@@ -50,37 +57,29 @@ public class TimeTrackable : MonoBehaviour {
             if (queue.Count == 0)
                 return;
             // Rewind the frame.
-            _lastFragment = queue.Pop();
-            backup_queue.Push(_lastFragment);
-            StackSize = queue.Count;
+            _lastFragment = queue[queue.Count - 1];
 
-            transform.position = (Vector3)_lastFragment.pos;
-            transform.rotation = _lastFragment.rotation;
+            transform.localPosition = (Vector3)_lastFragment.pos;
+            transform.localRotation = _lastFragment.rotation;
         }
     }
-
+    */
     void Awake () {
-        //        if(Application.platform == RuntimePlatform.Android)
-        //          path = "jar:file://" + Application.dataPath + "!/assets/";
-        //    else
-        path = Application.persistentDataPath + "/Wall"+transform.parent.name;
-       //         path = Application.dataPath + "/Scenes/MhTest/WallCrumble/Recording/";
+//        path = Application.persistentDataPath + "/Wall"+transform.parent.name;
         _body = GetComponent<Rigidbody>();
-        queue = new Stack<TrackFragment>();
-        backup_queue = new Stack<TrackFragment>();
+        if(queue == null)
+            queue = new List<TrackFragment>();
     }
 
     public void Initialize()
     {
         // Get the 'original' frame.
         TrackFragment fragment = new TrackFragment();
-        fragment.pos = transform.position;
+        fragment.pos = transform.localPosition;
         fragment.time = PrivateTime;
-        fragment.rotation = transform.rotation;
+        fragment.rotation = transform.localRotation;
         // Add it to the stack.
-        queue.Push(fragment);
-        StackSize = queue.Count;
-
+        queue.Add(fragment);
     }
 
     void Update () {
@@ -90,15 +89,15 @@ public class TimeTrackable : MonoBehaviour {
         {
             // If the object didn't move, we dont care.
             if(queue.Count > 0)
-                if (transform.position == queue.Peek().pos)
+                if (transform.localPosition == queue[queue.Count - 1].pos)
                     return;
             PrivateTime += Time.deltaTime;
             TrackFragment fragment = new TrackFragment();
-            fragment.pos = (SerializableVector3)transform.position;
+            fragment.pos = (SerializableVector3)transform.localPosition;
             fragment.time = PrivateTime;
-            fragment.rotation = (SerializableQuaternion)transform.rotation;
-            queue.Push(fragment);
-            StackSize = queue.Count;
+            fragment.rotation = (SerializableQuaternion)transform.localRotation;
+            queue.Add(fragment);
+            index += 1;
             return;
         }
 
@@ -107,7 +106,7 @@ public class TimeTrackable : MonoBehaviour {
         // Now we reverse everything.
 
         // If the stack is empty, return.
-        if (queue.Count == 0 && backup_queue.Count == 0)
+        if (queue.Count == 0)
         {
             return;
         }
@@ -118,32 +117,38 @@ public class TimeTrackable : MonoBehaviour {
 
         if (forward)
         {
-            // See if there's a keyframe for the curret rewind period.
-            if (queue.Count > 0 && freezeTime - _reversedTime <= queue.Peek().time)
-            {
-                // Rewind the frame.
-                _lastFragment = queue.Pop();
-                backup_queue.Push(_lastFragment);
-                StackSize = queue.Count;
+            if (index <= 0 )//|| index > queue.Count - 1)
+                return;
 
-                transform.position = _lastFragment.pos;
-                transform.rotation = (Quaternion)_lastFragment.rotation;
+            // See if there's a keyframe for the curret rewind period.
+            if (freezeTime - _reversedTime <= queue[index-1].time)
+            {
+                index -= 1;
+                // Rewind the frame.
+                _lastFragment = queue[index];
+
+                transform.localPosition = _lastFragment.pos;
+                transform.localRotation = (Quaternion)_lastFragment.rotation;
             }
             return;
         }
-
-        // See if there's a keyframe for the curret rewind period.
-        if (backup_queue.Count > 0 && freezeTime - _reversedTime <= backup_queue.Peek().time)
+        else
         {
-            // Rewind the frame.
-            _lastFragment = backup_queue.Pop();
-            queue.Push(_lastFragment);
-            StackSize = backup_queue.Count;
+            if (index >= queue.Count -1)
+                return;
 
-            transform.position = _lastFragment.pos;
-            transform.rotation = (Quaternion)_lastFragment.rotation;
+            // See if there's a keyframe for the curret rewind period.
+            if (freezeTime - _reversedTime <= queue[index].time)
+            {
+                index += 1;
+                // Rewind the frame.
+                _lastFragment = queue[index];
+
+                transform.localPosition = _lastFragment.pos;
+                transform.localRotation = (Quaternion)_lastFragment.rotation;
+            }
+            return;
         }
-
     }
 
     // Start rewinding.
@@ -157,17 +162,13 @@ public class TimeTrackable : MonoBehaviour {
     // Start recording.
     public void Record()
     {
-        File.Delete(path + this.name + ".dat");
+/*        if (File.Exists(path + this.name + ".dat"))
+        {
+            File.Delete(path + this.name + ".dat");
+        }*/
         tracking = true;
-        queue = new Stack<TrackFragment>();
-        backup_queue = new Stack<TrackFragment>();
+        _body.isKinematic = false;
+        queue = new List<TrackFragment>();
         Initialize();
-
     }
-}
-
-[System.Serializable]
-class TimeData
-{
-    public Stack<TrackFragment> queue;
 }
