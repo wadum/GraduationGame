@@ -35,38 +35,7 @@ public class TimeTrackable : MonoBehaviour {
     // Helper value for when reversing time.
     private float freezeTime = 0;
 
-/*    public void Save()
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(path + this.name + ".dat");
-        TimeData data = new TimeData();
-        data.queue = this.queue;
-        bf.Serialize(file, data);
-        file.Close();
-    }
-
-    public void Load()
-    {
-        tracking = false;
-        if (File.Exists(path + this.name + ".dat"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(path + this.name + ".dat", FileMode.Open);
-            TimeData data = (TimeData)bf.Deserialize(file);
-            file.Close();
-            queue = data.queue;
-            if (queue.Count == 0)
-                return;
-            // Rewind the frame.
-            _lastFragment = queue[queue.Count - 1];
-
-            transform.localPosition = (Vector3)_lastFragment.pos;
-            transform.localRotation = _lastFragment.rotation;
-        }
-    }
-    */
     void Awake () {
-//        path = Application.persistentDataPath + "/Wall"+transform.parent.name;
         _body = GetComponent<Rigidbody>();
         if(queue == null)
             queue = new List<TrackFragment>();
@@ -84,7 +53,7 @@ public class TimeTrackable : MonoBehaviour {
     }
 
     void Update () {
-        float deltaTime = Time.deltaTime * TimeMultiplier;
+//        float deltaTime = Time.deltaTime * TimeMultiplier;
         // If we're recording the object.
         if (tracking)
         {
@@ -103,57 +72,76 @@ public class TimeTrackable : MonoBehaviour {
             return;
         }
 
-        if (frozen)
+        if (frozen || queue.Count == 0)
             return;
-        // Now we reverse everything.
 
-        // If the stack is empty, return.
-        if (queue.Count == 0)
-        {
-            return;
-        }
         // Turn OFF unity's gravity, we're in control now.
         _body.isKinematic = true;
         // Keep track of the rewind time.
-
-        if (forward)
+    //    Debug.Log(RecordMaster.time);
+        if(RecordMaster.time + 0.2f <= queue[index].time)
         {
-            if (index <= 0 )//|| index > queue.Count - 1)
-                return;
-
-            _reversedTime += deltaTime;
-
-            // See if there's a keyframe for the curret rewind period.
-            if (freezeTime - _reversedTime <= queue[index-1].time)
-            {
+            if (index > 0)
                 index -= 1;
-                // Rewind the frame.
-                _lastFragment = queue[index];
 
-                transform.localPosition = _lastFragment.pos;
-                transform.localRotation = (Quaternion)_lastFragment.rotation;
-            }
-            return;
+            // Rewind the frame.
+            _lastFragment = queue[index];
+
+            transform.localPosition = _lastFragment.pos;
+            transform.localRotation = (Quaternion)_lastFragment.rotation;
+
         }
-        else
+        else if(RecordMaster.time >= queue[index].time)
         {
-            if (index >= queue.Count -1)
-                return;
-
-            _reversedTime += deltaTime;
-
-            // See if there's a keyframe for the curret rewind period.
-            if (_reversedTime > queue[index].time)
-            {
+            if (queue.Count > index + 1)
                 index += 1;
-                // Rewind the frame.
-                _lastFragment = queue[index];
+            // Rewind the frame.
+            _lastFragment = queue[index];
 
-                transform.localPosition = _lastFragment.pos;
-                transform.localRotation = (Quaternion)_lastFragment.rotation;
-            }
-            return;
+            transform.localPosition = _lastFragment.pos;
+            transform.localRotation = (Quaternion)_lastFragment.rotation;
         }
+
+
+        /*
+                if (forward)
+                {
+                    if (index <= 0 )
+                        return;
+
+                    _reversedTime += deltaTime;
+
+                    // See if there's a keyframe for the curret rewind period.
+                    if (freezeTime - _reversedTime <= queue[index-1].time)
+                    {
+                        index -= 1;
+                        // Rewind the frame.
+                        _lastFragment = queue[index];
+
+                        transform.localPosition = _lastFragment.pos;
+                        transform.localRotation = (Quaternion)_lastFragment.rotation;
+                    }
+                    return;
+                }
+                else
+                {
+                    if (index >= queue.Count -1)
+                        return;
+
+                    _reversedTime += deltaTime;
+
+                    // See if there's a keyframe for the curret rewind period.
+                    if (_reversedTime > queue[index].time)
+                    {
+                        index += 1;
+                        // Rewind the frame.
+                        _lastFragment = queue[index];
+
+                        transform.localPosition = _lastFragment.pos;
+                        transform.localRotation = (Quaternion)_lastFragment.rotation;
+                    }
+                    return;
+                }*/
     }
 
     // Start rewinding.

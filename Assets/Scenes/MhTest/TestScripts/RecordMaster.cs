@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class RecordMaster : MonoBehaviour {
     private TimeTrackable[] trackers;
     public GameObject cylinder;
     public float State=0;
-    private float PastState = 0;
     public static float time;
-
+    public float _time;
+    public float tmp;
+    public Slider slider;
+    private float epsilon = 0.1f;
+    bool tracking = false;
     // Use this for initialization
     void Awake()
     {
@@ -16,11 +20,28 @@ public class RecordMaster : MonoBehaviour {
     }
     
     void Start () {
+        tmp = 0 ;
         foreach (TimeTrackable track in trackers)
         {
-            track.tracking = true;
-            track.GetComponent<Rigidbody>().isKinematic = true;
+            if (track.queue.Count == 0)
+            {
+                track.tracking = true;
+                track.GetComponent<Rigidbody>().isKinematic = true;
+
+            }
+            else
+            {
+                if (track.queue[track.queue.Count - 1].time > tmp)
+                {
+                    tmp = track.queue[track.queue.Count - 1].time;
+                }
+
+            }
         }
+        slider.maxValue = tmp;
+        time = tmp;
+        State = tmp;
+        slider.value = tmp;
     }
 
     public void SetFloat(float value)
@@ -30,30 +51,11 @@ public class RecordMaster : MonoBehaviour {
 
     void Update()
     {
-        time += Time.deltaTime;
-        if (State > 0 && PastState <= 0)
-            foreach (TimeTrackable track in trackers)
-            {
-                time = 0;
-                track.Move();
-                track.forward = true;
-                track.frozen = false;
-            }
-        if (State < 0 && PastState >= 0)
-            foreach (TimeTrackable track in trackers)
-            {
-                time = 0;
-                track.Move();
-                track.forward = false;
-                track.frozen = false;
-            }
-        if (State == 0)
-            foreach(TimeTrackable track in trackers)
-            {
-                track.frozen = true;
-            }
+        if (!tracking)
+        {
+                time = State;
+        }
 
-        PastState = State;
         if (Input.anyKey)
         {
             if(Input.GetKeyDown(KeyCode.A)){ Track(); }
@@ -63,6 +65,7 @@ public class RecordMaster : MonoBehaviour {
 	
     public void Track()
     {
+        tracking = true;
         if (cylinder)
         {
             cylinder.GetComponent<CapsuleCollider>().enabled = true;
