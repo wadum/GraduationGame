@@ -80,7 +80,7 @@ public class CharacterJumping : MonoBehaviour
         if (verticalDist > _jumpHeight)
             return false;
 
-        var horizontalDist = Vector2.Distance(new Vector2(v1.x, v1.z), new Vector2(v2.x, v1.z));
+        var horizontalDist = Vector2.Distance(new Vector2(v1.x, v1.z), new Vector2(v2.x, v2.z));
         if (horizontalDist > _jumpWidth)
             return false;
 
