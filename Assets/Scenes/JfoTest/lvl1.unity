@@ -10853,7 +10853,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  centerClock: {fileID: 0}
+  centerClock: {fileID: 1362960219}
   clockpartsToCollect: 3
   clockPartCounter: 0
 --- !u!114 &563341488
@@ -10962,7 +10962,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563341484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21b41e13db8006f4bbb9ac609f0d4dda, type: 3}
   m_Name: 
@@ -20436,7 +20436,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.65747565e-06, y: 1.45286357, z: -1.35547602}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1362960220}
   m_Father: {fileID: 1399360293}
   m_RootOrder: 0
 --- !u!23 &1005382386
@@ -28903,6 +28904,33 @@ ConfigurableJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
+--- !u!1 &1362960219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1362960220}
+  m_Layer: 0
+  m_Name: ClockCenterQuestionmark
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1362960220
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1362960219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1005382385}
+  m_RootOrder: 0
 --- !u!1 &1363869836
 GameObject:
   m_ObjectHideFlags: 0
@@ -31377,6 +31405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwipeSensitivity: 5
+  TapHoldSeconds: 1
   SimulateMouseTapInEditor: 1
 --- !u!1 &1459646142
 GameObject:

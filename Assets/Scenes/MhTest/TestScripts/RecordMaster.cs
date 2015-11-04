@@ -42,7 +42,6 @@ public class RecordMaster : MonoBehaviour {
 
             }
         }
-        Debug.Log(_time);
         slider.maxValue = tmp;
         time = _time;
         State = _time;
