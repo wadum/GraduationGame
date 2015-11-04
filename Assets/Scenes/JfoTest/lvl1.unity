@@ -2532,48 +2532,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 126731690}
   m_Mesh: {fileID: 4300106, guid: 0d464920ed8a08344bb894a302075fec, type: 3}
---- !u!1 &127451855
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 143118, guid: e63242a6c45350a4fb3c75df3902aa1a, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 127451857}
-  - 114: {fileID: 127451856}
-  m_Layer: 0
-  m_Name: Input System
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &127451856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11426844, guid: e63242a6c45350a4fb3c75df3902aa1a,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 127451855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d08db393039d545adba1f20348ca19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwipeSensitivity: 5
-  SimulateMouseTapInEditor: 1
---- !u!4 &127451857
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 422588, guid: e63242a6c45350a4fb3c75df3902aa1a, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 127451855}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.73525715, y: 1.53138757, z: .00135803223}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
 --- !u!1 &128172358
 GameObject:
   m_ObjectHideFlags: 0
@@ -7295,6 +7253,10 @@ Prefab:
       propertyPath: State
       value: .73682493
       objectReference: {fileID: 0}
+    - target: {fileID: 159688, guid: cf19b1aae25ee504b8df306fb76fb6bf, type: 2}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf19b1aae25ee504b8df306fb76fb6bf, type: 2}
   m_IsPrefabParent: 0
@@ -10833,6 +10795,7 @@ GameObject:
   - 114: {fileID: 563341488}
   - 114: {fileID: 563341487}
   - 114: {fileID: 563341486}
+  - 114: {fileID: 563341494}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10993,6 +10956,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563341484}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &563341494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563341484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b41e13db8006f4bbb9ac609f0d4dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaximumVerticalJump: 2
+  MaximumHorizonalJump: 5
+  MaximumDrop: 10
+  JumpingSpeed: 2
+  TagsToJumpOnto:
+  - Finish
 --- !u!1 &563520501
 GameObject:
   m_ObjectHideFlags: 0
@@ -17223,7 +17203,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 850210985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.48000002, y: .680000007, z: -10.3800001}
+  m_LocalPosition: {x: -10.3900003, y: 2.58999991, z: -13.3900003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 416594076}
@@ -25582,7 +25562,7 @@ RectTransform:
   - {fileID: 180721799}
   - {fileID: 1224462025}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -.498840451, y: 100}
@@ -31661,7 +31641,7 @@ Transform:
   m_Children:
   - {fileID: 1082023889}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!135 &1467479001
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -40337,7 +40317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingPos: {x: 0, y: 10, z: -5}
   UpDownRotationLimit: 80
-  InputSystem: {fileID: 127451855}
+  InputSystem: {fileID: 0}
   ForceTouch: 0
   MaxZoomDistance: 100
   MinZoomDistance: 3
@@ -40470,7 +40450,7 @@ Transform:
   - {fileID: 907948681}
   - {fileID: 1426167934}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
 --- !u!1 &1879189372
 GameObject:
   m_ObjectHideFlags: 0
