@@ -8,7 +8,7 @@ public class DisableBox : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Breakable Wall")
+        if (collider.name == "mainPillar")
         {
             obj.SetActive(!obj.activeSelf);
             obj2.SetActive(obj.activeSelf);
@@ -17,7 +17,7 @@ public class DisableBox : MonoBehaviour {
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.tag == "Breakable Wall")
+        if (collider.name == "mainPillar")
         {
             obj.SetActive(!obj.activeSelf);
             obj2.SetActive(obj.activeSelf);
