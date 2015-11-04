@@ -57,8 +57,8 @@ public class TimeTrackable : MonoBehaviour {
             if(queue.Count > 0)
                 if (transform.localPosition == queue[index].pos)
                     return;
-            if (queue[index].time + 0.1f <= RecordMaster.time)
-                return;
+//            if (queue[index].time + 0.1f <= RecordMaster.time)
+  //              return;
             TrackFragment fragment = new TrackFragment();
             fragment.pos = (SerializableVector3)transform.localPosition;
             fragment.time = RecordMaster.time;
@@ -74,7 +74,7 @@ public class TimeTrackable : MonoBehaviour {
         // Turn OFF unity's gravity, we're in control now.
         _body.isKinematic = true;
         // Keep track of the rewind time.
-        if(RecordMaster.time + 0.2f <= queue[index].time)
+        if(RecordMaster.time/* + 0.025f */<= queue[index].time)
         {
             if (index > 0)
                 index -= 1;
@@ -86,7 +86,7 @@ public class TimeTrackable : MonoBehaviour {
             transform.localRotation = (Quaternion)_lastFragment.rotation;
 
         }
-        else if(RecordMaster.time >= queue[index].time)
+        else if(RecordMaster.time -0.2f>= queue[index].time)
         {
             if (queue.Count > index + 1)
                 index += 1;

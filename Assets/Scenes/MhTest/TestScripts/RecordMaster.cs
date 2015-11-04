@@ -11,12 +11,17 @@ public class RecordMaster : MonoBehaviour {
     public float tmp;
     public Slider slider;
     private float epsilon = 0.1f;
-    bool tracking = false;
+    public bool tracking = false;
 
     // Use this for initialization
     void Awake()
     {
         trackers = transform.GetComponentsInChildren<TimeTrackable>();
+        foreach(TimeTrackable track in trackers)
+        {
+            track.tracking = tracking;
+
+        }
     }
     
     void Start () {
@@ -27,7 +32,6 @@ public class RecordMaster : MonoBehaviour {
             {
                 track.tracking = true;
                 track.GetComponent<Rigidbody>().isKinematic = true;
-
             }
             else
             {
@@ -38,10 +42,12 @@ public class RecordMaster : MonoBehaviour {
 
             }
         }
+        Debug.Log(_time);
         slider.maxValue = tmp;
-        time = tmp;
-        State = tmp;
-        slider.value = tmp;
+        time = _time;
+        State = _time;
+        slider.value = _time;
+
     }
 
     public void SetFloat(float value)
@@ -51,9 +57,15 @@ public class RecordMaster : MonoBehaviour {
 
     void Update()
     {
-        if (!tracking)
+        if(tracking)
         {
-                time = State;
+            time += Time.deltaTime;
+            _time = time;
+        }
+        else
+        {
+            time = State;
+            _time = time;
         }
 
         if (Input.anyKey)
@@ -73,6 +85,7 @@ public class RecordMaster : MonoBehaviour {
 
         }
         time = 0;
+        _time = time;
 
         foreach (TimeTrackable track in trackers)
         {
