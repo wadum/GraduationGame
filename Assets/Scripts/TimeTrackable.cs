@@ -20,9 +20,6 @@ public class TimeTrackable : MonoBehaviour {
     public bool frozen = false;
     public float TimeMultiplier = 1f;
 
-    // Needs its own Time.time
-//    private float PrivateTime;
-
     // If true, each frame which influences the object, will be tracked.
     public bool tracking;
 
@@ -53,16 +50,15 @@ public class TimeTrackable : MonoBehaviour {
     }
 
     void Update () {
-//        float deltaTime = Time.deltaTime * TimeMultiplier;
         // If we're recording the object.
         if (tracking)
         {
             // If the object didn't move, we dont care.
             if(queue.Count > 0)
-                if (transform.localPosition == queue[index].pos)// queue[queue.Count - 1].pos)
+                if (transform.localPosition == queue[index].pos)
                     return;
-//            PrivateTime = RecordMaster.time;
-//            PrivateTime += Time.deltaTime;
+            if (queue[index].time + 0.1f <= RecordMaster.time)
+                return;
             TrackFragment fragment = new TrackFragment();
             fragment.pos = (SerializableVector3)transform.localPosition;
             fragment.time = RecordMaster.time;
@@ -78,7 +74,6 @@ public class TimeTrackable : MonoBehaviour {
         // Turn OFF unity's gravity, we're in control now.
         _body.isKinematic = true;
         // Keep track of the rewind time.
-    //    Debug.Log(RecordMaster.time);
         if(RecordMaster.time + 0.2f <= queue[index].time)
         {
             if (index > 0)
@@ -101,47 +96,6 @@ public class TimeTrackable : MonoBehaviour {
             transform.localPosition = _lastFragment.pos;
             transform.localRotation = (Quaternion)_lastFragment.rotation;
         }
-
-
-        /*
-                if (forward)
-                {
-                    if (index <= 0 )
-                        return;
-
-                    _reversedTime += deltaTime;
-
-                    // See if there's a keyframe for the curret rewind period.
-                    if (freezeTime - _reversedTime <= queue[index-1].time)
-                    {
-                        index -= 1;
-                        // Rewind the frame.
-                        _lastFragment = queue[index];
-
-                        transform.localPosition = _lastFragment.pos;
-                        transform.localRotation = (Quaternion)_lastFragment.rotation;
-                    }
-                    return;
-                }
-                else
-                {
-                    if (index >= queue.Count -1)
-                        return;
-
-                    _reversedTime += deltaTime;
-
-                    // See if there's a keyframe for the curret rewind period.
-                    if (_reversedTime > queue[index].time)
-                    {
-                        index += 1;
-                        // Rewind the frame.
-                        _lastFragment = queue[index];
-
-                        transform.localPosition = _lastFragment.pos;
-                        transform.localRotation = (Quaternion)_lastFragment.rotation;
-                    }
-                    return;
-                }*/
     }
 
     // Start rewinding.
@@ -155,10 +109,6 @@ public class TimeTrackable : MonoBehaviour {
     // Start recording.
     public void Record()
     {
-/*        if (File.Exists(path + this.name + ".dat"))
-        {
-            File.Delete(path + this.name + ".dat");
-        }*/
         tracking = true;
         _body.isKinematic = false;
         queue = new List<TrackFragment>();

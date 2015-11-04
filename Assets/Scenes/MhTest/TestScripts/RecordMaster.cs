@@ -16,8 +16,7 @@ public class RecordMaster : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        trackers = GameObject.FindObjectsOfType<TimeTrackable>();
-
+        trackers = transform.GetComponentsInChildren<TimeTrackable>();
     }
     
     void Start () {
