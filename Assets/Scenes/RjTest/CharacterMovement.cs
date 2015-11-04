@@ -38,7 +38,7 @@ public class CharacterMovement : MonoBehaviour
 	void Update () {
         if (!DeliverClockPartArea)
         {
-            Debug.Log("Add DeliverClockPartArea");
+//            Debug.Log("Add DeliverClockPartArea");
             return;
         }
 

@@ -12,6 +12,7 @@ public class RecordMaster : MonoBehaviour {
     public Slider slider;
     private float epsilon = 0.1f;
     bool tracking = false;
+
     // Use this for initialization
     void Awake()
     {

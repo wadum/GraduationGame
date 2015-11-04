@@ -10,8 +10,8 @@ public class DisableBox : MonoBehaviour {
     {
         if (collider.tag == "Breakable Wall")
         {
-            obj.SetActive(!obj.active);
-            obj2.SetActive(obj.active);
+            obj.SetActive(!obj.activeSelf);
+            obj2.SetActive(obj.activeSelf);
         }
     }
 
@@ -19,8 +19,8 @@ public class DisableBox : MonoBehaviour {
     {
         if (collider.tag == "Breakable Wall")
         {
-            obj.SetActive(!obj.active);
-            obj2.SetActive(obj.active);
+            obj.SetActive(!obj.activeSelf);
+            obj2.SetActive(obj.activeSelf);
         }
     }
 }
