@@ -1,13 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class DeconstruableTower : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    NavMeshAgent _NavMeshAgent;
+    public Slider _Slider;
+    
+    // Use this for initialization
+    void Start()
+    {
+        _NavMeshAgent = GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>();
         TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit => FindObjectOfType<GameOverlayController>().ToggleWallSlider());
+        touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit =>
+        {
+            if (_NavMeshAgent.enabled)
+                FindObjectOfType<GameOverlayController>().ToggleWallSlider();
+        });
     }
+
+    void Update()
+    {
+        if (!_NavMeshAgent.enabled && _Slider.IsActive())
+            FindObjectOfType<GameOverlayController>().ToggleWallSlider();
+    }
+
 
     void OnTriggerStay(Collider collider)
     {
