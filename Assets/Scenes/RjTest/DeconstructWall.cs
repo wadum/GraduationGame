@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Linq;
 
 public class DeconstructWall : MonoBehaviour {
@@ -13,7 +12,14 @@ public class DeconstructWall : MonoBehaviour {
     {
         _bricks = this.GetComponentsInChildren<Transform>().Where(b => b != transform).OrderBy(b => b.position.y).ToArray();
         TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit => FindObjectOfType<GameOverlayController>().ToggleWallSlider());
+        touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit =>
+        {
+            if (hit.collider.gameObject.transform.root.gameObject == gameObject)
+            {
+                Debug.Log("Got Hit");
+                FindObjectOfType<GameOverlayController>().ToggleWallSlider();
+            }
+        });
     }
 	
 	public void SetConstructionLevel(float level)
@@ -23,7 +29,7 @@ public class DeconstructWall : MonoBehaviour {
 
         for (int i = 0; i < _bricks.Length; i++)
         {
-            _bricks[i].gameObject.SetActive((i > percentage) ? false : true);
+            _bricks[i].gameObject.SetActive((!(i > percentage)));
         }
     }
 }
