@@ -1,41 +1,87 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class CharacterMovement : MonoBehaviour {
+public class CharacterMovement : MonoBehaviour
+{
+    public GameObject InputSystem;
+    public GameObject DeliverClockPartArea;
+    public GameObject[] FloatWaypoints;
 
-    public GameObject Terrain;
+    NavMeshAgent _agent;
 
-    NavMeshAgent agent;
+    public float WaypointFloatSpeed = 1.0f;
+    float _startTime;
+    float _journeyLength;
+    float _distCovered;
+    float _fracJourney;
+    int _currentWaypoint;
+    bool _flyToCenterClock;
 
-	// Use this for initialization
-	void Start () {
-        agent = this.gameObject.GetComponent<NavMeshAgent>();
-	}
+    Vector3 _lerpStartingPos;
+    Vector3 _lerpEndPos;
+
+    // Use this for initialization
+    void Start () {
+        _agent = gameObject.GetComponent<NavMeshAgent>();
+        _currentWaypoint = 0;
+
+        TouchHandling touchHandling = null;
+        if (InputSystem)
+            touchHandling = InputSystem.GetComponent<TouchHandling>();
+        if (touchHandling)
+        {
+            touchHandling.RegisterTapHandlerByTag("Terrain", hit => GoTo(hit.point));
+            touchHandling.RegisterTapHandlerByTag("Clockpart", hit => GoTo(hit.collider.transform.position));
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	    if (Input.GetMouseButtonUp(0) == true)
+        if (!DeliverClockPartArea)
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                NavMeshHit navHit;
-
-                if (hit.collider.tag != "Terrain")
-                {
-                    return;
-                }
-
-                if (agent.Raycast(hit.point, out navHit)){
-                    agent.SetDestination(navHit.position);
-                }
-                else
-                {
-                agent.SetDestination(hit.point);
-                }
-            }
+            Debug.Log("Add DeliverClockPartArea");
+            return;
         }
+
+        if (!_flyToCenterClock)
+            return;
+
+	    _agent.enabled = false;
+
+	    _distCovered = (Time.time - _startTime) * WaypointFloatSpeed;
+	    _fracJourney = _distCovered / _journeyLength;
+	    transform.position = Vector3.Lerp(_lerpStartingPos, _lerpEndPos, _fracJourney);
+
+	    if (!(_fracJourney >= 1))
+            return;
+
+	    _startTime = Time.time;
+	    _currentWaypoint++;
+	    _lerpStartingPos = FloatWaypoints[_currentWaypoint-1].transform.position;
+
+	    if (_lerpStartingPos == DeliverClockPartArea.transform.position)
+	    {
+	        _agent.enabled = true;
+	        _flyToCenterClock = false;
+	        return;
+	    }
+
+	    _lerpEndPos = FloatWaypoints[_currentWaypoint].transform.position;
+	    _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
 	}
+
+    public void GoTo(Vector3 position)
+    {
+        if (_agent.enabled)
+            _agent.SetDestination(position);
+    }
+
+    public void GoToCenterClock(GameObject[] waypoints)
+    {
+        FloatWaypoints = waypoints;
+        _startTime = Time.time;
+        _lerpEndPos = FloatWaypoints[_currentWaypoint].transform.position;
+        _lerpStartingPos = transform.position;
+        _journeyLength = Vector3.Distance(_lerpStartingPos, FloatWaypoints[0].transform.position);
+        _flyToCenterClock = true;
+    }
 }
