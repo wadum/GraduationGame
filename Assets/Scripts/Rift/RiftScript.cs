@@ -7,10 +7,18 @@ public class RiftScript : MonoBehaviour {
     public bool active;
     public RiftScript Partner;
 
+    ElectrifiedRift electrified;
     private float ElapsedTime = 0;
 
     // Use this for initialization
     void Start () {
+        electrified = GetComponentInChildren<ElectrifiedRift>();
+        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
+        touchHandling.RegisterTapHandlerByTag("PortalRift", hit => {
+            if(hit.collider.gameObject == gameObject)
+                FindObjectOfType<RiftMaster>().TagRift(gameObject);
+            });
+
         if (active)
             transform.localScale = OpenedScale;
         else
@@ -26,9 +34,15 @@ public class RiftScript : MonoBehaviour {
         }
         else
         {
+            if (Partner && electrified.Active)
+            {
+                Partner.GetComponentInChildren<LightningGenerator>().enabled = true;
+            }
             if (ElapsedTime < 1f)
                 ElapsedTime += Time.deltaTime;
         }
+        if(!Partner)
+            GetComponentInChildren<LightningGenerator>().enabled = false;
         float dist = ElapsedTime / 1f;
         transform.localScale = Vector3.Lerp(ClosedScale, OpenedScale, dist);
     }
