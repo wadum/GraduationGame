@@ -49,7 +49,7 @@ public class CharacterInventory : MonoBehaviour
     public void AddClockPart(GameObject clockpart)
     {
         clockParts[clockPartCounter] = clockpart;
-        clockPartCounter++;
+  //      clockPartCounter++;
 
         for (int i = 0; i < clockPartCounter; i++)
         {

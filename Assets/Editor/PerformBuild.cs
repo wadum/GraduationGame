@@ -13,7 +13,7 @@ class PerformBuild
 
     public static void CommandLineBuildAndroid ()
     {
-        var settings = new Settings("TimeAndStuff") {Scenes = GetBuildScenes()};
+        var settings = new Settings("TimeKeeper") {Scenes = GetBuildScenes()};
 
         var args = System.Environment.GetCommandLineArgs ();
         for (var i = 0; i < args.Length; i++) {
@@ -28,7 +28,7 @@ class PerformBuild
     [MenuItem("Build/Build Test Release")]
     public static void TestBuild(){
 		
-        var settings = new Settings("TimeAndStuffTest") {Scenes = GetBuildScenes() };
+        var settings = new Settings("TimeKeeper") {Scenes = GetBuildScenes() };
 
         MakeBuild(settings);
 
