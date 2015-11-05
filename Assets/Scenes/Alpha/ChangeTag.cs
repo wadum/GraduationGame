@@ -7,7 +7,7 @@ public class ChangeTag : MonoBehaviour {
 	void Update () {
         if (this.tag == "Breakable Wall" && RecordMaster.time > 0.4)
             this.tag = "Finish";
-        else if (this.tag != "Breakable Wall")
+        else if (RecordMaster.time <= 0.4f)
             this.tag = "Breakable Wall";
 
                 
