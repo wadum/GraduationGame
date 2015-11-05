@@ -282,7 +282,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11426844, guid: e63242a6c45350a4fb3c75df3902aa1a, type: 2}
       propertyPath: SimulateMouseTapInEditor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e63242a6c45350a4fb3c75df3902aa1a, type: 2}
@@ -291,6 +291,18 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 143118, guid: e63242a6c45350a4fb3c75df3902aa1a, type: 2}
   m_PrefabInternal: {fileID: 497387296}
+--- !u!114 &497387300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 497387297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d41276dfc7d1574c9d50f6d7a5c5d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TagToListenOn: Player
 --- !u!1 &508006688 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 152488, guid: b8483a78bb751764795c2f0456cb1673, type: 2}
@@ -306,8 +318,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b41e13db8006f4bbb9ac609f0d4dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaximumVerticalJumpFactor: 2
-  MaximumHorizonalJumpFactor: 5
+  MaximumVerticalJump: 2
+  MaximumHorizonalJump: 5
+  MaximumDrop: 10
   JumpingSpeed: 5
   TagsToJumpOnto:
   - Finish
@@ -317,7 +330,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508006688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 713874cf18c8ad049b62c05936311a70, type: 3}
   m_Name: 
@@ -328,7 +341,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508006688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 635e2d649a0184046b931a430a97cbb0, type: 3}
   m_Name: 
@@ -401,7 +414,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 565982545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.0200005, y: 0, z: -8.76000023}
+  m_LocalPosition: {x: 42.0200005, y: 3, z: -8.76000023}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -752,7 +765,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1149870111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.5, y: 0, z: -8.63000011}
+  m_LocalPosition: {x: 38.5, y: 4, z: -8.63000011}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1345,7 +1358,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1432034534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.5, y: 0, z: -12.7343855}
+  m_LocalPosition: {x: 38.5, y: 1, z: -12.7343855}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1779,7 +1792,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11478044, guid: a09bbfd9edb474b7aa456d5607443097, type: 2}
       propertyPath: ForceTouch
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a09bbfd9edb474b7aa456d5607443097, type: 2}
@@ -1852,7 +1865,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2009812485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.7200012, y: 0, z: -12.7343855}
+  m_LocalPosition: {x: 45.7200012, y: 2, z: -12.7343855}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2027,7 +2040,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2118877627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.0200005, y: 0, z: -12.7343855}
+  m_LocalPosition: {x: 42.0200005, y: 2, z: -12.7343855}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}

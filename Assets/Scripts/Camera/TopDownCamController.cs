@@ -46,10 +46,7 @@ public class TopDownCamController : MonoBehaviour {
             touchHandling = InputSystem.GetComponent<TouchHandling>();
 
 	    if (touchHandling)
-	    {
-            touchHandling.RegisterSwipeHandler(HandleSwipe);
             touchHandling.RegisterPinchHandler(HandlePinch);
-	    }
 
 		StartCoroutine(AlwaysLookAt(_player));
 	}
@@ -142,13 +139,6 @@ public class TopDownCamController : MonoBehaviour {
         }
     }
 
-    private void HandleSwipe(Touch touch)
-    {
-        var directions = touch.deltaPosition;
-        RotateUp(-directions.y * 0.5f);
-        RotateRight(directions.x * 0.5f);
-    }
-
     private void HandlePinch(List<Touch> touches)
     {
         // takes the average vector of a list of vectors
@@ -158,17 +148,32 @@ public class TopDownCamController : MonoBehaviour {
 
         // transforms the list of touches to a list of positions
         var pos = touches.Select(t => t.position).ToList();
+        
         // transforms the list of touches to a list of the previous positions
         var prevPos = touches.Select(t => t.position - t.deltaPosition).ToList();
 
-        // calculate the difference between the average distance to the centers for the current and previous positions
-        var distDiff = avgDist(pos, avg(pos)) - avgDist(prevPos, avg(prevPos));
+        // calculate current center by finding the average point
+        var center = avg(pos);
 
+        // calculate previous center by finding the average point
+        var prevCenter = avg(prevPos);
+
+        // calculate the difference between the average distance to the centers for the current and previous positions
+        var distDiff = avgDist(pos, center) - avgDist(prevPos, prevCenter);
+
+        // do the zoom in or out depending on whether we "pinch out" or "pinch in" ie. whether or not the distance to the center has changed
         if (distDiff <= 0)
             // if the difference is negative, the distance from the center became larger, indicating a pinch out
-            ZoomOut(Mathf.Abs(distDiff) * 0.2f);
+            ZoomOut(Mathf.Abs(distDiff) * 0.1f);
         else
             // else the distance became smaller, indicating a pinch in
-            ZoomIn(Mathf.Abs(distDiff) * 0.2f);
+            ZoomIn(Mathf.Abs(distDiff) * 0.1f);
+
+        // calculate the distance between the centers, applying a smoothing factor
+        var distCenter = (center - prevCenter) * 0.5f;
+
+        // rotate based on the delta vector between centers
+        RotateUp(-distCenter.y);
+        RotateRight(distCenter.x);
     }
 }
