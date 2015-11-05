@@ -5,16 +5,6 @@ public class TimeZone : MonoBehaviour {
 
     public float TimeMultiplier = 1f;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     void OnTriggerExit(Collider collider)
     {
         TimeTrackable timescript = collider.GetComponent<TimeTrackable>();

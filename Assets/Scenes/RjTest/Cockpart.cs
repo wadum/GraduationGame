@@ -43,10 +43,10 @@ public class Cockpart : MonoBehaviour {
             float fracJourney = distCovered / journeyLength;
             transform.position = Vector3.Lerp(lerpStartingPos, lerpEndPos, fracJourney);
 
-            if (fracJourney > 1)
+/*            if (fracJourney > 1)
             {
                 Destroy(gameObject);
-            }
+            }*/
         }
 
     }

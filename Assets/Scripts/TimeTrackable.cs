@@ -1,24 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 
 public class TimeTrackable : MonoBehaviour {
 
-    public struct TrackFragment{
-        public Vector3 pos;
-        public float time;
-        public Vector3 velocity;
-        public Quaternion rotation;
+    [System.Serializable]
+    class TimeData : ScriptableObject
+    {
+        public List<TrackFragment> queue;
     }
-
+    [SerializeField]
+    public int index = -1;
+    public static TimeTrackable current;
+    public bool forward;
+    public bool frozen = false;
     public float TimeMultiplier = 1f;
 
-    // Needs its own Time.time
-    private float PrivateTime;
-
     // If true, each frame which influences the object, will be tracked.
-    public bool tracking = false;
-    public Stack<TrackFragment> queue;
+    public bool tracking;
+
+    [SerializeField]
+    public List<TrackFragment> queue;
     public float _reversedTime = 0;
 
     private TrackFragment _lastFragment;
@@ -26,80 +31,95 @@ public class TimeTrackable : MonoBehaviour {
     // Helper value for when reversing time.
     private float freezeTime = 0;
 
-    public RecordMaster RM;
-
-	void Start () {
-        RM = FindObjectOfType<RecordMaster>();
-        PrivateTime = Time.time;
+    void Awake () {
         _body = GetComponent<Rigidbody>();
-        queue = new Stack<TrackFragment>();
+        if(queue == null)
+            queue = new List<TrackFragment>();
+    }
+
+    void Start()
+    {
+        Material material = (Material)Resources.Load("Materials/INTERACTWITHME", typeof(Material));
+        Renderer rend = GetComponent<Renderer>();
+        rend.material = material;
+    }
+
+    public void Initialize()
+    {
         // Get the 'original' frame.
-        TrackFragment fragment;
-        fragment.velocity = _body.velocity;
-        fragment.pos = transform.position;
-        fragment.time = PrivateTime;
-        fragment.rotation = transform.rotation;
+        TrackFragment fragment = new TrackFragment();
+        fragment.pos = transform.localPosition;
+        fragment.time = RecordMaster.time;
+        fragment.rotation = transform.localRotation;
         // Add it to the stack.
-        queue.Push(fragment);
+        queue.Add(fragment);
     }
 
     void Update () {
-        float deltaTime = Time.deltaTime * TimeMultiplier;
+        if (Time.timeScale == 0)
+            return;
         // If we're recording the object.
         if (tracking)
         {
             // If the object didn't move, we dont care.
             if(queue.Count > 0)
-                if (transform.position == queue.Peek().pos && _body.velocity == queue.Peek().velocity)
+                if (transform.localPosition == queue[index].pos)
                     return;
-            // Turn ON unity's movement, should prob me replaced by our custom system.
-            _body.isKinematic = false;
-            PrivateTime += Time.deltaTime;
-            TrackFragment fragment;
-            fragment.velocity = _body.velocity;
-            fragment.pos = transform.position;
-            fragment.time = PrivateTime;
-            fragment.rotation = transform.rotation;
-            queue.Push(fragment);
+//            if (queue[index].time + 0.1f <= RecordMaster.time)
+  //              return;
+            TrackFragment fragment = new TrackFragment();
+            fragment.pos = (SerializableVector3)transform.localPosition;
+            fragment.time = RecordMaster.time;
+            fragment.rotation = (SerializableQuaternion)transform.localRotation;
+            queue.Add(fragment);
+            index += 1;
             return;
         }
-        // Now we reverse everything.
 
-        // If the stack is empty, return.
-        if (queue.Count == 0)
-        {
+        if (frozen || queue.Count == 0)
             return;
-        }
+
         // Turn OFF unity's gravity, we're in control now.
         _body.isKinematic = true;
         // Keep track of the rewind time.
-        _reversedTime += deltaTime;
-
-        // See if there's a keyframe for the curret rewind period.
-        if (freezeTime - _reversedTime <= queue.Peek().time)
+        if(RecordMaster.time/* + 0.025f */<= queue[index].time)
         {
+            if (index > 0)
+                index -= 1;
+
             // Rewind the frame.
-            _lastFragment = queue.Pop();
-            transform.position = _lastFragment.pos;
-            _body.velocity = _lastFragment.velocity;
-            transform.rotation = _lastFragment.rotation;
+            _lastFragment = queue[index];
+
+            transform.localPosition = _lastFragment.pos;
+            transform.localRotation = (Quaternion)_lastFragment.rotation;
+
+        }
+        else if(RecordMaster.time -0.2f>= queue[index].time)
+        {
+            if (queue.Count > index + 1)
+                index += 1;
+            // Rewind the frame.
+            _lastFragment = queue[index];
+
+            transform.localPosition = _lastFragment.pos;
+            transform.localRotation = (Quaternion)_lastFragment.rotation;
         }
     }
 
     // Start rewinding.
-    public void Reverse()
-    {
-        if (tracking)
-        {
-            freezeTime = PrivateTime;
-            _reversedTime = 0;
-            tracking = false;
-        }
+    public void Move()
+    { 
+        freezeTime = RecordMaster.time;
+        _reversedTime = 0;
+        tracking = false;
     }
 
     // Start recording.
     public void Record()
     {
         tracking = true;
+        _body.isKinematic = false;
+        queue = new List<TrackFragment>();
+        Initialize();
     }
 }
