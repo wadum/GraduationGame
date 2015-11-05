@@ -19,8 +19,8 @@ public class AnimationController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        CheckForWalkingOrStanding();
 
+        CheckForWalkingOrStanding();
     }
 
     public void Jumping()
@@ -44,7 +44,7 @@ public class AnimationController : MonoBehaviour {
         else
         {
             _animationController.SetBool("VelocityGreaterThanZero", false);
-            _animationController.Play("idle");
+            _animationController.Play("Idle");
         }
     }
 }
