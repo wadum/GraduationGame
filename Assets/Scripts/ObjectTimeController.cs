@@ -18,7 +18,7 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
         TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
         touchHandling.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
         {
-            if (hit.collider.gameObject == gameObject)
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {
                 FindObjectOfType<GameOverlayController>().Activate(this);
             }
