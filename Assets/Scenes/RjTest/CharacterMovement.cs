@@ -71,6 +71,8 @@ public class CharacterMovement : MonoBehaviour
 
     public void GoTo(Vector3 position)
     {
+        FindObjectOfType<GameOverlayController>().HideWallSlider();
+
         if (_agent.enabled)
             _agent.SetDestination(position);
     }

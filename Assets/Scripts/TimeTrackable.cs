@@ -14,7 +14,6 @@ public class TimeTrackable : MonoBehaviour {
     }
     [SerializeField]
     public int index = -1;
-//    public string path;
     public static TimeTrackable current;
     public bool forward;
     public bool frozen = false;
@@ -38,6 +37,13 @@ public class TimeTrackable : MonoBehaviour {
             queue = new List<TrackFragment>();
     }
 
+    void Start()
+    {
+        Material material = (Material)Resources.Load("Materials/INTERACTWITHME", typeof(Material));
+        Renderer rend = GetComponent<Renderer>();
+        rend.material = material;
+    }
+
     public void Initialize()
     {
         // Get the 'original' frame.
@@ -50,6 +56,8 @@ public class TimeTrackable : MonoBehaviour {
     }
 
     void Update () {
+        if (Time.timeScale == 0)
+            return;
         // If we're recording the object.
         if (tracking)
         {

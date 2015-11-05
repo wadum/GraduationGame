@@ -14,7 +14,9 @@ public class DeconstruableTower : MonoBehaviour {
         touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit =>
         {
             if (_NavMeshAgent.enabled)
-                FindObjectOfType<GameOverlayController>().ToggleWallSlider();
+                FindObjectOfType<GameOverlayController>().ShowWallSlider();
+
+            //    FindObjectOfType<GameOverlayController>().ToggleWallSlider();
         });
     }
 
