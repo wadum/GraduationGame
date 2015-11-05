@@ -6,6 +6,7 @@ public class LightningGenerator : MonoBehaviour {
     public int lengthOfLineRenderer;
     public float frecuency;
     public float maxConductorDistance;
+    public float JitterDistance = 0.1f;
 
     public GameObject[] LightningConductors;
     LineRenderer lineRenderer;
@@ -73,7 +74,7 @@ public class LightningGenerator : MonoBehaviour {
             {
                 Vector3 originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 Vector3 dirMoveDist = (lightningConductor.transform.position - originalPos).normalized * LengthForEachSection;
-                Vector3 RandomDisplacement = (Vector3.Cross(dirMoveDist, Camera.main.transform.position - originalPos)).normalized * Random.Range(-0.5f, 0.5f);
+                Vector3 RandomDisplacement = (Vector3.Cross(dirMoveDist, Camera.main.transform.position - originalPos)).normalized * Random.Range(-JitterDistance, JitterDistance);
                 Vector3 pos = originalPos + dirMoveDist * i + RandomDisplacement;
                 lineRenderer.SetPosition(i, pos);
             }
