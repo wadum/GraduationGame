@@ -44,7 +44,7 @@ public class AnimationController : MonoBehaviour {
         else
         {
             _animationController.SetBool("VelocityGreaterThanZero", false);
-            _animationController.Play("Idle");
+      //      _animationController.Play("Idle");
         }
     }
 }
