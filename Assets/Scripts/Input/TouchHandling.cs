@@ -9,15 +9,18 @@ using UnityEngine.UI;
 public class TouchHandling : MonoBehaviour
 {
     public float SwipeSensitivity = 4f;
+    public float TapHoldSeconds = 1f;
     public bool SimulateMouseTapInEditor = true;
 
     private Dictionary<string, List<Action<RaycastHit>>> _tapEventHandlers;
+    private Dictionary<string, List<Action<RaycastHit>>> _tapAndHoldEventHandlers;
     private Action<Touch> _swipeHandler = (s) => { };
     private Action<List<Touch>> _pinchHandler = (p) => { };
     private GraphicRaycaster _guiCaster;
 
     void Awake() {
         _tapEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
+        _tapAndHoldEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
     }
 
     void Start()
@@ -49,12 +52,14 @@ public class TouchHandling : MonoBehaviour
 
     #region State machine for recognizing multitouch taps and gestures
     private IEnumerator AwaitInput() {
+        var touch1Began = 0f;
+
         while (true) {
             var touches = GetTouches();
 
             if (SimulateMouseTapInEditor && Application.isEditor && Input.GetMouseButtonDown(0))
             {
-                HandleMouseTap(Input.mousePosition);
+                HandleTap(Input.mousePosition);
                 yield return null;
                 continue;
             }
@@ -64,12 +69,19 @@ public class TouchHandling : MonoBehaviour
                 continue;
             }
 
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Began) {
+                touch1Began = Time.time;
+            }
+
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
-                HandleTap(touches[0]);
+                var position = touches[0].position;
+                if (Time.time - touch1Began > TapHoldSeconds)
+                    HandleTapAndHold(position);
+                else
+                    HandleTap(position);
                 yield return null;
                 continue;
             }
-
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
                 yield return StartCoroutine(HandleGesture());
@@ -113,24 +125,24 @@ public class TouchHandling : MonoBehaviour
         _swipeHandler(touch);
     }
 
-    private void HandleMouseTap(Vector3 mousePosition)
+    private void HandleTap(Vector3 position)
     {
-        HandleTapRaycast(mousePosition);
-    }
-
-    private void HandleTap(Touch tap) {
-        HandleTapRaycast(tap.position);
-    }
-
-    private void HandleTapRaycast(Vector3 position)
-    {
-        var ray = Camera.main.ScreenPointToRay(position);
-        RaycastHit hit;
+        var hit = Raycast(position);
         List<Action<RaycastHit>> handlers;
-        if (Physics.Raycast(ray, out hit) && _tapEventHandlers.TryGetValue(hit.collider.tag, out handlers))
+        if (hit.HasValue && _tapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
             foreach(var handler in handlers)
-                handler(hit);
+                handler(hit.Value);
     }
+
+    private void HandleTapAndHold(Vector3 position)
+    {
+        var hit = Raycast(position);
+        List<Action<RaycastHit>> handlers;
+        if (hit.HasValue && _tapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
+            foreach(var handler in handlers)
+                handler(hit.Value);
+    }
+
     #endregion
 
     #region registration of handlers
@@ -145,6 +157,17 @@ public class TouchHandling : MonoBehaviour
         _tapEventHandlers[objTag].Add(handler);
     }
 
+    public void RegisterTapAndHoldHandlerByTag(string objTag, Action<RaycastHit> handler)
+    {
+        if (string.IsNullOrEmpty(objTag))
+            return;
+
+        if (!_tapAndHoldEventHandlers.ContainsKey(objTag))
+            _tapAndHoldEventHandlers[objTag] = new List<Action<RaycastHit>>();
+
+        _tapAndHoldEventHandlers[objTag].Add(handler);
+    }
+
     public void RegisterSwipeHandler(Action<Touch> handler) {
         _swipeHandler = handler;
     }
@@ -155,13 +178,21 @@ public class TouchHandling : MonoBehaviour
     #endregion
 
     #region removing handlers
-    public void ClearTapHandler(string tag) {
+    public void ClearTapHandler(string objTag) {
         // Functions even if tag does not exist.
-        _tapEventHandlers.Remove(tag);
+        _tapEventHandlers.Remove(objTag);
+    }
+    public void ClearTapAndHoldHandler(string objTag) {
+        // Functions even if tag does not exist.
+        _tapAndHoldEventHandlers.Remove(objTag);
     }
 
     public void ClearAllTapHandlers() {
         _tapEventHandlers.Clear();
+    }
+
+    public void ClearAllTapAndHoldHandlers() {
+        _tapAndHoldEventHandlers.Clear();
     }
 
     public void ClearSwipeHandler() {
@@ -174,6 +205,7 @@ public class TouchHandling : MonoBehaviour
 
     public void ClearAllHandlers() {
         ClearAllTapHandlers();
+        ClearAllTapAndHoldHandlers();
         ClearSwipeHandler();
         ClearPinchHandler();
     }
@@ -183,6 +215,14 @@ public class TouchHandling : MonoBehaviour
     private List<Touch> GetTouches()
     {
         return Input.touches.Where(t => !IsPointerOverGui(t.position)).ToList();
+    }
+
+    private static RaycastHit? Raycast(Vector3 position) {
+        var ray = Camera.main.ScreenPointToRay(position);
+        RaycastHit hit;
+        return Physics.Raycast(ray, out hit)?
+            (RaycastHit?)hit :
+            null;
     }
 
     /// <summary>
