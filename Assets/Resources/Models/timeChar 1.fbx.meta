@@ -104,6 +104,11 @@ ModelImporter:
     4300000: timeChar_ref:timeCharModel_ref_timeBody
     4300002: timeChar_ref:timeCharModel_ref_timeEyes
     7400000: Take 001
+    7400002: Walking
+    7400004: JumpUpTransition
+    7400006: JumpIdleState
+    7400008: JumpLanding
+    7400010: Idle
     9500000: //RootNode
     13700000: timeChar_ref:timeCharModel_ref_timeBody
     13700002: timeChar_ref:timeCharModel_ref_timeEyes
@@ -126,7 +131,739 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 118
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: timeChar_ref:master_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt/timeChar_ref:L_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt/timeChar_ref:R_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt/timeChar_ref:L_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt/timeChar_ref:head_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt/timeChar_ref:R_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl/timeChar_ref:L_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl/timeChar_ref:R_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:root_ctrl
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeBody
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeEyes
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Walking
+      takeName: Take 001
+      firstFrame: 66
+      lastFrame: 82
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: timeChar_ref:master_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt/timeChar_ref:L_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt/timeChar_ref:R_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt/timeChar_ref:L_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt/timeChar_ref:head_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt/timeChar_ref:R_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl/timeChar_ref:L_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl/timeChar_ref:R_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:root_ctrl
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeBody
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeEyes
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: JumpUpTransition
+      takeName: Take 001
+      firstFrame: 83
+      lastFrame: 93
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: timeChar_ref:master_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt/timeChar_ref:L_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt/timeChar_ref:R_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt/timeChar_ref:L_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt/timeChar_ref:head_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt/timeChar_ref:R_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl/timeChar_ref:L_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl/timeChar_ref:R_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:root_ctrl
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeBody
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeEyes
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: JumpIdleState
+      takeName: Take 001
+      firstFrame: 100
+      lastFrame: 101
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: timeChar_ref:master_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt/timeChar_ref:L_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt/timeChar_ref:R_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt/timeChar_ref:L_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt/timeChar_ref:head_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt/timeChar_ref:R_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl/timeChar_ref:L_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl/timeChar_ref:R_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:root_ctrl
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeBody
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeEyes
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: JumpLanding
+      takeName: Take 001
+      firstFrame: 108
+      lastFrame: 118
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: timeChar_ref:master_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt/timeChar_ref:L_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt/timeChar_ref:R_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt/timeChar_ref:L_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt/timeChar_ref:head_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt/timeChar_ref:R_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl/timeChar_ref:L_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl/timeChar_ref:R_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:root_ctrl
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeBody
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeEyes
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: timeChar_ref:master_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:L_femur_jnt/timeChar_ref:L_knee_jnt/timeChar_ref:L_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:pelvis_jnt/timeChar_ref:R_femur_jnt/timeChar_ref:R_knee_jnt/timeChar_ref:R_footEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:L_clavicle_jnt/timeChar_ref:L_shoulder_jnt/timeChar_ref:L_elbow_jnt/timeChar_ref:L_wrist_Jnt/timeChar_ref:L_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:neck_01_jnt/timeChar_ref:neck_02_jnt/timeChar_ref:head_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:ground_root_jnt/timeChar_ref:root_jnt/timeChar_ref:spine_01_jnt/timeChar_ref:spine_02_jnt/timeChar_ref:spine_03_jnt/timeChar_ref:spine_04_jnt/timeChar_ref:spine_05_jnt/timeChar_ref:spine_06_jnt/timeChar_ref:R_clavicle_jnt/timeChar_ref:R_shoulder_jnt/timeChar_ref:R_elbow_jnt/timeChar_ref:R_wrist_Jnt/timeChar_ref:R_handEnd_jnt
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_foot_ctrl/timeChar_ref:L_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_hand_ctrl/timeChar_ref:L_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:L_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_elbowAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_foot_ctrl/timeChar_ref:R_foot_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_arm_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_handCtrl/timeChar_ref:R_hand_IK
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:R_kneeAim_ctrl
+        weight: 1
+      - path: timeChar_ref:master_ctrl/timeChar_ref:root_ctrl
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeBody
+        weight: 1
+      - path: timeChar_ref:timeCharModel_ref_timeGrp/timeChar_ref:timeCharModel_ref_timeEyes
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
