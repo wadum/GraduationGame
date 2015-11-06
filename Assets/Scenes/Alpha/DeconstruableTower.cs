@@ -5,17 +5,20 @@ using UnityEngine.UI;
 public class DeconstruableTower : MonoBehaviour {
     NavMeshAgent _NavMeshAgent;
     public Slider _Slider;
+    GameOverlayController controller;
     
     // Use this for initialization
     void Start()
     {
+        controller = FindObjectOfType<GameOverlayController>();
         _NavMeshAgent = GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>();
         TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
         touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit =>
         {
             if (_NavMeshAgent.enabled)
-                FindObjectOfType<GameOverlayController>().ShowWallSlider();
-
+            {
+                controller.TimeSlider.SetActive(!controller.TimeSlider.activeSelf);
+            }
             //    FindObjectOfType<GameOverlayController>().ToggleWallSlider();
         });
     }
@@ -23,7 +26,8 @@ public class DeconstruableTower : MonoBehaviour {
     void Update()
     {
         if (!_NavMeshAgent.enabled && _Slider.IsActive())
-            FindObjectOfType<GameOverlayController>().ToggleWallSlider();
+            controller.TimeSlider.SetActive(!controller.TimeSlider.activeSelf);
+        //            FindObjectOfType<GameOverlayController>().ToggleWallSlider();
     }
 
 
@@ -31,7 +35,8 @@ public class DeconstruableTower : MonoBehaviour {
     {
         if(collider.tag == "Player")
         {
-            FindObjectOfType<GameOverlayController>().HideWallSlider();
+            controller.TimeSlider.SetActive(false);
+          //FindObjectOfType<GameOverlayController>().HideWallSlider();
         }
     }
 

@@ -25,13 +25,17 @@ public class RecordMaster : MonoBehaviour {
     }
     
     void Start () {
-        tmp = 0 ;
+        InitializeSlider();
+    }
+
+    public void InitializeSlider()
+    {
+        tmp = 0;
         foreach (TimeTrackable track in trackers)
         {
             if (track.queue.Count == 0)
             {
-                track.tracking = true;
-                track.GetComponent<Rigidbody>().isKinematic = true;
+                // Nothing
             }
             else
             {
@@ -42,17 +46,16 @@ public class RecordMaster : MonoBehaviour {
 
             }
         }
-        slider.maxValue = tmp;
         time = _time;
         State = _time;
+        slider.maxValue = tmp;
         slider.value = _time;
-
     }
 
     public void SetFloat(float value)
     {
         State = value;
-    }    
+   }
 
     void Update()
     {
@@ -76,25 +79,45 @@ public class RecordMaster : MonoBehaviour {
 	
     public void Track()
     {
-        tracking = true;
-        if (cylinder)
+        if (!tracking)
         {
-            cylinder.GetComponent<CapsuleCollider>().enabled = true;
-            cylinder.GetComponent<OneSecondScript>().StartTime();
+            tracking = true;
+            if (cylinder)
+            {
+                cylinder.GetComponent<CapsuleCollider>().enabled = true;
+                cylinder.GetComponent<OneSecondScript>().StartTime();
 
+            }
+            time = 0;
+            _time = time;
+
+            foreach (TimeTrackable track in trackers)
+            {
+                track.GetComponent<Rigidbody>().isKinematic = false;
+                track.Record();
+            }
         }
-        time = 0;
-        _time = time;
-
-        foreach (TimeTrackable track in trackers)
+        else
         {
-            track.GetComponent<Rigidbody>().isKinematic = false;
-            track.Record();
+            tracking = false;
+            foreach (TimeTrackable track in trackers)
+            {
+                track.Move();
+            }
+            InitializeSlider();
         }
     }
 
     public void Reset()
     {
         Application.LoadLevel(0);
+    }
+
+    public void SaveState()
+    {
+        foreach(TimeTrackable track in trackers)
+        {
+
+        }
     }
 }

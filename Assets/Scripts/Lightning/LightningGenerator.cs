@@ -85,7 +85,8 @@ public class LightningGenerator : MonoBehaviour {
     }
     void OnDisable()
     {
-        lineRenderer.enabled = false;
+        if(lineRenderer)
+            lineRenderer.enabled = false;
         if (lightningConductor)
             lightningConductor.GetComponent<Electrified>().Deactivate();
     }
