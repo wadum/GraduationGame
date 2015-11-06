@@ -23,7 +23,8 @@ public class CameraManager : MonoBehaviour {
         {
 			WorldView.enabled = false;
 			TopDownView.enabled = true;
-            Cam.transform.position = TopDownView.StartingPos;
+            Cam.transform.parent = transform;
+            Cam.transform.localPosition = TopDownView.StartingPos;
             TopDownView.Run(Cam);
         }
 	}
