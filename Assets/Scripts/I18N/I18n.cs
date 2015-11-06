@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 public class I18n {
 	
-	public static int DANISH = 0;
-	public static int ENGLISH = 1;
-	public int chosenLanguage;
-	public static I18n instance;
-	
+	public enum LanguageKeys {
+		Danish, English
+	};
+
+	LanguageKeys chosenLanguage;
+	private static I18n instance;
 	private Dictionary<string,string> fields;
 	
 	public I18n(){
 		fields = new Dictionary<string, string>();
-		//LoadLanguage ("en");
-		chosenLanguage = ENGLISH;
+		LoadLanguage (LanguageKeys.English);
 	}
 	
 	public static I18n GetInstance(){
@@ -25,17 +25,18 @@ public class I18n {
 		return instance;
 	}
 	
-	public int GetLanguage(){
+	public LanguageKeys GetLanguage(){
 		return chosenLanguage;
 	}
 
 	public string GetLanguageName(){
-		return (chosenLanguage == DANISH) ? "Danish" : "English";
+		return chosenLanguage.ToString();
 	}
 	
-	public void LoadLanguage(string lang){
+	public void LoadLanguage(LanguageKeys lang){
+		chosenLanguage = lang;
 		fields.Clear();
-		TextAsset textAsset=Resources.Load<TextAsset>("I18N/"+lang);
+		TextAsset textAsset=Resources.Load<TextAsset>("Texts/" + GetLanguageName() + "/buttons");
 		if(textAsset==null){
 			return;
 		}
@@ -46,14 +47,9 @@ public class I18n {
 				fields.Add(keyValue[0], keyValue[1]);
 			}
 		}
-		if (lang == "en") {
-			chosenLanguage = ENGLISH;
-		} else {
-			chosenLanguage = DANISH;
-		}
 	}
 	
-	public string translate(string i18nKey){
+	public string Translate(string i18nKey){
 		if (fields.ContainsKey(i18nKey)) {
 			return fields[i18nKey];
 		}
