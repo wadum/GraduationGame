@@ -51,36 +51,11 @@ public class ElevatorController : MonoBehaviour {
         _moving = true;
 
         Vector3 startPos = _elevatorModel.transform.position;
-        Vector3 endPos = startPos + Vector3.down*4f * (MoveUp ? -1 : 1);
+        Vector3 endPos = position.transform.position;
         float time = Time.time + AnimationTimer;
         while (Time.time < time)
         {
             _elevatorModel.transform.position = Vector3.Lerp(endPos, startPos, (time - Time.time)/AnimationTimer);
-            yield return null;
-        }
-
-        startPos = _elevatorModel.transform.position;
-        endPos = position.transform.position + Vector3.up * 4f * (MoveUp ? -1 : 1);
-        time = Time.time + (AnimationTimer);
-
-        foreach (var mr in _elevatorModel.GetComponentsInChildren<MeshRenderer>())
-            mr.enabled = false;
-        while (Time.time < time)
-        {
-            _elevatorModel.transform.position = Vector3.Lerp(endPos, startPos, (time - Time.time) / AnimationTimer);
-            yield return null;
-        }
-
-        foreach (var mr in _elevatorModel.GetComponentsInChildren<MeshRenderer>())
-            mr.enabled = true;
-
-        startPos = _elevatorModel.transform.position;
-        endPos = position.transform.position;
-        time = Time.time + AnimationTimer;
-
-        while (Time.time < time)
-        {
-            _elevatorModel.transform.position = Vector3.Lerp(endPos, startPos, (time - Time.time) / AnimationTimer);
             yield return null;
         }
 

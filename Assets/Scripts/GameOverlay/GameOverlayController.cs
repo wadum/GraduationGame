@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -8,9 +8,11 @@ public class GameOverlayController : MonoBehaviour {
 	public GameObject PauseMenu;
     public GameObject StoreScreen;
     public GameObject TimeSlider;
+	public TimeSliderController SliderController;
 
     Canvas _canvas;
     TimeControllable _currentObj;
+
 
     void Start()
 	{
@@ -61,6 +63,7 @@ public class GameOverlayController : MonoBehaviour {
         _currentObj = obj;
         TimeSlider.SetActive(true);
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
+		SliderController.SetTimeControllable(obj);
     }
 
     public void Deactivate()
