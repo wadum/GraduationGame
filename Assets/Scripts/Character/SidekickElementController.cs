@@ -69,7 +69,6 @@ public class SidekickElementController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(_myStatus);
         // if we are to formUp and ou current status is swirling around the player then start forming up.
         if (!SwirlingAroundPlayer && _myStatus == Status.SwirlingAroundPlayer)
         {
