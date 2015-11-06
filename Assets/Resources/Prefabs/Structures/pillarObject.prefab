@@ -2495,8 +2495,8 @@ GameObject:
   - 65: {fileID: 6503558}
   - 23: {fileID: 2328364}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: WalkwayElement
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -3659,7 +3659,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189246}
   m_LocalRotation: {x: 0, y: -.468832284, z: 0, w: .883287251}
-  m_LocalPosition: {x: -5.48000002, y: -.140000001, z: -8.82999992}
+  m_LocalPosition: {x: 16.7698078, y: 0, z: 1.20431125}
   m_LocalScale: {x: .549985468, y: .549985468, z: .549985468}
   m_Children:
   - {fileID: 408030}
@@ -9471,10 +9471,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a6d32d6b3b20e42b2f78f1b002ed37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimePos: 100
-  workingStateStartPercent: 0
-  workingStateEndPercent: 90
-  ItemsControlledByTime:
+  TimePos: 0
+  workingStateStartPercent: 90
+  workingStateEndPercent: 100
+  ActiveObjects: []
+  DeactiveObjects: []
+  EnableObjects:
+  - {fileID: 190148}
+  DisableObjects:
   - {fileID: 195908}
 --- !u!114 &11472448
 MonoBehaviour:
@@ -9538,7 +9542,43 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: EnableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: EnabledObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DisableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DisabledObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: WalkwayElement
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: EnableObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 195908}
+    - target: {fileID: 0}
+      propertyPath: DisableObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 190148}
+    - target: {fileID: 0}
+      propertyPath: TimePos
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 189246}
