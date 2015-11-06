@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using System;
 
-public class ObjectTimeController : MonoBehaviour, TimeControllable {
+public class ObjectTimeController : TimeControllable {
 
     [Header("Time Settings")]
     [Range(0,100)]
@@ -44,9 +44,8 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
             obj.SetActive(!(TimePos > workingStateStartPercent && TimePos <= workingStateEndPercent));
         }
     }
-
-
-    public void SetFloat(float var)
+	
+	override public void SetFloat(float var)
     {
         if (ActiveObjects.Any(b => !b.Active)) return;
         if (DeactiveObjects.Any(b => b.Active)) return;
@@ -62,8 +61,9 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
 
     }
 
-    public float GetFloat()
+	override public float GetFloat()
     {
         return TimePos;
     }
+
 }
