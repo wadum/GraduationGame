@@ -13,8 +13,7 @@ public class RiftScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         electrified = GetComponentInChildren<ElectrifiedRift>();
-        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("PortalRift", hit => {
+        MultiTouch.RegisterTapHandlerByTag("PortalRift", hit => {
             if(hit.collider.gameObject == gameObject)
                 FindObjectOfType<RiftMaster>().TagRift(gameObject);
             });
