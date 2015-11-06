@@ -15,8 +15,7 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
 	// Use this for initialization
     void Start()
     {
-        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
+        MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
         {
             if (hit.collider.gameObject == gameObject)
             {
@@ -24,7 +23,7 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
             }
         });
 
-        foreach (GameObject obj in ItemsControlledByTime)
+        foreach (var obj in ItemsControlledByTime)
         {
             obj.SetActive(TimePos > workingStateStartPercent && TimePos < workingStateEndPercent);
         }
@@ -34,7 +33,7 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
     public void SetFloat(float var)
     {
         TimePos = var;
-        foreach (GameObject obj in ItemsControlledByTime)
+        foreach (var obj in ItemsControlledByTime)
         {
             obj.SetActive(TimePos > workingStateStartPercent && TimePos < workingStateEndPercent);
         }
