@@ -27,8 +27,7 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
     // Use this for initialization
     void Start()
     {
-        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
+        MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
         {
             if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {

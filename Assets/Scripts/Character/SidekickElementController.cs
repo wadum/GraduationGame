@@ -39,8 +39,7 @@ public class SidekickElementController : MonoBehaviour {
 
         SwirlingAroundPlayer = true;
 
-        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
+        MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
         {
             var parentTransform = hit.transform.root;
             if (parentTransform.GetComponent<ObjectTimeController>())
@@ -48,7 +47,7 @@ public class SidekickElementController : MonoBehaviour {
                 FlyToObject(parentTransform.GetComponent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform.position, parentTransform.GetComponent<HelperSwirlAroundLocation>().SwirlDistance);
             }
         });
-        touchHandling.RegisterTapHandlerByTag("Terrain", hit =>
+        MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
         {
             if (_myStatus != Status.SwirlingAroundPlayer && _myStatus != Status.FlyBack)
             {

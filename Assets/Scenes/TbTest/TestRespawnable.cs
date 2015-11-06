@@ -4,15 +4,14 @@ public class TestRespawnable : MonoBehaviour
 {
 	void Start ()
 	{
-	    var inputSystem = FindObjectOfType<TouchHandling>();
 	    var respawnable = GetComponent<Respawnable>();
 
-	    if (!(inputSystem && respawnable))
+	    if (!respawnable)
 	    {
-	        Debug.Log("Something is wrong, chief.");
+	        Debug.Log("Missing Respawnable - cannot test");
 	        return;
 	    }
 
-        inputSystem.RegisterTapHandlerByTag(tag, t => respawnable.Respawn());
+        MultiTouch.RegisterTapHandlerByTag(tag, t => respawnable.Respawn());
 	}
 }

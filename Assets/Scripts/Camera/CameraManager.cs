@@ -23,7 +23,7 @@ public class CameraManager : MonoBehaviour {
         {
 			WorldView.enabled = false;
 			TopDownView.enabled = true;
-            Cam.transform.position = TopDownView.StartingPos;
+            Cam.transform.position = TopDownView.StartingPos + GameObject.FindGameObjectWithTag("Player").transform.position;
             TopDownView.Run(Cam);
         }
 	}
