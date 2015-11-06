@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameOverlayController : MonoBehaviour {
@@ -6,11 +7,14 @@ public class GameOverlayController : MonoBehaviour {
 	public GameObject StoryText;
 	public GameObject PauseMenu;
     public GameObject StoreScreen;
-    public GameObject WallSlider;
+    public GameObject TimeSlider;
+	public TimeSliderController SliderController;
 
-    private Canvas _canvas;
+    Canvas _canvas;
+    TimeControllable _currentObj;
 
-	void Start()
+
+    void Start()
 	{
 		_canvas = GetComponentInChildren<Canvas>();
 		_canvas.worldCamera = Camera.main;
@@ -54,19 +58,21 @@ public class GameOverlayController : MonoBehaviour {
 		PauseMenu.SetActive(false);
 	}
 
-    public void ToggleWallSlider()
+    public void Activate(TimeControllable obj)
     {
-        if (WallSlider.activeSelf) HideWallSlider();
-        else ShowWallSlider();
+        _currentObj = obj;
+        TimeSlider.SetActive(true);
+        TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
+		SliderController.SetTimeControllable(obj);
     }
 
-    public void ShowWallSlider()
+    public void Deactivate()
     {
-        WallSlider.SetActive(true);
+        TimeSlider.SetActive(false);
     }
 
-    public void HideWallSlider()
+    public void SetFloat(float var)
     {
-        WallSlider.SetActive(false);
+        _currentObj.SetFloat(var);
     }
 }

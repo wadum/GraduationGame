@@ -656,22 +656,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &130892
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 499440}
-  - 114: {fileID: 11452846}
-  m_Layer: 0
-  m_Name: Input System
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &130988
 GameObject:
   m_ObjectHideFlags: 1
@@ -1672,14 +1656,15 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 444536}
-  - 33: {fileID: 3315852}
-  - 136: {fileID: 13643810}
-  - 23: {fileID: 2339046}
-  - 195: {fileID: 19547210}
-  - 54: {fileID: 5451638}
+  - 114: {fileID: 11423792}
   - 114: {fileID: 11421422}
-  - 114: {fileID: 11477922}
   - 114: {fileID: 11444552}
+  - 195: {fileID: 19547210}
+  - 114: {fileID: 11477922}
+  - 136: {fileID: 13643810}
+  - 33: {fileID: 3315852}
+  - 23: {fileID: 2339046}
+  - 54: {fileID: 5451638}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1749,22 +1734,6 @@ GameObject:
   - 95: {fileID: 9532254}
   m_Layer: 0
   m_Name: hairStrand (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &176458
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 458796}
-  - 114: {fileID: 11406944}
-  m_Layer: 0
-  m_Name: RiftMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3005,7 +2974,7 @@ Transform:
   - {fileID: 417334}
   - {fileID: 474560}
   m_Father: {fileID: 444536}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!4 &444536
 Transform:
   m_ObjectHideFlags: 1
@@ -3013,12 +2982,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 1, z: 4}
+  m_LocalPosition: {x: 6, y: 1, z: 3.1099999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 474194}
-  - {fileID: 499440}
-  - {fileID: 458796}
   - {fileID: 443104}
   - {fileID: 467584}
   - {fileID: 494774}
@@ -3358,18 +3325,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 474458}
   m_RootOrder: 11
---- !u!4 &458796
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176458}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 444536}
-  m_RootOrder: 2
 --- !u!4 &458912
 Transform:
   m_ObjectHideFlags: 1
@@ -3498,7 +3453,7 @@ Transform:
   - {fileID: 405882}
   - {fileID: 477330}
   m_Father: {fileID: 444536}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!4 &467928
 Transform:
   m_ObjectHideFlags: 1
@@ -3647,7 +3602,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: -1.75, z: -3}
+  m_LocalPosition: {x: 0, y: -.75, z: .363000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 496142}
@@ -3672,7 +3627,7 @@ Transform:
   - {fileID: 448500}
   - {fileID: 493264}
   m_Father: {fileID: 444536}
-  m_RootOrder: 7
+  m_RootOrder: 5
 --- !u!4 &474560
 Transform:
   m_ObjectHideFlags: 1
@@ -3827,7 +3782,7 @@ Transform:
   - {fileID: 475314}
   - {fileID: 494950}
   m_Father: {fileID: 444536}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!4 &481474
 Transform:
   m_ObjectHideFlags: 1
@@ -4034,7 +3989,7 @@ Transform:
   - {fileID: 405688}
   - {fileID: 408926}
   m_Father: {fileID: 444536}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!4 &494950
 Transform:
   m_ObjectHideFlags: 1
@@ -4161,18 +4116,6 @@ Transform:
   - {fileID: 428534}
   m_Father: {fileID: 452146}
   m_RootOrder: 0
---- !u!4 &499440
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130892}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.73525715, y: 1.53138757, z: .00135803223}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 444536}
-  m_RootOrder: 1
 --- !u!23 &2301334
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -5866,9 +5809,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 120
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11402066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5880,22 +5826,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 140
   EndRotationSpeed: 40
---- !u!114 &11406944
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6713bd4158acd1b4a8dbc3beb2ddf549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gb1: {fileID: 0}
-  gb2: {fileID: 0}
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11407368
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5907,9 +5843,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 170
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11409034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5921,9 +5860,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 90
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11416380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5935,9 +5877,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 70
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11421152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5960,10 +5905,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab289c6ac760fd6478039b56c418567a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputSystem: {fileID: 130892}
   DeliverClockPartArea: {fileID: 0}
   FloatWaypoints: []
   WaypointFloatSpeed: 5
+--- !u!114 &11423792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b555c5191898374189a393be198a981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SwipeSensitivity: 4
+  TapHoldSeconds: 1
+  SimulateMouseTapInEditor: 1
 --- !u!114 &11424926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5975,9 +5933,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 90
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11425950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6000,9 +5961,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 140
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11428002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6036,9 +6000,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 190
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11431598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6050,9 +6017,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 170
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11432104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6086,9 +6056,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 180
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11436496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6100,9 +6073,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 180
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11436982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6153,9 +6129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 130
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11446154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6200,9 +6179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 190
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11448644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6225,9 +6207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 250
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11450278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6250,23 +6235,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 60
   EndRotationSpeed: 40
---- !u!114 &11452846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d08db393039d545adba1f20348ca19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwipeSensitivity: 5
-  TapHoldSeconds: 1
-  SimulateMouseTapInEditor: 1
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11455222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6289,9 +6263,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 180
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11466018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6358,9 +6335,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 160
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11477922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6401,9 +6381,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 200
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11482836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6437,9 +6420,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 300
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11488204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6484,9 +6470,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 160
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11494374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6498,9 +6487,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4623a9eec82acb49b12416b9d787c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Detach: 0
+  SwirlingAroundPlayer: 0
   OriginalRotationSpeed: 150
   EndRotationSpeed: 40
+  SwirlAroundPlayerDistance: 1.5
+  parent: {fileID: 172066}
+  _myStatus: 0
 --- !u!114 &11497644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7029,7 +7021,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.0514144562, y: -8.16799002e-08, z: 2.29105353e-07}
+  m_ConnectedAnchor: {x: -.0514142178, y: -8.11414793e-08, z: 2.29105353e-07}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -7617,7 +7609,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.0515408628, y: 7.0036549e-08, z: 2.29105353e-07}
+  m_ConnectedAnchor: {x: -.0515406244, y: 6.99383236e-08, z: 2.29105353e-07}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -7911,7 +7903,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.01780756, y: 1.12777343e-10, z: 2.29105353e-07}
+  m_ConnectedAnchor: {x: -.0178073216, y: -2.18278728e-10, z: 2.29105353e-07}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -10851,7 +10843,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.0515579619, y: -5.20813046e-08, z: 1.2665987e-07}
+  m_ConnectedAnchor: {x: -.0515582003, y: -5.19939931e-08, z: 1.2665987e-07}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -11635,7 +11627,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.0515582003, y: 6.72152964e-08, z: -1.14552677e-07}
+  m_ConnectedAnchor: {x: -.0515579619, y: 6.71279849e-08, z: -1.14552677e-07}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -12027,7 +12019,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.0515579619, y: -5.20813046e-08, z: -2.98023224e-08}
+  m_ConnectedAnchor: {x: -.0515582003, y: -5.19939931e-08, z: -2.98023224e-08}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
