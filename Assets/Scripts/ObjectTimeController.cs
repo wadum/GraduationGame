@@ -47,9 +47,11 @@ public class ObjectTimeController : TimeControllable {
 	
 	override public void SetFloat(float var)
     {
+        TimePos = var;
+
         if (ActiveObjects.Any(b => !b.Active)) return;
         if (DeactiveObjects.Any(b => b.Active)) return;
-        TimePos = var;
+        
         foreach (GameObject obj in EnableObjects)
         {
             obj.SetActive(TimePos > workingStateStartPercent && TimePos <= workingStateEndPercent);
