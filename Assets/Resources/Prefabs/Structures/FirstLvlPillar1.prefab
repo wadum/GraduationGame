@@ -2188,7 +2188,7 @@ GameObject:
   - 65: {fileID: 6537052}
   - 23: {fileID: 2351590}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: WalkwayElement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9483,9 +9483,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimePos: 100
-  workingStateStartPercent: 0
-  workingStateEndPercent: 90
-  ItemsControlledByTime:
+  workingStateStartPercent: 90
+  workingStateEndPercent: 100
+  ActiveObjects: []
+  DeactiveObjects: []
+  EnableObjects:
+  - {fileID: 177732}
+  DisableObjects:
   - {fileID: 118526}
 --- !u!208 &20843496
 NavMeshObstacle:
