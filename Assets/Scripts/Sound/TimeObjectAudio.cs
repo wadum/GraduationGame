@@ -14,13 +14,19 @@ public class TimeObjectAudio : MonoBehaviour {
 	
 	public void PlayForward(float pos)
 	{
-		ForwardEffect.time = (pos/100) * ForwardEffect.clip.length;
+		float percentage = (pos/100);
+		if(percentage >= 1)
+			return;
+		ForwardEffect.time = percentage * ForwardEffect.clip.length;
 		ForwardEffect.Play();
 	}
 	
 	public void PlayBackward(float pos)
 	{
-		BackwardEffect.time = BackwardEffect.clip.length - ((pos/100) * BackwardEffect.clip.length);
+		float percentage = (pos/100);
+		if(percentage <= 0)
+			return;
+		BackwardEffect.time = BackwardEffect.clip.length - (percentage * BackwardEffect.clip.length);
 		BackwardEffect.Play();
 	}
 
