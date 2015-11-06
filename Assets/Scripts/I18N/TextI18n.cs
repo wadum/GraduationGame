@@ -5,21 +5,18 @@ using System.Collections;
 [RequireComponent(typeof(Text))]
 public class TextI18n : MonoBehaviour {
 	
-	public string translationKey;
+	public string TranslationKey;
 	
 	private Text text;
 	
 	void Start(){
-		Text[] texts = GetComponentsInParent<Text>();
-		if (texts.Length > 0) {
-			text = texts [0];
-			updateField ();
-		}
+		text = GetComponentInParent<Text>();
+		UpdateField ();
 	}
 	
-	public void updateField(){
+	public void UpdateField(){
 		if (I18n.GetInstance () != null && text != null) {
-			text.text = I18n.GetInstance ().translate (translationKey);
+			text.text = I18n.GetInstance ().Translate (TranslationKey);
 		}
 	}
 }
