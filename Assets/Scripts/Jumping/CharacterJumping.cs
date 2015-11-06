@@ -15,7 +15,6 @@ public class CharacterJumping : MonoBehaviour
     private float _jumpHeight;
     private float _jumpWidth;
     private float _dropHeight;
-    private TouchHandling _inputSystem;
     private bool _jumping = false;
     private NavMeshAgent _nav;
     private AnimationController _animator;
@@ -29,9 +28,9 @@ public class CharacterJumping : MonoBehaviour
 	    }
 
 	    foreach (var  jmpTag in TagsToJumpOnto)
-            _inputSystem.RegisterTapHandlerByTag(jmpTag, JumpForJoy);
+            MultiTouch.RegisterTapHandlerByTag(jmpTag, JumpForJoy);
 
-        _inputSystem.RegisterTapHandlerByTag("Terrain", ReturnToTerraFirma);
+        MultiTouch.RegisterTapHandlerByTag("Terrain", ReturnToTerraFirma);
 	}
 
     private bool Sanity()
@@ -53,7 +52,7 @@ public class CharacterJumping : MonoBehaviour
 	        return false;
 	    }
 
-	    var inputs = FindObjectsOfType<TouchHandling>();
+	    var inputs = FindObjectsOfType<MultiTouch>();
 	    if (!inputs.Any())
 	    {
 	        Debug.Log("Jumping disabled: No input system in scene.");
@@ -65,8 +64,6 @@ public class CharacterJumping : MonoBehaviour
 	        Debug.Log("Jumping disabled: Too many input systems in scene, only one expected, change this script?");
 	        return false;
 	    }
-
-        _inputSystem = inputs[0];
 
         _nav = GetComponent<NavMeshAgent>();
         if (!_nav)
@@ -170,7 +167,9 @@ public class CharacterJumping : MonoBehaviour
     {
         _jumping = true;
         _nav.enabled = false;
-        _animator.Jumping();
+
+        if (_animator)
+            _animator.Jumping();
 
         // Correct target by height of the character so we land on our feet
         target += new Vector3(0, transform.lossyScale.y, 0);
@@ -184,7 +183,9 @@ public class CharacterJumping : MonoBehaviour
         if (restoreNagivation)
             _nav.enabled = true;
 
-        _animator.Landing();
+        if (_animator)
+            _animator.Landing();
+
         transform.parent = targetParent;
         _jumping = false;
     }

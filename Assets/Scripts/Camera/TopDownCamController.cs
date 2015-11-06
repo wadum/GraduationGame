@@ -10,7 +10,6 @@ public class TopDownCamController : MonoBehaviour {
     public const float ZoomSpeed = 0.5f;
 	public const float RotateSpeed = 1f;
     public float UpDownRotationLimit = 80;
-    public GameObject InputSystem;
     public bool ForceTouch = false;
 
     private GameObject _player;
@@ -41,12 +40,7 @@ public class TopDownCamController : MonoBehaviour {
 		_cam = cam;
 		_oldPlayerPos = _player ? _player.transform.position : (_player = GameObject.FindGameObjectWithTag("Player")).transform.position;
 
-	    TouchHandling touchHandling = null;
-        if (InputSystem)
-            touchHandling = InputSystem.GetComponent<TouchHandling>();
-
-	    if (touchHandling)
-            touchHandling.RegisterPinchHandler(HandlePinch);
+        MultiTouch.RegisterPinchHandler(HandlePinch);
 
 		StartCoroutine(AlwaysLookAt(_player));
 	}
