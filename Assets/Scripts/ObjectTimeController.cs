@@ -17,6 +17,7 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
     [Space(5)]
     [Header("Prerequisites")]
     public Electrified[] ActiveObjects;
+    [NonSerialized]
     public Electrified[] DeactiveObjects;
 
     [Space(5)]
@@ -27,8 +28,7 @@ public class ObjectTimeController : MonoBehaviour, TimeControllable {
     // Use this for initialization
     void Start()
     {
-        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
+        MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
         {
             if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {

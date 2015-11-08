@@ -6,21 +6,21 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TouchHandling : MonoBehaviour
+public class MultiTouch : MonoBehaviour
 {
     public float SwipeSensitivity = 4f;
     public float TapHoldSeconds = 1f;
     public bool SimulateMouseTapInEditor = true;
 
-    private Dictionary<string, List<Action<RaycastHit>>> _tapEventHandlers;
-    private Dictionary<string, List<Action<RaycastHit>>> _tapAndHoldEventHandlers;
-    private Action<Touch> _swipeHandler = (s) => { };
-    private Action<List<Touch>> _pinchHandler = (p) => { };
+    private static readonly Dictionary<string, List<Action<RaycastHit>>> TapEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
+    private static readonly Dictionary<string, List<Action<RaycastHit>>> TapAndHoldEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
+
+    private static Action<Touch> _swipeHandler = (s) => { };
+    private static Action<List<Touch>> _pinchHandler = (p) => { };
     private GraphicRaycaster _guiCaster;
 
     void Awake() {
-        _tapEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
-        _tapAndHoldEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
+        ClearAllHandlers();
     }
 
     void Start()
@@ -113,97 +113,94 @@ public class TouchHandling : MonoBehaviour
     #endregion
 
     #region callback handling for the different taps and gestures
-    private void HandlePinch(List<Touch> touches) {
+    private static void HandlePinch(List<Touch> touches) {
         // Right now we just do this, as we are pretty certain we only need one pinch handler,
         // specifically for the camera. Keep in mind that we ignore UI touches, so UI pinches should still function.
         _pinchHandler(touches);
     }
 
-    private void HandleSwipe(Touch touch) {
+    private static void HandleSwipe(Touch touch) {
         // Right now we just do this, as we are pretty certain we only need one swipe handler,
         // specifically for the camera. Keep in mind that we ignore UI touches, so UI swipes should still function.
         _swipeHandler(touch);
     }
 
-    private void HandleTap(Vector3 position)
+    private static void HandleTap(Vector3 position)
     {
         var hit = Raycast(position);
         List<Action<RaycastHit>> handlers;
-        if (hit.HasValue && _tapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
+        if (hit.HasValue && TapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
             foreach(var handler in handlers)
                 handler(hit.Value);
     }
 
-    private void HandleTapAndHold(Vector3 position)
+    private static void HandleTapAndHold(Vector3 position)
     {
         var hit = Raycast(position);
         List<Action<RaycastHit>> handlers;
-        if (hit.HasValue && _tapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
+        if (hit.HasValue && TapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
             foreach(var handler in handlers)
                 handler(hit.Value);
     }
-
     #endregion
 
     #region registration of handlers
-    public void RegisterTapHandlerByTag(string objTag, Action<RaycastHit> handler)
+    public static void RegisterTapHandlerByTag(string objTag, Action<RaycastHit> handler)
     {
         if (string.IsNullOrEmpty(objTag))
             return;
 
-        if (!_tapEventHandlers.ContainsKey(objTag))
-            _tapEventHandlers[objTag] = new List<Action<RaycastHit>>();
+        if (!TapEventHandlers.ContainsKey(objTag))
+            TapEventHandlers[objTag] = new List<Action<RaycastHit>>();
 
-        _tapEventHandlers[objTag].Add(handler);
+        TapEventHandlers[objTag].Add(handler);
     }
 
-    public void RegisterTapAndHoldHandlerByTag(string objTag, Action<RaycastHit> handler)
+    public static void RegisterTapAndHoldHandlerByTag(string objTag, Action<RaycastHit> handler)
     {
         if (string.IsNullOrEmpty(objTag))
             return;
 
-        if (!_tapAndHoldEventHandlers.ContainsKey(objTag))
-            _tapAndHoldEventHandlers[objTag] = new List<Action<RaycastHit>>();
+        if (!TapAndHoldEventHandlers.ContainsKey(objTag))
+            TapAndHoldEventHandlers[objTag] = new List<Action<RaycastHit>>();
 
-        _tapAndHoldEventHandlers[objTag].Add(handler);
+        TapAndHoldEventHandlers[objTag].Add(handler);
     }
 
-    public void RegisterSwipeHandler(Action<Touch> handler) {
+    public static void RegisterSwipeHandler(Action<Touch> handler) {
         _swipeHandler = handler;
     }
 
-    public void RegisterPinchHandler(Action<List<Touch>> handler) {
+    public static void RegisterPinchHandler(Action<List<Touch>> handler) {
         _pinchHandler = handler;
     }
     #endregion
 
     #region removing handlers
-    public void ClearTapHandler(string objTag) {
-        // Functions even if tag does not exist.
-        _tapEventHandlers.Remove(objTag);
+    public static void ClearTapHandler(string objTag) {
+        TapEventHandlers.Remove(objTag);
     }
-    public void ClearTapAndHoldHandler(string objTag) {
-        // Functions even if tag does not exist.
-        _tapAndHoldEventHandlers.Remove(objTag);
+    public static void ClearTapAndHoldHandler(string objTag) {
+        TapAndHoldEventHandlers.Remove(objTag);
     }
 
-    public void ClearAllTapHandlers() {
-        _tapEventHandlers.Clear();
+    public static void ClearAllTapHandlers() {
+        TapEventHandlers.Clear();
     }
 
-    public void ClearAllTapAndHoldHandlers() {
-        _tapAndHoldEventHandlers.Clear();
+    public static void ClearAllTapAndHoldHandlers() {
+        TapAndHoldEventHandlers.Clear();
     }
 
-    public void ClearSwipeHandler() {
+    public static void ClearSwipeHandler() {
         _swipeHandler = s => { };
     }
 
-    public void ClearPinchHandler() {
+    public static void ClearPinchHandler() {
         _pinchHandler = p => { };
     }
 
-    public void ClearAllHandlers() {
+    public static void ClearAllHandlers() {
         ClearAllTapHandlers();
         ClearAllTapAndHoldHandlers();
         ClearSwipeHandler();
@@ -226,8 +223,9 @@ public class TouchHandling : MonoBehaviour
     }
 
     /// <summary>
-    /// Since unity has marked the bug where IsPointerOverGameObject as "by design"
-    /// we have to make our own replacement raycasting against the canvas.
+    /// Since unity has marked the misfeature where IsPointerOverGameObject
+    /// always return false on android as "by design" we have to make our own
+    /// replacement raycasting against the canvas.
     /// 
     /// *bleep* Unity.
     /// </summary>

@@ -12,9 +12,8 @@ public class DeconstructWall : MonoBehaviour, TimeControllable {
     // Use this for initialization
     void Start()
     {
-        _bricks = this.GetComponentsInChildren<Transform>().Where(b => b != transform).OrderBy(b => b.position.y).ToArray();
-        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit =>
+        _bricks = GetComponentsInChildren<Transform>().Where(b => b != transform).OrderBy(b => b.position.y).ToArray();
+        MultiTouch.RegisterTapHandlerByTag("Breakable Wall", hit =>
         {
             if (hit.collider.gameObject.transform.root.gameObject == gameObject)
             {

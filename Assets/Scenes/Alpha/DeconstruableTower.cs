@@ -12,14 +12,13 @@ public class DeconstruableTower : MonoBehaviour {
     {
         controller = FindObjectOfType<GameOverlayController>();
         _NavMeshAgent = GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>();
-        TouchHandling touchHandling = FindObjectOfType<TouchHandling>();
-        touchHandling.RegisterTapHandlerByTag("Breakable Wall", hit =>
+
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Breakable Wall", hit =>
         {
             if (_NavMeshAgent.enabled)
             {
                 controller.TimeSlider.SetActive(!controller.TimeSlider.activeSelf);
             }
-            //    FindObjectOfType<GameOverlayController>().ToggleWallSlider();
         });
     }
 

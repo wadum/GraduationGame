@@ -9,7 +9,5 @@ public class ChangeTag : MonoBehaviour {
             this.tag = "Finish";
         else if (RecordMaster.time <= 0.4f)
             this.tag = "Breakable Wall";
-
-                
 	}
 }

@@ -2,7 +2,6 @@
 
 public class CharacterMovement : MonoBehaviour
 {
-    public GameObject InputSystem;
     public GameObject DeliverClockPartArea;
     public GameObject[] FloatWaypoints;
 
@@ -24,14 +23,8 @@ public class CharacterMovement : MonoBehaviour
         _agent = gameObject.GetComponent<NavMeshAgent>();
         _currentWaypoint = 0;
 
-        TouchHandling touchHandling = null;
-        if (InputSystem)
-            touchHandling = InputSystem.GetComponent<TouchHandling>();
-        if (touchHandling)
-        {
-            touchHandling.RegisterTapHandlerByTag("Terrain", hit => GoTo(hit.point));
-            touchHandling.RegisterTapHandlerByTag("Clockpart", hit => GoTo(hit.collider.transform.position));
-        }
+        MultiTouch.RegisterTapHandlerByTag("Terrain", hit => GoTo(hit.point));
+        MultiTouch.RegisterTapHandlerByTag("Clockpart", hit => GoTo(hit.collider.transform.position));
     }
 	
 	// Update is called once per frame
