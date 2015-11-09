@@ -21,10 +21,10 @@ public class SaveLoad : MonoBehaviour {
 
     public ObjectTimeController[] _TimeControllers;
     private List<SaveState> _SaveData;
+    public int _lvl = -1;
 
     CharacterInventory inv;
     Cockpart[] cogs;
-    int _lvl;
 
     void Awake()
     {
@@ -35,7 +35,7 @@ public class SaveLoad : MonoBehaviour {
         }
         else if(saveLoad != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
