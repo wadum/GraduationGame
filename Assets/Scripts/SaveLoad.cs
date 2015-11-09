@@ -21,6 +21,7 @@ public class SaveLoad : MonoBehaviour {
 
     public ObjectTimeController[] _TimeControllers;
     private List<SaveState> _SaveData;
+    public int _lvl = -1;
 
     CharacterInventory inv;
     Cockpart[] cogs;
@@ -34,18 +35,41 @@ public class SaveLoad : MonoBehaviour {
         }
         else if(saveLoad != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
-        _TimeControllers = GameObject.FindObjectsOfType<ObjectTimeController>();
-        _SaveData = new List<SaveState>();
     }
-    // It's up for debate on when to load the data from a previus playthrough, either on this script being enabled, or on void OnLevelWasLoaded(int level) might be candidates.
+
+    // When the script is loaded for the first time, it will load progress from last time.
     void OnEnable()
     {
-        // Save on enable?
+        Prepare();
+    }
+
+    void Prepare()
+    {
+        _lvl = Application.loadedLevel;
+        _TimeControllers = GameObject.FindObjectsOfType<ObjectTimeController>();
+        _SaveData = new List<SaveState>();
+        // Load on enable?
         inv = FindObjectOfType<CharacterInventory>();
         cogs = GameObject.FindObjectsOfType<Cockpart>();
         Load();
+    }
+
+    void OnLevelWasLoaded(int level)
+    {
+        Debug.Log(_lvl + " " + Application.loadedLevel);
+        if(_lvl == level)
+        {
+            // If we load the same level which we're already in, we must be in the process of resetting, so we reset the values without loading.
+            _TimeControllers = GameObject.FindObjectsOfType<ObjectTimeController>();
+            _SaveData = new List<SaveState>();
+        }
+        else
+        {
+            Debug.Log("preparing");
+            Prepare();
+        }
     }
 
     void OnApplicationQuit()
@@ -57,8 +81,6 @@ public class SaveLoad : MonoBehaviour {
 
     public void Save()
     {
-        // Clears the already stored data
-        _SaveData.Clear();
         // Add all the TimePos data for the objects we need to save
         foreach (ObjectTimeController TimeController in _TimeControllers)
         {
@@ -79,6 +101,9 @@ public class SaveLoad : MonoBehaviour {
         // Save the data to the file.
         bf.Serialize(file, new SaveData(_SaveData, pickups));
         file.Close();
+
+        // Clears data for next save
+        _SaveData.Clear();
     }
 
     public void Load()

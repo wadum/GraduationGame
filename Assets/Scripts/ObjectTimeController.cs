@@ -31,7 +31,7 @@ public class ObjectTimeController : TimeControllable {
         {
             if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {
-                FindObjectOfType<GameOverlayController>().Activate(this);
+                FindObjectOfType<GameOverlayController>().ActivateSlider(this);
             }
         });
 
