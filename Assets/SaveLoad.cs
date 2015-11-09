@@ -114,8 +114,10 @@ public class SaveLoad : MonoBehaviour {
             }
         }
     }
+
     void Update()
     {
+        // If there's no automatic saving, we save on keyinput instead.
         if (SaveInterval == 0)
         {
             if (Input.anyKey)
@@ -125,6 +127,8 @@ public class SaveLoad : MonoBehaviour {
             }
             return;
         }
+
+        // Save on fixed time interval.
         if (elapsedtime < SaveInterval)
         {
             elapsedtime += Time.deltaTime;
@@ -134,6 +138,7 @@ public class SaveLoad : MonoBehaviour {
         elapsedtime = 0;
     }
 }
+
 [Serializable]
 class SaveData
 {
