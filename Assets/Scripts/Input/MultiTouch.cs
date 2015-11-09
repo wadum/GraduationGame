@@ -36,7 +36,7 @@ public class MultiTouch : MonoBehaviour
                 Debug.Log("No canvas found for fallback.");
         }
         if (gui)
-            _guiCaster = gui.GetComponent<GraphicRaycaster>();
+            _guiCaster = gui.GetComponentInChildren<GraphicRaycaster>();
         
         if (!_guiCaster)
             Debug.Log("GraphicRaycaster could not be gotten from canvas, ui blocking will not be available.");

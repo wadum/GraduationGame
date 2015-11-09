@@ -38,7 +38,6 @@ public class SidekickElementController : MonoBehaviour {
         _rotationSpeed = OriginalRotationSpeed / 4;
 
         SwirlingAroundPlayer = true;
-
         MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
         {
             var parentTransform = hit.transform.root;

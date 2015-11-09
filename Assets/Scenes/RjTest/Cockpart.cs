@@ -30,9 +30,9 @@ public class Cockpart : MonoBehaviour {
 
         transform.Rotate(Vector3.up,100*Time.deltaTime);        
 
-        if (pickedUp)
+        if (pickedUp) 
         {
-            clockPart.transform.localPosition = Vector3.right;
+            clockPart.transform.localPosition = Vector3.right + Vector3.up;
             transform.position = player.transform.position;
         }
 
