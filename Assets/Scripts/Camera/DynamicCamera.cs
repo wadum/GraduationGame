@@ -10,8 +10,8 @@ public class DynamicCamera : MonoBehaviour {
 
     [Header("Position and Rotation")]
     public float NeutralDistanceFromPlayer = 5f;
-    [Range(-180, 180)] public float NeutralPitch = 20f;
-    [Range(-180, 180)] public float NeutralYaw = 0f;
+    [Range(-89, 89)] public float NeutralPitch = 20f;
+    [Range(-180, 180)] public float NeutralYaw;
 
     [Header("Field of View")]
     [Range(10, 170)] public float NeutralFieldOfView = 60;
@@ -32,55 +32,6 @@ public class DynamicCamera : MonoBehaviour {
     private float _desiredZoom;
     private float _desiredPitch;
     private float _desiredYaw;
-
-    // Helper properties
-    private Quaternion RelativeRotation { get { return Quaternion.Inverse(transform.rotation) * _player.rotation; } }
-    private float CurrentYaw {
-        get { return RelativeRotation.eulerAngles.y; }
-        set {
-            var distance = CurrentDistance;
-
-            transform.position = _player.position;
-            transform.rotation = GetRelativeRotation(value, CurrentPitch);
-
-            CurrentDistance = distance;
-        }
-    }
-
-    private float CurrentPitch {
-        get { return RelativeRotation.eulerAngles.x; }
-        set {
-            var distance = CurrentDistance;
-
-            transform.position = _player.position;
-            transform.rotation = GetRelativeRotation(CurrentYaw, value);
-
-            CurrentDistance = distance;
-        }
-    }
-
-    private Quaternion GetRelativeRotation(float yaw, float pitch) {
-        var inverse = Quaternion.Inverse(_player.rotation);
-
-        var yawAxis = inverse * Vector3.up;
-        var yawRot = Quaternion.AngleAxis(yaw, yawAxis) * _player.rotation;
-
-        inverse = Quaternion.Inverse(yawRot);
-        var pitchAxis = inverse * Vector3.right;
-        var pitchRot = Quaternion.AngleAxis(pitch, pitchAxis) * yawRot;
-
-        return pitchRot;
-    }
-
-    private float CurrentZoom {
-        get { return _camera.fieldOfView; }
-        set { _camera.fieldOfView = Mathf.Clamp(value, MinimumFieldOfView, MaximumFieldOfView); }
-    }
-
-    private float CurrentDistance {
-        get { return Vector3.Distance(transform.position, PlayerTop); }
-        set { transform.position = (transform.position - PlayerTop).normalized * value + PlayerTop; }
-    }
 
     private Vector3 PlayerTop {
         get {
@@ -126,21 +77,16 @@ public class DynamicCamera : MonoBehaviour {
         MultiTouch.RegisterTapHandlerByTag("Terrain", _ => _playerRotateIntent = _playerZoomIntent = false);
 	}
 
-    private void ResetToNeutral() {
-        CurrentDistance = NeutralDistanceFromPlayer;
-        CurrentYaw = NeutralYaw;
-        CurrentPitch = NeutralPitch;
-
-        transform.LookAt(PlayerTop);
-    }
-
     void LateUpdate() {
-        ResetToNeutral();
+        var baseYawAxis = _player.up;
+        var yaw = Quaternion.AngleAxis(NeutralYaw, baseYawAxis);
 
-        if (Input.GetKeyDown(KeyCode.D)) {
-            Debug.Log("Current Yaw: " + CurrentYaw);
-            Debug.Log("Current Pitch: " + CurrentPitch);
-        }
+        var basePitchAxis = _player.right;
+        var pitchAxis = yaw * basePitchAxis;
+        var pitch = Quaternion.AngleAxis(NeutralPitch, pitchAxis);
+
+        transform.position = pitch * yaw * (-_player.forward * NeutralDistanceFromPlayer) + PlayerTop;
+        transform.LookAt(_player);
     }
 
     private void HandleSwipe(Touch swipe) {
@@ -163,7 +109,7 @@ public class DynamicCamera : MonoBehaviour {
         var previousCenter = averagePoint(previousPositions);
         var previousAverageDistanceToCenter = averageDistanceToPoint(previousPositions, previousCenter);
 
-        CurrentZoom += 2 * ZoomFovDegreesPerPixelPinch * (previousAverageDistanceToCenter - averageDistanceToCenter);
+        _desiredZoom += 2 * ZoomFovDegreesPerPixelPinch * (previousAverageDistanceToCenter - averageDistanceToCenter);
     }
 
     // Transforms v -> ([0, 1], [0, 1]) given v is in screen coordinates
