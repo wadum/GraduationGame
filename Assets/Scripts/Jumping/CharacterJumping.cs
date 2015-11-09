@@ -42,7 +42,10 @@ public class CharacterJumping : MonoBehaviour
 	        return false;
 	    }
 
-        var scale = transform.lossyScale.y;
+        // Get the scale of the character. If no collider information is available, we fall back to lossyscale.
+        var col = GetComponent<Collider>();
+        var scale = col ? col.bounds.extents.y : transform.lossyScale.y;
+
         _jumpHeight = MaximumVerticalJump * scale;
         _jumpWidth = MaximumHorizonalJump * scale;
         _dropHeight = MaximumDrop * scale;
@@ -116,10 +119,10 @@ public class CharacterJumping : MonoBehaviour
         var target = hit.collider.gameObject.transform;
 
         // Get location on top of target
-        var v1 = target.position + new Vector3(0, target.lossyScale.y / 2, 0);
+        var v1 = target.position + new Vector3(0, hit.collider.bounds.extents.y, 0);
 
         // Get distance from feet of character
-        var v2 = transform.position - new Vector3(0, transform.lossyScale.y / 2, 0);
+        var v2 = transform.position - new Vector3(0, hit.collider.bounds.extents.y, 0);
 
         if (!CanReach(v2, v1))
         {
