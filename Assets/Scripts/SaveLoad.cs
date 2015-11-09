@@ -6,6 +6,10 @@ using System.IO;
 
 public class SaveLoad : MonoBehaviour {
 
+    // We need some sort of persistant identifier for objects in the game
+    // Unity sux, so we are forced to use the object names.
+    // So far this script can save and load the state of pickupitems and the mechanim pilars.
+
     // There should only be one of this object in the game.
     public static SaveLoad saveLoad;
 
@@ -14,17 +18,15 @@ public class SaveLoad : MonoBehaviour {
     private float elapsedtime;
 
     [Header("Debuggin")]
-    public string levelname = "null";
 
     public ObjectTimeController[] _TimeControllers;
     private List<SaveState> _SaveData;
 
     CharacterInventory inv;
-    Cockpart[] COCKS;
+    Cockpart[] cogs;
 
     void Awake()
     {
-        levelname = Application.loadedLevelName;
         if (saveLoad == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -37,83 +39,95 @@ public class SaveLoad : MonoBehaviour {
         _TimeControllers = GameObject.FindObjectsOfType<ObjectTimeController>();
         _SaveData = new List<SaveState>();
     }
-
-    void Start()
-    {
-        inv = FindObjectOfType<CharacterInventory>();
-    }
-
+    // It's up for debate on when to load the data from a previus playthrough, either on this script being enabled, or on void OnLevelWasLoaded(int level) might be candidates.
     void OnEnable()
     {
         // Save on enable?
         inv = FindObjectOfType<CharacterInventory>();
-        COCKS = GameObject.FindObjectsOfType<Cockpart>();
+        cogs = GameObject.FindObjectsOfType<Cockpart>();
         Load();
-    }
-
-    void OnDisable()
-    {
-
     }
 
     void OnApplicationQuit()
     {
-        Save();
+        // If there's no save interval, we're giving input on when to save, this also allows us to reset the savedata.
+        if(SaveInterval != 0)
+            Save();
     }
 
     public void Save()
     {
+        // Clears the already stored data
+        _SaveData.Clear();
+        // Add all the TimePos data for the objects we need to save
         foreach (ObjectTimeController TimeController in _TimeControllers)
         {
             _SaveData.Add(new SaveState(TimeController.name, TimeController.TimePos));
         }
-        List<int> taggedcocks = new List<int>();
+        // Prepare a new string for all the pickupitems' names.
+        List<string> pickups = new List<string>();
         foreach (GameObject cock in inv.clockParts)
         {
-            taggedcocks.Add(cock.GetInstanceID());
+            if(cock != null)
+            {
+                pickups.Add(cock.name);
+            }
         }
+        // Open new BinaryFormatter, with a filename depending on the level we're playing.
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/save" + levelname + ".save", FileMode.Create);
-        bf.Serialize(file, new SaveData(_SaveData, taggedcocks));
+        FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Create);
+        // Save the data to the file.
+        bf.Serialize(file, new SaveData(_SaveData, pickups));
         file.Close();
-        _SaveData.Clear();
-        Debug.Log("saved");
     }
 
     public void Load()
     {
+        // Reverse from Save, now we load.
         BinaryFormatter bf = new BinaryFormatter();
-        if(File.Exists(Application.persistentDataPath + "/save" + levelname + ".save"))
+        if(File.Exists(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save"))
         {
-            FileStream file = File.Open(Application.persistentDataPath + "/save" + levelname + ".save", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Open);
             SaveData data = (SaveData) bf.Deserialize(file);
             file.Close();
-            List<int> taggedcocks = new List<int>();
-            _SaveData = data.data;
-            taggedcocks = data.inv;
-            foreach (SaveState state in _SaveData)
+            // Restore the data of the pilars.
+            foreach (SaveState state in data.data)
             {
                 foreach (ObjectTimeController controller in _TimeControllers)
+                    // Sadly we have to identify by name.
                     if (controller.name == state.name)
                         controller.TimePos = state.pos;
             }
-            Debug.Log(taggedcocks.Count + " " + COCKS.Length);
-            foreach(int ID in taggedcocks)
+            // Restore the data for pickups
+            foreach(string Cog in data.inv)
             {
-                Debug.Log("ID: " + ID);
-                foreach (Cockpart cock in COCKS)
+                foreach (Cockpart cock in cogs)
                 {
-                    Debug.Log("COCKS: " + cock.GetInstanceID());
-                    if (cock.GetInstanceID() == ID)
+                    if (cock.name == Cog)
                     {
-                        Debug.Log(cock + " " + ID);
-                        return;
-        
+                        // Copy the functionality of the Cogs and Inventory, should most likely be a localiced helperfunction in those scripts instead.
+                        GameObject player = GameObject.FindGameObjectWithTag ("Player" );
+                        cock.transform.parent = player.transform;
+                        cock.pickedUp = true;
+                        cock.GetComponent<Collider>().enabled = false;
+                        inv.AddClockPart(cock.gameObject);
                     }
                 }
             }
         }
     }
+
+    // Instead of deleting the file, we can simply overwrite it with blank data
+    public void Reset()
+    {
+        _SaveData.Clear();
+        List<string> taggedcocks = new List<string>();
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Create);
+        bf.Serialize(file, new SaveData(_SaveData, taggedcocks));
+        file.Close();
+    }
+
 
     void Update()
     {
@@ -122,8 +136,9 @@ public class SaveLoad : MonoBehaviour {
         {
             if (Input.anyKey)
             {
-                if (Input.GetKeyDown(KeyCode.A)) { Save(); }
-                if (Input.GetKeyDown(KeyCode.D)) { Load(); }
+                if (Input.GetKeyDown(KeyCode.S)) { Save(); }
+                if (Input.GetKeyDown(KeyCode.L)) { Load(); }
+                if (Input.GetKeyDown(KeyCode.R)) { Reset(); }
             }
             return;
         }
@@ -139,18 +154,20 @@ public class SaveLoad : MonoBehaviour {
     }
 }
 
+// SaveData is the data which is being serializd, it needs to hold all information which we store in a load, so expand this as needed.
 [Serializable]
 class SaveData
 {
     public List<SaveState> data;
-    public List<int> inv;
-    public SaveData(List<SaveState> data, List<int> inv)
+    public List<string> inv;
+    public SaveData(List<SaveState> data, List<string> inv)
     {
         this.data = data;
         this.inv = inv;
     }
 }
 
+// Helper class for the pilars
 [Serializable]
 class SaveState
 {
@@ -161,10 +178,4 @@ class SaveState
         this.name = name;
         this.pos = pos;
     }
-}
-
-[Serializable]
-class SaveInventory
-{
-    public int ID;
 }
