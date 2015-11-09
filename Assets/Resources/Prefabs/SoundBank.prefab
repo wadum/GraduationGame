@@ -25,9 +25,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 466240}
   - 114: {fileID: 11415068}
+  - 114: {fileID: 11420382}
   m_Layer: 0
   m_Name: SoundBank
-  m_TagString: Untagged
+  m_TagString: SoundBank
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -539,8 +540,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b07aaac632b24f03b329654d8f84286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ambience: {fileID: 8200212}
-  AmbienceReversed: {fileID: 8298532}
+--- !u!114 &11420382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d381c4de19e4b04aba2b0d32297497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Normal: {fileID: 8200212}
+  Reversed: {fileID: 8298532}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
