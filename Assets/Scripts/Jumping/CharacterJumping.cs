@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -41,7 +42,10 @@ public class CharacterJumping : MonoBehaviour
 	        return false;
 	    }
 
-        var scale = transform.lossyScale.y;
+        // Get the scale of the character. If no collider information is available, we fall back to lossyscale.
+        var col = GetComponent<Collider>();
+        var scale = col ? col.bounds.extents.y : transform.lossyScale.y;
+
         _jumpHeight = MaximumVerticalJump * scale;
         _jumpWidth = MaximumHorizonalJump * scale;
         _dropHeight = MaximumDrop * scale;
@@ -115,10 +119,10 @@ public class CharacterJumping : MonoBehaviour
         var target = hit.collider.gameObject.transform;
 
         // Get location on top of target
-        var v1 = target.position + new Vector3(0, target.lossyScale.y / 2, 0);
+        var v1 = target.position + new Vector3(0, hit.collider.bounds.extents.y, 0);
 
         // Get distance from feet of character
-        var v2 = transform.position - new Vector3(0, transform.lossyScale.y / 2, 0);
+        var v2 = transform.position - new Vector3(0, hit.collider.bounds.extents.y, 0);
 
         if (!CanReach(v2, v1))
         {
@@ -163,6 +167,16 @@ public class CharacterJumping : MonoBehaviour
         StartCoroutine(Jumping(v1, null, true));
     }
 
+    private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to) {
+        var xzStart = new Vector2(from.x, from.z);
+        var xzEnd = new Vector2(to.x, to.z);
+        var midway = xzStart + (xzEnd - xzStart)/2;
+
+        var ctrl = new Vector3(midway.x, from.y + 2*_jumpHeight, midway.y);
+
+        return t => Mathf.Pow(1 - t, 2)*from + 2*(1 - t)*t*ctrl + Mathf.Pow(t, 2)*to;
+    }
+
     private IEnumerator Jumping(Vector3 target, Transform targetParent, bool restoreNagivation)
     {
         _jumping = true;
@@ -173,12 +187,16 @@ public class CharacterJumping : MonoBehaviour
 
         // Correct target by height of the character so we land on our feet
         target += new Vector3(0, transform.lossyScale.y, 0);
+        var jumpCurve = MakeBezierJump(transform.position, target);
 
-        while (Vector3.Distance(transform.position, target) > 0.001f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, target, JumpingSpeed * Time.deltaTime);
+        var t = 0f;
+        while (t <= 1) {
+            transform.position = jumpCurve(t);
+            t += Time.deltaTime / JumpingSpeed;
             yield return null;
         }
+
+        transform.position = target;
 
         if (restoreNagivation)
             _nav.enabled = true;

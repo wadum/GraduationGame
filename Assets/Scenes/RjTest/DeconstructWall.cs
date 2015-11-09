@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Linq;
 using System;
 
-public class DeconstructWall : MonoBehaviour, TimeControllable {
+public class DeconstructWall : TimeControllable {
 
     public float PercentageLeftBehind = 3;
 
@@ -35,12 +35,12 @@ public class DeconstructWall : MonoBehaviour, TimeControllable {
         }
     }
 
-    public void SetFloat(float var)
+    override public void SetFloat(float var)
     {
         SetConstructionLevel(var);
     }
 
-    public float GetFloat()
+	override public float GetFloat()
     {
         return _level;
     }
