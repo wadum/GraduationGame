@@ -11,7 +11,7 @@ public class Cockpart : MonoBehaviour {
     float startTime;
     float journeyLength;
 
-    bool pickedUp = false;
+    public bool pickedUp = false;
     bool flyToCenterClock = false;
 
     Vector3 lerpStartingPos;
@@ -34,7 +34,6 @@ public class Cockpart : MonoBehaviour {
         {
             clockPart.transform.localPosition = Vector3.right;
             transform.position = player.transform.position;
-
         }
 
         if (flyToCenterClock)
