@@ -81,7 +81,7 @@ public class SidekickElementController : MonoBehaviour {
             case Status.SwirlingAroundPlayer:
                 GetComponent<RandomRotation>().enabled = true;
 
-                RotateAroundPos(_player.transform.position);
+                RotateAroundPos(_player.transform.position + Vector3.up);
 
                 break;
 
