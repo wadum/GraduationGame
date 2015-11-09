@@ -50,7 +50,6 @@ public class CharacterInventory : MonoBehaviour
     {
         clockParts[clockPartCounter] = clockpart;
         clockPartCounter++;
-
         for (int i = 0; i < clockPartCounter; i++)
         {
             clockParts[i].transform.rotation = Quaternion.Euler(0, 360 / clockPartCounter * i, 0);
@@ -61,5 +60,4 @@ public class CharacterInventory : MonoBehaviour
     {
         deliver = value;
     }
-
 }

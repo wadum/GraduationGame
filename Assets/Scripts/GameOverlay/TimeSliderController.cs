@@ -55,7 +55,7 @@ public class TimeSliderController : MonoBehaviour {
     {
         while (true)
         {
-            _slider.value += var;
+            _slider.value += 100f * Time.deltaTime/var;
             yield return null;
         }
     }
