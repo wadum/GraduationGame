@@ -1,30 +1,30 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class SoundMaster : MonoBehaviour {
 
-	public AudioSource Ambience, AmbienceReversed;
+	private List<ZoneAudio> _zones;
+	public List<ZoneAudio> Zones{
+		get {
+			if(_zones == null)
+				_zones = new List<ZoneAudio>();
+			return _zones;
+		}
+	}
 
 	void Start()
 	{
-		if (Mathf.Abs (Ambience.clip.length - AmbienceReversed.clip.length) > 0.1f)
-			Debug.Log ("Ambience music tracks are not the same length!");
+		transform.parent = Camera.main.transform;
+		transform.localPosition = Vector3.zero;
 	}
 
-	public void PlayAmbience()
+	public void PlayNormal()
 	{
-		var playbackPos = Ambience.clip.length - AmbienceReversed.time;
-		AmbienceReversed.Stop();	
-		Ambience.time = playbackPos;
-		Ambience.Play();
+		_zones.ForEach(zone => zone.PlayNormal());
 	}
 
-	public void PlayAmbienceReversed()
+	public void PlayReversed()
 	{
-		var playbackPos = Mathf.Abs((AmbienceReversed.clip.length - Ambience.time)%Ambience.clip.length);
-		Ambience.Stop();
-		AmbienceReversed.time = playbackPos;
-		AmbienceReversed.Play();
+		_zones.ForEach(zone => zone.PlayReversed());
 	}
-
 }

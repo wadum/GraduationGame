@@ -38,7 +38,7 @@ public class TimeSliderController : MonoBehaviour {
     public void DecreaseTimePressed()
     {
 		if(_soundMaster)
-			_soundMaster.PlayAmbienceReversed();
+			_soundMaster.PlayReversed();
         _decreaseCorout = StartCoroutine(changeValue(-TimeSpeed));
 		_obj.MusicBackward();
     }
@@ -46,7 +46,7 @@ public class TimeSliderController : MonoBehaviour {
     public void DecreaseTimeReleased()
     {
 		if(_soundMaster)
-			_soundMaster.PlayAmbience();
+			_soundMaster.PlayNormal();
         StopCoroutine(_decreaseCorout);
 		_obj.StopMusic();
     }
@@ -55,7 +55,7 @@ public class TimeSliderController : MonoBehaviour {
     {
         while (true)
         {
-            _slider.value += var;
+            _slider.value += 100f * Time.deltaTime/var;
             yield return null;
         }
     }
