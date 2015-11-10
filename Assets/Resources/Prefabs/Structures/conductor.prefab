@@ -501,6 +501,7 @@ GameObject:
   - 4: {fileID: 491734}
   - 114: {fileID: 11482432}
   - 120: {fileID: 12018098}
+  - 82: {fileID: 8250610}
   m_Layer: 0
   m_Name: BigLightning
   m_TagString: Untagged
@@ -1675,6 +1676,77 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158610}
   m_Mesh: {fileID: 4300000, guid: 56161c493cde86244a387cf9544c1e06, type: 3}
+--- !u!82 &8250610
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 192840}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 38adb739f1d9c9045984bff8bb812f6c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .266000003
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2
+  MaxDistance: 7
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9550952
 Animator:
   serializedVersion: 3
@@ -1707,6 +1779,7 @@ MonoBehaviour:
   frecuency: .100000001
   maxConductorDistance: 10
   JitterDistance: .400000006
+  Audio: {fileID: 0}
   LightningConductors: []
 --- !u!114 &11434450
 MonoBehaviour:
@@ -1736,6 +1809,7 @@ MonoBehaviour:
   frecuency: .100000001
   maxConductorDistance: 10
   JitterDistance: .400000006
+  Audio: {fileID: 0}
   LightningConductors: []
 --- !u!114 &11457416
 MonoBehaviour:
@@ -1771,6 +1845,7 @@ MonoBehaviour:
   frecuency: .0500000007
   maxConductorDistance: 10
   JitterDistance: .100000001
+  Audio: {fileID: 8250610}
   LightningConductors: []
 --- !u!114 &11494510
 MonoBehaviour:
