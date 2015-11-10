@@ -51,13 +51,15 @@ public class CharacterMovement : MonoBehaviour
 	    _currentWaypoint++;
 	    _lerpStartingPos = FloatWaypoints[_currentWaypoint-1].transform.position;
 
-	    if (_lerpStartingPos == DeliverClockPartArea.transform.position)
+	    if (_lerpStartingPos == DeliverClockPartArea.transform.position || _currentWaypoint == FloatWaypoints.Length)
 	    {
 	        _agent.enabled = true;
 	        _flyToCenterClock = false;
+            Debug.Log("DONE!");
 	        return;
 	    }
 
+        Debug.Log(_currentWaypoint);
 	    _lerpEndPos = FloatWaypoints[_currentWaypoint].transform.position;
 	    _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
 	}
