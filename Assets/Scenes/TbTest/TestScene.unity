@@ -325,7 +325,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11426844, guid: e63242a6c45350a4fb3c75df3902aa1a, type: 2}
       propertyPath: SimulateMouseTapInEditor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e63242a6c45350a4fb3c75df3902aa1a, type: 2}
@@ -498,13 +498,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1f003f0cb6bab42a180d9267f2d421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NeutralDistanceFromPlayer: 6
+  NeutralDistance: 5
   NeutralPitch: 15
   NeutralYaw: 0
   NeutralFieldOfView: 60
   MinimumFieldOfView: 20
   MaximumFieldOfView: 100
-  ZoomFovDegreesPerPixelPinch: 100
+  MinimumDistance: 5
+  MaximumDistance: 10
+  MinimumPitch: -20
+  MaximumPitch: 80
+  MinimumYaw: -180
+  MaximumYaw: 180
+  PitchByHeight: 90
+  YawByWidth: 360
+  ZoomFactor: 90
 --- !u!81 &800987906
 AudioListener:
   m_ObjectHideFlags: 0
@@ -750,7 +758,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!1 &1164437183
 GameObject:
   m_ObjectHideFlags: 0

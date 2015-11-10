@@ -166,7 +166,6 @@ public class DynamicCamera : MonoBehaviour {
         MultiTouch.RegisterTapHandlerByTag("Terrain", _ => _playerIntent = false);
 	}
 
-
     private bool _manualOverride = false;
     void LateUpdate() {
         if (Input.GetKeyDown(KeyCode.A))
@@ -190,9 +189,8 @@ public class DynamicCamera : MonoBehaviour {
 
     private void ConstrainedPlayerControl() {
         var desiredRotation = Rotation(_playerDesiredAbsoluteYaw, _playerDesiredPitch, false);
-        var rot = Quaternion.RotateTowards(CurrentAbsoluteRotation, desiredRotation, 40f * Time.deltaTime);
 
-        SetPosition(rot, NeutralDistance, false);
+        SetPosition(desiredRotation, NeutralDistance, false);
 
         transform.LookAt(_player);
     }
