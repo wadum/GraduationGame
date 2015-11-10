@@ -18,19 +18,22 @@ public class GameOverlayController : MonoBehaviour {
 
     void Awake()
     {
-        if (gameOverlayController == null)
-        {
-            gameOverlayController = this;
-        }
-        else if (gameOverlayController != this)
-        {
-            Destroy(this.gameObject);
-        }
+        /*        if (gameOverlayController == null)
+                {
+                    DontDestroyOnLoad(gameObject);
+                    gameOverlayController = this;
+                }
+                else if (gameOverlayController != this)
+                {
+                    Destroy(this.gameObject);
+                }*/
+        gameOverlayController = this;
+
     }
 
     void Start()
 	{
-		_canvas = GetComponentInChildren<Canvas>();
+        _canvas = GetComponentInChildren<Canvas>();
 		_canvas.worldCamera = Camera.main;
 	}
 

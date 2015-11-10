@@ -23,7 +23,7 @@ public class CharacterMovement : MonoBehaviour
         _agent = gameObject.GetComponent<NavMeshAgent>();
         _currentWaypoint = 0;
 
-        MultiTouch.RegisterTapHandlerByTag("Terrain", hit => GoTo(hit.point));
+        MultiTouch.RegisterTapHandlerByTag("Terrain", hit => { GoTo(hit.point); GameOverlayController.gameOverlayController.DeactivateSlider(); });
         MultiTouch.RegisterTapHandlerByTag("Clockpart", hit => GoTo(hit.collider.transform.position));
     }
 	
