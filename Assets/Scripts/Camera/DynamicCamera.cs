@@ -5,8 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class DynamicCamera : MonoBehaviour {
-
-
     [Header("Position and Rotation")]
     public float NeutralDistance = 5f;
     [Range(-89, 89)] public float NeutralPitch = 20f;
@@ -172,10 +170,6 @@ public class DynamicCamera : MonoBehaviour {
         var pitchRot = Quaternion.AngleAxis(pitch, yawRot*BaseRelativePitchAxis);
 
         return pitchRot*yawRot;
-    }
-
-    private void SetRelativePosition(float yaw, float pitch, float distance) {
-        SetRelativePosition(RelativeRotation(yaw, pitch), distance);
     }
 
     private void SetRelativePosition(Quaternion rotation, float distance) {
