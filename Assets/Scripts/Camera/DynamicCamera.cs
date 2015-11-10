@@ -8,7 +8,7 @@ public class DynamicCamera : MonoBehaviour {
 
 
     [Header("Position and Rotation")]
-    public float NeutralDistanceFromPlayer = 5f;
+    public float NeutralDistance = 5f;
     [Range(-89, 89)] public float NeutralPitch = 20f;
     [Range(-180, 180)] public float NeutralYaw;
 
@@ -66,6 +66,8 @@ public class DynamicCamera : MonoBehaviour {
             ConstrainedPlayerControl();
         else
             FullyAutomaticCameraControl();
+
+        Debug.Log("Relative: " + CurrentRelativePitch);
     }
 
     private void ConstrainedPlayerControl() {
@@ -73,11 +75,9 @@ public class DynamicCamera : MonoBehaviour {
     }
 
     private void FullyAutomaticCameraControl() {
-        var rot = Quaternion.RotateTowards(CurrentRelativeRotation, NeutralRotation, 1f);
+        var rot = Quaternion.RotateTowards(CurrentRelativeYawRotation * CurrentRelativePitchRotation, NeutralRotation, 10f * Time.deltaTime);
 
-        Debug.Log(rot.eulerAngles);
-
-        SetRelativePosition(rot, NeutralDistanceFromPlayer);
+        SetRelativePosition(rot, NeutralDistance);
 
         transform.LookAt(_player);
     }
@@ -112,7 +112,7 @@ public class DynamicCamera : MonoBehaviour {
     // Helper properties
     private Vector3 RelativeYawAxis { get { return -_player.up; } }
 
-    private Vector3 RelativePitchAxis { get { return _player.right; } }
+    private Vector3 BaseRelativePitchAxis { get { return _player.right; } }
 
     private Vector3 RelativePosition { get { return transform.position - PlayerTop; } }
 
@@ -124,12 +124,39 @@ public class DynamicCamera : MonoBehaviour {
 
     private float CurrentAbsoluteYaw {
         get {
-            var yawComponent = Vector3.ProjectOnPlane(RelativePosition.normalized, Vector3.up);
-            var angle = Vector3.Angle(yawComponent, Vector3.forward);
+            var yawComponent = Vector3.ProjectOnPlane(RelativePosition, Vector3.up);
+            var angle = Vector3.Angle(yawComponent, -Vector3.forward);
 
-            return yawComponent.x > 0 ? angle : -angle;
+            return Vector3.Dot(Vector3.Cross(yawComponent, -Vector3.forward), Vector3.up) >= 0 ? angle : -angle;
         }
     }
+
+    private float CurrentRelativeYaw {
+        get {
+            var yawComponent = Vector3.ProjectOnPlane(RelativePosition, RelativeYawAxis);
+            var angle = Vector3.Angle(yawComponent, -_player.forward);
+
+            return Vector3.Dot(Vector3.Cross(yawComponent, -_player.forward), RelativeYawAxis) >= 0 ? -angle : angle;
+        }
+    }
+
+    private float CurrentRelativePitch {
+        get {
+            var yawRot = CurrentRelativeYawRotation;
+            var yawForward = yawRot*-_player.forward;
+
+            var relativePitchAxis = yawRot*BaseRelativePitchAxis;
+            var pitchComponent = Vector3.ProjectOnPlane(RelativePosition, relativePitchAxis);
+            
+            var angle = Vector3.Angle(pitchComponent, yawForward);
+
+            return Vector3.Dot(Vector3.Cross(pitchComponent, yawForward), relativePitchAxis) >= 0 ? -angle : angle;
+        }
+    }
+
+    private Quaternion CurrentRelativeYawRotation { get { return Quaternion.AngleAxis(CurrentRelativeYaw, RelativeYawAxis); } }
+
+    private Quaternion CurrentRelativePitchRotation { get { return Quaternion.AngleAxis(CurrentRelativePitch, CurrentRelativeYawRotation*BaseRelativePitchAxis); } }
 
     private Vector3 PlayerTop {
         get {
@@ -142,7 +169,7 @@ public class DynamicCamera : MonoBehaviour {
     // Helper methods
     private Quaternion RelativeRotation(float yaw, float pitch) {
         var yawRot = Quaternion.AngleAxis(yaw, RelativeYawAxis);
-        var pitchRot = Quaternion.AngleAxis(pitch, yawRot*RelativePitchAxis);
+        var pitchRot = Quaternion.AngleAxis(pitch, yawRot*BaseRelativePitchAxis);
 
         return pitchRot*yawRot;
     }
