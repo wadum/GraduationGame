@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour {
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<Respawnable>().Respawn();
         respawning = true;
-        GameObject.FindObjectOfType<GameOverlayController>().Deactivate();
+        GameObject.FindObjectOfType<GameOverlayController>().DeactivateSlider();
         foreach(SidekickElementController sidekick in GameObject.FindObjectsOfType<SidekickElementController>())
         {
             sidekick._myStatus = SidekickElementController.Status.FlyBack;

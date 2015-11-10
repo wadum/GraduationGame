@@ -6,7 +6,7 @@ public class ElevatorDoor : MonoBehaviour {
     public void open()
     {
         if (!GetComponentInParent<ElevatorController>()._moving)
-            transform.localPosition = Vector3.up * 2;
+            transform.localPosition = Vector3.down * 2;
     }
 
     public void close()

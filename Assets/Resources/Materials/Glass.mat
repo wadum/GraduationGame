@@ -6,12 +6,13 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: LightGlow
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_Name: Glass
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHABLEND_ON _EMISSION
+  m_LightmapFlags: 1
   m_CustomRenderQueue: 3000
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Transparent
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -82,19 +83,19 @@ Material:
       data:
         first:
           name: _SrcBlend
-        second: 1
+        second: 5
       data:
         first:
           name: _DstBlend
-        second: 0
+        second: 10
       data:
         first:
           name: _Cutoff
         second: .5
       data:
         first:
-          name: PixelSnap
-        second: 0
+          name: _Metallic
+        second: .444999993
       data:
         first:
           name: _Parallax
@@ -102,11 +103,11 @@ Material:
       data:
         first:
           name: _ZWrite
-        second: 1
+        second: 0
       data:
         first:
           name: _Glossiness
-        second: .200000003
+        second: 1
       data:
         first:
           name: _BumpScale
@@ -126,25 +127,13 @@ Material:
       data:
         first:
           name: _Mode
-        second: 0
-      data:
-        first:
-          name: _Metallic
-        second: 0
-      data:
-        first:
-          name: _InvFade
-        second: 1
+        second: 2
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .352941155, g: .919675469, b: 1, a: 1}
       data:
         first:
           name: _Color
-        second: {r: .431444645, g: .905694306, b: 1, a: 1}
-      data:
-        first:
-          name: _TintColor
-        second: {r: .257352948, g: .692697585, b: 1, a: .5}
+        second: {r: .602941155, g: .934279859, b: 1, a: .184}
