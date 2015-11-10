@@ -246,6 +246,7 @@ GameObject:
   - 23: {fileID: 317560065}
   - 114: {fileID: 317560064}
   - 120: {fileID: 317560063}
+  - 82: {fileID: 317560068}
   m_Layer: 0
   m_Name: BigLightning
   m_TagString: Untagged
@@ -319,6 +320,7 @@ MonoBehaviour:
   frecuency: .0500000007
   maxConductorDistance: 10
   JitterDistance: .100000001
+  Audio: {fileID: 317560068}
   LightningConductors: []
 --- !u!23 &317560065
 MeshRenderer:
@@ -366,6 +368,77 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 317560061}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &317560068
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317560061}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 38adb739f1d9c9045984bff8bb812f6c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .266000003
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2
+  MaxDistance: 7
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &355045241
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +815,7 @@ MonoBehaviour:
   frecuency: .100000001
   maxConductorDistance: 10
   JitterDistance: .200000003
+  Audio: {fileID: 0}
   LightningConductors: []
 --- !u!23 &548407491
 MeshRenderer:
@@ -1053,6 +1127,7 @@ GameObject:
   - 23: {fileID: 929792552}
   - 114: {fileID: 929792551}
   - 120: {fileID: 929792550}
+  - 82: {fileID: 929792555}
   m_Layer: 0
   m_Name: BigLightning
   m_TagString: Untagged
@@ -1126,6 +1201,7 @@ MonoBehaviour:
   frecuency: .0500000007
   maxConductorDistance: 10
   JitterDistance: .100000001
+  Audio: {fileID: 929792555}
   LightningConductors: []
 --- !u!23 &929792552
 MeshRenderer:
@@ -1173,6 +1249,77 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 929792548}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &929792555
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 929792548}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 38adb739f1d9c9045984bff8bb812f6c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .266000003
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2
+  MaxDistance: 7
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &999589003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,6 +1673,7 @@ MonoBehaviour:
   frecuency: .100000001
   maxConductorDistance: 10
   JitterDistance: .200000003
+  Audio: {fileID: 0}
   LightningConductors: []
 --- !u!23 &1242513144
 MeshRenderer:
@@ -1910,6 +2058,7 @@ MonoBehaviour:
   frecuency: .100000001
   maxConductorDistance: 10
   JitterDistance: .200000003
+  Audio: {fileID: 0}
   LightningConductors: []
 --- !u!23 &1607741386
 MeshRenderer:
@@ -2060,7 +2209,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422406, guid: fbe5954b1d0a6f340bad84457e1981b6, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbe5954b1d0a6f340bad84457e1981b6, type: 2}
@@ -2191,6 +2340,7 @@ MonoBehaviour:
   frecuency: .100000001
   maxConductorDistance: 10
   JitterDistance: .200000003
+  Audio: {fileID: 0}
   LightningConductors: []
 --- !u!23 &1678489895
 MeshRenderer:
@@ -2363,19 +2513,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 441988, guid: e6fa5177004ff444dbbd7470552aafe8, type: 2}
       propertyPath: m_RootOrder
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 12009982, guid: e6fa5177004ff444dbbd7470552aafe8, type: 2}
-      propertyPath: m_LightmapParameters
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 12026964, guid: e6fa5177004ff444dbbd7470552aafe8, type: 2}
-      propertyPath: m_LightmapParameters
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 12059540, guid: e6fa5177004ff444dbbd7470552aafe8, type: 2}
-      propertyPath: m_LightmapParameters
-      value: 
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6fa5177004ff444dbbd7470552aafe8, type: 2}
