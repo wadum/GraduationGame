@@ -65,7 +65,10 @@ public class CharacterMovement : MonoBehaviour
     public void GoTo(Vector3 position)
     {
         if (_agent.enabled)
+        {
+            GameOverlayController.gameOverlayController.DeactivateSlider();
             _agent.SetDestination(position);
+        }
     }
 
     public void GoToCenterClock(GameObject[] waypoints)
