@@ -18,7 +18,7 @@ public class DeconstructWall : TimeControllable {
             if (hit.collider.gameObject.transform.root.gameObject == gameObject)
             {
                 Debug.Log("Got Hit");
-                FindObjectOfType<GameOverlayController>().Activate(this);
+                FindObjectOfType<GameOverlayController>().ActivateSlider(this);
             }
         });
     }

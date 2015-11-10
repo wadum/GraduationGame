@@ -9,6 +9,7 @@ public class GameOverlayController : MonoBehaviour {
     public GameObject StoreScreen;
     public GameObject TimeSlider;
 	public TimeSliderController SliderController;
+	public AudioSource ActivateSliderSound;
 
     Canvas _canvas;
     TimeControllable _currentObj;
@@ -58,15 +59,17 @@ public class GameOverlayController : MonoBehaviour {
 		PauseMenu.SetActive(false);
 	}
 
-    public void Activate(TimeControllable obj)
+    public void ActivateSlider(TimeControllable obj)
     {
+		if(ActivateSliderSound && (!TimeSlider.activeSelf || _currentObj != obj))
+			ActivateSliderSound.Play();
         _currentObj = obj;
         TimeSlider.SetActive(true);
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
 		SliderController.SetTimeControllable(obj);
     }
 
-    public void Deactivate()
+    public void DeactivateSlider()
     {
         TimeSlider.SetActive(false);
     }

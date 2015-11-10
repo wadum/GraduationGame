@@ -135,39 +135,33 @@ public class TopDownCamController : MonoBehaviour {
 
     private void HandlePinch(List<Touch> touches)
     {
-        // takes the average vector of a list of vectors
-        Func<List<Vector2>, Vector2> avg = vectors => vectors.Aggregate((v1, v2) => v1 + v2) / vectors.Count;
-        // takes the average distance between a list of vectors and a point
-        Func<List<Vector2>, Vector2, float> avgDist = (vectors, point) => vectors.Select(p => Vector2.Distance(p, point)).Average();
+        Func<List<Vector2>, Vector2> averagePoint = vectors => vectors.Aggregate((v1, v2) => v1 + v2) / vectors.Count;
+        Func<List<Vector2>, Vector2, float> averageDistanceToPoint = (vectors, point) => vectors.Select(p => Vector2.Distance(p, point)).Average();
+        Func<Vector2, Vector2> screenNormalize = v => new Vector2(v.x / Screen.width, v.y / Screen.height);
 
-        // transforms the list of touches to a list of positions
-        var pos = touches.Select(t => t.position).ToList();
-        
-        // transforms the list of touches to a list of the previous positions
-        var prevPos = touches.Select(t => t.position - t.deltaPosition).ToList();
+        var positions = touches.Select(t => t.position).ToList();
+        var center = averagePoint(positions);
+        var averageDistanceToCenter = averageDistanceToPoint(positions, center);
 
-        // calculate current center by finding the average point
-        var center = avg(pos);
+        var previousPositions = touches.Select(t => t.position - t.deltaPosition).ToList();
+        var previousCenter = averagePoint(previousPositions);
+        var previousAverageDistanceToCenter = averageDistanceToPoint(previousPositions, previousCenter);
 
-        // calculate previous center by finding the average point
-        var prevCenter = avg(prevPos);
+        var centerMovementDirection = screenNormalize(center - previousCenter);
+        var centerDistanceRatio = averageDistanceToCenter/previousAverageDistanceToCenter;
 
-        // calculate the difference between the average distance to the centers for the current and previous positions
-        var distDiff = avgDist(pos, center) - avgDist(prevPos, prevCenter);
+        // TODO: REMOVE THIS LATER, preferably this whole script. This is a quickfix.
+        const float eyeballedZoomFactor = 20;
+        const float eyeballedRotateFactor = 900;
 
-        // do the zoom in or out depending on whether we "pinch out" or "pinch in" ie. whether or not the distance to the center has changed
-        if (distDiff <= 0)
-            // if the difference is negative, the distance from the center became larger, indicating a pinch out
-            ZoomOut(Mathf.Abs(distDiff) * 0.1f);
+        if (centerDistanceRatio < 1)
+            ZoomOut((1 - centerDistanceRatio) * eyeballedZoomFactor);
         else
-            // else the distance became smaller, indicating a pinch in
-            ZoomIn(Mathf.Abs(distDiff) * 0.1f);
+            ZoomIn((centerDistanceRatio - 1) * eyeballedZoomFactor);
 
-        // calculate the distance between the centers, applying a smoothing factor
-        var distCenter = (center - prevCenter) * 0.5f;
+        var rotate = centerMovementDirection*eyeballedRotateFactor;
 
-        // rotate based on the delta vector between centers
-        RotateUp(-distCenter.y);
-        RotateRight(distCenter.x);
+        RotateUp(-rotate.y);
+        RotateRight(rotate.x);
     }
 }

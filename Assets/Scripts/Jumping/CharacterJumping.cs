@@ -140,8 +140,8 @@ public class CharacterJumping : MonoBehaviour
         if (_jumping)
             return;
 
-        // Check if we are already on Terra Firma -- in which case we assume the player should not jump
-        if (transform.root == transform)
+        // Check if we are standing on a valid jumpable object, otherwise return
+        if (!TagsToJumpOnto.Contains(transform.root.tag))
             return;
 
         // Store current parent;
