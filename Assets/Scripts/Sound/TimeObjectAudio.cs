@@ -8,7 +8,7 @@ public class TimeObjectAudio : MonoBehaviour {
 
 	void Start()
 	{
-		if (Mathf.Abs (ForwardEffect.clip.length - BackwardEffect.clip.length) > 0.1f)
+		if (Mathf.Abs (ForwardEffect.clip.length - BackwardEffect.clip.length) > 1f)
 			Debug.Log (string.Format("AudioClip {0} is not the same length as {1}!", ForwardEffect.clip.name, BackwardEffect.clip.name));
 	}
 	

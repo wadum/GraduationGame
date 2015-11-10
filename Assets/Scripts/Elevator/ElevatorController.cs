@@ -20,7 +20,7 @@ public class ElevatorController : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag("Player");
         _elevatorDoor = GetComponentInChildren<ElevatorDoor>();
         _electrode = GetComponentInChildren<ElectrifiedElevator>();
-        _elevatorModel = gameObject.transform.FindChild("ElevatorModel").gameObject;
+        _elevatorModel = gameObject.transform.FindChild("pistonElevator").gameObject;
         _elevatorModel.transform.position = DefaultPosition.transform.position;
         _elevatorModel.transform.rotation = DefaultPosition.transform.rotation;
     }
