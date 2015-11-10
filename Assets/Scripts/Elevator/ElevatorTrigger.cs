@@ -4,39 +4,75 @@ using System.Collections;
 public class ElevatorTrigger : MonoBehaviour {
 
     public Animator Ani;
-    public float Cooldown = 10;
+    public float WaitTime = 5;
 
-    private float lastUsed = -10;
+    public GameObject UpperWall;
+    public GameObject LowerWall;
 
-	void OnTriggerEnter(Collider other)
+    public GameObject Player
     {
-        if (other.tag != "Player" && other.gameObject.transform.root != other.gameObject.transform) return;
-        if (lastUsed + Cooldown > Time.time) return;
-        lastUsed = Time.time;
-
-        other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        other.gameObject.transform.root.parent = this.transform;
-
-        StartCoroutine(moveElevator(other.gameObject));
+        get; set;
+    }
+    public bool Triggered
+    {
+        get; set;
     }
 
-    IEnumerator moveElevator(GameObject player)
+    void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "Player" || other.gameObject.transform.root != other.gameObject.transform) return;
 
-        Ani.SetBool("Up", !Ani.GetBool("Up"));
+        Player = other.gameObject;
+        Triggered = true;
+    }
 
-        yield return null;
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag != "Player" || other.gameObject.transform.root != other.gameObject.transform) return;
 
-        while (Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingUp") || Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingDown"))
+        Player = other.gameObject;
+        Triggered = false;
+    }
+
+
+    void Update()
+    {
+        UpperWall.SetActive(!Ani.GetCurrentAnimatorStateInfo(0).IsName("UpPose"));
+        LowerWall.SetActive(!Ani.GetCurrentAnimatorStateInfo(0).IsName("DownPose"));
+
+        if (Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingUp") || Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingDown"))
         {
-            yield return null;
+            if (Triggered)
+            {
+                Player.GetComponent<NavMeshAgent>().enabled = false;
+                Player.transform.parent = transform;
+            }
         }
+    }
 
-        player.GetComponent<NavMeshAgent>().enabled = true;
-        player.transform.root.parent = null;
 
-        lastUsed = Time.time;
+    public IEnumerator moveElevator()
+    {
+        while (true)
+        {
+            while (Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingUp") || Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingDown") || Ani.GetCurrentAnimatorStateInfo(0).IsName("New State"))
+            {
+                yield return null;
+            }
 
+            if (Triggered)
+            {
+                Player.GetComponent<NavMeshAgent>().enabled = true;
+                Player.transform.parent = null;
+            }
+
+            yield return new WaitForSeconds(WaitTime);
+
+            Ani.SetBool("Up", !Ani.GetBool("Up"));
+
+            yield return new WaitForSeconds(1f);
+
+        }
     }
 }
 
