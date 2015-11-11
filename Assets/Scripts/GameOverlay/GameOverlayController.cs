@@ -77,9 +77,14 @@ public class GameOverlayController : MonoBehaviour {
 
     public void ActivateSlider(TimeControllable obj)
     {
-		if(ActivateSliderSound && (!TimeSlider.activeSelf || _currentObj != obj))
+        if (TimeSlider.activeSelf)
+            DeactivateSlider();
+        if (ActivateSliderSound && (!TimeSlider.activeSelf || _currentObj != obj))
 			ActivateSliderSound.Play();
         _currentObj = obj;
+        MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
+        if(master)
+            master.Activate();
         TimeSlider.SetActive(true);
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
 		SliderController.SetTimeControllable(obj);
@@ -87,6 +92,13 @@ public class GameOverlayController : MonoBehaviour {
 
     public void DeactivateSlider()
     {
+        if (_currentObj)
+        {
+            MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
+            if (master)
+                master.Deactivate();
+        }
+
         TimeSlider.SetActive(false);
     }
 
