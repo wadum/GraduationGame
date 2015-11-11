@@ -3024,7 +3024,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0550370291, y: 7.55806017, z: .0136162275}
+  m_LocalPosition: {x: .100000001, y: 7.5, z: .300000012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425884}
@@ -3284,7 +3284,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123592}
   m_LocalRotation: {x: 0, y: -.468832284, z: 0, w: .883287251}
-  m_LocalPosition: {x: 12.1868649, y: 0, z: 3.17689347}
+  m_LocalPosition: {x: 5.38999987, y: 5.3499999, z: 35.1399994}
   m_LocalScale: {x: .549985468, y: .549985468, z: .549985468}
   m_Children:
   - {fileID: 460698}
@@ -4047,7 +4047,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.69913793, y: 9.36999989, z: -8.91139603}
+  m_LocalPosition: {x: 0, y: 7.94999981, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425884}
@@ -9529,10 +9529,14 @@ MonoBehaviour:
   workingStateEndPercent: 100
   ActiveObjects: []
   DeactiveObjects: []
-  EnableObjects:
+  EnableObjectsBeforeTimeLimit: []
+  EnableObjectsWithinTimeLimit:
   - {fileID: 177732}
-  DisableObjects:
+  EnableObjectsAfterTimeLimit: []
+  DisableObjectsBeforeTimeLimit: []
+  DisableObjectsWithinTimeLimit:
   - {fileID: 118526}
+  DisableObjectsAfterTimeLimit: []
 --- !u!208 &20843496
 NavMeshObstacle:
   m_ObjectHideFlags: 1

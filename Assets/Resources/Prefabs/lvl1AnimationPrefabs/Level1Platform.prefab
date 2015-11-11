@@ -943,10 +943,10 @@ GameObject:
   - 64: {fileID: 6407488}
   m_Layer: 0
   m_Name: mainPlatform
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &130882
 GameObject:
@@ -2315,12 +2315,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 457834}
   - 137: {fileID: 13760648}
+  - 64: {fileID: 6482392}
   m_Layer: 0
   m_Name: pCylinder18 1
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &169944
 GameObject:
@@ -2366,10 +2367,10 @@ GameObject:
   - 64: {fileID: 6477430}
   m_Layer: 0
   m_Name: pCylinder31
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &170608
 GameObject:
@@ -2583,6 +2584,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 439366}
   - 137: {fileID: 13798902}
+  - 208: {fileID: 20833060}
   m_Layer: 0
   m_Name: group7_pCylinder42
   m_TagString: Untagged
@@ -3473,7 +3475,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143242}
   m_LocalRotation: {x: -.233812988, y: .233812988, z: -.667331636, w: .667331636}
-  m_LocalPosition: {x: 1.63819301, y: 7.71561384, z: 5.28598213}
+  m_LocalPosition: {x: 1.63819301, y: 7.5999999, z: 5.28598213}
   m_LocalScale: {x: 73.4417496, y: 73.4417496, z: 73.4417496}
   m_Children: []
   m_Father: {fileID: 450674}
@@ -4419,7 +4421,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -18.5115242, z: 0}
+  m_LocalPosition: {x: -0, y: -18.9200001, z: 0}
   m_LocalScale: {x: 1345.31287, y: 43.516304, z: 1345.31287}
   m_Children: []
   m_Father: {fileID: 429314}
@@ -4958,7 +4960,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.30455279, y: 16.0818348, z: 15.8429594}
+  m_LocalPosition: {x: 11.4399996, y: 23.7600002, z: -11.3400002}
   m_LocalScale: {x: 276.871613, y: 13.5916462, z: 276.871613}
   m_Children: []
   m_Father: {fileID: 464728}
@@ -5818,7 +5820,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.3986549, y: 32.8800621, z: -17.6296864}
+  m_LocalPosition: {x: -11.3986549, y: 30.6000004, z: -17.6296864}
   m_LocalScale: {x: 389.562714, y: 5.98422813, z: 389.562714}
   m_Children: []
   m_Father: {fileID: 417524}
@@ -6482,7 +6484,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300220, guid: 494fc3ef797d17b4db2bd61134a99a5e, type: 3}
 --- !u!64 &6477430
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -6494,7 +6496,19 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300186, guid: 494fc3ef797d17b4db2bd61134a99a5e, type: 3}
+--- !u!64 &6482392
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169776}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300068, guid: 494fc3ef797d17b4db2bd61134a99a5e, type: 3}
 --- !u!95 &9510888
 Animator:
   serializedVersion: 3
@@ -10528,6 +10542,21 @@ SkinnedMeshRenderer:
     m_Center: {x: .109877586, y: 12.2793646, z: .0581789017}
     m_Extent: {x: 1.50724316, y: 1.56364727, z: 1.48287487}
   m_DirtyAABB: 0
+--- !u!208 &20833060
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177186}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.50700009, y: 1.56400013, z: 1.48300004}
+  m_MoveThreshold: .100000001
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -11.7590008, y: 4.05200005, z: -17.1830006}
+  m_TimeToStationary: .5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
