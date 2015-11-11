@@ -23,7 +23,7 @@ public class CharacterMovement : MonoBehaviour
         _agent = gameObject.GetComponent<NavMeshAgent>();
         _currentWaypoint = 0;
 
-        MultiTouch.RegisterTapHandlerByTag("Terrain", hit => GoTo(hit.point));
+        MultiTouch.RegisterTapHandlerByTag("Terrain", hit => { GoTo(hit.point); GameOverlayController.gameOverlayController.DeactivateSlider(); });
         MultiTouch.RegisterTapHandlerByTag("Clockpart", hit => GoTo(hit.collider.transform.position));
     }
 	
@@ -51,13 +51,12 @@ public class CharacterMovement : MonoBehaviour
 	    _currentWaypoint++;
 	    _lerpStartingPos = FloatWaypoints[_currentWaypoint-1].transform.position;
 
-	    if (_lerpStartingPos == DeliverClockPartArea.transform.position)
+	    if (_lerpStartingPos == DeliverClockPartArea.transform.position || _currentWaypoint == FloatWaypoints.Length)
 	    {
 	        _agent.enabled = true;
 	        _flyToCenterClock = false;
 	        return;
 	    }
-
 	    _lerpEndPos = FloatWaypoints[_currentWaypoint].transform.position;
 	    _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
 	}
@@ -65,7 +64,10 @@ public class CharacterMovement : MonoBehaviour
     public void GoTo(Vector3 position)
     {
         if (_agent.enabled)
+        {
+            GameOverlayController.gameOverlayController.DeactivateSlider();
             _agent.SetDestination(position);
+        }
     }
 
     public void GoToCenterClock(GameObject[] waypoints)

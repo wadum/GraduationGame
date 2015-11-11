@@ -58,7 +58,6 @@ public class SaveLoad : MonoBehaviour {
 
     void OnLevelWasLoaded(int level)
     {
-        Debug.Log(_lvl + " " + Application.loadedLevel);
         if(_lvl == level)
         {
             // If we load the same level which we're already in, we must be in the process of resetting, so we reset the values without loading.
@@ -67,7 +66,6 @@ public class SaveLoad : MonoBehaviour {
         }
         else
         {
-            Debug.Log("preparing");
             Prepare();
         }
     }
