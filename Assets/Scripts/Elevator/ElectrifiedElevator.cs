@@ -2,24 +2,29 @@
 using System.Collections;
 
 public class ElectrifiedElevator : Electrified {
-    public ElevatorDoor _door;
+
+    public Collider _elevatorTrigger;
+    public Animator Ani;
 
 	// Use this for initialization
 	void Start () {
-        _door.close();
+        StartCoroutine(_elevatorTrigger.gameObject.GetComponent<ElevatorTrigger>().moveElevator());
+        Ani.speed = 0;
         base.Deactivate();
 	}
 
     // Update is called once per frame
     override public bool Activate()
     {
-        _door.open();
+        Ani.speed = 1;
+        //_elevatorTrigger.enabled = true;
         return base.Activate();
     }
 
     override public bool Deactivate()
     {
-        _door.close();
+        Ani.speed = 0;
+        //_elevatorTrigger.enabled = false;
         return base.Deactivate();
     }
 }

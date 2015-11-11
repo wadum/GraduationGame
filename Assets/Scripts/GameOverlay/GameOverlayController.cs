@@ -11,13 +11,29 @@ public class GameOverlayController : MonoBehaviour {
 	public TimeSliderController SliderController;
 	public AudioSource ActivateSliderSound;
 
+    public static GameOverlayController gameOverlayController;
+
     Canvas _canvas;
     TimeControllable _currentObj;
 
+    void Awake()
+    {
+        /*        if (gameOverlayController == null)
+                {
+                    DontDestroyOnLoad(gameObject);
+                    gameOverlayController = this;
+                }
+                else if (gameOverlayController != this)
+                {
+                    Destroy(this.gameObject);
+                }*/
+        gameOverlayController = this;
+
+    }
 
     void Start()
 	{
-		_canvas = GetComponentInChildren<Canvas>();
+        _canvas = GetComponentInChildren<Canvas>();
 		_canvas.worldCamera = Camera.main;
 	}
 

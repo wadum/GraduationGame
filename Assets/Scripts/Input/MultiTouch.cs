@@ -36,7 +36,7 @@ public class MultiTouch : MonoBehaviour
                 Debug.Log("No canvas found for fallback.");
         }
         if (gui)
-            _guiCaster = gui.GetComponent<GraphicRaycaster>();
+            _guiCaster = gui.GetComponentInChildren<GraphicRaycaster>();
         
         if (!_guiCaster)
             Debug.Log("GraphicRaycaster could not be gotten from canvas, ui blocking will not be available.");
@@ -75,10 +75,16 @@ public class MultiTouch : MonoBehaviour
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
                 var position = touches[0].position;
-                if (Time.time - touch1Began > TapHoldSeconds)
-                    HandleTapAndHold(position);
-                else
+                if (Time.time - touch1Began <= TapHoldSeconds)
                     HandleTap(position);
+                yield return null;
+                continue;
+            }
+
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary && (Time.time - touch1Began > TapHoldSeconds) )
+            {
+                var position = touches[0].position;
+                HandleTapAndHold(position);
                 yield return null;
                 continue;
             }

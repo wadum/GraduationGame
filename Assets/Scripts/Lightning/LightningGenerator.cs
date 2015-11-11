@@ -8,6 +8,8 @@ public class LightningGenerator : MonoBehaviour {
     public float maxConductorDistance;
     public float JitterDistance = 0.1f;
 
+    public AudioSource Audio;
+
     public GameObject[] LightningConductors;
     LineRenderer lineRenderer;
 
@@ -35,7 +37,7 @@ public class LightningGenerator : MonoBehaviour {
         timePassed += Time.deltaTime;
 
         // reset conductor max distance
-        conductorDistance = maxConductorDistance;
+        conductorDistance = (lightningConductor != null) ? Vector3.Distance(transform.position, lightningConductor.transform.position) : maxConductorDistance;
             
 
         //Find the closest lightning conducter
@@ -43,26 +45,34 @@ public class LightningGenerator : MonoBehaviour {
         {
             //LightningConductors[i].GetComponent<Electrified>().Deactivate();
 
-            if (LightningConductors[i].GetComponentInParent<RiftScript>() && !LightningConductors[i].GetComponentInParent<RiftScript>().Partner) continue;
+            if (LightningConductors[i].gameObject.activeInHierarchy == false) continue;
 
-            if (Vector3.Distance(transform.position, LightningConductors[i].transform.position) < conductorDistance && Vector3.Distance(transform.position, LightningConductors[i].transform.position) > 1) {
+            if (Vector3.Distance(transform.position, LightningConductors[i].transform.position) < conductorDistance && Vector3.Distance(transform.position, LightningConductors[i].transform.position) > 0.05) {
                 conductorDistance = Vector3.Distance(transform.position, LightningConductors[i].transform.position);
-                if(lightningConductor && lightningConductor != LightningConductors[i])
+                if (lightningConductor && lightningConductor != LightningConductors[i])
+                {
                     lightningConductor.GetComponent<Electrified>().Deactivate();
+                }
                 lightningConductor = LightningConductors[i];
                 lightningConductor.GetComponent<Electrified>().Activate();
                 LengthForEachSection = conductorDistance / lengthOfLineRenderer;
                 lineRenderer.enabled = true;
+                if(Audio)
+                    Audio.Play();
             }
         }
 
         //If the conductors are to far away dont shoot lightning
         if (conductorDistance >= maxConductorDistance)
         {
-            if(lightningConductor)
+            if (lightningConductor)
+            {
                 lightningConductor.GetComponent<Electrified>().Deactivate();
+            }
             lightningConductor = null;
             lineRenderer.enabled = false;
+            if (Audio)
+                Audio.Stop();
             return;
         }
 
@@ -85,8 +95,12 @@ public class LightningGenerator : MonoBehaviour {
     }
     void OnDisable()
     {
-        if(lineRenderer)
+        if (lineRenderer)
+        {
             lineRenderer.enabled = false;
+            if (Audio)
+                Audio.Stop();
+        }
         if (lightningConductor)
             lightningConductor.GetComponent<Electrified>().Deactivate();
     }

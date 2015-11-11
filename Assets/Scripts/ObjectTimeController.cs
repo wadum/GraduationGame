@@ -21,13 +21,19 @@ public class ObjectTimeController : TimeControllable {
 
     [Space(5)]
     [Header("Objects Controlled By Time")]
-    public GameObject[] EnableObjects;
-    public GameObject[] DisableObjects;
+    //Enabling
+    public GameObject[] EnableObjectsBeforeTimeLimit;
+    public GameObject[] EnableObjectsWithinTimeLimit;
+    public GameObject[] EnableObjectsAfterTimeLimit;
+    //Disabling
+    public GameObject[] DisableObjectsBeforeTimeLimit;
+    public GameObject[] DisableObjectsWithinTimeLimit;
+    public GameObject[] DisableObjectsAfterTimeLimit;
 
     // Use this for initialization
     void Start()
     {
-        MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
+        MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
         {
             if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {
@@ -35,13 +41,39 @@ public class ObjectTimeController : TimeControllable {
             }
         });
 
-        foreach (GameObject obj in EnableObjects)
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
+        {
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
+            {
+                FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+            }
+        });
+        //Enabling
+        foreach (GameObject obj in EnableObjectsBeforeTimeLimit)
+        {
+            obj.SetActive(TimePos <= workingStateEndPercent);
+        }
+        foreach (GameObject obj in EnableObjectsWithinTimeLimit)
         {
             obj.SetActive(TimePos > workingStateStartPercent && TimePos <= workingStateEndPercent);
         }
-        foreach (GameObject obj in DisableObjects)
+        foreach (GameObject obj in EnableObjectsAfterTimeLimit)
+        {
+            obj.SetActive(TimePos > workingStateStartPercent);
+        }
+
+        //Disabling
+        foreach (GameObject obj in DisableObjectsBeforeTimeLimit)
+        {
+            obj.SetActive(!(TimePos <= workingStateEndPercent));
+        }
+        foreach (GameObject obj in DisableObjectsWithinTimeLimit)
         {
             obj.SetActive(!(TimePos > workingStateStartPercent && TimePos <= workingStateEndPercent));
+        }
+        foreach (GameObject obj in DisableObjectsAfterTimeLimit)
+        {
+            obj.SetActive(!(TimePos > workingStateStartPercent));
         }
     }
 	
@@ -51,16 +83,34 @@ public class ObjectTimeController : TimeControllable {
 
         if (ActiveObjects.Any(b => !b.Active)) return;
         if (DeactiveObjects.Any(b => b.Active)) return;
-        
-        foreach (GameObject obj in EnableObjects)
+
+        //Enabling
+        foreach (GameObject obj in EnableObjectsBeforeTimeLimit)
+        {
+            obj.SetActive(TimePos <= workingStateEndPercent);
+        }
+        foreach (GameObject obj in EnableObjectsWithinTimeLimit)
         {
             obj.SetActive(TimePos > workingStateStartPercent && TimePos <= workingStateEndPercent);
         }
-        foreach (GameObject obj in DisableObjects)
+        foreach (GameObject obj in EnableObjectsAfterTimeLimit)
+        {
+            obj.SetActive(TimePos > workingStateStartPercent);
+        }
+
+        //Disabling
+        foreach (GameObject obj in DisableObjectsBeforeTimeLimit)
+        {
+            obj.SetActive(!(TimePos <= workingStateEndPercent));
+        }
+        foreach (GameObject obj in DisableObjectsWithinTimeLimit)
         {
             obj.SetActive(!(TimePos > workingStateStartPercent && TimePos <= workingStateEndPercent));
         }
-
+        foreach (GameObject obj in DisableObjectsAfterTimeLimit)
+        {
+            obj.SetActive(!(TimePos > workingStateStartPercent));
+        }
     }
 
 	override public float GetFloat()
