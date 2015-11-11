@@ -97,6 +97,7 @@ GameObject:
   - 114: {fileID: 11485502}
   - 114: {fileID: 11477932}
   - 114: {fileID: 11482650}
+  - 95: {fileID: 9576446}
   m_Layer: 0
   m_Name: Row3PillarObject
   m_TagString: Untagged
@@ -3346,8 +3347,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140618}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0550370291, y: 7.55806017, z: .0136162275}
+  m_LocalRotation: {x: 0, y: 0, z: .270369679, w: .962756574}
+  m_LocalPosition: {x: -5.01941681, y: 5.74311113, z: .00791177247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 468028}
@@ -3987,8 +3988,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102214}
-  m_LocalRotation: {x: 0, y: .368448436, z: 0, w: .929648221}
-  m_LocalPosition: {x: 20.1399994, y: 10.6700001, z: -8.07999992}
+  m_LocalRotation: {x: 0, y: .0964893475, z: 0, w: .995334029}
+  m_LocalPosition: {x: 18.6599998, y: 10.6700001, z: -8.22000027}
   m_LocalScale: {x: .549985468, y: .549985468, z: .549985468}
   m_Children:
   - {fileID: 457638}
@@ -9471,6 +9472,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &9576446
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102214}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 71ac34f82972b3041b0234b1fea6c027, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11477932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9487,10 +9505,12 @@ MonoBehaviour:
   workingStateEndPercent: 0
   ActiveObjects: []
   DeactiveObjects: []
-  EnableObjects:
-  - {fileID: 161184}
-  DisableObjects:
-  - {fileID: 128540}
+  EnableObjectsBeforeTimeLimit: []
+  EnableObjectsWithinTimeLimit: []
+  EnableObjectsAfterTimeLimit: []
+  DisableObjectsBeforeTimeLimit: []
+  DisableObjectsWithinTimeLimit: []
+  DisableObjectsAfterTimeLimit: []
 --- !u!114 &11482650
 MonoBehaviour:
   m_ObjectHideFlags: 1
