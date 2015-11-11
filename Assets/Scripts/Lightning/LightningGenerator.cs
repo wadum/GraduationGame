@@ -43,7 +43,6 @@ public class LightningGenerator : MonoBehaviour {
         //Find the closest lightning conducter
         for (int i = 0; i < LightningConductors.Length; i++)
         {
-            //LightningConductors[i].GetComponent<Electrified>().Deactivate();
 
             if (LightningConductors[i].gameObject.activeInHierarchy == false) continue;
 
@@ -54,7 +53,6 @@ public class LightningGenerator : MonoBehaviour {
                     lightningConductor.GetComponent<Electrified>().Deactivate();
                 }
                 lightningConductor = LightningConductors[i];
-                lightningConductor.GetComponent<Electrified>().Activate();
                 LengthForEachSection = conductorDistance / lengthOfLineRenderer;
                 lineRenderer.enabled = true;
                 if(Audio)
@@ -76,6 +74,8 @@ public class LightningGenerator : MonoBehaviour {
             return;
         }
 
+        if (lightningConductor) lightningConductor.GetComponent<Electrified>().Activate();
+
         //if enough ime has passed update the line
         if (timePassed > frecuency)
         {
@@ -92,16 +92,5 @@ public class LightningGenerator : MonoBehaviour {
             lineRenderer.SetPosition(lengthOfLineRenderer - 1, lastPos);
             timePassed = 0.0f;
         }
-    }
-    void OnDisable()
-    {
-        if (lineRenderer)
-        {
-            lineRenderer.enabled = false;
-            if (Audio)
-                Audio.Stop();
-        }
-        if (lightningConductor)
-            lightningConductor.GetComponent<Electrified>().Deactivate();
     }
 }
