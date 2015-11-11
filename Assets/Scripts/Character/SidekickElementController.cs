@@ -15,7 +15,7 @@ public class SidekickElementController : MonoBehaviour {
     float _animationTimer = 2;
     float _swirlDistance;
     GameObject _player;
-    Vector3 _endPos;
+    Transform _endPos;
     Vector3 _originalPos;
     Vector3 _rotationPos;
     Vector3 _startpos;
@@ -38,13 +38,20 @@ public class SidekickElementController : MonoBehaviour {
         _rotationSpeed = OriginalRotationSpeed / 4;
 
         SwirlingAroundPlayer = true;
-
-        MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
+        MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
         {
-            var parentTransform = hit.transform.root;
-            if (parentTransform.GetComponent<ObjectTimeController>())
+            var parentTransform = hit.transform;
+            if (parentTransform.GetComponentInParent<ObjectTimeController>())
             {
-                FlyToObject(parentTransform.GetComponent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform.position, parentTransform.GetComponent<HelperSwirlAroundLocation>().SwirlDistance);
+                FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
+            }
+        });
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
+        {
+            var parentTransform = hit.transform;
+            if (parentTransform.GetComponentInParent<ObjectTimeController>())
+            {
+                FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
             }
         });
         MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
@@ -80,7 +87,7 @@ public class SidekickElementController : MonoBehaviour {
         {
             case Status.SwirlingAroundPlayer:
                 GetComponent<RandomRotation>().enabled = true;
-
+                _swirlDistance = SwirlAroundPlayerDistance;
                 RotateAroundPos(_player.transform.position + Vector3.up);
 
                 break;
@@ -99,8 +106,8 @@ public class SidekickElementController : MonoBehaviour {
 
             case Status.FlyOut:
                 _time += Time.deltaTime;
-                transform.position = Vector3.Lerp(_startpos, _endPos, _time / _animationTimer);
-                if(Vector3.Distance(transform.position, _endPos) < _swirlDistance)
+                transform.position = Vector3.Lerp(_startpos, _endPos.position, _time / _animationTimer);
+                if(Vector3.Distance(transform.position, _endPos.position) < _swirlDistance)
                 {
                     _myStatus = Status.SwirlingAroundObject;
                 }
@@ -111,7 +118,7 @@ public class SidekickElementController : MonoBehaviour {
                 GetComponent<RandomRotation>().enabled = true;
                 _time = 0;
                 _startpos = transform.position;
-                RotateAroundPos(_endPos);
+                RotateAroundPos(_endPos.position);
                 break;
 
             case Status.FlyBack:
@@ -140,8 +147,18 @@ public class SidekickElementController : MonoBehaviour {
         {
             _rotationSpeed = _rotationSpeed - Time.deltaTime;
         }
+        if (!_endPos)
+            return;
+        if (Vector3.Distance(transform.position, _endPos.position) < _swirlDistance)
+        {
+            transform.position += (transform.position - Pos).normalized;
+        }
+        if (Vector3.Distance(transform.position, _endPos.position) > _swirlDistance + 0.2f)
+        {
+            transform.position += (Pos - transform.position).normalized;
+        }
 
-        if (Vector3.Distance(transform.position, new Vector3(transform.position.x, Pos.y, transform.position.z)) > 0.2)
+        if (Vector3.Distance(transform.position, new Vector3(transform.position.x, Pos.y, transform.position.z)) > 0.2f)
         {
             if (transform.position.y < Pos.y)
             {
@@ -154,7 +171,7 @@ public class SidekickElementController : MonoBehaviour {
         }
     }
 
-    void FlyToObject(Vector3 EndPos, float SwirlDistance)
+    void FlyToObject(Transform EndPos, float SwirlDistance)
     {
         this.transform.parent = null;
         SwirlingAroundPlayer = false;
