@@ -23,7 +23,7 @@ public class SaveLoad : MonoBehaviour {
     private List<SaveState> _SaveData;
     public int _lvl = -1;
 
-    CharacterInventory inv;
+    public CharacterInventory inv;
     Cockpart[] cogs;
 
     void Awake()
@@ -58,16 +58,7 @@ public class SaveLoad : MonoBehaviour {
 
     void OnLevelWasLoaded(int level)
     {
-        if(_lvl == level)
-        {
-            // If we load the same level which we're already in, we must be in the process of resetting, so we reset the values without loading.
-            _TimeControllers = GameObject.FindObjectsOfType<ObjectTimeController>();
-            _SaveData = new List<SaveState>();
-        }
-        else
-        {
             Prepare();
-        }
     }
 
     void OnApplicationQuit()
@@ -89,9 +80,10 @@ public class SaveLoad : MonoBehaviour {
         foreach (GameObject cock in inv.clockParts)
         {
             if(cock != null)
-            {
-                pickups.Add(cock.name);
-            }
+                if (!pickups.Contains(cock.name))
+                {
+                    pickups.Add(cock.name);
+                }
         }
         // Open new BinaryFormatter, with a filename depending on the level we're playing.
         BinaryFormatter bf = new BinaryFormatter();
@@ -129,7 +121,7 @@ public class SaveLoad : MonoBehaviour {
                     if (cock.name == Cog)
                     {
                         // Copy the functionality of the Cogs and Inventory, should most likely be a localiced helperfunction in those scripts instead.
-                        GameObject player = GameObject.FindGameObjectWithTag ("Player" );
+                        GameObject player = GameObject.FindGameObjectWithTag("Player");
                         cock.transform.parent = player.transform;
                         cock.pickedUp = true;
                         cock.GetComponent<Collider>().enabled = false;
@@ -143,7 +135,8 @@ public class SaveLoad : MonoBehaviour {
     // Instead of deleting the file, we can simply overwrite it with blank data
     public void Reset()
     {
-        _SaveData.Clear();
+        if(_SaveData.Count > 0)
+            _SaveData.Clear();
         List<string> taggedcocks = new List<string>();
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Create);
