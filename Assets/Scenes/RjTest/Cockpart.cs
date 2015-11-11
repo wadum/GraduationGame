@@ -47,6 +47,7 @@ public class Cockpart : MonoBehaviour {
 
             if (fracJourney > 1)
             {
+                GameObject.FindObjectOfType<CenterClockworkDeliverence>().turnedin += 1;
                 Destroy(gameObject);
             }
         }

@@ -28,7 +28,7 @@ Shader "Shader Forge/VertextDef" {
             #include "AutoLight.cginc"
             #pragma multi_compile_fwdbase_fullshadows
             #pragma multi_compile_fog
-            #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
+            #pragma exclude_renderers metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
             #pragma target 3.0
             uniform float4 _LightColor0;
             uniform float4 _TimeEditor;
@@ -109,7 +109,7 @@ Shader "Shader Forge/VertextDef" {
             #include "AutoLight.cginc"
             #pragma multi_compile_fwdadd_fullshadows
             #pragma multi_compile_fog
-            #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
+            #pragma exclude_renderers metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
             #pragma target 3.0
             uniform float4 _LightColor0;
             uniform float4 _TimeEditor;
@@ -183,7 +183,7 @@ Shader "Shader Forge/VertextDef" {
             #pragma fragmentoption ARB_precision_hint_fastest
             #pragma multi_compile_shadowcaster
             #pragma multi_compile_fog
-            #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
+            #pragma exclude_renderers metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
             #pragma target 3.0
             uniform float4 _TimeEditor;
             uniform float _Amounty;

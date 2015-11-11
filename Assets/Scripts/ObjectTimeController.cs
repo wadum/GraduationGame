@@ -31,7 +31,7 @@ public class ObjectTimeController : TimeControllable {
     public GameObject[] DisableObjectsAfterTimeLimit;
 
     private SphereCollider _collider;
-    private bool _InRange = false;
+    public bool InRange = false;
 
     void Awake()
     {
@@ -51,7 +51,7 @@ public class ObjectTimeController : TimeControllable {
     {
         MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
         {
-            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && _InRange)
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && InRange)
             {
                 FindObjectOfType<GameOverlayController>().ActivateSlider(this);
             }
@@ -59,7 +59,7 @@ public class ObjectTimeController : TimeControllable {
 
         MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
         {
-            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && _InRange)
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && InRange)
             {
                 FindObjectOfType<GameOverlayController>().ActivateSlider(this);
             }
@@ -138,7 +138,7 @@ public class ObjectTimeController : TimeControllable {
     {
         if (collider.tag == "Player")
         {
-            _InRange = true;
+            InRange = true;
             MasterHighlight master = GetComponent<MasterHighlight>();
             if (master)
                 master.InRange = true;
@@ -147,7 +147,7 @@ public class ObjectTimeController : TimeControllable {
 
     void OnTriggerExit(Collider collider)
     {
-        _InRange = false;
+        InRange = false;
         MasterHighlight master = GetComponent<MasterHighlight>();
         if (master)
             master.InRange = false;

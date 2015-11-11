@@ -59,6 +59,13 @@ public class GameOverlayController : MonoBehaviour {
         StoreScreen.SetActive(false);
     }
 
+    public void GoToMainMenu()
+    {
+        SaveLoad.saveLoad.Save();
+        SaveLoad.saveLoad.SaveInterval = 0;
+        Application.LoadLevel("Main Menu");
+    }
+
     public void TogglePauseMenu()
 	{
 		if(PauseMenu.activeSelf) HidePauseMenu();
@@ -74,6 +81,7 @@ public class GameOverlayController : MonoBehaviour {
 	{
 		PauseMenu.SetActive(false);
 	}
+
 
     public void ActivateSlider(TimeControllable obj)
     {
