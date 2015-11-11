@@ -77,6 +77,8 @@ public class GameOverlayController : MonoBehaviour {
 
     public void ActivateSlider(TimeControllable obj)
     {
+        if (obj == _currentObj)
+            return;
         if (TimeSlider.activeSelf)
             DeactivateSlider();
         if (ActivateSliderSound && (!TimeSlider.activeSelf || _currentObj != obj))
@@ -100,6 +102,7 @@ public class GameOverlayController : MonoBehaviour {
         }
 
         TimeSlider.SetActive(false);
+        _currentObj = null;
     }
 
     public void SetFloat(float var)

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class MasterHighlight : MonoBehaviour {
     List<HighlightScript> _list;
     public float width;
-
+    private bool _inRange;
 
     void Awake()
     {
@@ -50,8 +50,15 @@ public class MasterHighlight : MonoBehaviour {
             script.Deactivate();
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-	}
+    public bool InRange
+    {
+        get { return _inRange; }
+        set {
+            foreach(HighlightScript script in _list)
+            {
+                script.InRange = value;
+            }
+            _inRange = value;
+        }
+    }
 }
