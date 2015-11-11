@@ -11,6 +11,8 @@ public class CharacterJumping : MonoBehaviour
     public float MaximumDrop = 10f;
     public float JumpingSpeed = 2f;
 
+    public bool ControlNavJumps = true;
+
     public string[] TagsToJumpOnto;
 
     private float _scale;
@@ -29,11 +31,53 @@ public class CharacterJumping : MonoBehaviour
             return;
 	    }
 
+        if (ControlNavJumps) {
+            _nav.autoTraverseOffMeshLink = false;
+            StartCoroutine(HandleNavJumps());
+        }
+
 	    foreach (var  jmpTag in TagsToJumpOnto)
             MultiTouch.RegisterTapHandlerByTag(jmpTag, JumpForJoy);
 
         MultiTouch.RegisterTapHandlerByTag("Terrain", ReturnToTerraFirma);
 	}
+
+    private IEnumerator HandleNavJumps() {
+        while (true) {
+            if (!_nav.isOnOffMeshLink) {
+                yield return null;
+                continue;
+            }
+
+            if (!_nav.currentOffMeshLinkData.activated) {
+                yield return null;
+                continue;
+            }
+
+            var target = _nav.currentOffMeshLinkData.endPos;
+
+            if (_animator)
+                _animator.Jumping();
+
+            target += new Vector3(0, _scale, 0);
+            var jumpCurve = MakeBezierJump(transform.position, target);
+
+            var t = 0f;
+            while (t <= 1) {
+                transform.position = jumpCurve(t);
+                t += Time.deltaTime / JumpingSpeed;
+                yield return null;
+            }
+
+            transform.position = target;
+
+            if (_animator)
+                _animator.Landing();
+
+            _nav.CompleteOffMeshLink();
+            _nav.Resume();
+        }
+    }
 
     private bool Sanity()
     {
