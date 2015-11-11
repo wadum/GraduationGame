@@ -4,10 +4,16 @@ using System.Collections.Generic;
 
 public class MasterHighlight : MonoBehaviour {
     List<HighlightScript> _list;
+    public float width;
 
-	// Use this for initialization
-	void Start () {
+
+    void Awake()
+    {
         _list = new List<HighlightScript>();
+
+    }
+    // Use this for initialization
+    void Start () {
         TagChildren(transform);
     }
 
@@ -20,8 +26,9 @@ public class MasterHighlight : MonoBehaviour {
                 var mesh = child.GetComponent<MeshRenderer>();
                 if (mesh)
                 {
-                    child.gameObject.AddComponent<HighlightScript>();
-                    _list.Add(child.GetComponent<HighlightScript>());
+                    HighlightScript script = child.gameObject.AddComponent<HighlightScript>();
+                    script.SetWidth(width);
+                    _list.Add(script);
                 }
                 else
                 {
