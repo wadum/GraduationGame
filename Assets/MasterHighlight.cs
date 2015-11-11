@@ -15,7 +15,7 @@ public class MasterHighlight : MonoBehaviour {
     {
         foreach (Transform child in _transform.GetComponentInChildren<Transform>())
         {
-            if (child.tag == "TimeManipulationObject")
+            if (child.tag == "TimeManipulationObject" || child.tag == "Rock")
             {
                 var mesh = child.GetComponent<MeshRenderer>();
                 if (mesh)
