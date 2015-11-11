@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class DynamicCamera : MonoBehaviour {
+    public bool AutoStartAi = true;
+
     [Header("Position and Rotation")]
     public float NeutralDistance = 5f;
     [Range(-89, 89)] public float NeutralPitch = 20f;
@@ -128,7 +131,22 @@ public class DynamicCamera : MonoBehaviour {
         transform.position = rotation * (relative? RelativeDirection: AbsoluteDirection) * distance + PlayerTop;
     }
 
+    /// <summary>
+    /// Set the position around the current target by yaw, pitch, and distance.
+    /// </summary>
+    /// <param name="yaw">The yaw in degrees</param>
+    /// <param name="pitch">The pitch in degrees</param>
+    /// <param name="distance">The euclidean distance in unity units</param>
+    /// <param name="relative">Whether to use the target or the world coordinate system for the yaw and pitch.</param>
+    public void SetPosition(float yaw, float pitch, float distance, bool relative = true) {
+        var rot = Rotation(yaw, pitch, relative);
+        
+        SetPosition(rot, distance, relative);
+    }
+
     #endregion
+
+    #region initialization (Start, etc)
 
     private bool Sanity() {
         _camera = GetComponent<Camera>();
@@ -164,10 +182,20 @@ public class DynamicCamera : MonoBehaviour {
         MultiTouch.RegisterSwipeHandler(HandleSwipe);
 	    MultiTouch.RegisterPinchHandler(HandlePinch);
         MultiTouch.RegisterTapHandlerByTag("Terrain", _ => _playerIntent = false);
-	}
+
+        _isRunning = AutoStartAi;
+    }
+
+    #endregion
+
+    #region Camera AI control
 
     private bool _manualOverride = false;
+    private bool _isRunning = false;
     void LateUpdate() {
+        if (!_isRunning)
+            return;
+
         if (Input.GetKeyDown(KeyCode.A))
             Debug.Log("Yaw: (" + CurrentAbsoluteYaw + ", " + CurrentRelativeYaw + "), Pitch: " + CurrentPitch);
 
@@ -187,10 +215,12 @@ public class DynamicCamera : MonoBehaviour {
             FullyAutomaticCameraControl();
     }
 
-    private void ConstrainedPlayerControl() {
-        var desiredRotation = Rotation(_playerDesiredAbsoluteYaw, _playerDesiredPitch, false);
+    public void Run() { _isRunning = true; }
 
-        SetPosition(desiredRotation, NeutralDistance, false);
+    public void Stop() { _isRunning = false; }
+
+    private void ConstrainedPlayerControl() {
+        SetPosition(_playerDesiredAbsoluteYaw, _playerDesiredPitch, NeutralDistance, false);
 
         transform.LookAt(_player);
     }
@@ -203,13 +233,23 @@ public class DynamicCamera : MonoBehaviour {
         transform.LookAt(_player);
     }
 
+    #endregion
+
+    #region input handlers
+
     private void HandleSwipe(Touch swipe) {
+        if (!_isRunning)
+            return;
+
         _playerIntent = true;
 
         var movementDirection = ScreenNormalize(swipe.deltaPosition);
     }
 
     private void HandlePinch(List<Touch> pinch) {
+        if (!_isRunning)
+            return;
+
         _playerIntent = true;
 
         Func<List<Vector2>, Vector2> averagePoint = vectors => vectors.Aggregate((v1, v2) => v1 + v2) / vectors.Count;
@@ -223,4 +263,6 @@ public class DynamicCamera : MonoBehaviour {
         var previousCenter = averagePoint(previousPositions);
         var previousAverageDistanceToCenter = averageDistanceToPoint(previousPositions, previousCenter);
     }
+
+    #endregion
 }
