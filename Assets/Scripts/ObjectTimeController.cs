@@ -33,7 +33,15 @@ public class ObjectTimeController : TimeControllable {
     // Use this for initialization
     void Start()
     {
-        MultiTouch.RegisterTapHandlerByTag("TimeManipulationObject", hit =>
+        MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
+        {
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
+            {
+                FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+            }
+        });
+
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
         {
             if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {

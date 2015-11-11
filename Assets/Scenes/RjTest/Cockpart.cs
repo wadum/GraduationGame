@@ -17,6 +17,9 @@ public class Cockpart : MonoBehaviour {
     Vector3 lerpStartingPos;
     Vector3 lerpEndPos;
 
+    public AudioSource PickupSound;
+
+
     // Use this for initialization
     void Start () {
 
@@ -30,9 +33,9 @@ public class Cockpart : MonoBehaviour {
 
         transform.Rotate(Vector3.up,100*Time.deltaTime);        
 
-        if (pickedUp)
+        if (pickedUp) 
         {
-            clockPart.transform.localPosition = Vector3.right;
+            clockPart.transform.localPosition = Vector3.right + Vector3.up;
             transform.position = player.transform.position;
         }
 
@@ -62,7 +65,8 @@ public class Cockpart : MonoBehaviour {
         pickedUp = true;
         this.GetComponent<Collider>().enabled = false;
         player.GetComponent<CharacterInventory>().AddClockPart(this.gameObject);
-       
+        if (PickupSound)
+            PickupSound.Play();
     }
 
     public void goToCenterClock(Vector3 CenterClockPos)
