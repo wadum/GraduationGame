@@ -16,8 +16,8 @@ public class ObjectTimeController : TimeControllable {
 
     [Space(5)]
     [Header("Prerequisites")]
-    public Electrified[] ActiveObjects;
-    public Electrified[] DeactiveObjects;
+    public GameObject[] ActiveObjects;
+    public GameObject[] DeactiveObjects;
 
     [Space(5)]
     [Header("Objects Controlled By Time")]
@@ -30,12 +30,28 @@ public class ObjectTimeController : TimeControllable {
     public GameObject[] DisableObjectsWithinTimeLimit;
     public GameObject[] DisableObjectsAfterTimeLimit;
 
+    private SphereCollider _collider;
+    private bool _InRange = false;
+
+    void Awake()
+    {
+        _collider = GetComponent<SphereCollider>();
+        if (!_collider)
+        {
+            Debug.Log("Missing SphereCollider on " + name + " - please add");
+        }
+        else
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
         MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
         {
-            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && _InRange)
             {
                 FindObjectOfType<GameOverlayController>().ActivateSlider(this);
             }
@@ -43,7 +59,7 @@ public class ObjectTimeController : TimeControllable {
 
         MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
         {
-            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && _InRange)
             {
                 FindObjectOfType<GameOverlayController>().ActivateSlider(this);
             }
@@ -81,9 +97,6 @@ public class ObjectTimeController : TimeControllable {
     {
         TimePos = var;
 
-        if (ActiveObjects.Any(b => !b.Active)) return;
-        if (DeactiveObjects.Any(b => b.Active)) return;
-
         //Enabling
         foreach (GameObject obj in EnableObjectsBeforeTimeLimit)
         {
@@ -97,6 +110,9 @@ public class ObjectTimeController : TimeControllable {
         {
             obj.SetActive(TimePos > workingStateStartPercent);
         }
+
+        if (ActiveObjects.Any(b => !b.activeSelf)) return;
+        if (DeactiveObjects.Any(b => b.activeSelf)) return;
 
         //Disabling
         foreach (GameObject obj in DisableObjectsBeforeTimeLimit)
@@ -118,4 +134,23 @@ public class ObjectTimeController : TimeControllable {
         return TimePos;
     }
 
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "Player")
+        {
+            _InRange = true;
+            MasterHighlight master = GetComponent<MasterHighlight>();
+            if (master)
+                master.InRange = true;
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        _InRange = false;
+        MasterHighlight master = GetComponent<MasterHighlight>();
+        if (master)
+            master.InRange = false;
+
+    }
 }
