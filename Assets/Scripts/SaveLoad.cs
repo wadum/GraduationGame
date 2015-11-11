@@ -24,7 +24,7 @@ public class SaveLoad : MonoBehaviour {
     public int _lvl = -1;
 
     CharacterInventory inv;
-    Cockpart[] cogs;
+    Clockpart[] cogs;
 
     void Awake()
     {
@@ -52,7 +52,7 @@ public class SaveLoad : MonoBehaviour {
         _SaveData = new List<SaveState>();
         // Load on enable?
         inv = FindObjectOfType<CharacterInventory>();
-        cogs = GameObject.FindObjectsOfType<Cockpart>();
+        cogs = GameObject.FindObjectsOfType<Clockpart>();
         Load();
     }
 
@@ -124,7 +124,7 @@ public class SaveLoad : MonoBehaviour {
             // Restore the data for pickups
             foreach(string Cog in data.inv)
             {
-                foreach (Cockpart cock in cogs)
+                foreach (Clockpart cock in cogs)
                 {
                     if (cock.name == Cog)
                     {

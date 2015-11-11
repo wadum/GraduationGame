@@ -30,7 +30,7 @@ public class CharacterInventory : MonoBehaviour
 
         if (clockPartCounter >= clockpartsToCollect && doOnce)
         {
-            playerMovement.GoToCenterClock(clockParts[clockPartCounter-1].GetComponent<Cockpart>().FloatWaypoints);
+            playerMovement.GoToCenterClock(clockParts[clockPartCounter-1].GetComponent<Clockpart>().FloatWaypoints);
             doOnce = false;
         }
 
@@ -38,7 +38,7 @@ public class CharacterInventory : MonoBehaviour
         {
             for (int i = 0; i < clockpartsToCollect ; i++)
             {
-                clockParts[i].GetComponent<Cockpart>().goToCenterClock(centerClock.transform.position);
+                clockParts[i].GetComponent<Clockpart>().goToCenterClock(centerClock.transform.position);
                 clockParts[i] = null;
                 clockPartCounter--;
             }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cockpart : MonoBehaviour {
+public class Clockpart : MonoBehaviour {
 
     public GameObject[] FloatWaypoints;
 
