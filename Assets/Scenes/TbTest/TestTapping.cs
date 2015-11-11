@@ -5,8 +5,6 @@ public class TestTapping : MonoBehaviour {
 
     public string TagToListenOn = "Player";
 
-    private MultiTouch _input;
-
 	// Use this for initialization
 	void Start () {
         MultiTouch.RegisterTapHandlerByTag(TagToListenOn, r => ExclaimTap(r.collider.tag));
@@ -20,9 +18,4 @@ public class TestTapping : MonoBehaviour {
     private static void ExclaimTapAndHold(string objTag) {
         Debug.Log("Did a tap and hold on an object with tag " + objTag);
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
