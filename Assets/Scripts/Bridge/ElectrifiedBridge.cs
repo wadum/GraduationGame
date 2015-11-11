@@ -14,4 +14,10 @@ public class ElectrifiedBridge : Electrified
     {
         return base.Deactivate();
     }
+
+    void OnDisable()
+    {
+        Deactivate();
+    }
+
 }

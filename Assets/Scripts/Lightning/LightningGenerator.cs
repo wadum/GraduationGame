@@ -20,7 +20,7 @@ public class LightningGenerator : MonoBehaviour {
     float conductorDistance;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
 
         // add linerenderer
         lineRenderer = gameObject.GetComponent<LineRenderer>();
@@ -38,8 +38,12 @@ public class LightningGenerator : MonoBehaviour {
 
         // reset conductor max distance
         conductorDistance = (lightningConductor != null) ? Vector3.Distance(transform.position, lightningConductor.transform.position) : maxConductorDistance;
-            
-
+        
+        //Remove the lightningconductor if the target conductor is not working
+        if (lightningConductor && lightningConductor.gameObject.activeInHierarchy == false)
+        {
+            lightningConductor = null;
+        }
         //Find the closest lightning conducter
         for (int i = 0; i < LightningConductors.Length; i++)
         {

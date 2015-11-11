@@ -16,8 +16,8 @@ public class ObjectTimeController : TimeControllable {
 
     [Space(5)]
     [Header("Prerequisites")]
-    public Electrified[] ActiveObjects;
-    public Electrified[] DeactiveObjects;
+    public GameObject[] ActiveObjects;
+    public GameObject[] DeactiveObjects;
 
     [Space(5)]
     [Header("Objects Controlled By Time")]
@@ -81,9 +81,6 @@ public class ObjectTimeController : TimeControllable {
     {
         TimePos = var;
 
-        if (ActiveObjects.Any(b => !b.Active)) return;
-        if (DeactiveObjects.Any(b => b.Active)) return;
-
         //Enabling
         foreach (GameObject obj in EnableObjectsBeforeTimeLimit)
         {
@@ -97,6 +94,9 @@ public class ObjectTimeController : TimeControllable {
         {
             obj.SetActive(TimePos > workingStateStartPercent);
         }
+
+        if (ActiveObjects.Any(b => !b.activeSelf)) return;
+        if (DeactiveObjects.Any(b => b.activeSelf)) return;
 
         //Disabling
         foreach (GameObject obj in DisableObjectsBeforeTimeLimit)
