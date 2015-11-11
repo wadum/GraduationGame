@@ -13,9 +13,10 @@ public class CharacterJumping : MonoBehaviour
 
     public string[] TagsToJumpOnto;
 
-    private float _jumpHeight;
-    private float _jumpWidth;
-    private float _dropHeight;
+    private float _scale;
+    private float _jumpHeight { get { return 2*_scale*MaximumVerticalJump; } }
+    private float _jumpWidth { get { return 2*_scale*MaximumHorizonalJump; } }
+    private float _dropHeight { get { return 2*_scale*MaximumDrop; } }
     private bool _jumping = false;
     private NavMeshAgent _nav;
     private AnimationController _animator;
@@ -44,11 +45,7 @@ public class CharacterJumping : MonoBehaviour
 
         // Get the scale of the character. If no collider information is available, we fall back to lossyscale.
         var col = GetComponent<Collider>();
-        var scale = col ? col.bounds.extents.y : transform.lossyScale.y;
-
-        _jumpHeight = MaximumVerticalJump * scale;
-        _jumpWidth = MaximumHorizonalJump * scale;
-        _dropHeight = MaximumDrop * scale;
+        _scale = col ? col.bounds.extents.y : transform.lossyScale.y;
 
 	    if (TagsToJumpOnto.Length == 0)
 	    {
@@ -154,7 +151,7 @@ public class CharacterJumping : MonoBehaviour
         var v1 = hit.point;
 
         // Get distance from feet of character
-        var v2 = transform.position - new Vector3(0, transform.lossyScale.y / 2, 0);
+        var v2 = transform.position - new Vector3(0, _scale, 0);
 
         if (!CanReach(v2, v1))
         {
@@ -164,7 +161,7 @@ public class CharacterJumping : MonoBehaviour
         }
         
         // Do the actual jump
-        StartCoroutine(Jumping(v1, null, true));
+        SimpleJump(v1);
     }
 
     private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to) {
@@ -177,6 +174,19 @@ public class CharacterJumping : MonoBehaviour
         return t => Mathf.Pow(1 - t, 2)*from + 2*(1 - t)*t*ctrl + Mathf.Pow(t, 2)*to;
     }
 
+    public bool AttemptSimpleJump(Vector3 target) {
+        if (_jumping)
+            return false;
+
+        SimpleJump(target);
+
+        return true;
+    }
+
+    private void SimpleJump(Vector3 target) {
+        StartCoroutine(Jumping(target, null, true));
+    }
+
     private IEnumerator Jumping(Vector3 target, Transform targetParent, bool restoreNagivation)
     {
         _jumping = true;
@@ -185,8 +195,7 @@ public class CharacterJumping : MonoBehaviour
         if (_animator)
             _animator.Jumping();
 
-        // Correct target by height of the character so we land on our feet
-        target += new Vector3(0, transform.lossyScale.y, 0);
+        target += new Vector3(0, _scale, 0);
         var jumpCurve = MakeBezierJump(transform.position, target);
 
         var t = 0f;
