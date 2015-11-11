@@ -1516,6 +1516,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: .00100000005
+--- !u!135 &184109907
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184109900}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12.3000002
+  m_Center: {x: 15.8000002, y: 10.6999998, z: 19.6100006}
 --- !u!1 &188116643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +1975,7 @@ GameObject:
   - 135: {fileID: 217259041}
   - 82: {fileID: 217259042}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Loot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7671,6 +7683,14 @@ Prefab:
       propertyPath: m_TagString
       value: TimeManipulationObject
       objectReference: {fileID: 0}
+    - target: {fileID: 11407140, guid: 1378f1c7b598f9145896f11acebf9682, type: 2}
+      propertyPath: TriggerZone
+      value: 
+      objectReference: {fileID: 1835684970}
+    - target: {fileID: 173042, guid: 1378f1c7b598f9145896f11acebf9682, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6409766, guid: 1378f1c7b598f9145896f11acebf9682, type: 2}
     - {fileID: 6401192, guid: 1378f1c7b598f9145896f11acebf9682, type: 2}
@@ -9397,6 +9417,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: .00100000005
+--- !u!135 &852708884
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 852708877}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 15.6599998
+  m_Center: {x: 19.9200001, y: 9.10000038, z: 15.0200005}
 --- !u!1 &859837073 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 169450, guid: 1378f1c7b598f9145896f11acebf9682, type: 2}
@@ -16672,7 +16704,7 @@ GameObject:
   - 135: {fileID: 1520057282}
   - 82: {fileID: 1520057283}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Loot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20147,6 +20179,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwirlAroundLocation: {fileID: 1337674627}
   SwirlDistance: 2
+--- !u!135 &1835684970
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1835684964}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 13.8900003
+  m_Center: {x: 0, y: 3.43000007, z: 0}
 --- !u!114 &1835684971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23381,8 +23425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b41e13db8006f4bbb9ac609f0d4dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaximumVerticalJump: 2
-  MaximumHorizonalJump: 5
+  MaximumVerticalJump: 4
+  MaximumHorizonalJump: 4
   MaximumDrop: 10
   JumpingSpeed: 2
   TagsToJumpOnto:
