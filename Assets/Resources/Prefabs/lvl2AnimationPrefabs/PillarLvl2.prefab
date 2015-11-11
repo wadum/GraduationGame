@@ -2325,7 +2325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &190486
 GameObject:
   m_ObjectHideFlags: 1
@@ -3646,7 +3646,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121768}
   m_LocalRotation: {x: 0, y: -.468832284, z: 0, w: .883287251}
-  m_LocalPosition: {x: -112.440002, y: 210.498993, z: -419.480011}
+  m_LocalPosition: {x: 23.760294, y: 0, z: .402706265}
   m_LocalScale: {x: .549985528, y: .549985468, z: .549985528}
   m_Children:
   - {fileID: 464906}
@@ -9476,10 +9476,14 @@ MonoBehaviour:
   workingStateEndPercent: 100
   ActiveObjects: []
   DeactiveObjects: []
-  EnableObjects:
+  EnableObjectsBeforeTimeLimit: []
+  EnableObjectsWithinTimeLimit:
   - {fileID: 140706}
-  DisableObjects:
+  EnableObjectsAfterTimeLimit: []
+  DisableObjectsBeforeTimeLimit: []
+  DisableObjectsWithinTimeLimit:
   - {fileID: 190356}
+  DisableObjectsAfterTimeLimit: []
 --- !u!114 &11461838
 MonoBehaviour:
   m_ObjectHideFlags: 1
