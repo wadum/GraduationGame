@@ -55,11 +55,8 @@ public class CharacterMovement : MonoBehaviour
 	    {
 	        _agent.enabled = true;
 	        _flyToCenterClock = false;
-            Debug.Log("DONE!");
 	        return;
 	    }
-
-        Debug.Log(_currentWaypoint);
 	    _lerpEndPos = FloatWaypoints[_currentWaypoint].transform.position;
 	    _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
 	}

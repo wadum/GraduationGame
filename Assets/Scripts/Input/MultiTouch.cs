@@ -73,12 +73,18 @@ public class MultiTouch : MonoBehaviour
                 touch1Began = Time.time;
             }
 
-            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary) {
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
                 var position = touches[0].position;
-                if (Time.time - touch1Began > TapHoldSeconds)
-                    HandleTapAndHold(position);
-                else
+                if (Time.time - touch1Began <= TapHoldSeconds)
                     HandleTap(position);
+                yield return null;
+                continue;
+            }
+
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary && (Time.time - touch1Began > TapHoldSeconds) )
+            {
+                var position = touches[0].position;
+                HandleTapAndHold(position);
                 yield return null;
                 continue;
             }
