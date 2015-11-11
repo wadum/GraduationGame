@@ -8,6 +8,8 @@ public class LightningGenerator : MonoBehaviour {
     public float maxConductorDistance;
     public float JitterDistance = 0.1f;
 
+    public AudioSource Audio;
+
     public GameObject[] LightningConductors;
     LineRenderer lineRenderer;
 
@@ -53,6 +55,8 @@ public class LightningGenerator : MonoBehaviour {
                 lightningConductor.GetComponent<Electrified>().Activate();
                 LengthForEachSection = conductorDistance / lengthOfLineRenderer;
                 lineRenderer.enabled = true;
+                if(Audio)
+                    Audio.Play();
             }
         }
 
@@ -63,6 +67,8 @@ public class LightningGenerator : MonoBehaviour {
                 lightningConductor.GetComponent<Electrified>().Deactivate();
             lightningConductor = null;
             lineRenderer.enabled = false;
+            if (Audio)
+                Audio.Stop();
             return;
         }
 
@@ -85,8 +91,12 @@ public class LightningGenerator : MonoBehaviour {
     }
     void OnDisable()
     {
-        if(lineRenderer)
+        if (lineRenderer)
+        {
             lineRenderer.enabled = false;
+            if (Audio)
+                Audio.Stop();
+        }
         if (lightningConductor)
             lightningConductor.GetComponent<Electrified>().Deactivate();
     }
