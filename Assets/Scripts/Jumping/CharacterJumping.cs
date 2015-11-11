@@ -107,9 +107,8 @@ public class CharacterJumping : MonoBehaviour
             return;
 
         // Check if we are already on the object
-        if (transform.root == hit.collider.gameObject.transform)
+        if (transform.parent == hit.collider.gameObject.transform)
             return;
-
         // Store current parent;
         var currentParent = transform.parent;
 
@@ -139,9 +138,10 @@ public class CharacterJumping : MonoBehaviour
     {
         if (_jumping)
             return;
-
+        if (!transform.parent)
+            return;
         // Check if we are standing on a valid jumpable object, otherwise return
-        if (!TagsToJumpOnto.Contains(transform.root.tag))
+        if (!TagsToJumpOnto.Contains(transform.parent.tag))//!TagsToJumpOnto.Contains(transform.root.tag))
             return;
 
         // Store current parent;
@@ -197,7 +197,6 @@ public class CharacterJumping : MonoBehaviour
         }
 
         transform.position = target;
-
         if (restoreNagivation)
             _nav.enabled = true;
 

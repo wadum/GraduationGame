@@ -36,7 +36,7 @@ public class MultiTouch : MonoBehaviour
                 Debug.Log("No canvas found for fallback.");
         }
         if (gui)
-            _guiCaster = gui.GetComponent<GraphicRaycaster>();
+            _guiCaster = gui.GetComponentInChildren<GraphicRaycaster>();
         
         if (!_guiCaster)
             Debug.Log("GraphicRaycaster could not be gotten from canvas, ui blocking will not be available.");
@@ -57,13 +57,6 @@ public class MultiTouch : MonoBehaviour
         while (true) {
             var touches = GetTouches();
 
-            if (SimulateMouseTapInEditor && Application.isEditor && Input.GetMouseButtonDown(0))
-            {
-                HandleTap(Input.mousePosition);
-                yield return null;
-                continue;
-            }
-
             if (!touches.Any()) {
                 yield return null;
                 continue;
@@ -75,10 +68,16 @@ public class MultiTouch : MonoBehaviour
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
                 var position = touches[0].position;
-                if (Time.time - touch1Began > TapHoldSeconds)
-                    HandleTapAndHold(position);
-                else
+                if (Time.time - touch1Began <= TapHoldSeconds)
                     HandleTap(position);
+                yield return null;
+                continue;
+            }
+
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary && (Time.time - touch1Began > TapHoldSeconds) )
+            {
+                var position = touches[0].position;
+                HandleTapAndHold(position);
                 yield return null;
                 continue;
             }
@@ -211,7 +210,15 @@ public class MultiTouch : MonoBehaviour
     #region private helpers
     private List<Touch> GetTouches()
     {
-        return Input.touches.Where(t => !IsPointerOverGui(t.position)).ToList();
+        var touches = Input.touches.ToList();
+
+        if (SimulateMouseTapInEditor && Application.isEditor) {
+            var fake = MouseToTouch.GetTouch(SwipeSensitivity);
+            if (fake.HasValue)
+                touches.Add(fake.Value);
+        }
+
+        return touches.Where(t => !IsPointerOverGui(t.position)).ToList();
     }
 
     private static RaycastHit? Raycast(Vector3 position) {
