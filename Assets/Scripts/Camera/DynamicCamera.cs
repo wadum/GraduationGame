@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class DynamicCamera : MonoBehaviour {
     public bool AutoStartAi = true;
+    public bool AutoAttachToPlayer = true;
 
     [Header("Position and Rotation")]
     public float NeutralDistance = 5f;
@@ -32,8 +33,8 @@ public class DynamicCamera : MonoBehaviour {
     public float ZoomFactor = 90f;
     
     private Camera _camera;
-    private Transform _player;
-    private Collider _playerCollider;
+    private Transform _target;
+    private Collider _targetCollider;
 
     // Used to override the camera agent
     private bool _playerIntent;
@@ -49,13 +50,13 @@ public class DynamicCamera : MonoBehaviour {
 
     private static Vector3 BaseAbsolutePitchAxis { get { return Vector3.right; } }
 
-    private Vector3 RelativeYawAxis { get { return -_player.up; } }
+    private Vector3 RelativeYawAxis { get { return -_target.up; } }
 
-    private Vector3 RelativeDirection { get { return -_player.forward; } }
+    private Vector3 RelativeDirection { get { return -_target.forward; } }
 
-    private Vector3 BaseRelativePitchAxis { get { return _player.right; } }
+    private Vector3 BaseRelativePitchAxis { get { return _target.right; } }
 
-    private Vector3 RelativePosition { get { return transform.position - PlayerTop; } }
+    private Vector3 RelativePosition { get { return transform.position - TopOfTarget; } }
 
     private Quaternion NeutralRelativeRotation { get { return Rotation(NeutralYaw, NeutralPitch); } }
 
@@ -103,11 +104,11 @@ public class DynamicCamera : MonoBehaviour {
 
     private Quaternion CurrentRelativePitchRotation { get { return Quaternion.AngleAxis(CurrentPitch, CurrentRelativeYawRotation*BaseRelativePitchAxis); } }
 
-    private Vector3 PlayerTop {
+    private Vector3 TopOfTarget {
         get {
-            return _playerCollider?
-                _player.position + new Vector3(0, _playerCollider.bounds.extents.y, 0):
-                _player.position;
+            return _targetCollider?
+                _target.position + new Vector3(0, _targetCollider.bounds.extents.y, 0):
+                _target.position;
         }
     }
 
@@ -128,7 +129,7 @@ public class DynamicCamera : MonoBehaviour {
     }
 
     private void SetPosition(Quaternion rotation, float distance, bool relative = true) {
-        transform.position = rotation * (relative? RelativeDirection: AbsoluteDirection) * distance + PlayerTop;
+        transform.position = rotation * (relative? RelativeDirection: AbsoluteDirection) * distance + TopOfTarget;
     }
 
     /// <summary>
@@ -144,6 +145,14 @@ public class DynamicCamera : MonoBehaviour {
         SetPosition(rot, distance, relative);
     }
 
+    public void SetTarget(Transform target) {
+        _target = target;
+    }
+
+    public void SetTarget(GameObject target) {
+        _target = target.transform;
+    }
+
     #endregion
 
     #region initialization (Start, etc)
@@ -151,26 +160,28 @@ public class DynamicCamera : MonoBehaviour {
     private bool Sanity() {
         _camera = GetComponent<Camera>();
 
-        var players = GameObject.FindGameObjectsWithTag("Player");
-        if (!players.Any()) {
-            Debug.Log("No GameObject tagged Player found.");
-            return false;
+        if (AutoAttachToPlayer) {
+            var players = GameObject.FindGameObjectsWithTag("Player");
+            if (!players.Any()) {
+                Debug.Log("No GameObject tagged Player found.");
+                return false;
+            }
+
+            if (players.Length >= 2) {
+                Debug.Log("More than one GameObject tagged player: " + string.Join(", ", players.Select(p => p.name).ToArray()));
+                return false;
+            }
+
+            _target = players.First().transform;
         }
 
-        if (players.Length >= 2) {
-            Debug.Log("More than one GameObject tagged player: " + string.Join(", ", players.Select(p => p.name).ToArray()));
-            return false;
-        }
-
-        _player = players.First().transform;
-
-        _playerCollider = _player.GetComponent<Collider>();
-        if (!_playerCollider) {
+        _targetCollider = _target.GetComponent<Collider>();
+        if (!_targetCollider)
             Debug.Log("Warn: player missing collider, camera offset might be wrong");
-        }
 
         return true;
     }
+
 
     void Start () {
 	    if (!Sanity()) {
@@ -183,7 +194,7 @@ public class DynamicCamera : MonoBehaviour {
 	    MultiTouch.RegisterPinchHandler(HandlePinch);
         MultiTouch.RegisterTapHandlerByTag("Terrain", _ => _playerIntent = false);
 
-        _isRunning = AutoStartAi;
+        _isRunning = AutoStartAi && _target;
     }
 
     #endregion
@@ -215,14 +226,14 @@ public class DynamicCamera : MonoBehaviour {
             FullyAutomaticCameraControl();
     }
 
-    public void Run() { _isRunning = true; }
+    public void Run() { _isRunning = _target; }
 
     public void Stop() { _isRunning = false; }
 
     private void ConstrainedPlayerControl() {
         SetPosition(_playerDesiredAbsoluteYaw, _playerDesiredPitch, NeutralDistance, false);
 
-        transform.LookAt(_player);
+        transform.LookAt(_target);
     }
 
     private void FullyAutomaticCameraControl() {
@@ -230,7 +241,7 @@ public class DynamicCamera : MonoBehaviour {
 
         SetPosition(rot, NeutralDistance);
 
-        transform.LookAt(_player);
+        transform.LookAt(_target);
     }
 
     #endregion
