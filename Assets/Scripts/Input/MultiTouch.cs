@@ -57,13 +57,6 @@ public class MultiTouch : MonoBehaviour
         while (true) {
             var touches = GetTouches();
 
-            if (SimulateMouseTapInEditor && Application.isEditor && Input.GetMouseButtonDown(0))
-            {
-                HandleTap(Input.mousePosition);
-                yield return null;
-                continue;
-            }
-
             if (!touches.Any()) {
                 yield return null;
                 continue;
@@ -217,7 +210,15 @@ public class MultiTouch : MonoBehaviour
     #region private helpers
     private List<Touch> GetTouches()
     {
-        return Input.touches.Where(t => !IsPointerOverGui(t.position)).ToList();
+        var touches = Input.touches.ToList();
+
+        if (SimulateMouseTapInEditor && Application.isEditor) {
+            var fake = MouseToTouch.GetTouch(SwipeSensitivity);
+            if (fake.HasValue)
+                touches.Add(fake.Value);
+        }
+
+        return touches.Where(t => !IsPointerOverGui(t.position)).ToList();
     }
 
     private static RaycastHit? Raycast(Vector3 position) {
