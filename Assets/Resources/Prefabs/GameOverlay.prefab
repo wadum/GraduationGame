@@ -331,6 +331,7 @@ GameObject:
   - 224: {fileID: 22418194}
   - 114: {fileID: 11498926}
   - 82: {fileID: 8240132}
+  - 82: {fileID: 8242660}
   m_Layer: 5
   m_Name: GameOverlay
   m_TagString: Gui
@@ -930,7 +931,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &166238
 GameObject:
   m_ObjectHideFlags: 1
@@ -1087,7 +1088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &172988
 GameObject:
   m_ObjectHideFlags: 1
@@ -1548,9 +1549,80 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: ba61d751cc1af7e42bc4f2920afb796b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 66e0a2a8815cabf4b991f5bf064ad050, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .300000012
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &8242660
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123694}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: b0f2bb1d3e47135438508dbd7e42cf19, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .167999998
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3941,7 +4013,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11425000}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11498926}
+        m_MethodName: GoToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11479862
@@ -4593,7 +4676,9 @@ MonoBehaviour:
   StoreScreen: {fileID: 110658}
   TimeSlider: {fileID: 163740}
   SliderController: {fileID: 11408922}
-  ActivateSliderSound: {fileID: 8240132}
+  ActivateSliderSounds:
+  - {fileID: 8240132}
+  - {fileID: 8242660}
 --- !u!114 &11499164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5080,7 +5165,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 1
+  m_PlaneDistance: .400000006
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -5651,7 +5736,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 3.05175781e-05, y: 100}
+  m_AnchoredPosition: {x: 3.05175781e-05, y: 0}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22436104
@@ -6543,7 +6628,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22498826

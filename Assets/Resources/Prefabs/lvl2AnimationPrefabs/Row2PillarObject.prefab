@@ -26,13 +26,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 472872}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &102996
 GameObject:
   m_ObjectHideFlags: 1
@@ -189,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &111258
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ GameObject:
   - 65: {fileID: 6538210}
   - 23: {fileID: 2344382}
   - 208: {fileID: 20831758}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1523,7 +1523,7 @@ GameObject:
   - 65: {fileID: 6592466}
   - 23: {fileID: 2398426}
   - 208: {fileID: 20801188}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2334,7 +2334,7 @@ GameObject:
   - 208: {fileID: 20800084}
   m_Layer: 0
   m_Name: mainPillar
-  m_TagString: TimeManipulationObject
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2401,6 +2401,8 @@ GameObject:
   - 114: {fileID: 11446908}
   - 114: {fileID: 11411458}
   - 95: {fileID: 9538496}
+  - 135: {fileID: 13521854}
+  - 114: {fileID: 11431256}
   m_Layer: 0
   m_Name: Row2PillarObject
   m_TagString: Untagged
@@ -2789,8 +2791,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189556}
-  m_LocalRotation: {x: 0, y: .305896252, z: 0, w: .952064872}
-  m_LocalPosition: {x: 18.9141884, y: 9.44999981, z: -12.6750164}
+  m_LocalRotation: {x: 0, y: .160129473, z: 0, w: .987096071}
+  m_LocalPosition: {x: 18.5799999, y: 9.44999981, z: -13.1899996}
   m_LocalScale: {x: .549985468, y: .549985468, z: .549985468}
   m_Children:
   - {fileID: 493314}
@@ -3899,7 +3901,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 186798}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: .00210016733, w: .999997795}
   m_LocalPosition: {x: .0550370291, y: 7.55806017, z: .0136162275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -9502,6 +9504,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwirlAroundLocation: {fileID: 164960}
   SwirlDistance: 2.5
+--- !u!114 &11431256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04fe4944762fdf4c98cbad00fdb557e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 0
 --- !u!114 &11446908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9518,10 +9532,13 @@ MonoBehaviour:
   workingStateEndPercent: 0
   ActiveObjects: []
   DeactiveObjects: []
-  EnableObjects:
-  - {fileID: 110914}
-  DisableObjects:
-  - {fileID: 102668}
+  EnableObjectsBeforeTimeLimit: []
+  EnableObjectsWithinTimeLimit: []
+  EnableObjectsAfterTimeLimit: []
+  DisableObjectsBeforeTimeLimit: []
+  DisableObjectsWithinTimeLimit: []
+  DisableObjectsAfterTimeLimit: []
+  InRange: 0
 --- !u!114 &11492606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9533,6 +9550,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb60b7bbfff2d2448b9aa84c6549c1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &13521854
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 19.2600002
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!208 &20800084
 NavMeshObstacle:
   m_ObjectHideFlags: 1

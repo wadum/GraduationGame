@@ -2594,6 +2594,7 @@ GameObject:
   - 23: {fileID: 2340830}
   - 64: {fileID: 6438940}
   - 208: {fileID: 20860334}
+  - 114: {fileID: 11448062}
   m_Layer: 0
   m_Name: mainPillar
   m_TagString: TimeManipulationObject
@@ -9857,7 +9858,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 08d91cc5aab1f2d4da7ee5fdd8d82d0a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 387df541da944b74ab2f71d93ebb6355, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -9928,7 +9929,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6336bd3e70faa2e4daabfca4115b5a0a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 17dba383f705bab489b1dae5cc1a6401, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -10042,6 +10043,7 @@ MonoBehaviour:
   DisableObjectsWithinTimeLimit:
   - {fileID: 118398}
   DisableObjectsAfterTimeLimit: []
+  InRange: 0
 --- !u!114 &11444262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10066,6 +10068,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwirlAroundLocation: {fileID: 154134}
   SwirlDistance: 2
+--- !u!114 &11448062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11464944
 MonoBehaviour:
   m_ObjectHideFlags: 1
