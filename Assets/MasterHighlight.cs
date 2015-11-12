@@ -30,10 +30,7 @@ public class MasterHighlight : MonoBehaviour {
                     script.SetWidth(width);
                     _list.Add(script);
                 }
-                else
-                {
                     TagChildren(child);
-                }
             }
         }
     }

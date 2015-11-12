@@ -34,7 +34,6 @@ public class LightningGenerator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // Add time
-        OnDrawGizmosSelected();
 
         timePassed += Time.deltaTime;
 
@@ -99,11 +98,9 @@ public class LightningGenerator : MonoBehaviour {
             timePassed = 0.0f;
         }
     }
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, maxConductorDistance);
     }
-
 }

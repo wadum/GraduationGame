@@ -26,7 +26,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 472872}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - 65: {fileID: 6538210}
   - 23: {fileID: 2344382}
   - 208: {fileID: 20831758}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1523,7 +1523,7 @@ GameObject:
   - 65: {fileID: 6592466}
   - 23: {fileID: 2398426}
   - 208: {fileID: 20801188}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2401,6 +2401,7 @@ GameObject:
   - 114: {fileID: 11446908}
   - 114: {fileID: 11411458}
   - 95: {fileID: 9538496}
+  - 135: {fileID: 13521854}
   m_Layer: 0
   m_Name: Row2PillarObject
   m_TagString: Untagged
@@ -9536,6 +9537,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb60b7bbfff2d2448b9aa84c6549c1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &13521854
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 19.2600002
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!208 &20800084
 NavMeshObstacle:
   m_ObjectHideFlags: 1

@@ -14,6 +14,9 @@ public class HighlightScript : MonoBehaviour {
         rend = GetComponent<Renderer>();
         if (!rend)
             Debug.Log(name);
+        MeshCollider collider = GetComponent<MeshCollider>();
+        if (!collider)
+            gameObject.AddComponent<MeshCollider>();
         //   orgshader = rend.material.shader;
         if (rend.material.shader.name != "Shader Forge/ObejctDissolver")
         {
