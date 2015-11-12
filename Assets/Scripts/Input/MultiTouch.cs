@@ -128,9 +128,14 @@ public class MultiTouch : MonoBehaviour
     {
         var hit = Raycast(position);
         List<Action<RaycastHit>> handlers;
+		int hits = 0;
         if (hit.HasValue && TapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
-            foreach(var handler in handlers)
+            foreach(var handler in handlers){
+				hits++;
                 handler(hit.Value);
+		}
+		if (hits == 0)
+			GameOverlayController.gameOverlayController.DeactivateSlider();
     }
 
     private static void HandleTapAndHold(Vector3 position)
