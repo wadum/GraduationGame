@@ -5,12 +5,13 @@ using System.Collections;
 public class TimeSliderController : MonoBehaviour {
 
     public float TimeSpeed;
-    Slider _slider;
-	SoundMaster _soundMaster;
-	TimeControllable _obj;
 
-    Coroutine _increaseCorout;
-    Coroutine _decreaseCorout;
+    private Slider _slider;
+	private SoundMaster _soundMaster;
+	private TimeControllable _obj;
+
+    private Coroutine _increaseCorout;
+    private Coroutine _decreaseCorout;
 
     void Start()
     {
