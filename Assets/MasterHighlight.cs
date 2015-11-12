@@ -19,7 +19,7 @@ public class MasterHighlight : MonoBehaviour {
 
     void TagChildren(Transform _transform)
     {
-        foreach (Transform child in _transform.GetComponentInChildren<Transform>())
+        foreach (Transform child in _transform.GetComponentsInChildren<Transform>())
         {
             if (child.tag == "TimeManipulationObject" || child.tag == "Rock")
             {
@@ -30,7 +30,6 @@ public class MasterHighlight : MonoBehaviour {
                     script.SetWidth(width);
                     _list.Add(script);
                 }
-                    TagChildren(child);
             }
         }
     }
