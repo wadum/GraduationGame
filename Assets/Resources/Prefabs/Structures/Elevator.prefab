@@ -1230,7 +1230,7 @@ GameObject:
   - 114: {fileID: 11491646}
   - 114: {fileID: 11491102}
   m_Layer: 0
-  m_Name: conductHolder (1)
+  m_Name: conductHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1601,22 +1601,6 @@ GameObject:
   m_Layer: 0
   m_Name: glassPart3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &164314
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 470376}
-  - 114: {fileID: 11445822}
-  m_Layer: 0
-  m_Name: LightningConductor (1)
-  m_TagString: LightningConductor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2602,8 +2586,7 @@ Transform:
   m_LocalRotation: {x: .707106829, y: -0, z: -0, w: .707106829}
   m_LocalPosition: {x: -0, y: 0, z: -.0583776832}
   m_LocalScale: {x: 4.97222185, y: 10.1196032, z: 4.97222185}
-  m_Children:
-  - {fileID: 470376}
+  m_Children: []
   m_Father: {fileID: 461358}
   m_RootOrder: 1
 --- !u!4 &414138
@@ -3620,18 +3603,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 427686}
   m_RootOrder: 1
---- !u!4 &470376
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 164314}
-  m_LocalRotation: {x: -.707106829, y: -5.96046448e-08, z: 5.96046448e-08, w: .707106829}
-  m_LocalPosition: {x: 0, y: -.00810000021, z: 0}
-  m_LocalScale: {x: .0727773681, y: .0727773532, z: .0357588269}
-  m_Children: []
-  m_Father: {fileID: 413520}
-  m_RootOrder: 0
 --- !u!4 &471290
 Transform:
   m_ObjectHideFlags: 1
@@ -6637,8 +6608,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.78376508, y: 1.64057982, z: .717785597}
-  m_Center: {x: -.0611376427, y: 2.972821, z: -.0559813604}
+  m_Size: {x: 1.67624056, y: 1.74821603, z: .717785597}
+  m_Center: {x: -.312897652, y: 2.91900158, z: -.0559813604}
 --- !u!65 &6575804
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -6703,20 +6674,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f158041ea6f34784cbd161d2e17a2d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 0
-  _elevatorTrigger: {fileID: 6527392}
-  Ani: {fileID: 9571164}
---- !u!114 &11445822
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 164314}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f158041ea6f34784cbd161d2e17a2d0e, type: 3}
@@ -6810,11 +6767,17 @@ MonoBehaviour:
   ActiveObjects: []
   DeactiveObjects: []
   EnableObjectsBeforeTimeLimit: []
-  EnableObjectsWithinTimeLimit: []
+  EnableObjectsWithinTimeLimit:
+  - {fileID: 153422}
+  - {fileID: 142478}
+  - {fileID: 116516}
+  - {fileID: 153870}
+  - {fileID: 185636}
   EnableObjectsAfterTimeLimit: []
   DisableObjectsBeforeTimeLimit: []
   DisableObjectsWithinTimeLimit: []
   DisableObjectsAfterTimeLimit: []
+  InRange: 0
 --- !u!114 &11491646
 MonoBehaviour:
   m_ObjectHideFlags: 1
