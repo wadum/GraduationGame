@@ -664,6 +664,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 479278}
   - 95: {fileID: 9528152}
+  - 114: {fileID: 11487528}
+  - 114: {fileID: 11485182}
   m_Layer: 0
   m_Name: 2ndPendulumPlatformlvl3
   m_TagString: Untagged
@@ -5606,6 +5608,40 @@ MonoBehaviour:
   JitterDistance: .100000001
   Audio: {fileID: 0}
   LightningConductors: []
+--- !u!114 &11485182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb60b7bbfff2d2448b9aa84c6549c1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11487528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777ab96fd3873b341a224e1159bd0272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimePos: 10
+  workingStateStartPercent: 0
+  workingStateEndPercent: 0
+  ActiveObjects: []
+  DeactiveObjects: []
+  EnableObjectsBeforeTimeLimit: []
+  EnableObjectsWithinTimeLimit: []
+  EnableObjectsAfterTimeLimit: []
+  DisableObjectsBeforeTimeLimit: []
+  DisableObjectsWithinTimeLimit: []
+  DisableObjectsAfterTimeLimit: []
+  InRange: 0
 --- !u!114 &11490672
 MonoBehaviour:
   m_ObjectHideFlags: 1
