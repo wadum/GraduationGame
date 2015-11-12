@@ -1017,7 +1017,7 @@ GameObject:
   - 65: {fileID: 6538802}
   - 23: {fileID: 2352114}
   - 208: {fileID: 20818788}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1622,6 +1622,8 @@ GameObject:
   - 114: {fileID: 11466710}
   - 114: {fileID: 11449678}
   - 95: {fileID: 9537454}
+  - 135: {fileID: 13577004}
+  - 114: {fileID: 11463418}
   m_Layer: 0
   m_Name: Row1PillarObject
   m_TagString: Untagged
@@ -1999,7 +2001,7 @@ GameObject:
   - 65: {fileID: 6589518}
   - 23: {fileID: 2308450}
   - 208: {fileID: 20819358}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2166,7 +2168,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 441674}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9502,6 +9504,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwirlAroundLocation: {fileID: 185706}
   SwirlDistance: 2.5
+--- !u!114 &11463418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04fe4944762fdf4c98cbad00fdb557e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 0
 --- !u!114 &11465700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9536,6 +9550,18 @@ MonoBehaviour:
   DisableObjectsWithinTimeLimit: []
   DisableObjectsAfterTimeLimit: []
   InRange: 0
+--- !u!135 &13577004
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 17.7199993
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!208 &20818788
 NavMeshObstacle:
   m_ObjectHideFlags: 1
