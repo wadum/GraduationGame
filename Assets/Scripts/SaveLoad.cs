@@ -24,24 +24,21 @@ public class SaveLoad : MonoBehaviour {
     public int _lvl = -1;
 
     public CharacterInventory inv;
+    public string lastLevel;
     Clockpart[] cogs;
 
-    void Awake()
+    // When the script is loaded for the first time, it will load progress from last time.
+    void OnEnable()
     {
         if (saveLoad == null)
         {
             DontDestroyOnLoad(gameObject);
             saveLoad = this;
         }
-        else if(saveLoad != this)
+        else if (saveLoad != this)
         {
             Destroy(this.gameObject);
         }
-    }
-
-    // When the script is loaded for the first time, it will load progress from last time.
-    void OnEnable()
-    {
         Prepare();
     }
 
