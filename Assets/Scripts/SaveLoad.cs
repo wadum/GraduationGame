@@ -23,25 +23,22 @@ public class SaveLoad : MonoBehaviour {
     private List<SaveState> _SaveData;
     public int _lvl = -1;
 
-    CharacterInventory inv;
-    Cockpart[] cogs;
+    public CharacterInventory inv;
+    public string lastLevel;
+    Clockpart[] cogs;
 
-    void Awake()
+    // When the script is loaded for the first time, it will load progress from last time.
+    void OnEnable()
     {
         if (saveLoad == null)
         {
             DontDestroyOnLoad(gameObject);
             saveLoad = this;
         }
-        else if(saveLoad != this)
+        else if (saveLoad != this)
         {
             Destroy(this.gameObject);
         }
-    }
-
-    // When the script is loaded for the first time, it will load progress from last time.
-    void OnEnable()
-    {
         Prepare();
     }
 
@@ -52,22 +49,13 @@ public class SaveLoad : MonoBehaviour {
         _SaveData = new List<SaveState>();
         // Load on enable?
         inv = FindObjectOfType<CharacterInventory>();
-        cogs = GameObject.FindObjectsOfType<Cockpart>();
+        cogs = GameObject.FindObjectsOfType<Clockpart>();
         Load();
     }
 
     void OnLevelWasLoaded(int level)
     {
-        if(_lvl == level)
-        {
-            // If we load the same level which we're already in, we must be in the process of resetting, so we reset the values without loading.
-            _TimeControllers = GameObject.FindObjectsOfType<ObjectTimeController>();
-            _SaveData = new List<SaveState>();
-        }
-        else
-        {
             Prepare();
-        }
     }
 
     void OnApplicationQuit()
@@ -86,12 +74,13 @@ public class SaveLoad : MonoBehaviour {
         }
         // Prepare a new string for all the pickupitems' names.
         List<string> pickups = new List<string>();
-        foreach (GameObject cock in inv.clockParts)
+        foreach (GameObject clock in inv.clockParts)
         {
-            if(cock != null)
-            {
-                pickups.Add(cock.name);
-            }
+            if(clock != null)
+                if (!pickups.Contains(clock.name))
+                {
+                    pickups.Add(clock.name);
+                }
         }
         // Open new BinaryFormatter, with a filename depending on the level we're playing.
         BinaryFormatter bf = new BinaryFormatter();
@@ -124,16 +113,16 @@ public class SaveLoad : MonoBehaviour {
             // Restore the data for pickups
             foreach(string Cog in data.inv)
             {
-                foreach (Cockpart cock in cogs)
+                foreach (Clockpart clock in cogs)
                 {
-                    if (cock.name == Cog)
+                    if (clock.name == Cog)
                     {
                         // Copy the functionality of the Cogs and Inventory, should most likely be a localiced helperfunction in those scripts instead.
-                        GameObject player = GameObject.FindGameObjectWithTag ("Player" );
-                        cock.transform.parent = player.transform;
-                        cock.pickedUp = true;
-                        cock.GetComponent<Collider>().enabled = false;
-                        inv.AddClockPart(cock.gameObject);
+                        GameObject player = GameObject.FindGameObjectWithTag("Player");
+                        clock.transform.parent = player.transform;
+                        clock.pickedUp = true;
+                        clock.GetComponent<Collider>().enabled = false;
+                        inv.AddClockPart(clock.gameObject);
                     }
                 }
             }
@@ -143,11 +132,12 @@ public class SaveLoad : MonoBehaviour {
     // Instead of deleting the file, we can simply overwrite it with blank data
     public void Reset()
     {
-        _SaveData.Clear();
-        List<string> taggedcocks = new List<string>();
+        if(_SaveData.Count > 0)
+            _SaveData.Clear();
+        List<string> taggedclocks = new List<string>();
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Create);
-        bf.Serialize(file, new SaveData(_SaveData, taggedcocks));
+        bf.Serialize(file, new SaveData(_SaveData, taggedclocks));
         file.Close();
     }
 

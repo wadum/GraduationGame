@@ -34,6 +34,7 @@ public class LightningGenerator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // Add time
+
         timePassed += Time.deltaTime;
 
         // reset conductor max distance
@@ -96,5 +97,10 @@ public class LightningGenerator : MonoBehaviour {
             lineRenderer.SetPosition(lengthOfLineRenderer - 1, lastPos);
             timePassed = 0.0f;
         }
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, maxConductorDistance);
     }
 }
