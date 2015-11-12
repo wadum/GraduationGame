@@ -34,8 +34,6 @@ public class LightningGenerator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // Add time
-        OnDrawGizmosSelected();
-
         timePassed += Time.deltaTime;
 
         // reset conductor max distance
