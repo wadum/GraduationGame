@@ -61,8 +61,13 @@ public class GameOverlayController : MonoBehaviour {
 
     public void GoToMainMenu()
     {
-        SaveLoad.saveLoad.Save();
-        SaveLoad.saveLoad.SaveInterval = 0;
+        if (!SaveLoad.saveLoad)
+            Debug.Log("No SaveLoad class in game");
+        else
+        {
+            SaveLoad.saveLoad.Save();
+            SaveLoad.saveLoad.SaveInterval = 0;
+        }
         Application.LoadLevel("Main Menu");
     }
 
