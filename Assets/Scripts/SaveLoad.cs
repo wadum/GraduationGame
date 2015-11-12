@@ -24,7 +24,7 @@ public class SaveLoad : MonoBehaviour {
     public int _lvl = -1;
 
     public CharacterInventory inv;
-    Cockpart[] cogs;
+    Clockpart[] cogs;
 
     void Awake()
     {
@@ -52,7 +52,7 @@ public class SaveLoad : MonoBehaviour {
         _SaveData = new List<SaveState>();
         // Load on enable?
         inv = FindObjectOfType<CharacterInventory>();
-        cogs = GameObject.FindObjectsOfType<Cockpart>();
+        cogs = GameObject.FindObjectsOfType<Clockpart>();
         Load();
     }
 
@@ -77,12 +77,12 @@ public class SaveLoad : MonoBehaviour {
         }
         // Prepare a new string for all the pickupitems' names.
         List<string> pickups = new List<string>();
-        foreach (GameObject cock in inv.clockParts)
+        foreach (GameObject clock in inv.clockParts)
         {
-            if(cock != null)
-                if (!pickups.Contains(cock.name))
+            if(clock != null)
+                if (!pickups.Contains(clock.name))
                 {
-                    pickups.Add(cock.name);
+                    pickups.Add(clock.name);
                 }
         }
         // Open new BinaryFormatter, with a filename depending on the level we're playing.
@@ -116,16 +116,16 @@ public class SaveLoad : MonoBehaviour {
             // Restore the data for pickups
             foreach(string Cog in data.inv)
             {
-                foreach (Cockpart cock in cogs)
+                foreach (Clockpart clock in cogs)
                 {
-                    if (cock.name == Cog)
+                    if (clock.name == Cog)
                     {
                         // Copy the functionality of the Cogs and Inventory, should most likely be a localiced helperfunction in those scripts instead.
                         GameObject player = GameObject.FindGameObjectWithTag("Player");
-                        cock.transform.parent = player.transform;
-                        cock.pickedUp = true;
-                        cock.GetComponent<Collider>().enabled = false;
-                        inv.AddClockPart(cock.gameObject);
+                        clock.transform.parent = player.transform;
+                        clock.pickedUp = true;
+                        clock.GetComponent<Collider>().enabled = false;
+                        inv.AddClockPart(clock.gameObject);
                     }
                 }
             }
@@ -137,10 +137,10 @@ public class SaveLoad : MonoBehaviour {
     {
         if(_SaveData.Count > 0)
             _SaveData.Clear();
-        List<string> taggedcocks = new List<string>();
+        List<string> taggedclocks = new List<string>();
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Create);
-        bf.Serialize(file, new SaveData(_SaveData, taggedcocks));
+        bf.Serialize(file, new SaveData(_SaveData, taggedclocks));
         file.Close();
     }
 
