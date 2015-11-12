@@ -5,6 +5,7 @@ public class CenterClockworkDeliverence : MonoBehaviour {
 
     Clockpart[] clocks;
     public int turnedin;
+    public string next_level = "Main Menu";
 	// Use this for initialization
 	void Start () {
         clocks = GameObject.FindObjectsOfType<Clockpart>();
@@ -15,8 +16,12 @@ public class CenterClockworkDeliverence : MonoBehaviour {
 
         if (clocks.Length == turnedin)
         {
-            SaveLoad.saveLoad.Reset();
-            Application.LoadLevel("Main Menu");
+            // Fire winning animation
+            if (SaveLoad.saveLoad)
+            {
+                SaveLoad.saveLoad.Reset();
+            }
+            Application.LoadLevel(next_level);
         }
     }
 
