@@ -3,17 +3,17 @@ using System.Collections;
 
 public class CenterClockworkDeliverence : MonoBehaviour {
 
-    Cockpart[] cocks;
+    Clockpart[] clocks;
     public int turnedin;
 	// Use this for initialization
 	void Start () {
-        cocks = GameObject.FindObjectsOfType<Cockpart>();
+        clocks = GameObject.FindObjectsOfType<Clockpart>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (cocks.Length == turnedin)
+        if (clocks.Length == turnedin)
         {
             SaveLoad.saveLoad.Reset();
             Application.LoadLevel("Main Menu");
