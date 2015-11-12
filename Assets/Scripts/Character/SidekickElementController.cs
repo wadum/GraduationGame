@@ -41,17 +41,21 @@ public class SidekickElementController : MonoBehaviour {
         MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
         {
             var parentTransform = hit.transform;
-            if (parentTransform.GetComponentInParent<ObjectTimeController>())
+            ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
+            if (timecontroller)
             {
-                FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
+                if(timecontroller.InRange)
+                    FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
             }
         });
         MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
         {
             var parentTransform = hit.transform;
-            if (parentTransform.GetComponentInParent<ObjectTimeController>())
+            ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
+            if (timecontroller)
             {
-                FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
+                if(timecontroller.InRange)
+                    FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
             }
         });
         MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
