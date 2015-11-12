@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameOverlayController : MonoBehaviour
 {
@@ -9,13 +10,14 @@ public class GameOverlayController : MonoBehaviour
     public GameObject StoreScreen;
     public GameObject TimeSlider;
     public TimeSliderController SliderController;
-    public AudioSource ActivateSliderSound;
+    public List<AudioSource> ActivateSliderSounds;
 
     public static GameOverlayController gameOverlayController;
 
     private Canvas _canvas;
     private TimeControllable _currentObj;
     private AnimationController _animController;
+    private CharacterMovement _player;
 
     void Awake()
     {
@@ -99,8 +101,8 @@ public class GameOverlayController : MonoBehaviour
             return;
         if (TimeSlider.activeSelf)
             DeactivateSlider();
-        if (ActivateSliderSound && (!TimeSlider.activeSelf || _currentObj != obj))
-            ActivateSliderSound.Play();
+        if (ActivateSliderSounds != null && (!TimeSlider.activeSelf || _currentObj != obj))
+            ActivateSliderSounds.ForEach(a => a.Play());
         _currentObj = obj;
         MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
         if (master)
@@ -109,6 +111,10 @@ public class GameOverlayController : MonoBehaviour
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
         SliderController.SetTimeControllable(obj);
 
+        if (_player == null)
+            _player = FindObjectOfType<CharacterMovement>();
+
+        _player.SetPlayerLookAts(true, obj.gameObject);
         _animController.StartMagic();
     }
 
@@ -127,6 +133,14 @@ public class GameOverlayController : MonoBehaviour
         if (_animController == null)
             _animController = FindObjectOfType<AnimationController>();
 
+        if (_player == null)
+            _player = FindObjectOfType<CharacterMovement>();
+
+        GameObject tmpGO = null;
+        if (_currentObj != null)
+            tmpGO = _currentObj.gameObject;
+
+        _player.SetPlayerLookAts(false, tmpGO);
         _animController.StopMagic();
     }
 

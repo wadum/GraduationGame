@@ -59,6 +59,8 @@ public class CharacterJumping : MonoBehaviour
             if (_animator)
                 _animator.Jumping();
 
+            GameOverlayController.gameOverlayController.DeactivateSlider();
+
             target += new Vector3(0, _scale, 0);
             var jumpCurve = MakeBezierJump(transform.position, target);
 
@@ -238,6 +240,8 @@ public class CharacterJumping : MonoBehaviour
 
         if (_animator)
             _animator.Jumping();
+
+        GameOverlayController.gameOverlayController.DeactivateSlider();
 
         target += new Vector3(0, _scale, 0);
         var jumpCurve = MakeBezierJump(transform.position, target);
