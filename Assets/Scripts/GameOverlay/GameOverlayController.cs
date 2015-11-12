@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Linq;
 
 public class GameOverlayController : MonoBehaviour {
 
@@ -9,7 +10,7 @@ public class GameOverlayController : MonoBehaviour {
     public GameObject StoreScreen;
     public GameObject TimeSlider;
 	public TimeSliderController SliderController;
-	public AudioSource ActivateSliderSound;
+	public AudioSource[] ActivateSliderSounds;
 
     public static GameOverlayController gameOverlayController;
 
@@ -94,8 +95,8 @@ public class GameOverlayController : MonoBehaviour {
             return;
         if (TimeSlider.activeSelf)
             DeactivateSlider();
-        if (ActivateSliderSound && (!TimeSlider.activeSelf || _currentObj != obj))
-			ActivateSliderSound.Play();
+        if (ActivateSliderSounds.Length > 0 && (!TimeSlider.activeSelf || _currentObj != obj))
+			ActivateSliderSounds.ToList().ForEach(a => a.Play());
         _currentObj = obj;
         MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
         if(master)
