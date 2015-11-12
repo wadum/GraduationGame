@@ -4,10 +4,15 @@ using System.Collections;
 public class ElevatorTrigger : MonoBehaviour {
 
     public Animator Ani;
-    public float WaitTime = 5;
+    public float WaitTime = 2;
 
+    public GameObject ImActive;
     public GameObject UpperWall;
     public GameObject LowerWall;
+
+    float _aniTime;
+    bool running = false;
+    float timer = 0;
 
     public GameObject Player
     {
@@ -37,41 +42,49 @@ public class ElevatorTrigger : MonoBehaviour {
 
     void Update()
     {
-        UpperWall.SetActive(!Ani.GetCurrentAnimatorStateInfo(0).IsName("UpPose"));
-        LowerWall.SetActive(!Ani.GetCurrentAnimatorStateInfo(0).IsName("DownPose"));
-
-        if (Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingUp") || Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingDown"))
+        if (ImActive.gameObject.activeSelf == true)
         {
-            if (Triggered)
+            _aniTime = 0;
+            Ani.speed = 1;
+            if (Ani.GetCurrentAnimatorStateInfo(0).IsName("New State"))
             {
-                Player.GetComponent<NavMeshAgent>().enabled = false;
-                Player.transform.parent = transform;
+                return;
             }
-        }
-    }
 
+            UpperWall.SetActive(!Ani.GetCurrentAnimatorStateInfo(0).IsName("UpPose"));
+            LowerWall.SetActive(!Ani.GetCurrentAnimatorStateInfo(0).IsName("DownPose"));
 
-    public IEnumerator moveElevator()
-    {
-        while (true)
+            if (Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingUp") || Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingDown"))
+            {
+                if (Triggered)
+                {
+                    Player.GetComponent<NavMeshAgent>().enabled = false;
+                    Player.transform.parent = transform;
+                }
+                running = false;
+                return;
+            }
+
+            timer += Time.deltaTime;
+
+            if (!running && timer > WaitTime)
+            {
+                timer = 0;
+                Ani.SetBool("Up", !Ani.GetBool("Up"));
+
+                if (Triggered)
+                {
+                    Player.GetComponent<NavMeshAgent>().enabled = true;
+                    Player.transform.parent = null;
+                }
+
+                running = true;
+            }
+        } else
         {
-            while (Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingUp") || Ani.GetCurrentAnimatorStateInfo(0).IsName("MovingDown") || Ani.GetCurrentAnimatorStateInfo(0).IsName("New State"))
-            {
-                yield return null;
-            }
-
-            if (Triggered)
-            {
-                Player.GetComponent<NavMeshAgent>().enabled = true;
-                Player.transform.parent = null;
-            }
-
-            yield return new WaitForSeconds(WaitTime);
-
-            Ani.SetBool("Up", !Ani.GetBool("Up"));
-
-            yield return new WaitForSeconds(1f);
-
+            _aniTime += Time.deltaTime;
+            if (_aniTime > 0.3)
+                Ani.speed = 0;
         }
     }
 }

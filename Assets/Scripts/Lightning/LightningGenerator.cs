@@ -57,10 +57,6 @@ public class LightningGenerator : MonoBehaviour {
                     lightningConductor.GetComponent<Electrified>().Deactivate();
                 }
                 lightningConductor = LightningConductors[i];
-                LengthForEachSection = conductorDistance / lengthOfLineRenderer;
-                lineRenderer.enabled = true;
-                if(Audio)
-                    Audio.Play();
             }
         }
 
@@ -78,23 +74,30 @@ public class LightningGenerator : MonoBehaviour {
             return;
         }
 
-        if (lightningConductor) lightningConductor.GetComponent<Electrified>().Activate();
-
-        //if enough ime has passed update the line
-        if (timePassed > frecuency)
+        if (lightningConductor)
         {
-            lineRenderer.SetPosition(0, transform.position);
-            for (int i = 1; i < lengthOfLineRenderer - 1; i++)
+            lightningConductor.GetComponent<Electrified>().Activate();
+            lineRenderer.enabled = true;
+            if (Audio)
+                Audio.Play();
+
+            //if enough ime has passed update the line
+            if (timePassed > frecuency)
             {
-                Vector3 originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                Vector3 dirMoveDist = (lightningConductor.transform.position - originalPos).normalized * LengthForEachSection;
-                Vector3 RandomDisplacement = (Vector3.Cross(dirMoveDist, Camera.main.transform.position - originalPos)).normalized * Random.Range(-JitterDistance, JitterDistance);
-                Vector3 pos = originalPos + dirMoveDist * i + RandomDisplacement;
-                lineRenderer.SetPosition(i, pos);
+                LengthForEachSection = conductorDistance / lengthOfLineRenderer;
+                lineRenderer.SetPosition(0, transform.position);
+                for (int i = 1; i < lengthOfLineRenderer - 1; i++)
+                {
+                    Vector3 originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    Vector3 dirMoveDist = (lightningConductor.transform.position - originalPos).normalized * LengthForEachSection;
+                    Vector3 RandomDisplacement = (Vector3.Cross(dirMoveDist, Camera.main.transform.position - originalPos)).normalized * Random.Range(-JitterDistance, JitterDistance);
+                    Vector3 pos = originalPos + dirMoveDist * i + RandomDisplacement;
+                    lineRenderer.SetPosition(i, pos);
+                }
+                Vector3 lastPos = lightningConductor.transform.position;
+                lineRenderer.SetPosition(lengthOfLineRenderer - 1, lastPos);
+                timePassed = 0.0f;
             }
-            Vector3 lastPos = lightningConductor.transform.position;
-            lineRenderer.SetPosition(lengthOfLineRenderer - 1, lastPos);
-            timePassed = 0.0f;
         }
     }
 
