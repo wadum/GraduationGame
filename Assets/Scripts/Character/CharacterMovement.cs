@@ -5,7 +5,7 @@ public class CharacterMovement : MonoBehaviour
     public GameObject DeliverClockPartArea;
     public GameObject[] FloatWaypoints;
     public float WaypointFloatSpeed = 1.0f;
-
+    public float RotationSpeed = 3.0f;
 
     private bool LootAtMovingObject = false;
     private GameObject LookAtTarget = null;
@@ -42,7 +42,9 @@ public class CharacterMovement : MonoBehaviour
                 if (tmpLTarget != null)
                 {
                     Vector3 tmpActualTarget = new Vector3(tmpLTarget.transform.position.x, this.gameObject.transform.position.y, tmpLTarget.transform.position.z);
-                    gameObject.transform.LookAt(tmpActualTarget);
+                    Quaternion targetRotation = Quaternion.LookRotation(tmpActualTarget - transform.position);
+                    float str = RotationSpeed * Time.deltaTime;
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
                 }
                 else
                     Debug.LogWarning("LookHERE script has to be assigned to one of the children of the target gameObject: " + LookAtTarget.name);
