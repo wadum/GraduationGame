@@ -55,6 +55,7 @@ public class SaveLoad : MonoBehaviour {
 
     void OnLevelWasLoaded(int level)
     {
+        PlayerPrefs.SetString("LastLevel", Application.loadedLevelName);
             Prepare();
     }
 
