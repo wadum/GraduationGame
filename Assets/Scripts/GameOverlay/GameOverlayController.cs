@@ -17,6 +17,7 @@ public class GameOverlayController : MonoBehaviour
     private Canvas _canvas;
     private TimeControllable _currentObj;
     private AnimationController _animController;
+    private CharacterMovement _player;
 
     void Awake()
     {
@@ -110,6 +111,10 @@ public class GameOverlayController : MonoBehaviour
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
         SliderController.SetTimeControllable(obj);
 
+        if (_player == null)
+            _player = FindObjectOfType<CharacterMovement>();
+
+        _player.SetPlayerLookAts(true, obj.gameObject);
         _animController.StartMagic();
     }
 
@@ -128,6 +133,14 @@ public class GameOverlayController : MonoBehaviour
         if (_animController == null)
             _animController = FindObjectOfType<AnimationController>();
 
+        if (_player == null)
+            _player = FindObjectOfType<CharacterMovement>();
+
+        GameObject tmpGO = null;
+        if (_currentObj != null)
+            tmpGO = _currentObj.gameObject;
+
+        _player.SetPlayerLookAts(false, tmpGO);
         _animController.StopMagic();
     }
 
