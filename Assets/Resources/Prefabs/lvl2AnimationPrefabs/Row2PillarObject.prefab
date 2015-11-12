@@ -32,7 +32,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &102996
 GameObject:
   m_ObjectHideFlags: 1
@@ -189,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &111258
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,7 +2334,7 @@ GameObject:
   - 208: {fileID: 20800084}
   m_Layer: 0
   m_Name: mainPillar
-  m_TagString: TimeManipulationObject
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2402,6 +2402,7 @@ GameObject:
   - 114: {fileID: 11411458}
   - 95: {fileID: 9538496}
   - 135: {fileID: 13521854}
+  - 114: {fileID: 11431256}
   m_Layer: 0
   m_Name: Row2PillarObject
   m_TagString: Untagged
@@ -9480,7 +9481,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189556}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: dc73c666bd1e0c74a81504dd62d7c867, type: 2}
   m_CullingMode: 0
@@ -9503,6 +9504,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwirlAroundLocation: {fileID: 164960}
   SwirlDistance: 2.5
+--- !u!114 &11431256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04fe4944762fdf4c98cbad00fdb557e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 0
 --- !u!114 &11446908
 MonoBehaviour:
   m_ObjectHideFlags: 1
