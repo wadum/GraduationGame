@@ -20,7 +20,8 @@ public class PauseMenuController : MonoBehaviour {
 
 	public void Restart()
 	{
-        SaveLoad.saveLoad.Reset();
+        if(SaveLoad.saveLoad)
+            SaveLoad.saveLoad.Reset();
 		Application.LoadLevel(Application.loadedLevel);
 	}
 

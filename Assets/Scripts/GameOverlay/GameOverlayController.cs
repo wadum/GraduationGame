@@ -1,20 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
-public class GameOverlayController : MonoBehaviour {
+public class GameOverlayController : MonoBehaviour
+{
 
-	public GameObject StoryText;
-	public GameObject PauseMenu;
+    public GameObject StoryText;
+    public GameObject PauseMenu;
     public GameObject StoreScreen;
     public GameObject TimeSlider;
-	public TimeSliderController SliderController;
-	public AudioSource ActivateSliderSound;
+    public TimeSliderController SliderController;
+    public AudioSource ActivateSliderSound;
 
     public static GameOverlayController gameOverlayController;
 
-    Canvas _canvas;
-    TimeControllable _currentObj;
+    private Canvas _canvas;
+    private TimeControllable _currentObj;
+    private AnimationController _animController;
 
     void Awake()
     {
@@ -28,26 +29,30 @@ public class GameOverlayController : MonoBehaviour {
                     Destroy(this.gameObject);
                 }*/
         gameOverlayController = this;
-
     }
 
     void Start()
-	{
+    {
         _canvas = GetComponentInChildren<Canvas>();
-		_canvas.worldCamera = Camera.main;
-	}
+        _canvas.worldCamera = Camera.main;
 
-	void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Escape))
-			TogglePauseMenu();
-	}
+        _animController = FindObjectOfType<AnimationController>();
+    }
 
-	public void ShowStoryText(string textFile)
-	{
-		StoryText.SetActive(true);
-		StoryText.GetComponent<StoryTextController>().Show(textFile);
-	}
+    void Update()
+    {
+        if (_animController == null)
+            Debug.LogWarning("Character's animation controller missing from scene!");
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            TogglePauseMenu();
+    }
+
+    public void ShowStoryText(string textFile)
+    {
+        StoryText.SetActive(true);
+        StoryText.GetComponent<StoryTextController>().Show(textFile);
+    }
 
     public void ShowStore()
     {
@@ -59,21 +64,34 @@ public class GameOverlayController : MonoBehaviour {
         StoreScreen.SetActive(false);
     }
 
+    public void GoToMainMenu()
+    {
+        if (!SaveLoad.saveLoad)
+            Debug.Log("No SaveLoad class in game");
+        else
+        {
+            SaveLoad.saveLoad.Save();
+            SaveLoad.saveLoad.SaveInterval = 0;
+        }
+        Application.LoadLevel("Main Menu");
+    }
+
     public void TogglePauseMenu()
-	{
-		if(PauseMenu.activeSelf) HidePauseMenu();
-		else ShowPauseMenu();
-	}
+    {
+        if (PauseMenu.activeSelf) HidePauseMenu();
+        else ShowPauseMenu();
+    }
 
-	public void ShowPauseMenu()
-	{
-		PauseMenu.SetActive(true);
-	}
+    public void ShowPauseMenu()
+    {
+        PauseMenu.SetActive(true);
+    }
 
-	public void HidePauseMenu()
-	{
-		PauseMenu.SetActive(false);
-	}
+    public void HidePauseMenu()
+    {
+        PauseMenu.SetActive(false);
+    }
+
 
     public void ActivateSlider(TimeControllable obj)
     {
@@ -82,14 +100,16 @@ public class GameOverlayController : MonoBehaviour {
         if (TimeSlider.activeSelf)
             DeactivateSlider();
         if (ActivateSliderSound && (!TimeSlider.activeSelf || _currentObj != obj))
-			ActivateSliderSound.Play();
+            ActivateSliderSound.Play();
         _currentObj = obj;
         MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
-        if(master)
+        if (master)
             master.Activate();
         TimeSlider.SetActive(true);
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
-		SliderController.SetTimeControllable(obj);
+        SliderController.SetTimeControllable(obj);
+
+        _animController.StartMagic();
     }
 
     public void DeactivateSlider()
@@ -103,6 +123,11 @@ public class GameOverlayController : MonoBehaviour {
 
         TimeSlider.SetActive(false);
         _currentObj = null;
+
+        if (_animController == null)
+            _animController = FindObjectOfType<AnimationController>();
+
+        _animController.StopMagic();
     }
 
     public void SetFloat(float var)

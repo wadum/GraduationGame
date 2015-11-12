@@ -30,7 +30,7 @@ public class CharacterInventory : MonoBehaviour
 
         if (clockPartCounter >= clockpartsToCollect && doOnce)
         {
-            playerMovement.GoToCenterClock(clockParts[clockPartCounter-1].GetComponent<Cockpart>().FloatWaypoints);
+            playerMovement.GoToCenterClock(clockParts[clockPartCounter-1].GetComponent<Clockpart>().FloatWaypoints);
             doOnce = false;
         }
 
@@ -38,7 +38,7 @@ public class CharacterInventory : MonoBehaviour
         {
             for (int i = 0; i < clockpartsToCollect ; i++)
             {
-                clockParts[i].GetComponent<Cockpart>().goToCenterClock(centerClock.transform.position);
+                clockParts[i].GetComponent<Clockpart>().goToCenterClock(centerClock.transform.position);
                 clockParts[i] = null;
                 clockPartCounter--;
             }
@@ -48,6 +48,17 @@ public class CharacterInventory : MonoBehaviour
 
     public void AddClockPart(GameObject clockpart)
     {
+        // Sanity.. This is an ugly fix, but I dont know why my loading gives two cogs..
+        foreach (GameObject cog in clockParts)
+        {
+            if(cog != null)
+            {
+                if (cog.name == clockpart.name)
+                {
+                    return;
+                }
+            }
+        }
         clockParts[clockPartCounter] = clockpart;
         clockPartCounter++;
         for (int i = 0; i < clockPartCounter; i++)
