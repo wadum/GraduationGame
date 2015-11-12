@@ -15,6 +15,7 @@ public class SaveLoad : MonoBehaviour {
 
     [Range(0, 100)]
     public float SaveInterval = 0;
+    private float _SaveInterval;
     private float elapsedtime;
 
     [Header("Debuggin")]
@@ -26,6 +27,13 @@ public class SaveLoad : MonoBehaviour {
     public CharacterInventory inv;
     public string lastLevel;
     Clockpart[] cogs;
+
+
+    void Awake()
+    {
+        _SaveInterval = SaveInterval;
+        SaveInterval = 0f;
+    }
 
     // When the script is loaded for the first time, it will load progress from last time.
     void OnEnable()
@@ -39,7 +47,6 @@ public class SaveLoad : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
-        Prepare();
     }
 
     void Prepare()
@@ -55,7 +62,15 @@ public class SaveLoad : MonoBehaviour {
 
     void OnLevelWasLoaded(int level)
     {
+        PlayerPrefs.SetString("LastLevel", Application.loadedLevelName);
+        if (Application.loadedLevelName == "Main Menu")
+            SaveLoad.saveLoad.SaveInterval = 0f;
+        else
+        {
+            Debug.Log("level was loaded");
+            SaveLoad.saveLoad.SaveInterval = _SaveInterval;
             Prepare();
+        }
     }
 
     void OnApplicationQuit()
