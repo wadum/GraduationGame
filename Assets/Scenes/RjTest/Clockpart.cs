@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cockpart : MonoBehaviour {
+public class Clockpart : MonoBehaviour {
 
     public GameObject[] FloatWaypoints;
 
@@ -47,6 +47,7 @@ public class Cockpart : MonoBehaviour {
 
             if (fracJourney > 1)
             {
+                GameObject.FindObjectOfType<CenterClockworkDeliverence>().turnedin += 1;
                 Destroy(gameObject);
             }
         }

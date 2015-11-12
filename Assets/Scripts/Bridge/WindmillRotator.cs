@@ -6,10 +6,10 @@ public class WindmillRotator : MonoBehaviour {
 
     public float RotationSpeed = 2;
     public GameObject RotateObject;
-    ElectrifiedBridge[] On;
+    Electrified[] On;
 	
 	void Awake () {
-        On = transform.root.GetComponentsInChildren<ElectrifiedBridge>();
+        On = transform.root.GetComponentsInChildren<Electrified>();
 	}
 	
 	void Update () {
