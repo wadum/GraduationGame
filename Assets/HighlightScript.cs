@@ -16,7 +16,10 @@ public class HighlightScript : MonoBehaviour {
             Debug.Log(name);
         //   orgshader = rend.material.shader;
         if (rend.material.shader.name != "Shader Forge/ObejctDissolver")
-            Debug.Log("Default shader? WHY?!" + rend.material.shader.name);
+        {
+            Destroy(this);
+         //   Debug.Log(name + "Shader does not support highlight");
+        }
         else
             orgemmision = rend.material.GetVector("_Emission");
     }
