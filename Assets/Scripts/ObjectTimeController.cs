@@ -3,10 +3,11 @@ using System.Collections;
 using System.Linq;
 using System;
 
-public class ObjectTimeController : TimeControllable {
+public class ObjectTimeController : TimeControllable
+{
 
     [Header("Time Settings")]
-    [Range(0,100)]
+    [Range(0, 100)]
     public float TimePos;
 
     [Range(0, 100)]
@@ -95,8 +96,8 @@ public class ObjectTimeController : TimeControllable {
             obj.SetActive(!(TimePos > workingStateStartPercent));
         }
     }
-	
-	override public void SetFloat(float var)
+
+    override public void SetFloat(float var)
     {
         TimePos = var;
         _lastChanged = Time.time;
@@ -133,7 +134,7 @@ public class ObjectTimeController : TimeControllable {
         }
     }
 
-	override public float GetFloat()
+    override public float GetFloat()
     {
         return TimePos;
     }
@@ -156,5 +157,16 @@ public class ObjectTimeController : TimeControllable {
         if (master)
             master.InRange = false;
 
+    }
+
+    void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "Player")
+        {
+            InRange = true;
+            MasterHighlight master = GetComponent<MasterHighlight>();
+            if (master)
+                master.InRange = true;
+        }
     }
 }
