@@ -915,7 +915,6 @@ GameObject:
   - 4: {fileID: 430300}
   - 33: {fileID: 3325970}
   - 23: {fileID: 2337180}
-  - 114: {fileID: 11499880}
   m_Layer: 0
   m_Name: conductCube
   m_TagString: Untagged
@@ -1843,6 +1842,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 401952}
+  - 114: {fileID: 11432430}
   m_Layer: 0
   m_Name: HelperSwirlLocation
   m_TagString: Untagged
@@ -6754,6 +6754,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11432430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11450378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6867,11 +6878,7 @@ MonoBehaviour:
   ActiveObjects: []
   DeactiveObjects: []
   EnableObjectsBeforeTimeLimit: []
-  EnableObjectsWithinTimeLimit:
-  - {fileID: 185636}
-  - {fileID: 142478}
-  - {fileID: 116516}
-  - {fileID: 153870}
+  EnableObjectsWithinTimeLimit: []
   EnableObjectsAfterTimeLimit: []
   DisableObjectsBeforeTimeLimit: []
   DisableObjectsWithinTimeLimit: []
@@ -6902,17 +6909,6 @@ MonoBehaviour:
   Active: 0
   _elevatorTrigger: {fileID: 6527392}
   Ani: {fileID: 9571164}
---- !u!114 &11499880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 135860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &13502956
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -7220,12 +7216,12 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113910}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: .0120000001, y: .971000075, z: .0120000001}
   m_MoveThreshold: .100000001
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: -3.13000011, z: 0}
   m_TimeToStationary: .5
