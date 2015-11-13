@@ -9,6 +9,7 @@ public class LoadLevel : MonoBehaviour
     int w = 250;
     int h = 200;
     string language;
+    bool active;
 
 
     // Use this for initialization
@@ -39,9 +40,11 @@ public class LoadLevel : MonoBehaviour
 
     public void Enable()
     {
-        this.gameObject.layer = LayerMask.NameToLayer("Default");
-        this.gameObject.AddComponent<MeshCollider>();
-
+        if (File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
+            this.gameObject.AddComponent<MeshCollider>();
+        }
     }
 
     void OnGUI()
