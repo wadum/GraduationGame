@@ -99,7 +99,7 @@ public class SaveLoad : MonoBehaviour {
         }
         // Open new BinaryFormatter, with a filename depending on the level we're playing.
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Create);
+        FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save", FileMode.Create);
         // Save the data to the file.
         bf.Serialize(file, new SaveData(_SaveData, pickups));
         file.Close();
@@ -112,9 +112,9 @@ public class SaveLoad : MonoBehaviour {
     {
         // Reverse from Save, now we load.
         BinaryFormatter bf = new BinaryFormatter();
-        if(File.Exists(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save"))
+        if(File.Exists(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save"))
         {
-            FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save", FileMode.Open);
             SaveData data = (SaveData) bf.Deserialize(file);
             file.Close();
             // Restore the data of the pilars.
@@ -151,7 +151,7 @@ public class SaveLoad : MonoBehaviour {
             _SaveData.Clear();
         List<string> taggedclocks = new List<string>();
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevelName + ".save", FileMode.Create);
+        FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save", FileMode.Create);
         bf.Serialize(file, new SaveData(_SaveData, taggedclocks));
         file.Close();
     }
@@ -180,6 +180,33 @@ public class SaveLoad : MonoBehaviour {
         Save();
         elapsedtime = 0;
     }
+
+    public void ResetEverything()
+    {
+        int q = Application.levelCount;
+
+        for (int i = 0; i < q; i++)
+            {
+            if (File.Exists(Application.persistentDataPath + "/save" + i + ".save")){
+                File.Delete(Application.persistentDataPath + "/save" + i + ".save");
+                }
+            }
+
+    }
+
+    public void ResetFrom(int level)
+    {
+        int q = Application.levelCount;
+
+        for (int i = level; i < q; i++)
+        {
+            if (File.Exists(Application.persistentDataPath + "/save" + i + ".save"))
+            {
+                File.Delete(Application.persistentDataPath + "/save" + i + ".save");
+            }
+        }
+    }
+
 }
 
 // SaveData is the data which is being serializd, it needs to hold all information which we store in a load, so expand this as needed.

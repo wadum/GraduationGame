@@ -1004,6 +1004,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &158952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 498860}
+  - 114: {fileID: 11456554}
+  - 64: {fileID: 6420148}
+  m_Layer: 0
+  m_Name: TriggerForKillingPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &158988
 GameObject:
   m_ObjectHideFlags: 1
@@ -1907,7 +1924,7 @@ Transform:
   - {fileID: 401372}
   - {fileID: 435864}
   m_Father: {fileID: 498750}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &416534
 Transform:
   m_ObjectHideFlags: 1
@@ -1935,7 +1952,7 @@ Transform:
   - {fileID: 477884}
   - {fileID: 402978}
   m_Father: {fileID: 498750}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &419898
 Transform:
   m_ObjectHideFlags: 1
@@ -2951,12 +2968,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187510}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: -.25, y: .289999992, z: -2.50999999}
+  m_LocalPosition: {x: .391133785, y: .588600218, z: -2.69105196}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 498860}
   - {fileID: 416114}
   - {fileID: 416822}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &498860
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 498750}
   m_RootOrder: 0
 --- !u!4 &499292
 Transform:
@@ -3692,6 +3722,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: db380aba305568946b5b901ce1f9e8f5, type: 3}
+--- !u!64 &6420148
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158952}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: db380aba305568946b5b901ce1f9e8f5, type: 3}
 --- !u!81 &8186324
 AudioListener:
   m_ObjectHideFlags: 1
@@ -3937,6 +3979,7 @@ MonoBehaviour:
   DeliverClockPartArea: {fileID: 0}
   FloatWaypoints: []
   WaypointFloatSpeed: 5
+  RotationSpeed: 3
 --- !u!114 &11424540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4145,6 +4188,22 @@ MonoBehaviour:
   SwirlAroundPlayerDistance: 1.5
   parent: {fileID: 112308}
   _myStatus: 0
+--- !u!114 &11456554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7775c4ece31ad4b4783670aedcf7866c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathWaitTime: .5
+  DissolverShader: {fileID: 4800000, guid: 1130eef763a03634e8197e2c60d88e58, type: 3}
+  _playerBody: {fileID: 100556}
+  _playerEyes: {fileID: 130840}
+  _playerHair: {fileID: 142566}
 --- !u!114 &11463810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4322,6 +4381,7 @@ MonoBehaviour:
   MaximumHorizonalJump: 5
   MaximumDrop: 10
   JumpingSpeed: 2
+  JumpingHeightFactor: .600000024
   ControlNavJumps: 1
   TagsToJumpOnto:
   - Rock
@@ -4400,7 +4460,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 04838dcc7de77114582d568ba801323d, type: 2}
+  - {fileID: 2100000, guid: 68ab28336387e0a49a4248aae4d41780, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -4462,7 +4522,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 04838dcc7de77114582d568ba801323d, type: 2}
+  - {fileID: 2100000, guid: 68ab28336387e0a49a4248aae4d41780, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

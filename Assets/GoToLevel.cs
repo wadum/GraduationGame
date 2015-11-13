@@ -12,7 +12,6 @@ public class GoToLevel : MonoBehaviour {
     }
     // Use this for initialization
     void Update () {
-        //        SaveLoad.saveLoad.SaveInterval = 2f;
         if (Time.time > 0.5f)
             if (level != "")
             {
