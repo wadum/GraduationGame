@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Linq;
 
-public class ActivateIfBridgeElectrified : MonoBehaviour {
+public class ActivateIfElectrified : MonoBehaviour {
 
     public GameObject ImActive;
-    ElectrifiedBridge[] On;
+    Electrified[] On;
 
     void Awake()
     {
-        On = transform.root.GetComponentsInChildren<ElectrifiedBridge>();
+        On = transform.root.GetComponentsInChildren<Electrified>();
     }
 
     void Update()
