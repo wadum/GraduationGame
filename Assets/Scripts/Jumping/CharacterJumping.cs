@@ -163,8 +163,8 @@ public class CharacterJumping : MonoBehaviour
         // Get location on top of target
         var v1 = target.position + new Vector3(0, hit.collider.bounds.extents.y, 0);
 
-        // Get distance from feet of character
-        var v2 = transform.position - new Vector3(0, hit.collider.bounds.extents.y, 0);
+        // Get distance from feet of character (WHICH IS WRONG GODDAMMIT POS SHOULD BE CENTER OF OBJECT PEOPLE NOT BOTTOM OF IT!)
+        var v2 = transform.position;
 
         if (!CanReach(v2, v1))
         {
@@ -196,8 +196,8 @@ public class CharacterJumping : MonoBehaviour
         // Get location of hit, for exact jumping
         var v1 = hit.point;
 
-        // Get distance from feet of character
-        var v2 = transform.position - new Vector3(0, _scale, 0);
+        // Get distance from feet of character (WHICH IS WRONG GODDAMMIT POS SHOULD BE CENTER OF OBJECT PEOPLE NOT BOTTOM OF IT!)
+        var v2 = transform.position;
 
         if (!CanReach(v2, v1))
         {
@@ -243,7 +243,6 @@ public class CharacterJumping : MonoBehaviour
 
         GameOverlayController.gameOverlayController.DeactivateSlider();
 
-        target += new Vector3(0, _scale, 0);
         var jumpCurve = MakeBezierJump(transform.position, target);
 
         var t = 0f;
@@ -261,6 +260,7 @@ public class CharacterJumping : MonoBehaviour
             _animator.Landing();
 
         transform.parent = targetParent;
+
         _jumping = false;
     }
 }

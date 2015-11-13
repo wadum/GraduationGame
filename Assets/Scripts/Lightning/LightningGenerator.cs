@@ -78,7 +78,7 @@ public class LightningGenerator : MonoBehaviour {
         {
             lightningConductor.GetComponent<Electrified>().Activate();
             lineRenderer.enabled = true;
-            if (Audio)
+            if (Audio && !Audio.isPlaying)
                 Audio.Play();
 
             //if enough ime has passed update the line
