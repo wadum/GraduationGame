@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadNextScene : MonoBehaviour {
+public class LoadNextSceneOnEnable : MonoBehaviour {
 
 	void OnEnable()
     {
