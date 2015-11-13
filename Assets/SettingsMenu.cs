@@ -23,8 +23,13 @@ public class SettingsMenu : MonoBehaviour
     public Animator anim;
 
     public float hSliderValue;
-
-
+    AudioSource clicksound;
+    void Start()
+    {
+        clicksound = GetComponent<AudioSource>();
+        if (!clicksound)
+            Debug.Log("Attach AudioSource to " + name + " for clicking sound, remember to set output SFX, and no play awake");
+    }
     void Update()
     {
         if (!canvas.enabled && !anim.GetBool("Settings") && !anim.GetBool("Character"))
@@ -59,7 +64,8 @@ public class SettingsMenu : MonoBehaviour
         if (language == "Danish")
             sound = "Lyd: ";
         GUI.Label(new Rect((w - 100) / 2, elementheight * 2, 100, elementheight), sound, tex);
-        hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight * 3.5f, 100, elementheight + 15), hSliderValue, 0.0F, 10.0F);
+        float volume = PlayerPrefs.GetFloat("Volume");
+        hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight * 3.5f, 100, elementheight + 15), volume, 0.0F, 10.0F);
         PlayerPrefs.SetFloat("Volume", hSliderValue);
 
         string lan = "Language: ";
@@ -68,11 +74,13 @@ public class SettingsMenu : MonoBehaviour
         GUI.Label(new Rect((w - 100) / 2, elementheight * 5, 100, elementheight), lan, tex);
         if (GUI.Button(new Rect((w - 100) / 2 + 100, elementheight * 6, 100, elementheight), "English", tex))
         {
+            clicksound.Play();
             PlayerPrefs.SetString("Lan", "English");
 			I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
         }
         if (GUI.Button(new Rect((w - 100) / 2 - 100, elementheight * 6, 100, elementheight), "Danish", tex))
         {
+            clicksound.Play();
             PlayerPrefs.SetString("Lan", "Danish");
 			I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
 
@@ -84,11 +92,13 @@ public class SettingsMenu : MonoBehaviour
 
         if (GUI.Button(new Rect((w - 100) / 2, elementheight * 9, 100, elementheight), credits, tex))
         {
+            clicksound.Play();
             credit = true;
         }
 
         if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), "Back", tex))
         {
+            clicksound.Play();
             _time = Time.time;
             Active = false;
             anim.SetBool("Settings", false);
@@ -98,16 +108,17 @@ public class SettingsMenu : MonoBehaviour
 
     void Credits(int windowID)
     {
-        int elementheight = 35;
+        int elementheight = 25;
         int n = 0;
         foreach (string member in members)
         {
-            GUI.Label(new Rect(10, elementheight * n, 100, elementheight), member, credits);
+            GUI.Label(new Rect(10, elementheight * (1+n), 100, elementheight), member, credits);
             n += 1;
         }
-        GUI.Box(new Rect(0, 0, w, elementheight * n), "");
+        GUI.Box(new Rect(0, elementheight, w, elementheight * n), "");
         if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), "Back", tex))
         {
+            clicksound.Play();
             credit = false;
         }
     }
