@@ -764,6 +764,7 @@ GameObject:
   - 114: {fileID: 11495540}
   - 114: {fileID: 11416002}
   - 95: {fileID: 9584842}
+  - 114: {fileID: 11414148}
   m_Layer: 0
   m_Name: PillarLvl3
   m_TagString: Untagged
@@ -1729,7 +1730,6 @@ GameObject:
   - 23: {fileID: 2323202}
   - 64: {fileID: 6416158}
   - 208: {fileID: 20821168}
-  - 114: {fileID: 11406218}
   m_Layer: 0
   m_Name: mainPillar
   m_TagString: TimeManipulationObject
@@ -1938,6 +1938,22 @@ GameObject:
   m_Layer: 0
   m_Name: pipe08
   m_TagString: TimeManipulationObject
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &173160
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 429248}
+  - 114: {fileID: 11492264}
+  m_Layer: 0
+  m_Name: HelperSwirlLocation
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3271,6 +3287,18 @@ Transform:
   - {fileID: 418036}
   m_Father: {fileID: 452612}
   m_RootOrder: 15
+--- !u!4 &429248
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 499718}
+  m_RootOrder: 0
 --- !u!4 &430372
 Transform:
   m_ObjectHideFlags: 1
@@ -4754,7 +4782,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: -.0030296077, w: .99999541}
   m_LocalPosition: {x: .0550370291, y: 7.55806017, z: .0136162275}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 429248}
   m_Father: {fileID: 452612}
   m_RootOrder: 3
 --- !u!23 &2300016
@@ -9451,7 +9480,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129212}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 112fbaca130c1d142a30405874dcc31a, type: 2}
   m_CullingMode: 0
@@ -9461,17 +9490,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11406218
+--- !u!114 &11414148
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160808}
+  m_GameObject: {fileID: 129212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
+  m_Script: {fileID: 11500000, guid: cf3fd874db6a32f4fad7ece7adb5600f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SwirlAroundLocation: {fileID: 173160}
+  SwirlDistance: 2
 --- !u!114 &11416002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9497,6 +9528,17 @@ MonoBehaviour:
   - {fileID: 189726}
   DisableObjectsAfterTimeLimit: []
   InRange: 0
+--- !u!114 &11492264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11495540
 MonoBehaviour:
   m_ObjectHideFlags: 1
