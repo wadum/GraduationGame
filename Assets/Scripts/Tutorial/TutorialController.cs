@@ -17,7 +17,7 @@ public class TutorialController : MonoBehaviour {
 	void Awake ()
 	{
 		_multiTouch = GameObject.FindObjectOfType<MultiTouch>();
-		if(PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial)
+		if(PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl1")
 			Destroy(gameObject);
 	}
 
