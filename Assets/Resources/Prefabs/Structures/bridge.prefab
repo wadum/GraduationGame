@@ -983,6 +983,7 @@ GameObject:
   - 4: {fileID: 406118}
   - 33: {fileID: 3348724}
   - 23: {fileID: 2390800}
+  - 114: {fileID: 11419100}
   m_Layer: 0
   m_Name: conductCube
   m_TagString: TimeManipulationObject
@@ -1548,7 +1549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &160688
 GameObject:
   m_ObjectHideFlags: 1
@@ -1694,7 +1695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &166692
 GameObject:
   m_ObjectHideFlags: 1
@@ -2267,7 +2268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &188928
 GameObject:
   m_ObjectHideFlags: 1
@@ -3434,8 +3435,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148786}
-  m_LocalRotation: {x: 0, y: .991895854, z: 0, w: .127053782}
-  m_LocalPosition: {x: 2.01999998, y: -.100000001, z: -12.9499998}
+  m_LocalRotation: {x: 0, y: .497912556, z: 0, w: .867227256}
+  m_LocalPosition: {x: 11.1300001, y: -4.11000013, z: -23.8199997}
   m_LocalScale: {x: 1.71139157, y: 1.71139288, z: 1.71139288}
   m_Children:
   - {fileID: 429464}
@@ -4816,7 +4817,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 79b1126aa9491ce4e98102485dd6ffe1, type: 2}
+  - {fileID: 2100000, guid: 4eabdf8e8f8735945b8406bde2b25000, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -5056,7 +5057,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 79b1126aa9491ce4e98102485dd6ffe1, type: 2}
+  - {fileID: 2100000, guid: 4eabdf8e8f8735945b8406bde2b25000, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -5272,7 +5273,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 79b1126aa9491ce4e98102485dd6ffe1, type: 2}
+  - {fileID: 2100000, guid: 4eabdf8e8f8735945b8406bde2b25000, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -7443,8 +7444,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.11214113, y: 3.11584926, z: 2.61720562}
-  m_Center: {x: -2.09027672, y: 1.05792499, z: -.80860424}
+  m_Size: {x: 1.11214113, y: 3.11584926, z: .790000021}
+  m_Center: {x: -2.09027672, y: 1.05792499, z: -1.52999997}
 --- !u!65 &6553506
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -7752,6 +7753,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: .0199999996
+--- !u!114 &11419100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11428884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8099,7 +8111,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: .470000029, y: 1.14900005, z: .521000028}
+  m_Extents: {x: .470000029, y: 1.14900005, z: .239999995}
   m_MoveThreshold: .100000001
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -8144,11 +8156,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: .212000012, y: .688000023, z: .451000035}
+  m_Extents: {x: .344999999, y: .688000023, z: .239999995}
   m_MoveThreshold: .100000001
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: .309000015, y: -.0180000011, z: 0}
+  m_Center: {x: 0, y: -.0180000011, z: 0}
   m_TimeToStationary: .5
 --- !u!1001 &100100000
 Prefab:
