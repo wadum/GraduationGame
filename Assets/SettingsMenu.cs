@@ -39,6 +39,10 @@ public class SettingsMenu : MonoBehaviour
         if (Active)
         {
             language = PlayerPrefs.GetString("Lan");
+			if(language == "Danish")
+				I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
+			else
+				I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
             Rect windowRect = new Rect((Screen.width - w) / 2, (Screen.height - h) / 2, w, h);
 
             if (!credit)
@@ -65,10 +69,12 @@ public class SettingsMenu : MonoBehaviour
         if (GUI.Button(new Rect((w - 100) / 2 + 100, elementheight * 6, 100, elementheight), "English", tex))
         {
             PlayerPrefs.SetString("Lan", "English");
+			I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
         }
         if (GUI.Button(new Rect((w - 100) / 2 - 100, elementheight * 6, 100, elementheight), "Danish", tex))
         {
             PlayerPrefs.SetString("Lan", "Danish");
+			I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
 
         }
 
