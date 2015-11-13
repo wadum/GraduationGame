@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MainPlatform
-  m_Shader: {fileID: 4800000, guid: 23f37d3ddc51f2e4fa5dde6fa6c7acde, type: 3}
+  m_Name: SilverDissolver
+  m_Shader: {fileID: 4800000, guid: 1130eef763a03634e8197e2c60d88e58, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2450
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -20,7 +20,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 30, y: 30}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -80,16 +80,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _node_3443
+          name: _DissolveNoise
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 40, y: 40}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _node_8760
-        second:
-          m_Texture: {fileID: 8900000, guid: a688077da6e11544a926b83dd7b0d1c4, type: 3}
+          m_Texture: {fileID: 2800000, guid: df3ec59ce32e6074fb6a520c77cb04d7, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -140,15 +133,23 @@ Material:
       data:
         first:
           name: _Metallic
-        second: 0
+        second: 1
       data:
         first:
           name: _Gloss
-        second: .47299999
+        second: 1
       data:
         first:
-          name: _node_2698
-        second: .504273474
+          name: _DissolveAmount
+        second: 0
+      data:
+        first:
+          name: _OutlineWidth
+        second: .0170000009
+      data:
+        first:
+          name: _AlphaToggle
+        second: 0
     m_Colors:
       data:
         first:
@@ -157,32 +158,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .485294104, g: .485294104, b: .485294104, a: 1}
       data:
         first:
           name: _Emission
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .253027678, g: .289016813, b: .29411763, a: 1}
       data:
         first:
-          name: _Color2
-        second: {r: 1, g: .868154168, b: .632352948, a: 1}
-      data:
-        first:
-          name: _Color1
-        second: {r: .113538057, g: .308823526, b: .308823526, a: 1}
-      data:
-        first:
-          name: _node_1401
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _node_3497
-        second: {r: 1, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _node_3046
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _node_8918
-        second: {r: 1, g: 1, b: 1, a: 1}
+          name: _OutlineColor
+        second: {r: 0, g: 1, b: .958620489, a: 0}
