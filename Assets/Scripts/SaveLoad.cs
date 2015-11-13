@@ -14,7 +14,7 @@ public class SaveLoad : MonoBehaviour {
     public static SaveLoad saveLoad;
 
     [Range(0, 100)]
-    public float SaveInterval = 0;
+    public float SaveInterval = 2;
     private float _SaveInterval;
     private float elapsedtime;
 
@@ -62,12 +62,13 @@ public class SaveLoad : MonoBehaviour {
 
     void OnLevelWasLoaded(int level)
     {
+        if (level == 2)
+            return;
         PlayerPrefs.SetString("LastLevel", Application.loadedLevelName);
         if (Application.loadedLevelName == "Main Menu")
             SaveLoad.saveLoad.SaveInterval = 0f;
         else
         {
-            Debug.Log("level was loaded");
             SaveLoad.saveLoad.SaveInterval = _SaveInterval;
             Prepare();
         }
@@ -198,7 +199,7 @@ public class SaveLoad : MonoBehaviour {
     {
         int q = Application.levelCount;
 
-        for (int i = level; i < q; i++)
+        for (int i = level-1; i < q; i++)
         {
             if (File.Exists(Application.persistentDataPath + "/save" + i + ".save"))
             {

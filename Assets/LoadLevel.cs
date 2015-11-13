@@ -68,6 +68,7 @@ public class LoadLevel : MonoBehaviour
         if (GUI.Button(new Rect((w / 2 - 75), elementheight, 75, elementheight), resume))
         {
             SaveLoad.saveLoad.SaveInterval = 2f;
+            Debug.Log(level);
             Application.LoadLevel(level);
         }
         string restart = "Restart!";
