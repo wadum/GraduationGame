@@ -23,7 +23,7 @@ public class ElevatorTrigger : MonoBehaviour {
         get; set;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.tag != "Player" || other.gameObject.transform.root != other.gameObject.transform) return;
 
@@ -72,13 +72,12 @@ public class ElevatorTrigger : MonoBehaviour {
                 timer = 0;
                 Ani.SetBool("Up", !Ani.GetBool("Up"));
 
-                if (Triggered)
-                {
-                    Player.GetComponent<NavMeshAgent>().enabled = true;
-                    Player.transform.parent = null;
-                }
-
                 running = true;
+            }
+            if (Triggered)
+            {
+                Player.GetComponent<NavMeshAgent>().enabled = true;
+                Player.transform.parent = null;
             }
         } else
         {

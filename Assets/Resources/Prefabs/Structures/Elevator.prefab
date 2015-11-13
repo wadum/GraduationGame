@@ -915,6 +915,7 @@ GameObject:
   - 4: {fileID: 430300}
   - 33: {fileID: 3325970}
   - 23: {fileID: 2337180}
+  - 114: {fileID: 11499880}
   m_Layer: 0
   m_Name: conductCube
   m_TagString: Untagged
@@ -1194,8 +1195,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 435868}
   - 33: {fileID: 3316040}
-  - 65: {fileID: 6527392}
   - 114: {fileID: 11457034}
+  - 135: {fileID: 13503774}
   m_Layer: 2
   m_Name: ElevatorTrigger
   m_TagString: Untagged
@@ -1842,7 +1843,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 401952}
-  - 114: {fileID: 11432430}
   m_Layer: 0
   m_Name: HelperSwirlLocation
   m_TagString: Untagged
@@ -2655,8 +2655,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 182058}
-  m_LocalRotation: {x: 0, y: -.407768965, z: 0, w: -.913085222}
-  m_LocalPosition: {x: .829999983, y: -2.18000007, z: -30.5400009}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.01999998, y: 1.92999995, z: 23.5200005}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 483836}
@@ -3121,7 +3121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144790}
   m_LocalRotation: {x: -.50000006, y: -.50000006, z: -.49999997, w: .49999997}
-  m_LocalPosition: {x: .610000014, y: .202000007, z: .00499999989}
+  m_LocalPosition: {x: .0299999993, y: .00999999978, z: .00499999989}
   m_LocalScale: {x: .346490413, y: .346490353, z: .346490383}
   m_Children: []
   m_Father: {fileID: 466686}
@@ -6612,18 +6612,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6527392
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144790}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.24699736, y: .883004785, z: 3.55734086}
-  m_Center: {x: .122925796, y: .0585505925, z: -.485845804}
 --- !u!65 &6529544
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -6754,17 +6742,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11432430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 178674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11450378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6773,12 +6750,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 185636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f158041ea6f34784cbd161d2e17a2d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c603ab996edc914bb4b21f30ad456f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 0
-  _elevatorTrigger: {fileID: 6527392}
-  Ani: {fileID: 9571164}
 --- !u!114 &11450736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6800,12 +6775,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 142478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f158041ea6f34784cbd161d2e17a2d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c603ab996edc914bb4b21f30ad456f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 0
-  _elevatorTrigger: {fileID: 6527392}
-  Ani: {fileID: 9571164}
 --- !u!114 &11457034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6843,12 +6816,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 153870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f158041ea6f34784cbd161d2e17a2d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c603ab996edc914bb4b21f30ad456f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 0
-  _elevatorTrigger: {fileID: 6527392}
-  Ani: {fileID: 9571164}
 --- !u!114 &11469954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6857,7 +6828,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 167674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829955cc8e516444fb9b09f10b2ffd81, type: 3}
+  m_Script: {fileID: 11500000, guid: 909ae7b077be02c44ab2c0754a82bac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ImActive: {fileID: 178638}
@@ -6878,7 +6849,11 @@ MonoBehaviour:
   ActiveObjects: []
   DeactiveObjects: []
   EnableObjectsBeforeTimeLimit: []
-  EnableObjectsWithinTimeLimit: []
+  EnableObjectsWithinTimeLimit:
+  - {fileID: 185636}
+  - {fileID: 142478}
+  - {fileID: 116516}
+  - {fileID: 153870}
   EnableObjectsAfterTimeLimit: []
   DisableObjectsBeforeTimeLimit: []
   DisableObjectsWithinTimeLimit: []
@@ -6903,12 +6878,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 116516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f158041ea6f34784cbd161d2e17a2d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c603ab996edc914bb4b21f30ad456f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 0
-  _elevatorTrigger: {fileID: 6527392}
-  Ani: {fileID: 9571164}
+--- !u!114 &11499880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &13502956
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -6920,6 +6904,18 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3.24000001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &13503774
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13712788
 SkinnedMeshRenderer:
@@ -7216,12 +7212,12 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113910}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: .0120000001, y: .971000075, z: .0120000001}
   m_MoveThreshold: .100000001
-  m_Carve: 1
+  m_Carve: 0
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: -3.13000011, z: 0}
   m_TimeToStationary: .5
