@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SettingsMenu : MonoBehaviour {
+public class SettingsMenu : MonoBehaviour
+{
     public bool Active;
     public GameObject panel;
     public int w = 500;
@@ -40,9 +41,9 @@ public class SettingsMenu : MonoBehaviour {
             language = PlayerPrefs.GetString("Lan");
             Rect windowRect = new Rect((Screen.width - w) / 2, (Screen.height - h) / 2, w, h);
 
-           if(!credit)
+            if (!credit)
                 windowRect = GUI.Window(0, windowRect, Settings, "", outer);
-           else
+            else
                 windowRect = GUI.Window(0, windowRect, Credits, "", credits);
 
         }
@@ -53,17 +54,17 @@ public class SettingsMenu : MonoBehaviour {
         string sound = "Sound: ";
         if (language == "Danish")
             sound = "Lyd: ";
-        GUI.Label(new Rect((w-100)/2, elementheight*2, 100, elementheight), sound, tex);
-        hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight*3.5f, 100, elementheight+15), hSliderValue, 0.0F, 10.0F);
+        GUI.Label(new Rect((w - 100) / 2, elementheight * 2, 100, elementheight), sound, tex);
+        hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight * 3.5f, 100, elementheight + 15), hSliderValue, 0.0F, 10.0F);
         PlayerPrefs.SetFloat("Volume", hSliderValue);
 
         string lan = "Language: ";
         if (language == "Danish")
             lan = "Sprog: ";
-        GUI.Label(new Rect((w - 100) / 2, elementheight*5, 100, elementheight), lan, tex);
-        if (GUI.Button(new Rect((w-100) / 2 + 100, elementheight*6, 100, elementheight), "English", tex))
+        GUI.Label(new Rect((w - 100) / 2, elementheight * 5, 100, elementheight), lan, tex);
+        if (GUI.Button(new Rect((w - 100) / 2 + 100, elementheight * 6, 100, elementheight), "English", tex))
         {
-                PlayerPrefs.SetString("Lan", "English");
+            PlayerPrefs.SetString("Lan", "English");
         }
         if (GUI.Button(new Rect((w - 100) / 2 - 100, elementheight * 6, 100, elementheight), "Danish", tex))
         {
@@ -80,7 +81,7 @@ public class SettingsMenu : MonoBehaviour {
             credit = true;
         }
 
-        if (GUI.Button(new Rect((w - 100), h - elementheight*2, 100, elementheight), "Back", tex))
+        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), "Back", tex))
         {
             _time = Time.time;
             Active = false;
