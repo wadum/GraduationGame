@@ -1013,6 +1013,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 498860}
   - 114: {fileID: 11456554}
+  - 64: {fileID: 6420148}
   m_Layer: 0
   m_Name: TriggerForKillingPlayer
   m_TagString: Untagged
@@ -2981,8 +2982,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158952}
-  m_LocalRotation: {x: 0, y: -.0226983596, z: 0, w: .999742389}
-  m_LocalPosition: {x: -.70927316, y: .0213881135, z: 4.50881529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498750}
@@ -3720,6 +3721,18 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: db380aba305568946b5b901ce1f9e8f5, type: 3}
+--- !u!64 &6420148
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158952}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: db380aba305568946b5b901ce1f9e8f5, type: 3}
 --- !u!81 &8186324
 AudioListener:
