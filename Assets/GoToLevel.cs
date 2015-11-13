@@ -22,7 +22,7 @@ public class GoToLevel : MonoBehaviour
                 Application.LoadLevel(level);
             }
             else
-                Application.LoadLevel("lvl1");
+                Application.LoadLevel("Intro Cinematic");
         else
             Debug.Log("waiting");
     }
