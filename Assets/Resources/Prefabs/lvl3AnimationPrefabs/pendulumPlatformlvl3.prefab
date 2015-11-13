@@ -102,6 +102,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &135862
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 403616}
+  - 114: {fileID: 11464676}
+  m_Layer: 0
+  m_Name: SwirlLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &141418
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +129,7 @@ GameObject:
   - 95: {fileID: 9541604}
   - 114: {fileID: 11434074}
   - 114: {fileID: 11404432}
+  - 114: {fileID: 11495750}
   m_Layer: 0
   m_Name: pendulumPlatformlvl3
   m_TagString: Untagged
@@ -181,7 +198,6 @@ GameObject:
   - 4: {fileID: 426100}
   - 33: {fileID: 3390306}
   - 23: {fileID: 2328972}
-  - 114: {fileID: 11406354}
   m_Layer: 0
   m_Name: PlatformPiece005
   m_TagString: Untagged
@@ -299,6 +315,18 @@ Transform:
   - {fileID: 418622}
   m_Father: {fileID: 440992}
   m_RootOrder: 0
+--- !u!4 &403616
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 429380}
+  m_RootOrder: 0
 --- !u!4 &405828
 Transform:
   m_ObjectHideFlags: 1
@@ -368,7 +396,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.34443617, y: -.820164025, z: .010983211}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 403616}
   m_Father: {fileID: 457944}
   m_RootOrder: 0
 --- !u!4 &440992
@@ -974,17 +1003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb60b7bbfff2d2448b9aa84c6549c1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11406354
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11434074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1008,6 +1026,30 @@ MonoBehaviour:
   DisableObjectsWithinTimeLimit: []
   DisableObjectsAfterTimeLimit: []
   InRange: 0
+--- !u!114 &11464676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11495750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3fd874db6a32f4fad7ece7adb5600f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SwirlAroundLocation: {fileID: 135862}
+  SwirlDistance: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

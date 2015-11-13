@@ -24,7 +24,8 @@ public class MasterHighlight : MonoBehaviour {
             if (child.tag == "TimeManipulationObject" || child.tag == "Rock")
             {
                 var mesh = child.GetComponent<MeshRenderer>();
-                if (mesh)
+                var mesh2 = child.GetComponent<SkinnedMeshRenderer>();
+                if (mesh || mesh2)
                 {
                     HighlightScript script = child.gameObject.AddComponent<HighlightScript>();
                     script.SetWidth(width);

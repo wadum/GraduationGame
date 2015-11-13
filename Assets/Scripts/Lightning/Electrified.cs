@@ -15,4 +15,9 @@ public class Electrified : MonoBehaviour {
     {
         return Active = false;
     }
+
+    void OnDisable()
+    {
+        Deactivate();
+    }
 }
