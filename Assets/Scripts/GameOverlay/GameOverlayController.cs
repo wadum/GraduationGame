@@ -7,6 +7,7 @@ public class GameOverlayController : MonoBehaviour
 
     public GameObject StoryText;
     public GameObject PauseMenu;
+	public GameObject PauseButton;
     public GameObject StoreScreen;
     public GameObject TimeSlider;
     public TimeSliderController SliderController;
@@ -86,12 +87,14 @@ public class GameOverlayController : MonoBehaviour
 
     public void ShowPauseMenu()
     {
+		PauseButton.SetActive(false);
         PauseMenu.SetActive(true);
     }
 
     public void HidePauseMenu()
     {
         PauseMenu.SetActive(false);
+		PauseButton.SetActive(true);
     }
 
 
