@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: time_texture
-  m_Shader: {fileID: 4800000, guid: a5883c4e216db6945814760276b5df30, type: 3}
+  m_Name: GirlCharacterMaterial
+  m_Shader: {fileID: 4800000, guid: 39a1b803e9354474eb759d65b132f296, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2450
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -34,6 +34,20 @@ Material:
           name: _DetailNormalMap
         second:
           m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DissolveNoise
+        second:
+          m_Texture: {fileID: 2800000, guid: df3ec59ce32e6074fb6a520c77cb04d7, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _EmissionTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: b62d1c06374290645ab6d839c0eeb213, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -80,9 +94,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _DissolveNoise
+          name: _node_7579
         second:
-          m_Texture: {fileID: 2800000, guid: df3ec59ce32e6074fb6a520c77cb04d7, type: 3}
+          m_Texture: {fileID: 2800000, guid: a208b379d6cc4a446933a18d8321205a, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -98,6 +112,18 @@ Material:
         first:
           name: _Cutoff
         second: .5
+      data:
+        first:
+          name: _DissolveAmount
+        second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 0
+      data:
+        first:
+          name: _Gloss
+        second: .363999993
       data:
         first:
           name: _Parallax
@@ -132,20 +158,40 @@ Material:
         second: 0
       data:
         first:
-          name: _Metallic
+          name: _OutlineWidth
+        second: .0170000009
+      data:
+        first:
+          name: _AlphaToggle
         second: 0
       data:
         first:
-          name: _Gloss
-        second: .675315917
+          name: _OpacityClipamount
+        second: .907999992
       data:
         first:
-          name: _DissolveAmount
+          name: _DisplacementSpeed
         second: 0
       data:
         first:
-          name: _node_718
+          name: _DisplacementAmount
+        second: 0
+      data:
+        first:
+          name: _node_4046
         second: 1
+      data:
+        first:
+          name: _node_2736
+        second: 0
+      data:
+        first:
+          name: _node_2590
+        second: 0
+      data:
+        first:
+          name: _node_6019
+        second: 0
     m_Colors:
       data:
         first:
@@ -154,8 +200,16 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _Emission
+        second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 0, g: 1, b: .958620489, a: 0}
+      data:
+        first:
+          name: _node_2079
         second: {r: .5, g: .5, b: .5, a: 1}

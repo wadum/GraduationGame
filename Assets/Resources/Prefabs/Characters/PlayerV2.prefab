@@ -1013,6 +1013,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 498860}
   - 114: {fileID: 11456554}
+  - 64: {fileID: 6420148}
   m_Layer: 0
   m_Name: TriggerForKillingPlayer
   m_TagString: Untagged
@@ -2981,8 +2982,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158952}
-  m_LocalRotation: {x: 0, y: -.0226983596, z: 0, w: .999742389}
-  m_LocalPosition: {x: -.70927316, y: .0213881135, z: 4.50881529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 498750}
@@ -3721,6 +3722,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: db380aba305568946b5b901ce1f9e8f5, type: 3}
+--- !u!64 &6420148
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158952}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_Mesh: {fileID: 4300000, guid: db380aba305568946b5b901ce1f9e8f5, type: 3}
 --- !u!81 &8186324
 AudioListener:
   m_ObjectHideFlags: 1
@@ -4186,7 +4199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7775c4ece31ad4b4783670aedcf7866c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathWaitTime: 3
+  DeathWaitTime: .5
   DissolverShader: {fileID: 4800000, guid: 1130eef763a03634e8197e2c60d88e58, type: 3}
   _playerBody: {fileID: 100556}
   _playerEyes: {fileID: 130840}
@@ -4447,7 +4460,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 04838dcc7de77114582d568ba801323d, type: 2}
+  - {fileID: 2100000, guid: 68ab28336387e0a49a4248aae4d41780, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -4509,7 +4522,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 04838dcc7de77114582d568ba801323d, type: 2}
+  - {fileID: 2100000, guid: 68ab28336387e0a49a4248aae4d41780, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
