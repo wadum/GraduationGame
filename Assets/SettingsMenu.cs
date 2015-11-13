@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
+
 
 public class SettingsMenu : MonoBehaviour
 {
+
     public bool Active;
     public GameObject panel;
     public int w = 500;
@@ -19,11 +22,14 @@ public class SettingsMenu : MonoBehaviour
     public List<string> members;
     public bool credit;
 
+    public AudioMixer GameAudioMixer;
+
 
     public Animator anim;
 
     public float hSliderValue;
     AudioSource clicksound;
+
     void Start()
     {
         clicksound = GetComponent<AudioSource>();
@@ -64,8 +70,10 @@ public class SettingsMenu : MonoBehaviour
         if (language == "Danish")
             sound = "Lyd: ";
         GUI.Label(new Rect((w - 100) / 2, elementheight * 2, 100, elementheight), sound, tex);
-        float volume = PlayerPrefs.GetFloat("Volume");
-        hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight * 3.5f, 100, elementheight + 15), volume, 0.0F, 10.0F);
+        float _volume = PlayerPrefs.GetFloat("Volume");
+        hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight * 3.5f, 100, elementheight + 15), _volume, 0F, 80.0F);
+        _volume = -80 + hSliderValue;
+        GameAudioMixer.SetFloat("masterVol", _volume);
         PlayerPrefs.SetFloat("Volume", hSliderValue);
 
         string lan = "Language: ";
@@ -95,8 +103,10 @@ public class SettingsMenu : MonoBehaviour
             clicksound.Play();
             credit = true;
         }
-
-        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), "Back", tex))
+        string back = "Back";
+        if (language == "Danish")
+            back = "Tilbage";
+        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), back, tex))
         {
             clicksound.Play();
             _time = Time.time;

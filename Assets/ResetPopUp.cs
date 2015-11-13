@@ -5,6 +5,15 @@ public class ResetPopUp : MonoBehaviour {
     public bool Popup;
     public GameObject panel;
 
+    AudioSource clicksound;
+
+    void Start()
+    {
+        clicksound = GetComponent<AudioSource>();
+        if (!clicksound)
+            Debug.Log("Attach AudioSource to " + name + " for clicking sound, remember to set output SFX, and no play awake");
+    }
+
     void OnGUI()
     {
         var w = 250;
@@ -28,6 +37,7 @@ public class ResetPopUp : MonoBehaviour {
         GUI.Label(new Rect((250 - w) / 2, h * 2, 250, h), "All progress will be lost.");
         if (GUI.Button(new Rect((250 - bw) / 2, h * 3, bw, h), "Yes"))
         {
+            clicksound.Play();
             panel.SetActive(true);
             SaveLoad.saveLoad.ResetEverything();
             Popup = false;
@@ -35,6 +45,7 @@ public class ResetPopUp : MonoBehaviour {
         }
         if (GUI.Button(new Rect((250 - bw) / 2, h * 4, bw, h), "No"))
         {
+            clicksound.Play();
             panel.SetActive(true);
             Popup = false;
         }
