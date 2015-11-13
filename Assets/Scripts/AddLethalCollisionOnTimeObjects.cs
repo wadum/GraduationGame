@@ -50,12 +50,7 @@ public class AddLethalCollisionOnTimeObjects : MonoBehaviour {
 
         var someTime = GetTime(col);
         if (!someTime)
-        {
-            Debug.Log(col.name + " is missing time!");
             return;
-        }
-
-        Debug.Log(someTime.Moving);
 
         if (someTime.Moving)
             StartCoroutine(MurderTheBitch());
