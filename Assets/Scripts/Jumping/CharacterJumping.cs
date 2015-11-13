@@ -256,12 +256,13 @@ public class CharacterJumping : MonoBehaviour
 
         GameOverlayController.gameOverlayController.DeactivateSlider();
 
+        var jumpingSpeed = Vector3.Distance(transform.position, target)/JumpWidth * JumpingSpeed;
         var jumpCurve = MakeBezierJump(transform.position, target);
 
         var t = 0f;
         while (t <= 1) {
             transform.position = jumpCurve(t);
-            t += Time.deltaTime / JumpingSpeed;
+            t += Time.deltaTime / jumpingSpeed;
             yield return null;
         }
 
