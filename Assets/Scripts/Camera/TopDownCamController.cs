@@ -28,7 +28,7 @@ public class TopDownCamController : MonoBehaviour {
 
     void Update()
     {
-        if (!Application.isMobilePlatform && !ForceTouch)
+		if (!Application.isMobilePlatform && !ForceTouch && !GameObject.FindGameObjectWithTag("TutorialController"))
         {
     		HandleKeyboardInput();
     		HandleMouseInput();
@@ -40,9 +40,15 @@ public class TopDownCamController : MonoBehaviour {
 		_cam = cam;
 		_oldPlayerPos = _player ? _player.transform.position : (_player = GameObject.FindGameObjectWithTag("Player")).transform.position;
 
-        MultiTouch.RegisterPinchHandler(HandlePinch);
+		if(!GameObject.FindGameObjectWithTag("TutorialController"))
+			RegisterHandlers();
 
 		StartCoroutine(AlwaysLookAt(_player));
+	}
+
+	public void RegisterHandlers()
+	{
+		MultiTouch.RegisterPinchHandler(HandlePinch);
 	}
 
 	private void HandleMouseInput()
