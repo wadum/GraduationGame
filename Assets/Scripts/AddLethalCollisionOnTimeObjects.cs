@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AddLethalCollisionOnTimeObjects : MonoBehaviour {
 
-    public float DeathWaitTime = 3.0f;
+    public float DeathWaitTime = 2.0f;
     public Shader DissolverShader;
 
     public GameObject _playerBody;
@@ -82,7 +82,7 @@ public class AddLethalCollisionOnTimeObjects : MonoBehaviour {
                 _playerEyesMaterial.SetFloat("_DissolveAmount", _disAmount);
                 _playerHairMaterial.SetFloat("_DissolveAmount", _disAmount);
 
-                _disAmount += Time.deltaTime / 2;
+                _disAmount += Time.deltaTime / DeathWaitTime;
                 yield return null;
             }
 

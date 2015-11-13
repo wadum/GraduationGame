@@ -27,7 +27,7 @@ public class KillHerDetector : MonoBehaviour {
 
     void OnTriggerStay(Collider _object)
     {
-        if (_timeController.Moving)
-            StartCoroutine(_player.GetComponent<AddLethalCollisionOnTimeObjects>().MurderTheBitch());
+        if (_object.tag == "Player" && _oldTimePos != _timeController.TimePos)
+            StartCoroutine(_player.GetComponentInChildren<AddLethalCollisionOnTimeObjects>().MurderTheBitch());
     }
 }
