@@ -33,6 +33,9 @@ public class ObjectTimeController : TimeControllable {
     private SphereCollider _collider;
     public bool InRange = false;
 
+    public bool Moving { get { return (Time.time - _lastChanged) < 0.1f; } }
+    private float _lastChanged;
+
     void Awake()
     {
         _collider = GetComponent<SphereCollider>();
@@ -96,6 +99,7 @@ public class ObjectTimeController : TimeControllable {
 	override public void SetFloat(float var)
     {
         TimePos = var;
+        _lastChanged = Time.time;
 
         //Enabling
         foreach (GameObject obj in EnableObjectsBeforeTimeLimit)
