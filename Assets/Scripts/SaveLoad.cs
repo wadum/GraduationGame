@@ -14,7 +14,7 @@ public class SaveLoad : MonoBehaviour {
     public static SaveLoad saveLoad;
 
     [Range(0, 100)]
-    public float SaveInterval = 0;
+    public float SaveInterval = 2;
     private float _SaveInterval;
     private float elapsedtime;
 
@@ -62,12 +62,13 @@ public class SaveLoad : MonoBehaviour {
 
     void OnLevelWasLoaded(int level)
     {
+        if (level == 2)
+            return;
         PlayerPrefs.SetString("LastLevel", Application.loadedLevelName);
-        if (Application.loadedLevelName == "Main Menu")
+        if (Application.loadedLevelName == "Main Menu" || Application.loadedLevelName == "Intro Cinematic")
             SaveLoad.saveLoad.SaveInterval = 0f;
         else
         {
-            Debug.Log("level was loaded");
             SaveLoad.saveLoad.SaveInterval = _SaveInterval;
             Prepare();
         }
