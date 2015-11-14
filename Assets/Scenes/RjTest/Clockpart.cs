@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Clockpart : MonoBehaviour
 {
@@ -11,18 +10,18 @@ public class Clockpart : MonoBehaviour
     public AudioSource PickupSound;
 
     private bool _flyToCenterClock = false;
-    private float _startTime, 
+    private float _startTime,
         _journeyLength;
     private GameObject _player;
     private Vector3 _lerpStartingPos,
         _lerpEndPos;
-    
+
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         transform.Rotate(Vector3.up, Random.Range(0.0f, 360.0f));
     }
-    
+
     void Update()
     {
         transform.Rotate(Vector3.up, 100 * Time.deltaTime);
@@ -37,11 +36,18 @@ public class Clockpart : MonoBehaviour
         {
             float distCovered = (Time.time - _startTime) * speed;
             float fracJourney = distCovered / _journeyLength;
+            Debug.Log(gameObject.name + " Start: " + _lerpStartingPos + " End: " + _lerpEndPos + " frac: " + fracJourney + " _journeyLength: " + _journeyLength + " distCovered: " + distCovered);
+
+            if (distCovered == 0 || _journeyLength == 0)
+            {
+                fracJourney = 1.1f;
+            }
+
             transform.position = Vector3.Lerp(_lerpStartingPos, _lerpEndPos, fracJourney);
 
             if (fracJourney > 1)
             {
-                GameObject.FindObjectOfType<CenterClockworkDeliverence>().turnedin += 1;
+                FindObjectOfType<CenterClockworkDeliverence>().TurnedIn += 1;
                 Destroy(gameObject);
             }
         }
