@@ -22,6 +22,10 @@ public class GoToLevel : MonoBehaviour
                 Application.LoadLevel(level);
             }
             else
+            {
+                // If we have no previus level, this must be the first time we play, and we must set the start volume, or we have no sound.
+                PlayerPrefs.SetFloat("Volume", 65);
                 Application.LoadLevel("Intro Cinematic");
+            }
     }
 }
