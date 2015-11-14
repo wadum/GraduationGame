@@ -44,7 +44,7 @@ public class I18n {
 		for(int i=0;i < lines.Length;i++){
 			if(lines[i].IndexOf("=") >= 0 && !lines[i].StartsWith("#")){
 				string[] keyValue = lines[i].Split(new char[] { '=' }, 2);
-				fields.Add(keyValue[0], keyValue[1]);
+				fields.Add(keyValue[0], keyValue[1].Replace("\\n", "\n"));
 			}
 		}
 	}

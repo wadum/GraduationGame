@@ -33,6 +33,5 @@ public class Tutorial4SliderBackward : TutorialStep {
 		Forward.GetComponent<EventTrigger>().enabled = true;
 		Forward.GetComponent<Button>().interactable = true;
 		GameOverlayController.gameOverlayController.DeactivateSlider();
-        PlayerPrefs.SetInt("PlayerPrefAlreadySeen", 1);
 	}
 }

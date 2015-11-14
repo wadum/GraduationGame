@@ -2,22 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TutorialController : MonoBehaviour {
+public class TutorialController : MonoBehaviour
+{
 
+    public bool ForceTutorial = false;
 	public bool DisableTutorial = true;
-	public bool DestroyTutorial;
 
 	public List<TutorialStep> Steps;
 	public List<GameObject> ObjectsToDestroy;
 
 	private static MultiTouch _multiTouch;
 
-	private const string PlayerPrefAlreadySeen = "PlayerPrefAlreadySeen";
+	public const string PlayerPrefAlreadySeen = "PlayerPrefAlreadySeen";
 	
 	void Awake ()
 	{
 		_multiTouch = GameObject.FindObjectOfType<MultiTouch>();
-		if(PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl1")
+		if((PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl1") && !ForceTutorial)
 			Destroy(gameObject);
 	}
 
@@ -33,13 +34,9 @@ public class TutorialController : MonoBehaviour {
 			yield return StartCoroutine(step.Run());
 		}
 
-		Destroy(gameObject);
-	}
+        PlayerPrefs.SetInt(PlayerPrefAlreadySeen, 1);
 
-	void Update ()
-	{
-		if(DestroyTutorial)
-			Destroy(gameObject);
+        Destroy(gameObject);
 	}
 
 	void OnDestroy()

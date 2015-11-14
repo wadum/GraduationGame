@@ -191,6 +191,7 @@ GameObject:
   - 224: {fileID: 22427906}
   - 222: {fileID: 22299842}
   - 114: {fileID: 11477218}
+  - 114: {fileID: 11406678}
   m_Layer: 5
   m_Name: 2TapAndHold
   m_TagString: Untagged
@@ -997,6 +998,7 @@ GameObject:
   - 224: {fileID: 22411970}
   - 222: {fileID: 22204446}
   - 114: {fileID: 11444396}
+  - 114: {fileID: 11452090}
   m_Layer: 5
   m_Name: 4SliderBackward
   m_TagString: Untagged
@@ -1471,6 +1473,7 @@ GameObject:
   - 224: {fileID: 22414046}
   - 222: {fileID: 22206834}
   - 114: {fileID: 11413068}
+  - 114: {fileID: 11434336}
   m_Layer: 5
   m_Name: 3SliderForward
   m_TagString: Untagged
@@ -1900,6 +1903,7 @@ GameObject:
   - 224: {fileID: 22429694}
   - 222: {fileID: 22249816}
   - 114: {fileID: 11450672}
+  - 114: {fileID: 11413266}
   m_Layer: 5
   m_Name: 1Move
   m_TagString: Untagged
@@ -2187,7 +2191,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148768}
-  m_LocalRotation: {x: .179586396, y: .815432966, z: .0864254385, w: .543459833}
+  m_LocalRotation: {x: .179586381, y: .815432847, z: .0864254311, w: .543459773}
   m_LocalPosition: {x: -2, y: 3.56399989, z: -2.96700001}
   m_LocalScale: {x: 1, y: 1.5, z: 1.5}
   m_Children: []
@@ -2542,9 +2546,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 66e0a2a8815cabf4b991f5bf064ad050, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fb8ff947dcbfeae43bc68d5f32e7023c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .300000012
+  m_Volume: .209000006
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2615,7 +2619,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: b0f2bb1d3e47135438508dbd7e42cf19, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: .167999998
+  m_Volume: .0810000002
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2950,6 +2954,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11406678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cad3cb7b335e47f8a5d90b37d58c125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: tut_2TapAndHold
 --- !u!114 &11407004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3117,13 +3133,21 @@ MonoBehaviour:
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'P r e s s  F o r w a r d   B u t t o n
-
-    T o   M o v e   O b j e c t
-
-    F o r w a r d   I n   T i m  e'
+  m_Text: 
+--- !u!114 &11413266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cad3cb7b335e47f8a5d90b37d58c125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: tut_1move
 --- !u!114 &11413306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3730,6 +3754,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: back
+--- !u!114 &11434336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cad3cb7b335e47f8a5d90b37d58c125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: tut_3SliderForward
 --- !u!114 &11437548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4074,13 +4110,9 @@ MonoBehaviour:
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'P r e s s  B a c k w a r d   B u t t o n
-
-    T o   M o v e   O b j e c t
-
-    B a c k w a r d  I n   T i m  e'
+  m_Text: 
 --- !u!114 &11444890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4390,9 +4422,9 @@ MonoBehaviour:
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: C l i c k   t h e  g r o u n d   t o  m o v e !
+  m_Text: 
 --- !u!114 &11451236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4425,6 +4457,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Show Shop
+--- !u!114 &11452090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cad3cb7b335e47f8a5d90b37d58c125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TranslationKey: tut_4SliderBackward
 --- !u!114 &11452974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4707,8 +4751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebddb3259059c49fc978d8de6f2b287e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ForceTutorial: 0
   DisableTutorial: 0
-  DestroyTutorial: 0
   Steps:
   - {fileID: 11439810}
   - {fileID: 11404116}
@@ -5365,9 +5409,9 @@ MonoBehaviour:
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "T a p  a n d  h o l d  o n  \ni n t e r a c t a b l e   o b j e c t s"
+  m_Text: 
 --- !u!114 &11477598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7175,7 +7219,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 572, y: 59}
+  m_AnchoredPosition: {x: 542, y: 59}
   m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22414914
@@ -7524,8 +7568,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -428, y: 59}
-  m_SizeDelta: {x: 1000, y: 100}
+  m_AnchoredPosition: {x: -428, y: 109}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22429888
 RectTransform:
