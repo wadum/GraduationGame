@@ -68,7 +68,6 @@ public class LoadLevel : MonoBehaviour
         if (GUI.Button(new Rect((w / 2 - 75), elementheight, 75, elementheight), resume))
         {
             SaveLoad.saveLoad.SaveInterval = 2f;
-            Debug.Log(level);
             Application.LoadLevel(level);
         }
         string restart = "Restart!";
@@ -78,8 +77,13 @@ public class LoadLevel : MonoBehaviour
         if (GUI.Button(new Rect((w / 2 - 75), elementheight * 2.5f, 75, elementheight), restart))
         {
             SaveLoad.saveLoad.ResetFrom(level);
-            SaveLoad.saveLoad.SaveInterval = 2f;
-            Application.LoadLevel(level);
+            if (level == 5)
+                Application.LoadLevel("Intro Cinematic");
+            else
+            {
+                SaveLoad.saveLoad.SaveInterval = 2f;
+                Application.LoadLevel(level);
+            }
         }
         string back = "Back";
         if (language == "Danish")

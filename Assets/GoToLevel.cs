@@ -17,7 +17,7 @@ public class GoToLevel : MonoBehaviour
     {
         _time += Time.deltaTime;
         if (_time > timeToWait)
-            if (level != "")// && level != Application.loadedLevelName) // this script should only be in the scene with the team logo
+            if (level != "") // this script should only be in the scene with the team logo
             {
                 Application.LoadLevel(level);
             }
