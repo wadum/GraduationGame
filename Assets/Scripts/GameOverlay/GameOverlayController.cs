@@ -117,7 +117,7 @@ public class GameOverlayController : MonoBehaviour
         if (_player == null)
             _player = FindObjectOfType<CharacterMovement>();
 
-        _player.SetPlayerLookAts(true, obj.gameObject);
+        _player.SetPlayerLookAtWhenMagic(true, obj.gameObject);
         _animController.StartMagic();
     }
 
@@ -143,7 +143,7 @@ public class GameOverlayController : MonoBehaviour
         if (_currentObj != null)
             tmpGO = _currentObj.gameObject;
 
-        _player.SetPlayerLookAts(false, tmpGO);
+        _player.SetPlayerLookAtWhenMagic(false, tmpGO);
         _animController.StopMagic();
     }
 

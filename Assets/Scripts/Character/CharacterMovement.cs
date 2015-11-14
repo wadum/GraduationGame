@@ -82,7 +82,7 @@ public class CharacterMovement : MonoBehaviour
         _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
     }
 
-    public void SetPlayerLookAts(bool value, GameObject go)
+    public void SetPlayerLookAtWhenMagic(bool value, GameObject go)
     {
         _lootAtMovingObject = value;
         _lookAtTarget = go;

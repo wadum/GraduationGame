@@ -17,41 +17,66 @@ public class CharacterJumping : MonoBehaviour
     public string[] TagsToJumpOnto;
 
     private float _height;
-    private float JumpHeight { get { return _height*MaximumVerticalJump; } }
-    private float JumpWidth { get { return _height*MaximumHorizonalJump; } }
-    private float DropHeight { get { return _height*MaximumDrop; } }
+    private float JumpHeight { get { return _height * MaximumVerticalJump; } }
+    private float JumpWidth { get { return _height * MaximumHorizonalJump; } }
+    private float DropHeight { get { return _height * MaximumDrop; } }
     private bool _jumping = false;
     private NavMeshAgent _nav;
     private AnimationController _animator;
     private Renderer _renderer;
+    private Vector3 _jumpingTarget;
 
-    void Start ()
-	{
-	    if (!Sanity())
-	    {
-	        enabled = false;
+    void Start()
+    {
+        if (!Sanity())
+        {
+            enabled = false;
             return;
-	    }
+        }
 
-        if (ControlNavJumps) {
+        if (ControlNavJumps)
+        {
             _nav.autoTraverseOffMeshLink = false;
             StartCoroutine(HandleNavJumps());
         }
 
-	    foreach (var  jmpTag in TagsToJumpOnto)
+        foreach (var jmpTag in TagsToJumpOnto)
             MultiTouch.RegisterTapHandlerByTag(jmpTag, JumpForJoy);
 
         MultiTouch.RegisterTapHandlerByTag("Terrain", ReturnToTerraFirma);
-	}
+    }
 
-    private IEnumerator HandleNavJumps() {
-        while (true) {
-            if (!_nav.isOnOffMeshLink) {
+    void Update()
+    {
+        if (_jumping)
+        {
+            if (_jumpingTarget == new Vector3(0, 0, 0)) return;
+            //Debug.Log("Jumpin!!"); ;
+            FixLookAt(_jumpingTarget);
+        }
+    }
+
+    private void FixLookAt(Vector3 target)
+    {
+        // Look where we jump and reset weird rotation
+        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+        float str = 3.0f * Time.deltaTime;
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+    }
+
+    private IEnumerator HandleNavJumps()
+    {
+        while (true)
+        {
+            if (!_nav.isOnOffMeshLink)
+            {
                 yield return null;
                 continue;
             }
 
-            if (!_nav.currentOffMeshLinkData.activated) {
+            if (!_nav.currentOffMeshLinkData.activated)
+            {
                 yield return null;
                 continue;
             }
@@ -62,12 +87,14 @@ public class CharacterJumping : MonoBehaviour
                 _animator.Jumping();
 
             GameOverlayController.gameOverlayController.DeactivateSlider();
+            _jumpingTarget = target; // set jumping target for rotation
 
-            target += new Vector3(0, _height/2, 0);
+            target += new Vector3(0, _height / 2, 0);
             var jumpCurve = MakeBezierJump(transform.position, target);
 
             var t = 0f;
-            while (t <= 1) {
+            while (t <= 1)
+            {
                 transform.position = jumpCurve(t);
                 t += Time.deltaTime / JumpingSpeed;
                 yield return null;
@@ -85,33 +112,33 @@ public class CharacterJumping : MonoBehaviour
 
     private bool Sanity()
     {
-	    if (transform.root != transform)
-	    {
-	        Debug.Log("Jumping disabled: Character should be a root gameobject at the beginning of the game.");
-	        return false;
-	    }
+        if (transform.root != transform)
+        {
+            Debug.Log("Jumping disabled: Character should be a root gameobject at the beginning of the game.");
+            return false;
+        }
 
         // Get the scale of the character. If no collider information is available, we fall back to lossyscale.
         //var col = GetComponent<Collider>();
 
-	    if (TagsToJumpOnto.Length == 0)
-	    {
-	        Debug.Log("Jumping disabled: No tags to jump onto.");
-	        return false;
-	    }
+        if (TagsToJumpOnto.Length == 0)
+        {
+            Debug.Log("Jumping disabled: No tags to jump onto.");
+            return false;
+        }
 
-	    var inputs = FindObjectsOfType<MultiTouch>();
-	    if (!inputs.Any())
-	    {
-	        Debug.Log("Jumping disabled: No input system in scene.");
-	        return false;
-	    }
-	    
+        var inputs = FindObjectsOfType<MultiTouch>();
+        if (!inputs.Any())
+        {
+            Debug.Log("Jumping disabled: No input system in scene.");
+            return false;
+        }
+
         if (inputs.Length > 1)
-	    {
-	        Debug.Log("Jumping disabled: Too many input systems in scene, only one expected, change this script?");
-	        return false;
-	    }
+        {
+            Debug.Log("Jumping disabled: Too many input systems in scene, only one expected, change this script?");
+            return false;
+        }
 
         _nav = GetComponent<NavMeshAgent>();
         if (!_nav)
@@ -217,23 +244,25 @@ public class CharacterJumping : MonoBehaviour
             transform.parent = currentParent;
             return;
         }
-        
+
         // Do the actual jump
         SimpleJump(v1);
     }
 
-    private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to) {
+    private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to)
+    {
         var dist = Vector3.Distance(from, to);
         var xzStart = new Vector2(from.x, from.z);
         var xzEnd = new Vector2(to.x, to.z);
-        var midway = xzStart + (xzEnd - xzStart)/2;
+        var midway = xzStart + (xzEnd - xzStart) / 2;
 
         var ctrl = new Vector3(midway.x, from.y + JumpingHeightFactor * dist, midway.y);
 
-        return t => Mathf.Pow(1 - t, 2)*from + 2*(1 - t)*t*ctrl + Mathf.Pow(t, 2)*to;
+        return t => Mathf.Pow(1 - t, 2) * from + 2 * (1 - t) * t * ctrl + Mathf.Pow(t, 2) * to;
     }
 
-    public bool AttemptSimpleJump(Vector3 target) {
+    public bool AttemptSimpleJump(Vector3 target)
+    {
         if (_jumping)
             return false;
 
@@ -242,7 +271,8 @@ public class CharacterJumping : MonoBehaviour
         return true;
     }
 
-    private void SimpleJump(Vector3 target) {
+    private void SimpleJump(Vector3 target)
+    {
         StartCoroutine(Jumping(target, null, true));
     }
 
@@ -255,12 +285,14 @@ public class CharacterJumping : MonoBehaviour
             _animator.Jumping();
 
         GameOverlayController.gameOverlayController.DeactivateSlider();
+        _jumpingTarget = target; // set jumping target for rotation
 
-        var jumpingSpeed = Vector3.Distance(transform.position, target)/JumpWidth * JumpingSpeed;
+        var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
         var jumpCurve = MakeBezierJump(transform.position, target);
 
         var t = 0f;
-        while (t <= 1) {
+        while (t <= 1)
+        {
             transform.position = jumpCurve(t);
             t += Time.deltaTime / jumpingSpeed;
             yield return null;

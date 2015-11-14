@@ -36,7 +36,7 @@ public class Clockpart : MonoBehaviour
         {
             float distCovered = (Time.time - _startTime) * speed;
             float fracJourney = distCovered / _journeyLength;
-            Debug.Log(gameObject.name + " Start: " + _lerpStartingPos + " End: " + _lerpEndPos + " frac: " + fracJourney + " _journeyLength: " + _journeyLength + " distCovered: " + distCovered);
+            //Debug.Log(gameObject.name + " Start: " + _lerpStartingPos + " End: " + _lerpEndPos + " frac: " + fracJourney + " _journeyLength: " + _journeyLength + " distCovered: " + distCovered);
 
             if (distCovered == 0 || _journeyLength == 0)
             {
