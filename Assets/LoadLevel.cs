@@ -11,6 +11,9 @@ public class LoadLevel : MonoBehaviour
     string language;
     bool active;
 
+    public GUIStyle tex;
+    AudioSource clicksound;
+
 
     // Use this for initialization
     void Start()
@@ -18,6 +21,9 @@ public class LoadLevel : MonoBehaviour
         if (!File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
             GetComponent<MeshRenderer>().enabled = false;
         language = PlayerPrefs.GetString("Language");
+        clicksound = GameObject.FindObjectOfType<SettingsMenu>().GetComponent<AudioSource>();
+        if (!clicksound)
+            Debug.Log(name + " is trying to borrow Setting's ClikSound, something went wrong");
     }
 
     void Update()
@@ -65,8 +71,9 @@ public class LoadLevel : MonoBehaviour
         if (language == "Danish")
             resume = "Forsæt!";
 
-        if (GUI.Button(new Rect((w / 2 - 75), elementheight, 75, elementheight), resume))
+        if (GUI.Button(new Rect((w / 2 - 75), elementheight, 75, elementheight), resume, tex))
         {
+            clicksound.Play();
             SaveLoad.saveLoad.SaveInterval = 2f;
             Application.LoadLevel(level);
         }
@@ -74,11 +81,15 @@ public class LoadLevel : MonoBehaviour
         if (language == "Danish!")
             resume = "Forfra!";
 
-        if (GUI.Button(new Rect((w / 2 - 75), elementheight * 2.5f, 75, elementheight), restart))
+        if (GUI.Button(new Rect((w / 2 - 75), elementheight * 2.5f, 75, elementheight), restart, tex))
         {
+            clicksound.Play();
             SaveLoad.saveLoad.ResetFrom(level);
             if (level == 5)
+            {
+                PlayerPrefs.SetInt("PlayerPrefAlreadySeen", 0);
                 Application.LoadLevel("Intro Cinematic");
+            }
             else
             {
                 SaveLoad.saveLoad.SaveInterval = 2f;
@@ -88,8 +99,9 @@ public class LoadLevel : MonoBehaviour
         string back = "Back";
         if (language == "Danish")
             restart = "Tilbage";
-        if (GUI.Button(new Rect(w-100, h - elementheight - 15f, 75, elementheight), back))
+        if (GUI.Button(new Rect(w-100, h - elementheight - 15f, 75, elementheight), back, tex))
         {
+            clicksound.Play();
             entering = false;
         }
     }
