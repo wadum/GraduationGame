@@ -8,7 +8,6 @@ public class LoadLevel : MonoBehaviour
     public bool entering;
     int w = 250;
     int h = 200;
-    string language;
     bool active;
 
     public GUIStyle tex;
@@ -20,7 +19,6 @@ public class LoadLevel : MonoBehaviour
     {
         if (!File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
             GetComponent<MeshRenderer>().enabled = false;
-        language = PlayerPrefs.GetString("Language");
         clicksound = GameObject.FindObjectOfType<SettingsMenu>().GetComponent<AudioSource>();
         if (!clicksound)
             Debug.Log(name + " is trying to borrow Setting's ClikSound, something went wrong");
@@ -53,35 +51,31 @@ public class LoadLevel : MonoBehaviour
         }
     }
 
+    public void Disable()
+    {
+        this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+    }
+
     void OnGUI()
     {
         if (entering)
         {
             Rect windowRect = new Rect((Screen.width - w) / 2, (Screen.height - h) / 2, w, h);
-            string cont = "Continue?";
-            if (language == "Danish")
-                cont = "Fortsæt?";
-            windowRect = GUI.Window(0, windowRect, DoMyWindow, cont) ;
+            windowRect = GUI.Window(0, windowRect, DoMyWindow, "") ;
         }
     }
     void DoMyWindow(int windowID)
     {
         int elementheight = 35;
-        string resume = "Resume!";
-        if (language == "Danish")
-            resume = "Forsæt!";
 
-        if (GUI.Button(new Rect((w / 2 - 75), elementheight, 75, elementheight), resume, tex))
+        if (GUI.Button(new Rect((w / 2 - 75), elementheight, 75, elementheight), I18n.GetInstance().Translate("resume"), tex))
         {
             clicksound.Play();
             SaveLoad.saveLoad.SaveInterval = 2f;
             Application.LoadLevel(level);
         }
-        string restart = "Restart!";
-        if (language == "Danish!")
-            resume = "Forfra!";
 
-        if (GUI.Button(new Rect((w / 2 - 75), elementheight * 2.5f, 75, elementheight), restart, tex))
+        if (GUI.Button(new Rect((w / 2 - 75), elementheight * 2.5f, 75, elementheight), I18n.GetInstance().Translate("restart"), tex))
         {
             clicksound.Play();
             SaveLoad.saveLoad.ResetFrom(level);
@@ -96,10 +90,7 @@ public class LoadLevel : MonoBehaviour
                 Application.LoadLevel(level);
             }
         }
-        string back = "Back";
-        if (language == "Danish")
-            restart = "Tilbage";
-        if (GUI.Button(new Rect(w-100, h - elementheight - 15f, 75, elementheight), back, tex))
+        if (GUI.Button(new Rect(w-100, h - elementheight - 15f, 75, elementheight), I18n.GetInstance().Translate("back"), tex))
         {
             clicksound.Play();
             entering = false;

@@ -11,6 +11,13 @@ public class GoToLevel : MonoBehaviour
     {
         level = PlayerPrefs.GetString("LastLevel");
         SaveLoad.saveLoad.SaveInterval = 0f;
+        string language = PlayerPrefs.GetString("Lan");
+        if(language == "Danish")
+        {
+            I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
+        }else
+            I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
+
     }
 
     void Update()
