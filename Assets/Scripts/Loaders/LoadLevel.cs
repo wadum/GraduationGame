@@ -81,7 +81,7 @@ public class LoadLevel : MonoBehaviour
             SaveLoad.saveLoad.ResetFrom(level);
             if (level == 5)
             {
-                PlayerPrefs.SetInt("PlayerPrefAlreadySeen", 0);
+                PlayerPrefs.SetInt(TutorialController.PlayerPrefAlreadySeen, 0);
                 Application.LoadLevel("Intro Cinematic");
             }
             else

@@ -13,7 +13,7 @@ public class TutorialController : MonoBehaviour
 
 	private static MultiTouch _multiTouch;
 
-	public const string PlayerPrefAlreadySeen = "PlayerPrefAlreadySeen";
+	public const string PlayerPrefAlreadySeen = "TutorialAlreadySeen";
 	
 	void Awake ()
 	{

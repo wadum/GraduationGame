@@ -18,12 +18,11 @@ public class PlayerPrefsControl : MonoBehaviour
     public static void PrintPlayePrefs()
     {
         IntKeys.ForEach(k => {
-            if(PlayerPrefs.HasKey(k))
-                Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.GetInt(k)));
+                Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.HasKey(k) ? PlayerPrefs.GetInt(k).ToString() : "Not Set"));
         });
         StringKeys.ForEach(k => {
             if (PlayerPrefs.HasKey(k))
-                Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.GetInt(k)));
+                Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.HasKey(k) ? PlayerPrefs.GetString(k) : "Not Set"));
         });
     }
 }
