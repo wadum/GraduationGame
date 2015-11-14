@@ -8,14 +8,12 @@ public class SettingsMenu : MonoBehaviour
 {
 
     public bool Active;
-    public GameObject panel;
     public int w = 500;
     public int h = 200;
-    string language;
     public GUIStyle tex;
     public GUIStyle outer;
     public GUIStyle credits;
-    public Canvas canvas;
+    public GameObject main;
     float wait = 0.5f;
     float _time;
 
@@ -36,24 +34,16 @@ public class SettingsMenu : MonoBehaviour
         if (!clicksound)
             Debug.Log("Attach AudioSource to " + name + " for clicking sound, remember to set output SFX, and no play awake");
     }
-    void Update()
-    {
-        if (!canvas.enabled && !anim.GetBool("Settings") && !anim.GetBool("Character"))
-        {
-            if (Time.time > _time + wait)
-                canvas.enabled = true;
-        }
 
-    }
     void OnGUI()
     {
         if (Active)
         {
-            language = PlayerPrefs.GetString("Lan");
-			if(language == "Danish")
+//            language = PlayerPrefs.GetString("Lan");
+/*			if(language == "Danish")
 				I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
 			else
-				I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
+				I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);*/
             Rect windowRect = new Rect((Screen.width - w) / 2, (Screen.height - h) / 2, w, h);
 
             if (!credit)
@@ -66,20 +56,14 @@ public class SettingsMenu : MonoBehaviour
     void Settings(int windowID)
     {
         int elementheight = 35;
-        string sound = "Sound: ";
-        if (language == "Danish")
-            sound = "Lyd: ";
-        GUI.Label(new Rect((w - 100) / 2, elementheight * 2, 100, elementheight), sound, tex);
+        GUI.Label(new Rect((w - 100) / 2, elementheight * 2, 100, elementheight), I18n.GetInstance().Translate("sound"), tex);
         float _volume = PlayerPrefs.GetFloat("Volume");
         hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight * 3.5f, 100, elementheight + 15), _volume, 0F, 80.0F);
         _volume = -80 + hSliderValue;
         GameAudioMixer.SetFloat("masterVol", _volume);
         PlayerPrefs.SetFloat("Volume", hSliderValue);
 
-        string lan = "Language: ";
-        if (language == "Danish")
-            lan = "Sprog: ";
-        GUI.Label(new Rect((w - 100) / 2, elementheight * 5, 100, elementheight), lan, tex);
+        GUI.Label(new Rect((w - 100) / 2, elementheight * 5, 100, elementheight), I18n.GetInstance().Translate("language"), tex);
         if (GUI.Button(new Rect((w - 100) / 2 + 100, elementheight * 6, 100, elementheight), "English", tex))
         {
             clicksound.Play();
@@ -91,27 +75,20 @@ public class SettingsMenu : MonoBehaviour
             clicksound.Play();
             PlayerPrefs.SetString("Lan", "Danish");
 			I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
-
         }
 
-        string credits = "Credits";
-        if (language == "Danish")
-            credits = "Holdet Bag";
-
-        if (GUI.Button(new Rect((w - 100) / 2, elementheight * 9, 100, elementheight), credits, tex))
+        if (GUI.Button(new Rect((w - 100) / 2, elementheight * 9, 100, elementheight), I18n.GetInstance().Translate("credits"), tex))
         {
             clicksound.Play();
             credit = true;
         }
-        string back = "Back";
-        if (language == "Danish")
-            back = "Tilbage";
-        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), back, tex))
+        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), I18n.GetInstance().Translate("back"), tex))
         {
             clicksound.Play();
             _time = Time.time;
             Active = false;
             anim.SetBool("Settings", false);
+            main.SetActive(!main.activeSelf);
         }
     }
 
@@ -126,7 +103,7 @@ public class SettingsMenu : MonoBehaviour
             n += 1;
         }
         GUI.Box(new Rect(0, elementheight, w, elementheight * n), "");
-        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), "Back", tex))
+        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), I18n.GetInstance().Translate("back"), tex))
         {
             clicksound.Play();
             credit = false;

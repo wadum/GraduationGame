@@ -6,6 +6,7 @@ public class MainMenuScript : MonoBehaviour {
     public SettingsMenu settings;
     public GameObject shop;
     public GameObject main;
+    public GameObject back;
     AudioSource clicksound;
 
 	// Use this for initialization
@@ -25,22 +26,33 @@ public class MainMenuScript : MonoBehaviour {
     public void ChooseCharacter()
     {
         clicksound.Play();
-        GetComponent<Canvas>().enabled = false;
+        main.SetActive(!main.activeSelf);
         anim.SetBool("Character", true);
         foreach (LoadLevel load in GameObject.FindObjectsOfType<LoadLevel>())
             load.Enable();
+        back.SetActive(!back.activeSelf);
+    }
+
+    public void BackFromCharacter()
+    {
+        clicksound.Play();
+        main.SetActive(!main.activeSelf);
+        anim.SetBool("Character", false);
+        foreach (LoadLevel load in GameObject.FindObjectsOfType<LoadLevel>())
+            load.Disable();
+        back.SetActive(!back.activeSelf);
     }
 
     public void GoToSettings()
     {
         clicksound.Play();
-        GetComponent<Canvas>().enabled = false;
+        main.SetActive(!main.activeSelf);
         anim.SetBool("Settings", true);
         settings.Active = true;
     }
 
     public void GoBackFromSettings() {
-        GetComponent<Canvas>().enabled = false;
+        main.SetActive(!main.activeSelf);
         anim.SetBool("Settings", false);
         settings.Active = false;
     }
