@@ -7,9 +7,10 @@ public class GameOverlayController : MonoBehaviour
 
     public GameObject StoryText;
     public GameObject PauseMenu;
-	public GameObject PauseButton;
+    public GameObject PauseButton;
     public GameObject StoreScreen;
     public GameObject TimeSlider;
+    public GameObject ControlsPicture;
     public TimeSliderController SliderController;
     public List<AudioSource> ActivateSliderSounds;
 
@@ -87,16 +88,26 @@ public class GameOverlayController : MonoBehaviour
 
     public void ShowPauseMenu()
     {
-		PauseButton.SetActive(false);
+        PauseButton.SetActive(false);
         PauseMenu.SetActive(true);
     }
 
     public void HidePauseMenu()
     {
         PauseMenu.SetActive(false);
-		PauseButton.SetActive(true);
+        PauseButton.SetActive(true);
     }
 
+
+    public void ShowTutorialPicture()
+    {
+        ControlsPicture.SetActive(true);
+    }
+
+    public void HideTutorialPicture()
+    {
+        ControlsPicture.SetActive(false);
+    }
 
     public void ActivateSlider(TimeControllable obj)
     {
