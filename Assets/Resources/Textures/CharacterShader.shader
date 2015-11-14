@@ -444,5 +444,4 @@ Shader "Shader Forge/ObejctDissolver" {
     }
 }
 FallBack "Diffuse"
-CustomEditor "ShaderForgeMaterialInspector"
 }

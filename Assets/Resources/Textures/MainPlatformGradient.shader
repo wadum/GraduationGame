@@ -258,5 +258,4 @@ Shader "Shader Forge/r" {
     }
 }
 FallBack "Diffuse"
-CustomEditor "ShaderForgeMaterialInspector"
 }
