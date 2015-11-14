@@ -92,7 +92,7 @@ public class CharacterJumping : MonoBehaviour
 	    }
 
         // Get the scale of the character. If no collider information is available, we fall back to lossyscale.
-        var col = GetComponent<Collider>();
+        //var col = GetComponent<Collider>();
 
 	    if (TagsToJumpOnto.Length == 0)
 	    {

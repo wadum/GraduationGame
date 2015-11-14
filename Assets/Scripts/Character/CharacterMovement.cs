@@ -7,9 +7,8 @@ public class CharacterMovement : MonoBehaviour
     public float WaypointFloatSpeed = 1.0f;
     public float RotationSpeed = 3.0f;
 
-    private bool LootAtMovingObject = false;
-    private GameObject LookAtTarget = null;
-
+    private bool _lootAtMovingObject = false;
+    private GameObject _lookAtTarget = null;
     private NavMeshAgent _agent;
     private float _startTime,
         _journeyLength,
@@ -34,11 +33,11 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LootAtMovingObject)
+        if (_lootAtMovingObject)
         {
-            if (LookAtTarget != null)
+            if (_lookAtTarget != null)
             {
-                LookHERE tmpLTarget = LookAtTarget.GetComponentInChildren<LookHERE>();
+                LookHERE tmpLTarget = _lookAtTarget.GetComponentInChildren<LookHERE>();
                 if (tmpLTarget != null)
                 {
                     Vector3 tmpActualTarget = new Vector3(tmpLTarget.transform.position.x, this.gameObject.transform.position.y, tmpLTarget.transform.position.z);
@@ -47,7 +46,7 @@ public class CharacterMovement : MonoBehaviour
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
                 }
                 else
-                    Debug.LogWarning("LookHERE script has to be assigned to one of the children of the target gameObject: " + LookAtTarget.name);
+                    Debug.LogWarning("LookHERE script has to be assigned to one of the children of the target gameObject: " + _lookAtTarget.name);
             }
         }
 
@@ -85,8 +84,8 @@ public class CharacterMovement : MonoBehaviour
 
     public void SetPlayerLookAts(bool value, GameObject go)
     {
-        LootAtMovingObject = value;
-        LookAtTarget = go;
+        _lootAtMovingObject = value;
+        _lookAtTarget = go;
     }
 
     public void GoTo(Vector3 position)

@@ -1,49 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Clockpart : MonoBehaviour {
-
+public class Clockpart : MonoBehaviour
+{
     public GameObject[] FloatWaypoints;
 
-    GameObject player;
+    public bool pickedUp = false;
     public GameObject clockPart;
     public float speed = 1.0f;
-    float startTime;
-    float journeyLength;
-
-    public bool pickedUp = false;
-    bool flyToCenterClock = false;
-
-    Vector3 lerpStartingPos;
-    Vector3 lerpEndPos;
-
     public AudioSource PickupSound;
 
-
-    // Use this for initialization
-    void Start () {
-
-        player = GameObject.FindGameObjectWithTag("Player");
-        transform.Rotate(Vector3.up, Random.Range(0.0f,360.0f));
-
+    private bool _flyToCenterClock = false;
+    private float _startTime, 
+        _journeyLength;
+    private GameObject _player;
+    private Vector3 _lerpStartingPos,
+        _lerpEndPos;
+    
+    void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        transform.Rotate(Vector3.up, Random.Range(0.0f, 360.0f));
     }
-	
-	// Update is called once per frame
-	void Update () {
+    
+    void Update()
+    {
+        transform.Rotate(Vector3.up, 100 * Time.deltaTime);
 
-        transform.Rotate(Vector3.up,100*Time.deltaTime);        
-
-        if (pickedUp) 
+        if (pickedUp)
         {
             clockPart.transform.localPosition = Vector3.right + Vector3.up;
-            transform.position = player.transform.position;
+            transform.position = _player.transform.position;
         }
 
-        if (flyToCenterClock)
+        if (_flyToCenterClock)
         {
-            float distCovered = (Time.time - startTime) * speed;
-            float fracJourney = distCovered / journeyLength;
-            transform.position = Vector3.Lerp(lerpStartingPos, lerpEndPos, fracJourney);
+            float distCovered = (Time.time - _startTime) * speed;
+            float fracJourney = distCovered / _journeyLength;
+            transform.position = Vector3.Lerp(_lerpStartingPos, _lerpEndPos, fracJourney);
 
             if (fracJourney > 1)
             {
@@ -51,12 +45,10 @@ public class Clockpart : MonoBehaviour {
                 Destroy(gameObject);
             }
         }
-
     }
 
     void OnTriggerEnter(Collider player)
     {
-
         if (player.tag != "Player")
         {
             return;
@@ -73,11 +65,11 @@ public class Clockpart : MonoBehaviour {
     public void goToCenterClock(Vector3 CenterClockPos)
     {
         transform.parent = null;
-        startTime = Time.time;
-        lerpEndPos = CenterClockPos;
-        lerpStartingPos = player.transform.position;
-        journeyLength = Vector3.Distance(lerpStartingPos, lerpEndPos);
+        _startTime = Time.time;
+        _lerpEndPos = CenterClockPos;
+        _lerpStartingPos = _player.transform.position;
+        _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
         pickedUp = false;
-        flyToCenterClock = true;
+        _flyToCenterClock = true;
     }
 }
