@@ -35,6 +35,17 @@ public class MasterHighlight : MonoBehaviour {
         }
     }
 
+    void Update()
+    {
+        if (_inRange)
+        {
+            float p = Mathf.PingPong(Time.time * 0.2f, 0.5f);
+            Vector3 v  = new Vector3(p, p, 0);
+            foreach (HighlightScript script in _list)
+                script.rend.material.SetVector("_Emission", v);
+        }
+    }
+
     public void Activate()
     {
         foreach (HighlightScript script in _list)

@@ -36,6 +36,7 @@ public class ObjectTimeController : TimeControllable
 
     public bool Moving { get { return (Time.time - _lastChanged) < 0.1f; } }
     private float _lastChanged;
+    MasterHighlight master;
 
     void Awake()
     {
@@ -53,6 +54,8 @@ public class ObjectTimeController : TimeControllable
     // Use this for initialization
     void Start()
     {
+        master = GetComponent<MasterHighlight>();
+
         MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
         {
             if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && InRange)
@@ -144,7 +147,6 @@ public class ObjectTimeController : TimeControllable
         if (collider.tag == "Player")
         {
             InRange = true;
-            MasterHighlight master = GetComponent<MasterHighlight>();
             if (master)
                 master.InRange = true;
         }
@@ -153,20 +155,21 @@ public class ObjectTimeController : TimeControllable
     void OnTriggerExit(Collider collider)
     {
         InRange = false;
-        MasterHighlight master = GetComponent<MasterHighlight>();
         if (master)
             master.InRange = false;
 
     }
-
+/*
     void OnTriggerStay(Collider collider)
     {
+
+        if (InRange)
+            return;
         if (collider.tag == "Player")
         {
             InRange = true;
-            MasterHighlight master = GetComponent<MasterHighlight>();
             if (master)
                 master.InRange = true;
         }
-    }
+    }*/
 }
