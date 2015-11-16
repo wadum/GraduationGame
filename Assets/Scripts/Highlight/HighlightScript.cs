@@ -3,11 +3,11 @@ using System.Collections;
 
 public class HighlightScript : MonoBehaviour {
 
-    Renderer rend;
     Shader orgshader;
     Vector3 orgemmision;
     bool _inRange;
     bool _activated;
+    public Renderer rend;
 
     void OnEnable()
     {
@@ -45,7 +45,7 @@ public class HighlightScript : MonoBehaviour {
         rend.material.SetFloat("_AlphaToggle", 0);
         _activated = false;
     }
-
+/*
     void Update()
     {
         if (_activated)
@@ -54,19 +54,7 @@ public class HighlightScript : MonoBehaviour {
             rend.material.SetVector("_Emission", new Vector3(Mathf.PingPong(Time.time * 0.2f, 0.5f), Mathf.PingPong(Time.time*0.2f, 0.5f), orgemmision.z));
 
     }
-
-    /*    public void InRange(bool value)
-        {
-            Vector3 v3 = new Vector3();
-            if (value)
-            {
-                rend.material.SetVector("_Emission", new Vector3(0, 1, 0));
-
-            }else
-                rend.material.SetVector("_Emission", orgemmision);
-        //    rend.material.
-        }*/
-
+*/
     public bool InRange
     {
         get { return _inRange; }

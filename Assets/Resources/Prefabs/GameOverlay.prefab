@@ -2192,7 +2192,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148768}
-  m_LocalRotation: {x: .179586396, y: .815432966, z: .0864254385, w: .543459833}
+  m_LocalRotation: {x: .179586381, y: .815432847, z: .0864254311, w: .543459773}
   m_LocalPosition: {x: -2, y: 3.56399989, z: -2.96700001}
   m_LocalScale: {x: 1, y: 1.5, z: 1.5}
   m_Children: []
@@ -3559,7 +3559,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967291
 --- !u!114 &11430300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8795,7 +8795,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 4294967291
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 123694}

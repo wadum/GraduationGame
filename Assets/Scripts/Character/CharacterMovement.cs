@@ -16,6 +16,8 @@ public class CharacterMovement : MonoBehaviour
         _fracJourney;
     private int _currentWaypoint;
     private bool _flyToCenterClock;
+    LookHERE tmpLTarget;
+
 
     private Vector3 _lerpStartingPos,
         _lerpEndPos;
@@ -37,7 +39,6 @@ public class CharacterMovement : MonoBehaviour
         {
             if (_lookAtTarget != null)
             {
-                LookHERE tmpLTarget = _lookAtTarget.GetComponentInChildren<LookHERE>();
                 if (tmpLTarget != null)
                 {
                     Vector3 tmpActualTarget = new Vector3(tmpLTarget.transform.position.x, this.gameObject.transform.position.y, tmpLTarget.transform.position.z);
@@ -49,7 +50,7 @@ public class CharacterMovement : MonoBehaviour
                     Debug.LogWarning("LookHERE script has to be assigned to one of the children of the target gameObject: " + _lookAtTarget.name);
             }
         }
-
+        
         if (!DeliverClockPartArea)
         {
             Debug.Log("Add DeliverClockPartArea");
@@ -86,6 +87,8 @@ public class CharacterMovement : MonoBehaviour
     {
         _lootAtMovingObject = value;
         _lookAtTarget = go;
+        if(go)
+            tmpLTarget = _lookAtTarget.GetComponentInChildren<LookHERE>();
     }
 
     public void GoTo(Vector3 position)
