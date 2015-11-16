@@ -11,6 +11,7 @@ public class CharacterJumping : MonoBehaviour
     public float MaximumDrop = 10f;
     public float JumpingSpeed = 2f;
     public float JumpingHeightFactor = 0.6f;
+    public float MaximumAcceptableSlant = 35f;
 
     public bool ControlNavJumps = true;
 
@@ -189,18 +190,17 @@ public class CharacterJumping : MonoBehaviour
         // Check if we are already on the object
         if (transform.parent == hit.collider.gameObject.transform)
             return;
+
+        if (Vector3.Angle(hit.normal, Vector3.up) > MaximumAcceptableSlant)
+            return;
         // Store current parent;
         var currentParent = transform.parent;
 
         // Detach the player and put him back into world coordinates
         transform.parent = null;
 
-        var target = hit.collider.gameObject.transform;
-        var targetRenderer = hit.collider.gameObject.GetComponent<Renderer>();
-
-
         // Get location on top of target
-        var v1 = targetRenderer.bounds.center + new Vector3(0, targetRenderer.bounds.extents.y, 0);
+        var v1 = hit.point;
 
         // Get location at bottom of player
         var v2 = _renderer.bounds.center - new Vector3(0, _height, 0);
@@ -213,7 +213,7 @@ public class CharacterJumping : MonoBehaviour
         }
 
         // Do the actual jump
-        StartCoroutine(Jumping(v1, target, false));
+        StartCoroutine(Jumping(v1, hit.collider.gameObject.transform, false));
     }
 
     private void ReturnToTerraFirma(RaycastHit hit)
@@ -235,8 +235,7 @@ public class CharacterJumping : MonoBehaviour
         // Get location of hit, for exact jumping
         var v1 = hit.point;
 
-        // Get distance from feet of character (WHICH IS WRONG GODDAMMIT POS SHOULD BE CENTER OF OBJECT PEOPLE NOT BOTTOM OF IT!)
-        var v2 = transform.position;
+        var v2 = _renderer.bounds.center - new Vector3(0, _height, 0);
 
         if (!CanReach(v2, v1))
         {
