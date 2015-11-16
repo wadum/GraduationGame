@@ -11,6 +11,7 @@ public class LoadLevel : MonoBehaviour
     bool active;
 
     public GUIStyle tex;
+    AudioSource crystalclick;
     AudioSource clicksound;
 
 
@@ -20,6 +21,7 @@ public class LoadLevel : MonoBehaviour
         if (!File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
             GetComponent<MeshRenderer>().enabled = false;
         clicksound = GameObject.FindObjectOfType<SettingsMenu>().GetComponent<AudioSource>();
+        crystalclick = GetComponent<AudioSource>();
         if (!clicksound)
             Debug.Log(name + " is trying to borrow Setting's ClikSound, something went wrong");
     }
@@ -35,6 +37,7 @@ public class LoadLevel : MonoBehaviour
             {
                 if(hit.transform.gameObject == gameObject)
                 {
+                    crystalclick.Play();
                     entering = true;
                 }
             }
