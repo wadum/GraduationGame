@@ -5,6 +5,7 @@ public class CenterClockworkDeliverence : MonoBehaviour
 {
     public int TurnedIn;
     public string NextLevel = "Main Menu";
+    bool done = false;
 
     private Clockpart[] _clockParts;
 
@@ -15,8 +16,12 @@ public class CenterClockworkDeliverence : MonoBehaviour
 
     void Update()
     {
+        if (done)
+            return;
+
         if (_clockParts.Length == TurnedIn)
         {
+            done = true;
             // Fire winning animation
             if (SaveLoad.saveLoad)
             {
