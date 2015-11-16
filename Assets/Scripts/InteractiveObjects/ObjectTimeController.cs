@@ -154,9 +154,12 @@ public class ObjectTimeController : TimeControllable
 
     void OnTriggerExit(Collider collider)
     {
-        InRange = false;
-        if (master)
-            master.InRange = false;
+        if (collider.tag == "Player")
+        {
+            InRange = false;
+            if (master)
+                master.InRange = false;
+        }
 
     }
 /*
