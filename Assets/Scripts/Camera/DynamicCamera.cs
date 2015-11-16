@@ -28,6 +28,9 @@ public class DynamicCamera : MonoBehaviour {
     [Range(-90, 90)] public float MaximumYaw = 180;
 
     [Header("Player Controls")]
+    public bool InvertPitch = false;
+    public bool InvertYaw = false;
+
     public float PitchByHeight = 90f;
     public float YawByWidth = 360f;
     public float ZoomFactor = 90f;
@@ -38,11 +41,35 @@ public class DynamicCamera : MonoBehaviour {
 
     // Used to override the camera agent
     private bool _playerIntent;
+
     private float _playerDesiredAbsoluteYaw;
     private float _playerDesiredPitch;
     private float _playerDesiredZoom;
 
     #region Helper properties
+
+    private float PlayerDesiredAbsoluteYaw {
+        get { return _playerDesiredAbsoluteYaw; }
+        set {
+            var val =
+                value > 360 ? 360 :
+                value < -360 ? -360 :
+                value;
+            _playerDesiredAbsoluteYaw =
+                val > 180 ? -360 + val :
+                val < -180 ? 360 + val :
+                val;
+        }
+    }
+
+    private float PlayerDesiredPitch {
+        get { return _playerDesiredPitch; }
+        set {
+            _playerDesiredPitch = value > 90 ? 90 :
+                value < -90 ? -90 :
+                value;
+        }
+    }
 
     private static Vector3 AbsoluteYawAxis { get { return -Vector3.up; } }
 
@@ -153,6 +180,40 @@ public class DynamicCamera : MonoBehaviour {
         _target = target.transform;
     }
 
+    private bool TargetPlayer() {
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        if (!players.Any()) {
+            Debug.Log("No GameObject tagged Player found.");
+            return false;
+        }
+
+        if (players.Length >= 2) {
+            Debug.Log("More than one GameObject tagged player: " +
+                      string.Join(", ", players.Select(p => p.name).ToArray()));
+            return false;
+        }
+
+        SetTarget(players.First().transform);
+
+        return true;
+    }
+
+    private float ClampPitch(float pitch) {
+        return Mathf.Clamp(pitch, MinimumPitch, MaximumPitch);
+    }
+
+    private float ClampYaw(float yaw) {
+        return Mathf.Clamp(yaw, MinimumYaw, MaximumYaw);
+    }
+
+    private float ClampFov(float fov) {
+        return Mathf.Clamp(fov, MinimumFieldOfView, MaximumFieldOfView);
+    }
+
+    private float ClampDistance(float distance) {
+        return Mathf.Clamp(distance, MinimumDistance, MaximumDistance);
+    }
+
     #endregion
 
     #region initialization (Start, etc)
@@ -161,19 +222,11 @@ public class DynamicCamera : MonoBehaviour {
         _camera = GetComponent<Camera>();
 
         if (AutoAttachToPlayer) {
-            var players = GameObject.FindGameObjectsWithTag("Player");
-            if (!players.Any()) {
-                Debug.Log("No GameObject tagged Player found.");
+            if (!TargetPlayer())
                 return false;
-            }
-
-            if (players.Length >= 2) {
-                Debug.Log("More than one GameObject tagged player: " + string.Join(", ", players.Select(p => p.name).ToArray()));
-                return false;
-            }
-
-            _target = players.First().transform;
         }
+        else
+            return true;
 
         _targetCollider = _target.GetComponent<Collider>();
         if (!_targetCollider)
@@ -195,6 +248,9 @@ public class DynamicCamera : MonoBehaviour {
         MultiTouch.RegisterTapHandlerByTag("Terrain", _ => _playerIntent = false);
 
         _isRunning = AutoStartAi && _target;
+
+        if (_isRunning)
+            SetPosition(NeutralRelativeRotation, NeutralDistance);
     }
 
     #endregion
@@ -207,8 +263,15 @@ public class DynamicCamera : MonoBehaviour {
         if (!_isRunning)
             return;
 
-        if (Input.GetKeyDown(KeyCode.A))
-            Debug.Log("Yaw: (" + CurrentAbsoluteYaw + ", " + CurrentRelativeYaw + "), Pitch: " + CurrentPitch);
+        HandleDebugInput();
+
+        if (_playerIntent || _manualOverride)
+            ConstrainedPlayerControl();
+        else
+            FullyAutomaticCameraControl();
+    }
+
+    private void HandleDebugInput() {
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (_manualOverride)
@@ -220,10 +283,21 @@ public class DynamicCamera : MonoBehaviour {
             }
         }
 
-        if (_playerIntent || _manualOverride)
-            ConstrainedPlayerControl();
-        else
-            FullyAutomaticCameraControl();
+        if (Input.GetMouseButtonDown(2)) {
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+                SetTarget(hit.transform);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace)) {
+            _manualOverride = false;
+            TargetPlayer();
+            SetPosition(NeutralRelativeRotation, NeutralDistance);
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+            Debug.Log("Yaw: (" + CurrentAbsoluteYaw + ", " + CurrentRelativeYaw + "), Pitch: " + CurrentPitch);
     }
 
     public void Run() { _isRunning = _target; }
@@ -231,7 +305,7 @@ public class DynamicCamera : MonoBehaviour {
     public void Stop() { _isRunning = false; }
 
     private void ConstrainedPlayerControl() {
-        SetPosition(_playerDesiredAbsoluteYaw, _playerDesiredPitch, NeutralDistance, false);
+        SetPosition(ClampYaw(PlayerDesiredAbsoluteYaw), ClampPitch(PlayerDesiredPitch), NeutralDistance, false);
 
         transform.LookAt(_target);
     }
@@ -255,6 +329,11 @@ public class DynamicCamera : MonoBehaviour {
         _playerIntent = true;
 
         var movementDirection = ScreenNormalize(swipe.deltaPosition);
+        var pitch = (InvertPitch ? movementDirection.y : -movementDirection.y)*PitchByHeight;
+        var yaw = (InvertYaw ? movementDirection.x : -movementDirection.x)*YawByWidth;
+
+        PlayerDesiredPitch = CurrentPitch + pitch;
+        PlayerDesiredAbsoluteYaw = CurrentAbsoluteYaw + yaw;
     }
 
     private void HandlePinch(List<Touch> pinch) {
