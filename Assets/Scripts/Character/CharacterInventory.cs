@@ -8,46 +8,55 @@ public class CharacterInventory : MonoBehaviour
     public GameObject centerClock;
 
     public int clockpartsToCollect;
-
-    CharacterMovement playerMovement;
-
     public int clockPartCounter = 0;
-    bool deliver;
-    bool doOnce;
 
-    // Use this for initialization
+    private bool _deliver,
+        _doOnce;
+
+    private CharacterMovement _playerMovement;
+    
     void Start()
     {
-        deliver = false;
-        doOnce = true;
+        _deliver = false;
+        _doOnce = true;
         if (!centerClock) centerClock = gameObject;
-        playerMovement = gameObject.GetComponent<CharacterMovement>();
+        _playerMovement = gameObject.GetComponent<CharacterMovement>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
 
-        if (clockPartCounter >= clockpartsToCollect && doOnce)
+        if (clockPartCounter >= clockpartsToCollect && _doOnce)
         {
-            playerMovement.GoToCenterClock(clockParts[clockPartCounter-1].GetComponent<Cockpart>().FloatWaypoints);
-            doOnce = false;
+            _playerMovement.GoToCenterClock(clockParts[clockPartCounter - 1].GetComponent<Clockpart>().FloatWaypoints);
+            _doOnce = false;
         }
 
-        if (clockPartCounter >= clockpartsToCollect && deliver)
+        if (clockPartCounter >= clockpartsToCollect && _deliver)
         {
-            for (int i = 0; i < clockpartsToCollect ; i++)
+            for (int i = 0; i < clockpartsToCollect; i++)
             {
-                clockParts[i].GetComponent<Cockpart>().goToCenterClock(centerClock.transform.position);
+                clockParts[i].GetComponent<Clockpart>().goToCenterClock(centerClock.transform.position);
                 clockParts[i] = null;
                 clockPartCounter--;
             }
-            doOnce = true;
+            _doOnce = true;
         }
     }
 
     public void AddClockPart(GameObject clockpart)
     {
+        // Sanity.. This is an ugly fix, but I dont know why my loading gives two cogs..
+        foreach (GameObject cog in clockParts)
+        {
+            if (cog != null)
+            {
+                if (cog.name == clockpart.name)
+                {
+                    return;
+                }
+            }
+        }
         clockParts[clockPartCounter] = clockpart;
         clockPartCounter++;
         for (int i = 0; i < clockPartCounter; i++)
@@ -58,6 +67,6 @@ public class CharacterInventory : MonoBehaviour
 
     public void Deliver(bool value)
     {
-        deliver = value;
+        _deliver = value;
     }
 }

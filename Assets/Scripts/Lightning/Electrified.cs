@@ -5,12 +5,6 @@ public class Electrified : MonoBehaviour {
 
     public bool Active;
 
-    // Use this for initialization
-    void Start()
-    {
-        Active = false;
-    }
-
     // Update is called once per frame
     public virtual bool Activate()
     {
@@ -20,5 +14,10 @@ public class Electrified : MonoBehaviour {
     public virtual bool Deactivate()
     {
         return Active = false;
+    }
+
+    void OnDisable()
+    {
+        Deactivate();
     }
 }

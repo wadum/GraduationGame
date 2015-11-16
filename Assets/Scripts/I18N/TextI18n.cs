@@ -9,6 +9,10 @@ public class TextI18n : MonoBehaviour {
 	
 	private Text text;
 	
+    void OnEnable()
+    {
+        UpdateField();
+    }
 	void Start(){
 		text = GetComponentInParent<Text>();
 		UpdateField ();

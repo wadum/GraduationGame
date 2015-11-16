@@ -1,27 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PauseMenuController : MonoBehaviour {
-	
-	void OnDisable () {
-		Time.timeScale = 1;
-		Debug.Log("Unpaused.");
-	}
+public class PauseMenuController : MonoBehaviour
+{
+    void OnDisable()
+    {
+        Time.timeScale = 1;
+    }
 
-	void OnEnable () {
-		Time.timeScale = 0;
-		Debug.Log("Paused.");
-	}
+    void OnEnable()
+    {
+        Time.timeScale = 0;
+    }
 
-	public void Resume()
-	{
-		gameObject.SetActive(false);
-	}
-
-	public void Restart()
-	{
-        SaveLoad.saveLoad.Reset();
-		Application.LoadLevel(Application.loadedLevel);
-	}
-
+    public void Restart()
+    {
+        if (SaveLoad.saveLoad)
+            SaveLoad.saveLoad.Reset();
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }

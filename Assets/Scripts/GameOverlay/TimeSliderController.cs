@@ -5,12 +5,13 @@ using System.Collections;
 public class TimeSliderController : MonoBehaviour {
 
     public float TimeSpeed;
-    Slider _slider;
-	SoundMaster _soundMaster;
-	TimeControllable _obj;
 
-    Coroutine _increaseCorout;
-    Coroutine _decreaseCorout;
+    private Slider _slider;
+	private SoundMaster _soundMaster;
+	private TimeControllable _obj;
+
+    private Coroutine _increaseCorout;
+    private Coroutine _decreaseCorout;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class TimeSliderController : MonoBehaviour {
 
     public void IncreaseTimeReleased()
     {
+		if(_increaseCorout == null) return;
         StopCoroutine(_increaseCorout);
 		_obj.StopMusic();
     }
@@ -45,6 +47,7 @@ public class TimeSliderController : MonoBehaviour {
 
     public void DecreaseTimeReleased()
     {
+		if(_decreaseCorout == null) return;
 		if(_soundMaster)
 			_soundMaster.PlayNormal();
         StopCoroutine(_decreaseCorout);

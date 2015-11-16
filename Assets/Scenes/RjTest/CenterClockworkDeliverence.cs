@@ -1,21 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CenterClockworkDeliverence : MonoBehaviour {
+public class CenterClockworkDeliverence : MonoBehaviour
+{
+    public int TurnedIn;
+    public string NextLevel = "Main Menu";
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private Clockpart[] _clockParts;
+
+    void Start()
+    {
+        _clockParts = FindObjectsOfType<Clockpart>();
+    }
+
+    void Update()
+    {
+        if (_clockParts.Length == TurnedIn)
+        {
+            // Fire winning animation
+            if (SaveLoad.saveLoad)
+            {
+                SaveLoad.saveLoad.Reset();
+            }
+            StartCoroutine(LoadNewLevelAfterXTime());
+        }
+    }
 
     void OnTriggerStay(Collider player)
     {
-
         if (player.tag != "Player")
         {
             return;
@@ -25,11 +37,16 @@ public class CenterClockworkDeliverence : MonoBehaviour {
 
     void OnTriggerExit(Collider player)
     {
-
         if (player.tag != "Player")
         {
             return;
         }
         player.GetComponent<CharacterInventory>().Deliver(false);
+    }
+
+    IEnumerator LoadNewLevelAfterXTime()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Application.LoadLevel(NextLevel);
     }
 }
