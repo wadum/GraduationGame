@@ -26,7 +26,6 @@ public class CharacterJumping : MonoBehaviour
     private NavMeshAgent _nav;
     private AnimationController _animator;
     private Renderer _renderer;
-    private Vector3 _jumpingTarget;
 
     void Start()
     {
@@ -249,8 +248,6 @@ public class CharacterJumping : MonoBehaviour
             _animator.Jumping();
             yield return new WaitForSeconds(0.2f);
         }
-
-        _jumpingTarget = target;
 
         var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
         var jumpCurve = MakeBezierJump(transform.position, target);
