@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -70,6 +69,8 @@ public class DynamicCamera : MonoBehaviour {
                 value;
         }
     }
+
+    private Quaternion PlayerDesiredAbsoluteRotation { get { return Rotation(PlayerDesiredAbsoluteYaw, PlayerDesiredPitch, false); } }
 
     private static Vector3 AbsoluteYawAxis { get { return -Vector3.up; } }
 
@@ -277,8 +278,7 @@ public class DynamicCamera : MonoBehaviour {
             if (_manualOverride)
                 _manualOverride = false;
             else {
-                _playerDesiredAbsoluteYaw = CurrentAbsoluteYaw;
-                _playerDesiredPitch = CurrentPitch;
+                Unhinge();
                 _manualOverride = true;
             }
         }
@@ -305,7 +305,9 @@ public class DynamicCamera : MonoBehaviour {
     public void Stop() { _isRunning = false; }
 
     private void ConstrainedPlayerControl() {
-        SetPosition(ClampYaw(PlayerDesiredAbsoluteYaw), ClampPitch(PlayerDesiredPitch), NeutralDistance, false);
+        var rot = Quaternion.RotateTowards(CurrentAbsoluteRotation, PlayerDesiredAbsoluteRotation, 40f * Time.deltaTime);
+
+        SetPosition(rot, NeutralDistance, false);
 
         transform.LookAt(_target);
     }
@@ -326,14 +328,22 @@ public class DynamicCamera : MonoBehaviour {
         if (!_isRunning)
             return;
 
-        _playerIntent = true;
+        if (!_playerIntent) {
+            _playerIntent = true;
+            Unhinge();
+        }
 
         var movementDirection = ScreenNormalize(swipe.deltaPosition);
-        var pitch = (InvertPitch ? movementDirection.y : -movementDirection.y)*PitchByHeight;
-        var yaw = (InvertYaw ? movementDirection.x : -movementDirection.x)*YawByWidth;
+        var pitch = (InvertPitch ? movementDirection.y : -movementDirection.y) * PitchByHeight;
+        var yaw = (InvertYaw ? movementDirection.x : -movementDirection.x) * YawByWidth;
 
-        PlayerDesiredPitch = CurrentPitch + pitch;
-        PlayerDesiredAbsoluteYaw = CurrentAbsoluteYaw + yaw;
+        PlayerDesiredPitch += pitch;
+        PlayerDesiredAbsoluteYaw += yaw;
+    }
+
+    private void Unhinge() {
+        PlayerDesiredPitch = CurrentPitch;
+        PlayerDesiredAbsoluteYaw = CurrentAbsoluteYaw;
     }
 
     private void HandlePinch(List<Touch> pinch) {
