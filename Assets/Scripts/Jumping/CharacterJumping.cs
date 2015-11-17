@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class CharacterJumping : MonoBehaviour
@@ -11,6 +12,7 @@ public class CharacterJumping : MonoBehaviour
     public float MaximumDrop = 10f;
     public float JumpingSpeed = 2f;
     public float JumpingHeightFactor = 0.6f;
+    public float MaximumAcceptableSlant = 35f;
 
     public bool ControlNavJumps = true;
 
@@ -19,6 +21,7 @@ public class CharacterJumping : MonoBehaviour
     private float _height;
     private float JumpHeight { get { return _height * MaximumVerticalJump; } }
     private float JumpWidth { get { return _height * MaximumHorizonalJump; } }
+    private Vector3 PlayerFeet { get { return _renderer.bounds.center - new Vector3(0, _height, 0); } }
     private float DropHeight { get { return _height * MaximumDrop; } }
     private bool _jumping = false;
     private NavMeshAgent _nav;
@@ -46,29 +49,14 @@ public class CharacterJumping : MonoBehaviour
         MultiTouch.RegisterTapHandlerByTag("Terrain", ReturnToTerraFirma);
     }
 
-    void Update()
-    {
-        if (_jumping)
-        {
-            if (_jumpingTarget == new Vector3(0, 0, 0)) return;
-            //Debug.Log("Jumpin!!"); ;
-            FixLookAt(_jumpingTarget);
-        }
-    }
-
-    private void FixLookAt(Vector3 target)
-    {
-        // Look where we jump and reset weird rotation
-        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
-        float str = 3.0f * Time.deltaTime;
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
-        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
-    }
-
     private IEnumerator HandleNavJumps()
     {
-        while (true)
-        {
+        while (true) {
+            if (_jumping) {
+                yield return null;
+                continue;
+            }
+
             if (!_nav.isOnOffMeshLink)
             {
                 yield return null;
@@ -81,31 +69,16 @@ public class CharacterJumping : MonoBehaviour
                 continue;
             }
 
-            var target = _nav.currentOffMeshLinkData.endPos;
+            var dest = _nav.destination;
+            // If we are close enough to the destination, we jump there instead of the off mesh link end pos
+            var target = CanReach(PlayerFeet, dest) ?
+                dest :
+                _nav.currentOffMeshLinkData.endPos;
 
-            if (_animator)
-                _animator.Jumping();
-
-            GameOverlayController.gameOverlayController.DeactivateSlider();
-            _jumpingTarget = target; // set jumping target for rotation
-
-            target += new Vector3(0, _height / 2, 0);
-            var jumpCurve = MakeBezierJump(transform.position, target);
-
-            var t = 0f;
-            while (t <= 1)
-            {
-                transform.position = jumpCurve(t);
-                t += Time.deltaTime / JumpingSpeed;
-                yield return null;
-            }
-
-            transform.position = target;
-
-            if (_animator)
-                _animator.Landing();
+            yield return StartCoroutine(Jumping(target, null, true));
 
             _nav.CompleteOffMeshLink();
+            _nav.destination = dest;
             _nav.Resume();
         }
     }
@@ -189,21 +162,20 @@ public class CharacterJumping : MonoBehaviour
         // Check if we are already on the object
         if (transform.parent == hit.collider.gameObject.transform)
             return;
+
+        if (Vector3.Angle(hit.normal, Vector3.up) > MaximumAcceptableSlant)
+            return;
         // Store current parent;
         var currentParent = transform.parent;
 
         // Detach the player and put him back into world coordinates
         transform.parent = null;
 
-        var target = hit.collider.gameObject.transform;
-        var targetRenderer = hit.collider.gameObject.GetComponent<Renderer>();
-
-
         // Get location on top of target
-        var v1 = targetRenderer.bounds.center + new Vector3(0, targetRenderer.bounds.extents.y, 0);
+        var v1 = hit.point;
 
         // Get location at bottom of player
-        var v2 = _renderer.bounds.center - new Vector3(0, _height, 0);
+        var v2 = PlayerFeet;
 
         if (!CanReach(v2, v1))
         {
@@ -213,7 +185,7 @@ public class CharacterJumping : MonoBehaviour
         }
 
         // Do the actual jump
-        StartCoroutine(Jumping(v1, target, false));
+        StartCoroutine(Jumping(v1, hit.collider.gameObject.transform, false));
     }
 
     private void ReturnToTerraFirma(RaycastHit hit)
@@ -235,8 +207,7 @@ public class CharacterJumping : MonoBehaviour
         // Get location of hit, for exact jumping
         var v1 = hit.point;
 
-        // Get distance from feet of character (WHICH IS WRONG GODDAMMIT POS SHOULD BE CENTER OF OBJECT PEOPLE NOT BOTTOM OF IT!)
-        var v2 = transform.position;
+        var v2 = PlayerFeet;
 
         if (!CanReach(v2, v1))
         {
@@ -246,7 +217,7 @@ public class CharacterJumping : MonoBehaviour
         }
 
         // Do the actual jump
-        SimpleJump(v1);
+        StartCoroutine(Jumping(v1, null, true));
     }
 
     private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to)
@@ -261,31 +232,26 @@ public class CharacterJumping : MonoBehaviour
         return t => Mathf.Pow(1 - t, 2) * from + 2 * (1 - t) * t * ctrl + Mathf.Pow(t, 2) * to;
     }
 
-    public bool AttemptSimpleJump(Vector3 target)
-    {
-        if (_jumping)
-            return false;
-
-        SimpleJump(target);
-
-        return true;
-    }
-
-    private void SimpleJump(Vector3 target)
-    {
-        StartCoroutine(Jumping(target, null, true));
-    }
-
     private IEnumerator Jumping(Vector3 target, Transform targetParent, bool restoreNagivation)
     {
         _jumping = true;
         _nav.enabled = false;
 
-        if (_animator)
-            _animator.Jumping();
-
         GameOverlayController.gameOverlayController.DeactivateSlider();
-        _jumpingTarget = target; // set jumping target for rotation
+
+        var lookDirection = Vector3.ProjectOnPlane(target - transform.position, Vector3.up);
+        var lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+        while (Vector3.Angle(lookDirection, transform.forward) > 0.1f) {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 5f);
+            yield return null;
+        }
+
+        if (_animator) {
+            _animator.Jumping();
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        _jumpingTarget = target;
 
         var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
         var jumpCurve = MakeBezierJump(transform.position, target);
@@ -306,7 +272,6 @@ public class CharacterJumping : MonoBehaviour
             _animator.Landing();
 
         transform.parent = targetParent;
-
         _jumping = false;
     }
 }
