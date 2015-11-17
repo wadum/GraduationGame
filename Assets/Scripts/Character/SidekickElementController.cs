@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SidekickElementController : MonoBehaviour {
+public class SidekickElementController : MonoBehaviour
+{
 
 
     public bool SwirlingAroundPlayer;
     public float OriginalRotationSpeed;
     public float EndRotationSpeed;
-    public float SwirlAroundPlayerDistance;
+    public float SwirlAroundPlayerDistance = 0.6f;
     public GameObject parent;
 
     float _rotationSpeed;
@@ -26,8 +27,8 @@ public class SidekickElementController : MonoBehaviour {
     public Status _myStatus;
     // Use this for initialization
 
-    void Start () {
-
+    void Start()
+    {
         _myStatus = Status.SwirlingAroundPlayer;
 
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -44,7 +45,7 @@ public class SidekickElementController : MonoBehaviour {
             ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
             if (timecontroller)
             {
-                if(timecontroller.InRange)
+                if (timecontroller.InRange)
                     FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
             }
         });
@@ -54,7 +55,7 @@ public class SidekickElementController : MonoBehaviour {
             ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
             if (timecontroller)
             {
-                if(timecontroller.InRange)
+                if (timecontroller.InRange)
                     FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
             }
         });
@@ -77,9 +78,10 @@ public class SidekickElementController : MonoBehaviour {
             }
         });
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         // if we are to formUp and ou current status is swirling around the player then start forming up.
         if (!SwirlingAroundPlayer && _myStatus == Status.SwirlingAroundPlayer)
         {
@@ -98,7 +100,7 @@ public class SidekickElementController : MonoBehaviour {
 
             case Status.Forming:
                 GetComponent<RandomRotation>().enabled = false;
-                transform.localPosition  = _originalPos;
+                transform.localPosition = _originalPos;
                 _myStatus = Status.InBody;
                 break;
 
@@ -111,7 +113,7 @@ public class SidekickElementController : MonoBehaviour {
             case Status.FlyOut:
                 _time += Time.deltaTime;
                 transform.position = Vector3.Lerp(_startpos, _endPos.position, _time / _animationTimer);
-                if(Vector3.Distance(transform.position, _endPos.position) < _swirlDistance)
+                if (Vector3.Distance(transform.position, _endPos.position) < _swirlDistance)
                 {
                     _myStatus = Status.SwirlingAroundObject;
                 }
@@ -138,14 +140,14 @@ public class SidekickElementController : MonoBehaviour {
                 break;
 
             default:
-           
+
                 break;
         }
     }
 
-    private void RotateAroundPos(Vector3 Pos)
+    private void RotateAroundPos(Vector3 targetPos)
     {
-        transform.RotateAround(Pos, Vector3.up, _rotationSpeed * Time.deltaTime);
+        transform.RotateAround(targetPos, Vector3.up, _rotationSpeed * Time.deltaTime);
 
         //Lowering he rotational speed as time goes by
         if (_rotationSpeed > EndRotationSpeed)
@@ -153,24 +155,12 @@ public class SidekickElementController : MonoBehaviour {
             _rotationSpeed = _rotationSpeed - Time.deltaTime;
         }
 
-        //If we are at the end position stop moving towards the target location
-        if (!_endPos)
-            return;
-
-        //If the distance to the object is to long or to short move closer or futher away
-        if (Vector3.Distance(transform.position, Pos) < _swirlDistance - 0.1f)
-        {
-            transform.position += (Pos - transform.position).normalized * Time.deltaTime;
-        }
-        if (Vector3.Distance(transform.position, Pos) > _swirlDistance + 0.1f)
-        {
-            transform.position += (Pos - transform.position).normalized * Time.deltaTime;
-        }
+        CorrecRotationDistance(targetPos);
 
         //Close in towards the y.pos of the rotation position
-        if (Vector3.Distance(transform.position, new Vector3(transform.position.x, Pos.y, transform.position.z)) > 0.2f)
+        if (Vector3.Distance(transform.position, new Vector3(transform.position.x, targetPos.y, transform.position.z)) > 0.2f)
         {
-            if (transform.position.y < Pos.y)
+            if (transform.position.y < targetPos.y)
             {
                 transform.position = transform.position + Vector3.up * Time.deltaTime;
             }
@@ -178,6 +168,19 @@ public class SidekickElementController : MonoBehaviour {
             {
                 transform.position = transform.position + Vector3.down * Time.deltaTime;
             }
+        }
+    }
+
+    private void CorrecRotationDistance(Vector3 targetPos)
+    {
+        //If the distance to the object is too long or too short move closer or futher away
+        if (Vector3.Distance(transform.position, targetPos) < _swirlDistance - 0.1f)
+        {
+            transform.position -= (targetPos + transform.position).normalized * Time.deltaTime;
+        }
+        if (Vector3.Distance(transform.position, targetPos) > _swirlDistance + 0.1f)
+        {
+            transform.position += (targetPos - transform.position).normalized * Time.deltaTime;
         }
     }
 

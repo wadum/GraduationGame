@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class LightningGenerator : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class LightningGenerator : MonoBehaviour {
 
     public AudioSource Audio;
 
+    public GameObject[] LightningConductorsToIgnore;
     public GameObject[] LightningConductors;
     LineRenderer lineRenderer;
 
@@ -30,6 +32,10 @@ public class LightningGenerator : MonoBehaviour {
         // Find lightningConductors
         LightningConductors = GameObject.FindGameObjectsWithTag("LightningConductor");
 
+        for (int i = 0; i < LightningConductorsToIgnore.Length; i++)
+        {
+            LightningConductors = LightningConductors.Where(con => con != LightningConductorsToIgnore[i]).ToArray();
+        }
     }
 
     // Update is called once per frame
@@ -118,4 +124,8 @@ public class LightningGenerator : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, maxConductorDistance);
     }
 
+    void OnDisable()
+    {
+        lightningConductor.GetComponent<Electrified>().Deactivate();
+    }
 }

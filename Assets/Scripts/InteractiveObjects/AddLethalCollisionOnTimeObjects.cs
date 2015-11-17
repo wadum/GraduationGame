@@ -86,6 +86,9 @@ public class AddLethalCollisionOnTimeObjects : MonoBehaviour {
                 yield return null;
             }
 
+            transform.parent.parent = null;
+            this.gameObject.transform.parent.GetComponentInChildren<AnimationController>().StopMagic();
+            GameOverlayController.gameOverlayController.DeactivateSlider();
             _respawn.Respawn();
             _playerBodyMaterial.SetFloat("_DissolveAmount", 0);
             _playerEyesMaterial.SetFloat("_DissolveAmount", 0);
