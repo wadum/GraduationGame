@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class CharacterJumping : MonoBehaviour
