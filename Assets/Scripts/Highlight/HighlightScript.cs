@@ -36,7 +36,6 @@ public class HighlightScript : MonoBehaviour {
     public void Activate()
     {
         rend.material.SetFloat("_AlphaToggle", 1);
-        rend.material.SetVector("_Emission", orgemmision);
         _activated = true;
     }
 
@@ -45,16 +44,12 @@ public class HighlightScript : MonoBehaviour {
         rend.material.SetFloat("_AlphaToggle", 0);
         _activated = false;
     }
-/*
-    void Update()
-    {
-        if (_activated)
-            return;
-        if (InRange)
-            rend.material.SetVector("_Emission", new Vector3(Mathf.PingPong(Time.time * 0.2f, 0.5f), Mathf.PingPong(Time.time*0.2f, 0.5f), orgemmision.z));
 
+    public void OrgEmission()
+    {
+        rend.material.SetVector("_Emission", orgemmision);
     }
-*/
+
     public bool InRange
     {
         get { return _inRange; }

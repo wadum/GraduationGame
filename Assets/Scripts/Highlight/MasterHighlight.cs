@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class MasterHighlight : MonoBehaviour {
     List<HighlightScript> _list;
     public float width;
-    private bool _inRange;
-
+    private bool _inRange, active, highlighted, blinking;
+    Vector3 emission;
     void Awake()
     {
         _list = new List<HighlightScript>();
@@ -37,25 +37,53 @@ public class MasterHighlight : MonoBehaviour {
 
     void Update()
     {
-        if (_inRange)
+        if (active)
         {
+            if(!blinking)
+                blinking = true;
             float p = Mathf.PingPong(Time.time * 0.2f, 0.5f);
-            Vector3 v  = new Vector3(p, p, 0);
+            emission = new Vector3(p, p, 0);
             foreach (HighlightScript script in _list)
-                script.rend.material.SetVector("_Emission", v);
+            {
+                script.rend.material.SetVector("_Emission", emission);
+            }
+            return;
         }
+        else if(blinking)
+        {
+            foreach (HighlightScript script in _list)
+                script.OrgEmission();
+            blinking = false;
+         }
+
+        if (_inRange && !highlighted)
+        {
+            highlighted = true;
+            foreach (HighlightScript script in _list)
+                script.Activate();
+        }
+        else if(!_inRange && highlighted)
+        {
+            highlighted = false;
+            foreach (HighlightScript script in _list)
+                script.Deactivate();
+        }
+
     }
 
     public void Activate()
     {
-        foreach (HighlightScript script in _list)
-            script.Activate();
+        active = true;
+            foreach(HighlightScript script in _list)
+                script.Deactivate();
+            blinking = true;
+        highlighted = false;
+
     }
 
     public void Deactivate()
     {
-        foreach (HighlightScript script in _list)
-            script.Deactivate();
+        active = false;
     }
 
     public bool InRange
