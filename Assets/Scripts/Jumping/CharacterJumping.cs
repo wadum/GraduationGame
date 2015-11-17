@@ -21,6 +21,7 @@ public class CharacterJumping : MonoBehaviour
     private float _height;
     private float JumpHeight { get { return _height * MaximumVerticalJump; } }
     private float JumpWidth { get { return _height * MaximumHorizonalJump; } }
+    private Vector3 PlayerFeet { get { return _renderer.bounds.center - new Vector3(0, _height, 0); } }
     private float DropHeight { get { return _height * MaximumDrop; } }
     private bool _jumping = false;
     private NavMeshAgent _nav;
@@ -151,9 +152,6 @@ public class CharacterJumping : MonoBehaviour
             return false;
 
         return true;
-    }
-
-    private Vector3 PlayerFeet { get { return _renderer.bounds.center - new Vector3(0, _height, 0); }
     }
 
     private void JumpForJoy(RaycastHit hit)
