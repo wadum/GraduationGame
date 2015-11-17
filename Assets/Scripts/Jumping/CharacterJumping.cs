@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class CharacterJumping : MonoBehaviour
@@ -45,25 +46,6 @@ public class CharacterJumping : MonoBehaviour
             MultiTouch.RegisterTapHandlerByTag(jmpTag, JumpForJoy);
 
         MultiTouch.RegisterTapHandlerByTag("Terrain", ReturnToTerraFirma);
-    }
-
-    void Update()
-    {
-        if (_jumping)
-        {
-            if (_jumpingTarget == new Vector3(0, 0, 0)) return;
-            //Debug.Log("Jumpin!!"); ;
-            FixLookAt(_jumpingTarget);
-        }
-    }
-
-    private void FixLookAt(Vector3 target)
-    {
-        // Look where we jump and reset weird rotation
-        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
-        float str = 3.0f * Time.deltaTime;
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
-        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
     }
 
     private IEnumerator HandleNavJumps()
@@ -280,10 +262,20 @@ public class CharacterJumping : MonoBehaviour
         _jumping = true;
         _nav.enabled = false;
 
-        if (_animator)
-            _animator.Jumping();
-
         GameOverlayController.gameOverlayController.DeactivateSlider();
+
+        var lookDirection = Vector3.ProjectOnPlane(target - transform.position, Vector3.up);
+        var lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+        while (Vector3.Angle(lookDirection, transform.forward) > 0.1f) {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 5f);
+            yield return null;
+        }
+
+        if (_animator) {
+            _animator.Jumping();
+            yield return new WaitForSeconds(0.2f);
+        }
+
         _jumpingTarget = target; // set jumping target for rotation
 
         var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
@@ -305,6 +297,7 @@ public class CharacterJumping : MonoBehaviour
             _animator.Landing();
 
         transform.parent = targetParent;
+
 
         _jumping = false;
     }
