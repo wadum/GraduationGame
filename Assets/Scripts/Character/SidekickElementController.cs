@@ -128,7 +128,7 @@ public class SidekickElementController : MonoBehaviour {
             case Status.FlyBack:
                 _time += Time.deltaTime;
                 transform.position = Vector3.Lerp(_startpos, _originalPos + parent.transform.localPosition + _player.transform.position, _time / _animationTimer);
-                if (Vector3.Distance(transform.position, _originalPos + parent.transform.localPosition + _player.transform.position) < 0.1)
+                if (Vector3.Distance(transform.position, _originalPos + parent.transform.localPosition + _player.transform.position) < SwirlAroundPlayerDistance)
                 {
                     SwirlingAroundPlayer = true;
                     _myStatus = Status.SwirlingAroundPlayer;
@@ -147,21 +147,27 @@ public class SidekickElementController : MonoBehaviour {
     {
         transform.RotateAround(Pos, Vector3.up, _rotationSpeed * Time.deltaTime);
 
+        //Lowering he rotational speed as time goes by
         if (_rotationSpeed > EndRotationSpeed)
         {
             _rotationSpeed = _rotationSpeed - Time.deltaTime;
         }
+
+        //If we are at the end position stop moving towards the target location
         if (!_endPos)
             return;
-        if (Vector3.Distance(transform.position, _endPos.position) < _swirlDistance)
+
+        //If the distance to the object is to long or to short move closer or futher away
+        if (Vector3.Distance(transform.position, Pos) < _swirlDistance - 0.1f)
         {
-            transform.position += (transform.position - Pos).normalized;
+            transform.position += (Pos - transform.position).normalized * Time.deltaTime;
         }
-        if (Vector3.Distance(transform.position, _endPos.position) > _swirlDistance + 0.2f)
+        if (Vector3.Distance(transform.position, Pos) > _swirlDistance + 0.1f)
         {
-            transform.position += (Pos - transform.position).normalized;
+            transform.position += (Pos - transform.position).normalized * Time.deltaTime;
         }
 
+        //Close in towards the y.pos of the rotation position
         if (Vector3.Distance(transform.position, new Vector3(transform.position.x, Pos.y, transform.position.z)) > 0.2f)
         {
             if (transform.position.y < Pos.y)
