@@ -7,6 +7,7 @@ public class LightningGenerator : MonoBehaviour {
     public float frecuency;
     public float maxConductorDistance;
     public float JitterDistance = 0.1f;
+    public float SinScale = 0.6f;
 
     public AudioSource Audio;
 
@@ -81,7 +82,7 @@ public class LightningGenerator : MonoBehaviour {
             if (Audio && !Audio.isPlaying)
                 Audio.Play();
 
-            //if enough ime has passed update the line
+            //if enough time has passed update the line
             if (timePassed > frecuency)
             {
                 LengthForEachSection = conductorDistance / lengthOfLineRenderer;
@@ -91,7 +92,17 @@ public class LightningGenerator : MonoBehaviour {
                     Vector3 originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     Vector3 dirMoveDist = (lightningConductor.transform.position - originalPos).normalized * LengthForEachSection;
                     Vector3 RandomDisplacement = (Vector3.Cross(dirMoveDist, Camera.main.transform.position - originalPos)).normalized * Random.Range(-JitterDistance, JitterDistance);
-                    Vector3 pos = originalPos + dirMoveDist * i + RandomDisplacement;
+                    Vector3 SinusCurver = new Vector3(0, SinScale, 0);
+
+                    if ( i < lengthOfLineRenderer / 2) { 
+                        SinusCurver = (SinusCurver * i / lengthOfLineRenderer) * (i - (lengthOfLineRenderer / 2));
+                    }
+                    else
+                    {
+                        SinusCurver = (SinusCurver * (lengthOfLineRenderer - i) / lengthOfLineRenderer) * (i - (lengthOfLineRenderer/2));
+                    }
+
+                    Vector3 pos = originalPos + dirMoveDist * i + RandomDisplacement + SinusCurver * SinScale;
                     lineRenderer.SetPosition(i, pos);
                 }
                 Vector3 lastPos = lightningConductor.transform.position;
