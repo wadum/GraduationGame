@@ -6,13 +6,13 @@ public class LoadLevel : MonoBehaviour
 {
     public int level;
     public bool entering;
-    int w = 250;
-    int h = 200;
     bool active;
+    public UnityEngine.UI.Button button;
+    public GameObject confirm;
 
     public GUIStyle tex;
     AudioSource crystalclick;
-    AudioSource clicksound;
+//    AudioSource clicksound;
 
 
     // Use this for initialization
@@ -20,10 +20,7 @@ public class LoadLevel : MonoBehaviour
     {
         if (!File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
             GetComponent<MeshRenderer>().enabled = false;
-        clicksound = GameObject.FindObjectOfType<SettingsMenu>().GetComponent<AudioSource>();
         crystalclick = GetComponent<AudioSource>();
-        if (!clicksound)
-            Debug.Log(name + " is trying to borrow Setting's ClikSound, something went wrong");
     }
 
     void Update()
@@ -38,7 +35,10 @@ public class LoadLevel : MonoBehaviour
                 if(hit.transform.gameObject == gameObject)
                 {
                     crystalclick.Play();
-                    entering = true;
+                    confirm.SetActive(true);
+                    GameObject.FindObjectOfType<MainMenuScript>().lvl = level;
+//                    entering = true;
+                    button.gameObject.SetActive(false);
                 }
             }
         }
@@ -58,7 +58,7 @@ public class LoadLevel : MonoBehaviour
     {
         this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }
-
+    /*
     void OnGUI()
     {
         if (entering)
@@ -96,8 +96,9 @@ public class LoadLevel : MonoBehaviour
         if (GUI.Button(new Rect(w-100, h - elementheight - 15f, 75, elementheight), I18n.GetInstance().Translate("back"), tex))
         {
             clicksound.Play();
+            button.gameObject.SetActive(true);
             entering = false;
         }
     }
-
+    */
 }

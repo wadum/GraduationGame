@@ -3,11 +3,13 @@ using System.Collections;
 
 public class MainMenuScript : MonoBehaviour {
     public Animator anim;
-    public SettingsMenu settings;
+    public GameObject settings;
     public GameObject shop;
     public GameObject main;
     public GameObject back;
+    public GameObject confirm;
     AudioSource clicksound;
+    public int lvl;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +40,7 @@ public class MainMenuScript : MonoBehaviour {
         clicksound.Play();
         main.SetActive(!main.activeSelf);
         anim.SetBool("Character", false);
+        anim.SetBool("Settings", false);
         foreach (LoadLevel load in GameObject.FindObjectsOfType<LoadLevel>())
             load.Disable();
         back.SetActive(!back.activeSelf);
@@ -48,18 +51,13 @@ public class MainMenuScript : MonoBehaviour {
         clicksound.Play();
         main.SetActive(!main.activeSelf);
         anim.SetBool("Settings", true);
-        settings.Active = true;
+        settings.SetActive(true);
     }
 
     public void GoBackFromSettings() {
         main.SetActive(!main.activeSelf);
         anim.SetBool("Settings", false);
-        settings.Active = false;
-    }
-
-    public void LoadLevel(string name)
-    {
-
+        settings.SetActive(false);
     }
 
     public void ToggleShop()
@@ -67,6 +65,34 @@ public class MainMenuScript : MonoBehaviour {
         clicksound.Play();
         main.SetActive(!main.activeSelf);
         shop.SetActive(!shop.activeSelf);
+    }
+
+    public void Load()
+    {
+        if(SaveLoad.saveLoad)
+            SaveLoad.saveLoad.SaveInterval = 2f;
+        Application.LoadLevel(lvl);
+    }
+
+    public void RestartLevel()
+    {
+        SaveLoad.saveLoad.ResetFrom(lvl);
+        if (lvl == 5)
+        {
+            PlayerPrefs.SetInt(TutorialController.PlayerPrefAlreadySeen, 0);
+            Application.LoadLevel("Intro Cinematic");
+        }
+        else
+        {
+            SaveLoad.saveLoad.SaveInterval = 2f;
+            Application.LoadLevel(lvl);
+        }
+    }
+
+    public void HideConfirm()
+    {
+        confirm.SetActive(false);
+        back.SetActive(true);
     }
 
 

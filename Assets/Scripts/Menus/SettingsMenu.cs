@@ -2,113 +2,141 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
-
+using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-
-    public bool Active;
-    public int w = 500;
-    public int h = 200;
+    public AudioMixer GameAudioMixer;
+    AudioSource clicksound;
+    public Image image;
+    bool active;
+    public GameObject buttons;
+    public Button back;
+    public Slider volume;
+    Image[] _clickers;
+    public Image credits;
     public GUIStyle tex;
-    public GUIStyle outer;
-    public GUIStyle credits;
-    public GameObject main;
-    float wait = 0.5f;
-    float _time;
 
     public List<string> members;
-    public bool credit;
+    public bool showCredits;
+    float h, w;
 
-    public AudioMixer GameAudioMixer;
+    void OnEnable()
+    {
+        image.fillAmount = 0;
+        back.gameObject.SetActive(true);
+        
+    }
 
+    void Update()
+    {
+        if (active)
+            return;
+        if (image.fillAmount < 1)
+        {
+            image.fillAmount += Time.deltaTime*1.5f;
+            return;
+        }
+        active = true;
+        buttons.SetActive(true);
+    }
 
-    public Animator anim;
-
-    public float hSliderValue;
-    AudioSource clicksound;
-
-    void Start()
+    void Awake()
     {
         clicksound = GetComponent<AudioSource>();
-        if (!clicksound)
-            Debug.Log("Attach AudioSource to " + name + " for clicking sound, remember to set output SFX, and no play awake");
+        _clickers = GetComponentsInChildren<Image>();
+        volume.value = PlayerPrefs.GetFloat("Volume");
+    }
+
+    public void Hide()
+    {
+        buttons.SetActive(false);
+        active = false;
+        this.gameObject.SetActive(false);
+    }
+
+    public void SetVolume(float volume)
+    {
+        Debug.Log(volume);
+        GameAudioMixer.SetFloat("masterVol", volume);
+        PlayerPrefs.SetFloat("Volume", volume);
+    }
+
+    public void SetDanish()
+    {
+        clicksound.Play();
+        PlayerPrefs.SetString("Lan", "Danish");
+        I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
+        foreach(Image butt in _clickers) {
+            if (butt.gameObject.activeSelf)
+            {
+                butt.gameObject.SetActive(false);
+                butt.gameObject.SetActive(true);
+            }
+        }
+        back.gameObject.SetActive(false);
+        back.gameObject.SetActive(true);
+    }
+
+    public void SetEnglish()
+    {
+        clicksound.Play();
+        PlayerPrefs.SetString("Lan", "English");
+        I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
+        foreach (Image butt in _clickers)
+        {
+            if (butt.gameObject.activeSelf)
+            {
+                butt.gameObject.SetActive(false);
+                butt.gameObject.SetActive(true);
+            }
+        }
+        back.gameObject.SetActive(false);
+        back.gameObject.SetActive(true);
+    }
+
+    public void ShowCredits()
+    {
+        clicksound.Play();
+        credits.gameObject.SetActive(true);
+        buttons.SetActive(false);
+        back.gameObject.SetActive(false);
+        showCredits = true;
+        image.gameObject.SetActive(false);
     }
 
     void OnGUI()
     {
-        if (Active)
+        if (showCredits)
         {
-//            language = PlayerPrefs.GetString("Lan");
-/*			if(language == "Danish")
-				I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
-			else
-				I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);*/
-            Rect windowRect = new Rect((Screen.width - w) / 2, (Screen.height - h) / 2, w, h);
+            w = Screen.width;
+            h = Screen.height;
 
-            if (!credit)
-                windowRect = GUI.Window(0, windowRect, Settings, "", outer);
-            else
-                windowRect = GUI.Window(0, windowRect, Credits, "", credits);
-
+            Rect windowRect = new Rect(5,5,w-10, h-10);
+                        
+            windowRect = GUI.Window(0, windowRect, Credits, "");
         }
     }
-    void Settings(int windowID)
-    {
-        int elementheight = 35;
-        GUI.Label(new Rect((w - 100) / 2, elementheight * 2, 100, elementheight), I18n.GetInstance().Translate("sound"), tex);
-        float _volume = PlayerPrefs.GetFloat("Volume");
-        hSliderValue = GUI.HorizontalSlider(new Rect((w - 100) / 2, elementheight * 3.5f, 100, elementheight + 15), _volume, 0F, 80.0F);
-        _volume = -80 + hSliderValue;
-        GameAudioMixer.SetFloat("masterVol", _volume);
-        PlayerPrefs.SetFloat("Volume", hSliderValue);
-
-        GUI.Label(new Rect((w - 100) / 2, elementheight * 5, 100, elementheight), I18n.GetInstance().Translate("language"), tex);
-        if (GUI.Button(new Rect((w - 100) / 2 + 100, elementheight * 6, 100, elementheight), "English", tex))
-        {
-            clicksound.Play();
-            PlayerPrefs.SetString("Lan", "English");
-			I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
-        }
-        if (GUI.Button(new Rect((w - 100) / 2 - 100, elementheight * 6, 100, elementheight), "Danish", tex))
-        {
-            clicksound.Play();
-            PlayerPrefs.SetString("Lan", "Danish");
-			I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
-        }
-
-        if (GUI.Button(new Rect((w - 100) / 2, elementheight * 9, 100, elementheight), I18n.GetInstance().Translate("credits"), tex))
-        {
-            clicksound.Play();
-            credit = true;
-        }
-        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), I18n.GetInstance().Translate("back"), tex))
-        {
-            clicksound.Play();
-            _time = Time.time;
-            Active = false;
-            anim.SetBool("Settings", false);
-            main.SetActive(!main.activeSelf);
-        }
-    }
-
 
     void Credits(int windowID)
     {
-        int elementheight = 25;
+        float elementheight = (h / members.Count) - 1;
+        float elementwidth = w - 15;
         int n = 0;
         foreach (string member in members)
         {
-            GUI.Label(new Rect(10, elementheight * (1+n), 100, elementheight), member, credits);
+            GUI.Label(new Rect(0, 5 + elementheight * n, elementwidth, elementheight), member, tex);
             n += 1;
         }
-        GUI.Box(new Rect(0, elementheight, w, elementheight * n), "");
-        if (GUI.Button(new Rect((w - 100), h - elementheight * 2, 100, elementheight), I18n.GetInstance().Translate("back"), tex))
-        {
+        if (GUI.Button(new Rect(0, 0, w - 5, h - 5), ""))
+        { 
             clicksound.Play();
-            credit = false;
+            credits.gameObject.SetActive(false);
+            buttons.SetActive(true);
+            back.gameObject.SetActive(true);
+            showCredits = false;
+            image.gameObject.SetActive(true);
         }
     }
-
 
 }
