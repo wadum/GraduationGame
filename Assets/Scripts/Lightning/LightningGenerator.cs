@@ -126,6 +126,9 @@ public class LightningGenerator : MonoBehaviour {
 
     void OnDisable()
     {
-        lightningConductor.GetComponent<Electrified>().Deactivate();
+        if (lightningConductor)
+        {
+            lightningConductor.GetComponent<Electrified>().Deactivate();
+        }
     }
 }
