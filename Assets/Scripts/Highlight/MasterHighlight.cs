@@ -7,6 +7,9 @@ public class MasterHighlight : MonoBehaviour {
     public float width;
     private bool _inRange, active, highlighted, blinking;
     Vector3 emission;
+    public Color OutlineColour = new Color(0,1,0.9586205f,0);
+    public Color Emmission = new Color(0.5f, 0.5f, 0);
+
     void Awake()
     {
         _list = new List<HighlightScript>();
@@ -29,6 +32,8 @@ public class MasterHighlight : MonoBehaviour {
                 {
                     HighlightScript script = child.gameObject.AddComponent<HighlightScript>();
                     script.SetWidth(width);
+                    script.rend.material.SetColor("_OutlineColor", OutlineColour);
+
                     _list.Add(script);
                 }
             }
@@ -42,10 +47,9 @@ public class MasterHighlight : MonoBehaviour {
             if(!blinking)
                 blinking = true;
             float p = Mathf.PingPong(Time.time * 0.2f, 0.5f);
-            emission = new Vector3(p, p, 0);
             foreach (HighlightScript script in _list)
             {
-                script.rend.material.SetVector("_Emission", emission);
+                script.rend.material.SetVector("_Emission", Emmission * p);
             }
             return;
         }
