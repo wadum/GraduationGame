@@ -10,9 +10,12 @@ public class GameOverlayController : MonoBehaviour
     public GameObject PauseButton;
     public GameObject StoreScreen;
     public GameObject TimeSlider;
+    public GameObject SoundPopup;
+    public GameObject ButtonsToHide;
     public GameObject ControlsPicture;
     public TimeSliderController SliderController;
     public List<AudioSource> ActivateSliderSounds;
+    public AudioSource MenuClickSound;
 
     public static GameOverlayController gameOverlayController;
 
@@ -23,15 +26,6 @@ public class GameOverlayController : MonoBehaviour
 
     void Awake()
     {
-        /*        if (gameOverlayController == null)
-                {
-                    DontDestroyOnLoad(gameObject);
-                    gameOverlayController = this;
-                }
-                else if (gameOverlayController != this)
-                {
-                    Destroy(this.gameObject);
-                }*/
         gameOverlayController = this;
     }
 
@@ -70,6 +64,8 @@ public class GameOverlayController : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        if (MenuClickSound)
+            MenuClickSound.Play();
         if (!SaveLoad.saveLoad)
             Debug.Log("No SaveLoad class in game");
         else
@@ -82,31 +78,18 @@ public class GameOverlayController : MonoBehaviour
 
     public void TogglePauseMenu()
     {
-        if (PauseMenu.activeSelf) HidePauseMenu();
-        else ShowPauseMenu();
+        if (MenuClickSound)
+            MenuClickSound.Play();
+        PauseButton.SetActive(!PauseButton.activeSelf);
+        PauseMenu.SetActive(!PauseMenu.activeSelf);
     }
 
-    public void ShowPauseMenu()
+    public void ToggleTutorialPicture()
     {
-        PauseButton.SetActive(false);
-        PauseMenu.SetActive(true);
-    }
+        if (MenuClickSound)
+            MenuClickSound.Play();
+        ControlsPicture.SetActive(!ControlsPicture.activeSelf);
 
-    public void HidePauseMenu()
-    {
-        PauseMenu.SetActive(false);
-        PauseButton.SetActive(true);
-    }
-
-
-    public void ShowTutorialPicture()
-    {
-        ControlsPicture.SetActive(true);
-    }
-
-    public void HideTutorialPicture()
-    {
-        ControlsPicture.SetActive(false);
     }
 
     public void ActivateSlider(TimeControllable obj)
@@ -161,5 +144,20 @@ public class GameOverlayController : MonoBehaviour
     public void SetFloat(float var)
     {
         _currentObj.SetFloat(var);
+    }
+
+    public void ToggleVolume()
+    {
+        if (MenuClickSound)
+            MenuClickSound.Play();
+
+        SoundPopup.SetActive(!SoundPopup.activeSelf);
+        ButtonsToHide.SetActive(!ButtonsToHide.activeSelf);
+    }
+
+    public void ClickSound()
+    {
+        if (MenuClickSound)
+            MenuClickSound.Play();
     }
 }
