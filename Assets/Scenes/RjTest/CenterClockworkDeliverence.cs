@@ -31,7 +31,7 @@ public class CenterClockworkDeliverence : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider player)
+    /*void OnTriggerStay(Collider player)
     {
         if (player.tag != "Player")
         {
@@ -47,7 +47,7 @@ public class CenterClockworkDeliverence : MonoBehaviour
             return;
         }
         player.GetComponent<CharacterInventory>().Deliver(false);
-    }
+    }*/
 
     IEnumerator LoadNewLevelAfterXTime()
     {

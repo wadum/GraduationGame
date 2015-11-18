@@ -9,11 +9,17 @@ public class Clockpart : MonoBehaviour
     public float speed = 1.0f;
     public AudioSource PickupSound;
 
-    private bool _flyToCenterClock = false;
-    private float _startTime,
+    public bool
+        finishedReassembling = false;
+    private bool
+        _reassemble = false;
+    private float 
+        _startTime,
         _journeyLength;
-    private GameObject _player;
-    private Vector3 _lerpStartingPos,
+    private GameObject 
+        _player;
+    private Vector3 
+        _lerpStartingPos,
         _lerpEndPos;
 
     void Start()
@@ -24,7 +30,26 @@ public class Clockpart : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(Vector3.up, 100 * Time.deltaTime);
+        if (_reassemble)
+        {
+            speed += 1;
+
+            transform.Rotate(Vector3.up, (50 * Time.deltaTime) * speed);
+
+            float distCovered = (Time.time - _startTime) * speed;
+            float fracJourney = distCovered / _journeyLength;
+
+            transform.position = Vector3.Lerp(_lerpStartingPos, _lerpEndPos, fracJourney);
+
+            if (fracJourney > 1)
+            {
+                FindObjectOfType<CenterClockworkDeliverence>().TurnedIn += 1;
+                finishedReassembling = true;
+            }
+            return;
+        }
+
+        transform.Rotate(Vector3.up, (50 * Time.deltaTime) * speed);
 
         if (pickedUp)
         {
@@ -32,25 +57,6 @@ public class Clockpart : MonoBehaviour
             transform.position = _player.transform.position;
         }
 
-        if (_flyToCenterClock)
-        {
-            float distCovered = (Time.time - _startTime) * speed;
-            float fracJourney = distCovered / _journeyLength;
-            //Debug.Log(gameObject.name + " Start: " + _lerpStartingPos + " End: " + _lerpEndPos + " frac: " + fracJourney + " _journeyLength: " + _journeyLength + " distCovered: " + distCovered);
-
-            if (distCovered == 0 || _journeyLength == 0)
-            {
-                fracJourney = 1.1f;
-            }
-
-            transform.position = Vector3.Lerp(_lerpStartingPos, _lerpEndPos, fracJourney);
-
-            if (fracJourney > 1)
-            {
-                FindObjectOfType<CenterClockworkDeliverence>().TurnedIn += 1;
-                Destroy(gameObject);
-            }
-        }
     }
 
     void OnTriggerEnter(Collider player)
@@ -68,14 +74,14 @@ public class Clockpart : MonoBehaviour
             PickupSound.Play();
     }
 
-    public void goToCenterClock(Vector3 CenterClockPos)
+    public void CollectToFinalPiece(Vector3 ReassemblePos)
     {
         transform.parent = null;
         _startTime = Time.time;
-        _lerpEndPos = CenterClockPos;
+        _lerpEndPos = ReassemblePos;
         _lerpStartingPos = _player.transform.position;
         _journeyLength = Vector3.Distance(_lerpStartingPos, _lerpEndPos);
         pickedUp = false;
-        _flyToCenterClock = true;
+        _reassemble = true;
     }
 }
