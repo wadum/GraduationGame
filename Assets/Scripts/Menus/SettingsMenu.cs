@@ -12,7 +12,7 @@ public class SettingsMenu : MonoBehaviour
     bool active;
     public GameObject buttons;
     public Button back;
-    public Slider volume;
+    public Slider volume, sfx, music;
     Image[] _clickers;
     public Image credits;
     public GUIStyle tex;
@@ -45,7 +45,9 @@ public class SettingsMenu : MonoBehaviour
     {
         clicksound = GetComponent<AudioSource>();
         _clickers = GetComponentsInChildren<Image>();
-        volume.value = PlayerPrefs.GetFloat("Volume");
+        volume.value = PlayerPrefs.GetFloat("masterVol");
+        sfx.value = PlayerPrefs.GetFloat("sfxVol");
+        music.value = PlayerPrefs.GetFloat("musicVol");
     }
 
     public void Hide()
@@ -57,9 +59,20 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        Debug.Log(volume);
         GameAudioMixer.SetFloat("masterVol", volume);
-        PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("masterVol", volume);
+    }
+
+    public void SetMusic(float volume)
+    {
+        GameAudioMixer.SetFloat("musicVol", volume);
+        PlayerPrefs.SetFloat("musicVol", volume);
+    }
+
+    public void SetSFX(float volume)
+    {
+        GameAudioMixer.SetFloat("sfxVol", volume);
+        PlayerPrefs.SetFloat("sfxVol", volume);
     }
 
     public void SetDanish()

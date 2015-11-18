@@ -13,21 +13,14 @@ public class MainMenuScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //        anim = GetComponent<Animator>();
         clicksound = GetComponent<AudioSource>();
         if(!clicksound)
             Debug.Log("Attach AudioSource to " + name + " for clicking sound, remember to set output SFX, and no play awake");
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-	}
-
-
     public void ChooseCharacter()
     {
-        clicksound.Play();
+        ClickSound();
         main.SetActive(!main.activeSelf);
         anim.SetBool("Character", true);
         foreach (LoadLevel load in GameObject.FindObjectsOfType<LoadLevel>())
@@ -37,7 +30,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void BackFromCharacter()
     {
-        clicksound.Play();
+        ClickSound();
         main.SetActive(!main.activeSelf);
         anim.SetBool("Character", false);
         anim.SetBool("Settings", false);
@@ -48,7 +41,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void GoToSettings()
     {
-        clicksound.Play();
+        ClickSound();
         main.SetActive(!main.activeSelf);
         anim.SetBool("Settings", true);
         settings.SetActive(true);
@@ -62,7 +55,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void ToggleShop()
     {
-        clicksound.Play();
+        ClickSound();
         main.SetActive(!main.activeSelf);
         shop.SetActive(!shop.activeSelf);
     }
@@ -95,5 +88,9 @@ public class MainMenuScript : MonoBehaviour {
         back.SetActive(true);
     }
 
-
+    public void ClickSound()
+    {
+        if (clicksound)
+            clicksound.Play();
+    }
 }

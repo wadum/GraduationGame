@@ -10,8 +10,8 @@ public class SetVolume : MonoBehaviour
 
     void Start()
     {
-        _volume = PlayerPrefs.GetFloat("Volume");
-//        _volume = -80 + _volume;
-        GameAudioMixer.SetFloat("masterVol", _volume);
+        GameAudioMixer.SetFloat("masterVol", PlayerPrefs.GetFloat("masterVol"));
+        GameAudioMixer.SetFloat("sfxVol", PlayerPrefs.GetFloat("sfxVol"));
+        GameAudioMixer.SetFloat("musicVol", PlayerPrefs.GetFloat("musicVol"));
     }
 }
