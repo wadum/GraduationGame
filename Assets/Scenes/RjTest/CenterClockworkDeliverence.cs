@@ -23,10 +23,6 @@ public class CenterClockworkDeliverence : MonoBehaviour
         {
             done = true;
             // Fire winning animation
-            if (SaveLoad.saveLoad)
-            {
-                SaveLoad.saveLoad.Reset();
-            }
             StartCoroutine(LoadNewLevelAfterXTime());
         }
     }
@@ -52,6 +48,10 @@ public class CenterClockworkDeliverence : MonoBehaviour
     IEnumerator LoadNewLevelAfterXTime()
     {
         yield return new WaitForSeconds(1.5f);
+        if (SaveLoad.saveLoad)
+        {
+            SaveLoad.saveLoad.Reset();
+        }
         Application.LoadLevel(NextLevel);
     }
 }

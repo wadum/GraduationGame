@@ -6,7 +6,8 @@ public class CharacterMovement : MonoBehaviour
     public GameObject[] FloatWaypoints;
     public float WaypointFloatSpeed = 1.0f;
     public float RotationSpeed = 3.0f;
-    public bool TutorialMoveFreeze = true;
+    // The TutorialMoveFreeze is a way to freeze the player, ignoring selected input while true
+    public bool TutorialMoveFreeze = false;
 
     private bool _lootAtMovingObject = false;
     private GameObject _lookAtTarget = null;

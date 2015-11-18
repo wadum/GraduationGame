@@ -10,7 +10,6 @@ public class Tutorial2TapAndHold : TutorialStep {
 
 	override public IEnumerator Run()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = true;
         MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit => Completed = true);
 
 		Backward.GetComponent<EventTrigger>().enabled = false;
