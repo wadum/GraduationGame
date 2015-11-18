@@ -38,6 +38,7 @@ public class TutorialController : MonoBehaviour
         }
 
         PlayerPrefs.SetInt(PlayerPrefAlreadySeen, 1);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = false;
 
         Destroy(gameObject);
     }
