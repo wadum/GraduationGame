@@ -13,7 +13,7 @@ public class TimeAnimationSync : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        _animator.SetFloat("Blend", _controller.GetFloat()/100);
+	void Update () {       
+       _animator.SetFloat("Blend", _controller.GetFloat() / 100);
 	}
 }
