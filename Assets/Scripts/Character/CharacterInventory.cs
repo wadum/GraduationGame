@@ -6,7 +6,7 @@ public class CharacterInventory : MonoBehaviour
 {
 
     public GameObject[] clockParts;
-    public GameObject centerClock;
+    public GameObject WholePiecePos;
 
     public GameObject Whole_Piece;
 
@@ -20,7 +20,7 @@ public class CharacterInventory : MonoBehaviour
     void Start()
     {
         _doOnce = false;
-        if (!centerClock) centerClock = gameObject;
+        //if (!WholePiecePos) WholePiecePos = gameObject;
         _playerMovement = gameObject.GetComponent<CharacterMovement>();
     }
     
@@ -31,8 +31,6 @@ public class CharacterInventory : MonoBehaviour
             for (int i = 0; i < clockpartsToCollect; i++)
             {
                 clockParts[i].GetComponent<Clockpart>().CollectToFinalPiece(transform.position + Vector3.up * 2);
-                //clockParts[i] = null;
-                //clockPartCounter--;
             }
             _doOnce = true;
         }
@@ -44,15 +42,21 @@ public class CharacterInventory : MonoBehaviour
                 return;
             }
 
+            for (int i = 0; i < clockpartsToCollect; i++)
+            {
+                clockParts[i].SetActive(false);
+            }
+            if (!Whole_Piece)
+            {
+                Debug.Log("where the hell is the diamond!?!?!");
+            }
+
             Whole_Piece.SetActive(true);
             Whole_Piece.transform.parent = null;
+            Whole_Piece.transform.position = clockParts[0].transform.position;
             StartCoroutine(Whole_Piece.GetComponent<FinalPieceAI>().PositionFinalPiece());
+            clockPartCounter = 0;
             _doOnce = false;
-        }
-
-        if (Whole_Piece.activeSelf == true)
-        {
-            _playerMovement.GoToCenterClock(clockParts[clockPartCounter - 1].GetComponent<Clockpart>().FloatWaypoints);
         }
     }
 

@@ -27,7 +27,8 @@ public class CenterClockworkDeliverence : MonoBehaviour
             {
                 SaveLoad.saveLoad.Reset();
             }
-            StartCoroutine(LoadNewLevelAfterXTime());
+            //I have removed it from here since the loading of the next level should happen once the final part has been positioned in the cener clock go to the FinalPieceAI script and its StartCoroutine to see the new place for loading next lvl
+            //StartCoroutine(LoadNewLevelAfterXTime());
         }
     }
 

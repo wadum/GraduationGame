@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Sprites;
 
 public class FinalPieceAI : MonoBehaviour {
 
+
+    public string NextLevel = "Main Menu";
     public Transform ClockPosition;
+    public GameObject Effects;
     public float speed = 1.0f;
     float _startTime;
     float _distCovered = 0;
     float _fracJourney = 0;
+
     // Update is called once per frame
 
     void Start()
@@ -33,12 +38,15 @@ public class FinalPieceAI : MonoBehaviour {
             transform.rotation = Quaternion.Lerp(_lerpStartingot, ClockPosition.transform.rotation, _fracJourney);
             yield return null;
         }
+        yield return new WaitForSeconds(1.5f);
 
+        Effects.GetComponent<ParticleSystem>().enableEmission = false;
+        
         //spray gay particles
         // to b implemented
 
-        //Disable this script since it will never need to be active again
-        this.enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        Application.LoadLevel(NextLevel);
         // this will never be reached but Ienumerators demands a return value on all endings
         yield return null;
     }
