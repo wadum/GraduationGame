@@ -10,6 +10,8 @@ public class ElevatorTrigger : MonoBehaviour {
     public GameObject UpperWall;
     public GameObject LowerWall;
 
+    public AudioSource Audio_moving;
+
     float _aniTime;
     bool running = false;
     float timer = 0;
@@ -46,6 +48,16 @@ public class ElevatorTrigger : MonoBehaviour {
         {
             _aniTime = 0;
             Ani.speed = 1;
+            if (Audio_moving)
+            {
+                Audio_moving.UnPause();
+            }
+
+            if (running && Audio_moving && !Audio_moving.isPlaying)
+            {
+                Audio_moving.Play();
+            }
+
             if (Ani.GetCurrentAnimatorStateInfo(0).IsName("New State"))
             {
                 return;
@@ -83,7 +95,11 @@ public class ElevatorTrigger : MonoBehaviour {
         {
             _aniTime += Time.deltaTime;
             if (_aniTime > 0.3)
-                Ani.speed = 0;
+                if (Audio_moving)
+                {
+                    Audio_moving.Pause();
+                }
+            Ani.speed = 0;
         }
     }
 }
