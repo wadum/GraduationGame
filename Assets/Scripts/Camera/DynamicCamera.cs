@@ -250,8 +250,11 @@ public class DynamicCamera : MonoBehaviour {
 
         _isRunning = AutoStartAi && _target;
 
-        if (_isRunning)
-            SetPosition(NeutralRelativeRotation, NeutralDistance);
+        if (!_isRunning)
+            return;
+
+        _playerIntent = true;
+        Unhinge();
     }
 
     #endregion
