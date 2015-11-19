@@ -1020,7 +1020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &158988
 GameObject:
   m_ObjectHideFlags: 1
@@ -1585,6 +1585,7 @@ GameObject:
   - 64: {fileID: 6413896}
   - 81: {fileID: 8186324}
   - 114: {fileID: 11425594}
+  - 114: {fileID: 11410892}
   m_Layer: 0
   m_Name: PlayerV2
   m_TagString: Player
@@ -2968,7 +2969,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187510}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: .429459035, y: .502605379, z: -1.17310357}
+  m_LocalPosition: {x: -.25, y: .689999998, z: -2.50999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 498860}
@@ -3859,6 +3860,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1257076ee9561a4e8f8fe7bfa0b9859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11410892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676ba8cbf639fc54bb24c34747a2c208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objh: {fileID: 0}
 --- !u!114 &11413304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3977,9 +3990,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeliverClockPartArea: {fileID: 0}
-  FloatWaypoints: []
   WaypointFloatSpeed: 5
   RotationSpeed: 3
+  TutorialMoveFreeze: 0
 --- !u!114 &11424540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4377,11 +4390,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b41e13db8006f4bbb9ac609f0d4dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaximumVerticalJump: 4
-  MaximumHorizonalJump: 5
-  MaximumDrop: 10
-  JumpingSpeed: 2
+  MaximumVerticalJump: 2
+  MaximumHorizonalJump: 3
+  MaximumDrop: 2
+  JumpingSpeed: 1.20000005
   JumpingHeightFactor: .600000024
+  MaximumAcceptableSlant: 35
   ControlNavJumps: 1
   TagsToJumpOnto:
   - Rock
@@ -4425,7 +4439,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  centerClock: {fileID: 0}
+  WholePiecePos: {fileID: 0}
+  Whole_Piece: {fileID: 0}
   clockpartsToCollect: 2
   clockPartCounter: 0
 --- !u!114 &11492830
