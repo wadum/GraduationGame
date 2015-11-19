@@ -36,7 +36,7 @@ public class DynamicCamera : MonoBehaviour {
     
     private Camera _camera;
     private Transform _target;
-    private Collider _targetCollider;
+    private Renderer _targetRenderer;
 
     // Used to override the camera agent
     private bool _playerIntent;
@@ -134,8 +134,8 @@ public class DynamicCamera : MonoBehaviour {
 
     private Vector3 TopOfTarget {
         get {
-            return _targetCollider?
-                _target.position + new Vector3(0, _targetCollider.bounds.extents.y, 0):
+            return _targetRenderer?
+                _targetRenderer.bounds.center + new Vector3(0, _targetRenderer.bounds.extents.y, 0):
                 _target.position;
         }
     }
@@ -175,10 +175,11 @@ public class DynamicCamera : MonoBehaviour {
 
     public void SetTarget(Transform target) {
         _target = target;
+        _targetRenderer = _target.GetComponent<Renderer>();
     }
 
     public void SetTarget(GameObject target) {
-        _target = target.transform;
+        SetTarget(target.transform);
     }
 
     private bool TargetPlayer() {
@@ -229,9 +230,9 @@ public class DynamicCamera : MonoBehaviour {
         else
             return true;
 
-        _targetCollider = _target.GetComponent<Collider>();
-        if (!_targetCollider)
-            Debug.Log("Warn: player missing collider, camera offset might be wrong");
+        _targetRenderer = _target.GetComponent<Renderer>();
+        if (!_targetRenderer)
+            Debug.Log("Warn: player missing renderer, camera offset might be wrong");
 
         return true;
     }
@@ -324,7 +325,7 @@ public class DynamicCamera : MonoBehaviour {
 
         SetPosition(PlayerDesiredAbsoluteRotation, zoom, false);
 
-        transform.LookAt(_target);
+        transform.LookAt(TopOfTarget);
     }
 
     private void FullyAutomaticCameraControl() {
@@ -332,7 +333,7 @@ public class DynamicCamera : MonoBehaviour {
 
         SetPosition(rot, NeutralDistance);
 
-        transform.LookAt(_target);
+        transform.LookAt(TopOfTarget);
     }
 
     #endregion
