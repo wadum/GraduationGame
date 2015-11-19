@@ -305,9 +305,7 @@ public class DynamicCamera : MonoBehaviour {
     public void Stop() { _isRunning = false; }
 
     private void ConstrainedPlayerControl() {
-        var rot = Quaternion.RotateTowards(CurrentAbsoluteRotation, PlayerDesiredAbsoluteRotation, 40f * Time.deltaTime);
-
-        SetPosition(rot, NeutralDistance, false);
+        SetPosition(PlayerDesiredAbsoluteRotation, NeutralDistance, false);
 
         transform.LookAt(_target);
     }
@@ -324,6 +322,14 @@ public class DynamicCamera : MonoBehaviour {
 
     #region input handlers
 
+    private void AddPlayerRotation(Vector2 movementDirection) {
+        var pitch = (InvertPitch ? movementDirection.y : -movementDirection.y) * PitchByHeight;
+        var yaw = (InvertYaw ? movementDirection.x : -movementDirection.x) * YawByWidth;
+
+        PlayerDesiredPitch = CurrentPitch + pitch;
+        PlayerDesiredAbsoluteYaw = CurrentAbsoluteYaw + yaw;
+    }
+
     private void HandleSwipe(Touch swipe) {
         if (!_isRunning)
             return;
@@ -333,12 +339,7 @@ public class DynamicCamera : MonoBehaviour {
             Unhinge();
         }
 
-        var movementDirection = ScreenNormalize(swipe.deltaPosition);
-        var pitch = (InvertPitch ? movementDirection.y : -movementDirection.y) * PitchByHeight;
-        var yaw = (InvertYaw ? movementDirection.x : -movementDirection.x) * YawByWidth;
-
-        PlayerDesiredPitch += pitch;
-        PlayerDesiredAbsoluteYaw += yaw;
+        AddPlayerRotation(ScreenNormalize(swipe.deltaPosition));
     }
 
     private void Unhinge() {
@@ -350,7 +351,10 @@ public class DynamicCamera : MonoBehaviour {
         if (!_isRunning)
             return;
 
-        _playerIntent = true;
+        if (!_playerIntent) {
+            _playerIntent = true;
+            Unhinge();
+        }
 
         Func<List<Vector2>, Vector2> averagePoint = vectors => vectors.Aggregate((v1, v2) => v1 + v2) / vectors.Count;
         Func<List<Vector2>, Vector2, float> averageDistanceToPoint = (vectors, point) => vectors.Select(p => Vector2.Distance(p, point)).Average();
