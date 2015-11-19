@@ -23,11 +23,16 @@ public class CenterClockworkDeliverence : MonoBehaviour
         {
             done = true;
             // Fire winning animation
-            StartCoroutine(LoadNewLevelAfterXTime());
+            if (SaveLoad.saveLoad)
+            {
+                SaveLoad.saveLoad.Reset();
+            }
+            //I have removed it from here since the loading of the next level should happen once the final part has been positioned in the cener clock go to the FinalPieceAI script and its StartCoroutine to see the new place for loading next lvl
+            //StartCoroutine(LoadNewLevelAfterXTime());
         }
     }
 
-    void OnTriggerStay(Collider player)
+    /*void OnTriggerStay(Collider player)
     {
         if (player.tag != "Player")
         {
@@ -43,15 +48,11 @@ public class CenterClockworkDeliverence : MonoBehaviour
             return;
         }
         player.GetComponent<CharacterInventory>().Deliver(false);
-    }
+    }*/
 
     IEnumerator LoadNewLevelAfterXTime()
     {
         yield return new WaitForSeconds(1.5f);
-        if (SaveLoad.saveLoad)
-        {
-            SaveLoad.saveLoad.Reset();
-        }
         Application.LoadLevel(NextLevel);
     }
 }
