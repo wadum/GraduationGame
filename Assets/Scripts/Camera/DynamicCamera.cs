@@ -308,7 +308,12 @@ public class DynamicCamera : MonoBehaviour {
     public void Stop() { _isRunning = false; }
 
     private void ConstrainedPlayerControl() {
-        SetPosition(PlayerDesiredAbsoluteRotation, NeutralDistance, false);
+        var zoom =
+            _playerDesiredZoom < MinimumDistance ? MinimumDistance :
+            _playerDesiredZoom > MaximumDistance ? MaximumDistance :
+            _playerDesiredZoom;
+
+        SetPosition(PlayerDesiredAbsoluteRotation, zoom, false);
 
         transform.LookAt(_target);
     }
@@ -369,6 +374,9 @@ public class DynamicCamera : MonoBehaviour {
         var previousPositions = pinch.Select(t => ScreenNormalize(t.position - t.deltaPosition)).ToList();
         var previousCenter = averagePoint(previousPositions);
         var previousAverageDistanceToCenter = averageDistanceToPoint(previousPositions, previousCenter);
+
+        var zoom = (1 - averageDistanceToCenter/previousAverageDistanceToCenter) * ZoomFactor;
+        _playerDesiredZoom = CurrentDistance + zoom;
     }
 
     #endregion
