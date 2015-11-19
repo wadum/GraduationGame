@@ -13,13 +13,16 @@ public class TutorialController : MonoBehaviour
     public List<GameObject> ObjectsToToggle;
 
     private static MultiTouch _multiTouch;
+    private static DynamicCamera _camera;
 
     public const string PlayerPrefAlreadySeen = "TutorialAlreadySeen";
 
     void Awake()
     {
         _multiTouch = FindObjectOfType<MultiTouch>();
-        if ((PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl1") && !ForceTutorial)
+        _camera = FindObjectOfType<DynamicCamera>();
+        if ((PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl1") &&
+            !ForceTutorial)
             Destroy(gameObject);
         else
             ObjectsToToggle.ForEach(obj => { if (obj) obj.SetActive(false); });
@@ -32,6 +35,9 @@ public class TutorialController : MonoBehaviour
 
     IEnumerator RunAllSteps()
     {
+        // We take control of the camera, so we turn off the built-in AI.
+        _camera.Stop();
+
         // Only once a tutorial start will we freeze the player.
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = true;
         foreach (var step in Steps)
@@ -42,6 +48,9 @@ public class TutorialController : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefAlreadySeen, 1);
         // When the tutorial is done the player is free to move around.
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = false;
+        
+        // We yield control to the camera built-in AI.
+        _camera.Run();
 
         Destroy(gameObject);
     }
@@ -51,20 +60,22 @@ public class TutorialController : MonoBehaviour
         EnableTouch();
         ObjectsToToggle.ForEach(obj => { if (obj) obj.SetActive(true); });
         ObjectsToDestroy.ForEach(obj => { if (obj) Destroy(obj); });
-        var cam = GameObject.FindObjectOfType<TopDownCamController>();
-        if (cam)
-            cam.RegisterHandlers();
+        //var cam = FindObjectOfType<TopDownCamController>();
+        //if (cam)
+        //    cam.RegisterHandlers();
     }
 
     public static IEnumerator MoveCamera(Vector3 desiredPos, float cameraRotationTime)
     {
         float time = 0;
-        Vector3 origCamPos = Camera.main.transform.position;
+        Vector3 origCamPos = _camera.transform.position;
+        var playerRenderer = GameObject.FindGameObjectWithTag("Player").GetComponent<Renderer>();
 
         while (time < cameraRotationTime)
         {
-            Camera.main.transform.position = Vector3.Slerp(origCamPos, desiredPos, time / cameraRotationTime);
+            _camera.transform.position = Vector3.Slerp(origCamPos, desiredPos, time / cameraRotationTime);
             time += Time.deltaTime;
+            _camera.transform.LookAt(playerRenderer.bounds.center + new Vector3(0, playerRenderer.bounds.extents.y, 0));
             yield return null;
         }
     }
