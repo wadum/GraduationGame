@@ -261,6 +261,7 @@ public class DynamicCamera : MonoBehaviour {
 
     #region Camera AI control
 
+    private bool _debugOn = false;
     private bool _manualOverride = false;
     private bool _isRunning = false;
     void LateUpdate() {
@@ -275,7 +276,15 @@ public class DynamicCamera : MonoBehaviour {
             FullyAutomaticCameraControl();
     }
 
-    private void HandleDebugInput() {
+    private void HandleDebugInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad0)) {
+            _debugOn = !_debugOn;
+            Debug.Log("Debug is " + (_debugOn? "on" : "off"));
+        }
+
+        if (!_debugOn)
+            return;
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (_manualOverride)
@@ -286,7 +295,7 @@ public class DynamicCamera : MonoBehaviour {
             }
         }
 
-        if (Input.GetMouseButtonDown(2)) {
+        if (Input.GetMouseButtonDown(1)) {
             var ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
