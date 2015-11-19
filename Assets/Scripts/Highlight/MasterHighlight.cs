@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-public class MasterHighlight : MonoBehaviour {
+public class MasterHighlight : MonoBehaviour
+{
     List<HighlightScript> _list;
     public float width;
     private bool _inRange, active, highlighted, blinking;
     Vector3 emission;
-    public Color OutlineColour = new Color(0,1,0.9586205f,0);
+    public Color OutlineColour = new Color(0, 1, 0.9586205f, 0);
     public Color Emmission = new Color(0.5f, 0.5f, 0);
 
     void Awake()
@@ -15,8 +15,9 @@ public class MasterHighlight : MonoBehaviour {
         _list = new List<HighlightScript>();
 
     }
-    // Use this for initialization
-    void Start () {
+
+    void Start()
+    {
         TagChildren(transform);
     }
 
@@ -24,6 +25,11 @@ public class MasterHighlight : MonoBehaviour {
     {
         foreach (Transform child in _transform.GetComponentsInChildren<Transform>())
         {
+            if (child.GetComponent<MasterHighlight>() && child.transform != transform)
+            {
+                //Debug.Log(child.name);
+                break;
+            }
             if (child.tag == "TimeManipulationObject" || child.tag == "Rock")
             {
                 var mesh = child.GetComponent<MeshRenderer>();
@@ -44,7 +50,7 @@ public class MasterHighlight : MonoBehaviour {
     {
         if (active)
         {
-            if(!blinking)
+            if (!blinking)
                 blinking = true;
             float p = Mathf.PingPong(Time.time * 0.2f, 0.5f);
             foreach (HighlightScript script in _list)
@@ -53,12 +59,12 @@ public class MasterHighlight : MonoBehaviour {
             }
             return;
         }
-        else if(blinking)
+        else if (blinking)
         {
             foreach (HighlightScript script in _list)
                 script.OrgEmission();
             blinking = false;
-         }
+        }
 
         if (_inRange && !highlighted)
         {
@@ -66,7 +72,7 @@ public class MasterHighlight : MonoBehaviour {
             foreach (HighlightScript script in _list)
                 script.Activate();
         }
-        else if(!_inRange && highlighted)
+        else if (!_inRange && highlighted)
         {
             highlighted = false;
             foreach (HighlightScript script in _list)
@@ -78,9 +84,9 @@ public class MasterHighlight : MonoBehaviour {
     public void Activate()
     {
         active = true;
-            foreach(HighlightScript script in _list)
-                script.Deactivate();
-            blinking = true;
+        foreach (HighlightScript script in _list)
+            script.Deactivate();
+        blinking = true;
         highlighted = false;
 
     }
@@ -93,8 +99,9 @@ public class MasterHighlight : MonoBehaviour {
     public bool InRange
     {
         get { return _inRange; }
-        set {
-            foreach(HighlightScript script in _list)
+        set
+        {
+            foreach (HighlightScript script in _list)
             {
                 script.InRange = value;
             }

@@ -83,7 +83,7 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
-                yield return StartCoroutine(HandleGesture());
+                yield return StartCoroutine(HandleGesture(touches));
                 continue;
             }
 
@@ -92,10 +92,9 @@ public class MultiTouch : MonoBehaviour
     }
 
 
-    private IEnumerator HandleGesture() {
-        while (Input.touchCount > 0) {
-            var touches = GetTouches();
-
+    private IEnumerator HandleGesture(List<Touch> initialTouches) {
+        var touches = initialTouches;
+        while (touches.Count > 0) {
             if (!touches.Any()) {
                 yield return null;
                 continue;
@@ -107,6 +106,7 @@ public class MultiTouch : MonoBehaviour
                 HandlePinch(touches);
 
             yield return null;
+            touches = GetTouches();
         }
     }
     #endregion

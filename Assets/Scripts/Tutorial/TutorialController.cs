@@ -32,12 +32,16 @@ public class TutorialController : MonoBehaviour
 
     IEnumerator RunAllSteps()
     {
+        // Only once a tutorial start will we freeze the player.
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = true;
         foreach (var step in Steps)
         {
             yield return StartCoroutine(step.Run());
         }
 
         PlayerPrefs.SetInt(PlayerPrefAlreadySeen, 1);
+        // When the tutorial is done the player is free to move around.
+        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = false;
 
         Destroy(gameObject);
     }

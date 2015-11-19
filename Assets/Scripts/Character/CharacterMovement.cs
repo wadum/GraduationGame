@@ -5,6 +5,8 @@ public class CharacterMovement : MonoBehaviour
     public GameObject DeliverClockPartArea;
     public float WaypointFloatSpeed = 1.0f;
     public float RotationSpeed = 3.0f;
+    // The TutorialMoveFreeze is a way to freeze the player, ignoring selected input while true
+    public bool TutorialMoveFreeze = false;
 
     private bool _lootAtMovingObject = false;
     private GameObject _lookAtTarget = null;
@@ -17,8 +19,16 @@ public class CharacterMovement : MonoBehaviour
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
 
-        MultiTouch.RegisterTapHandlerByTag("Terrain", hit => { GoTo(hit.point); GameOverlayController.gameOverlayController.DeactivateSlider(); });
-        MultiTouch.RegisterTapHandlerByTag("Clockpart", hit => GoTo(hit.collider.transform.position));
+        MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
+        {
+            if (TutorialMoveFreeze) return;
+            GoTo(hit.point);
+            GameOverlayController.gameOverlayController.DeactivateSlider();
+        });
+        MultiTouch.RegisterTapHandlerByTag("Clockpart", hit => {
+            if (TutorialMoveFreeze) return;
+            GoTo(hit.collider.transform.position);
+        });
     }
 
     // Update is called once per frame
@@ -39,7 +49,7 @@ public class CharacterMovement : MonoBehaviour
                     Debug.LogWarning("LookHERE script has to be assigned to one of the children of the target gameObject: " + _lookAtTarget.name);
             }
         }
-        
+
         if (!DeliverClockPartArea)
         {
             Debug.Log("Add DeliverClockPartArea");
@@ -51,7 +61,7 @@ public class CharacterMovement : MonoBehaviour
     {
         _lootAtMovingObject = value;
         _lookAtTarget = go;
-        if(go)
+        if (go)
             tmpLTarget = _lookAtTarget.GetComponentInChildren<LookHERE>();
     }
 
