@@ -13,6 +13,8 @@ public class CharacterInventory : MonoBehaviour
     public int clockpartsToCollect;
     public int clockPartCounter = 0;
 
+	public ZoneAudio AmbientAddition;
+
     private bool _doOnce;
 
     private CharacterMovement _playerMovement;
@@ -73,6 +75,7 @@ public class CharacterInventory : MonoBehaviour
                 }
             }
         }
+		AmbientAddition.enabled = true;
         clockParts[clockPartCounter] = clockpart;
         clockPartCounter++;
         for (int i = 0; i < clockPartCounter; i++)
