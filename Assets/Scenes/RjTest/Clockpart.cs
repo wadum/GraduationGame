@@ -9,7 +9,7 @@ public class Clockpart : MonoBehaviour
     public GameObject clockPart;
     public float speed = 1.0f;
     public float RotationSpeed = 1.0f;
-
+    public float AnimateSpeed = 1.5f;
     public bool
         finishedReassembling = false;
     private bool
@@ -97,7 +97,7 @@ public class Clockpart : MonoBehaviour
             yield return null;
         }
 
-        float time = Time.time + 1.5f;
+        float time = Time.time + AnimateSpeed;
 
         while(time > Time.time)
         {

@@ -16,6 +16,7 @@ public class CharacterInventory : MonoBehaviour
 	public ZoneAudio AmbientAddition;
 	public AudioSource CompletedAudio;
 	public AudioSource PickUpSound;
+    public float AnimateSpeed = 1.5f;
 
     private bool _doOnce;
 
@@ -26,6 +27,8 @@ public class CharacterInventory : MonoBehaviour
         _doOnce = false;
         //if (!WholePiecePos) WholePiecePos = gameObject;
         _playerMovement = gameObject.GetComponent<CharacterMovement>();
+        foreach (Clockpart clockpart in GameObject.FindObjectsOfType<Clockpart>())
+            clockpart.AnimateSpeed = AnimateSpeed;
     }
     
     void Update()
