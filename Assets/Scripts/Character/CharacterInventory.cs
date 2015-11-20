@@ -14,6 +14,8 @@ public class CharacterInventory : MonoBehaviour
     public int clockPartCounter = 0;
 
 	public ZoneAudio AmbientAddition;
+	public AudioSource CompletedAudio;
+	public AudioSource PickUpSound;
 
     private bool _doOnce;
 
@@ -39,6 +41,8 @@ public class CharacterInventory : MonoBehaviour
 
         if (clockPartCounter >= clockpartsToCollect && _doOnce)
         {
+			if(!CompletedAudio.isPlaying)
+				CompletedAudio.Play();
             if(!(clockParts[0].GetComponent<Clockpart>().finishedReassembling && clockParts[1].GetComponent<Clockpart>().finishedReassembling))
             {
                 return;
@@ -82,6 +86,8 @@ public class CharacterInventory : MonoBehaviour
 		}
         clockParts[clockPartCounter] = clockpart;
         clockPartCounter++;
+		if(clockPartCounter < clockpartsToCollect)
+			PickUpSound.Play();
         for (int i = 0; i < clockPartCounter; i++)
         {
             clockParts[i].transform.rotation = Quaternion.Euler(0, 360 / clockPartCounter * i, 0);
