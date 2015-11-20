@@ -75,7 +75,11 @@ public class CharacterInventory : MonoBehaviour
                 }
             }
         }
-		AmbientAddition.enabled = true;
+		if(clockPartCounter == 0)
+		{
+			AmbientAddition.enabled = true;
+			GameObject.Find("Addition").GetComponent<AudioSource>().time = GameObject.Find("Ambience").GetComponent<AudioSource>().time;
+		}
         clockParts[clockPartCounter] = clockpart;
         clockPartCounter++;
         for (int i = 0; i < clockPartCounter; i++)
