@@ -13,6 +13,11 @@ public class CharacterInventory : MonoBehaviour
     public int clockpartsToCollect;
     public int clockPartCounter = 0;
 
+	public ZoneAudio AmbientAddition;
+	public AudioSource CompletedAudio;
+	public AudioSource PickUpSound;
+    public float AnimateSpeed = 1.5f;
+
     private bool _doOnce;
 
     private CharacterMovement _playerMovement;
@@ -22,6 +27,8 @@ public class CharacterInventory : MonoBehaviour
         _doOnce = false;
         //if (!WholePiecePos) WholePiecePos = gameObject;
         _playerMovement = gameObject.GetComponent<CharacterMovement>();
+        foreach (Clockpart clockpart in GameObject.FindObjectsOfType<Clockpart>())
+            clockpart.AnimateSpeed = AnimateSpeed;
     }
     
     void Update()
@@ -37,6 +44,8 @@ public class CharacterInventory : MonoBehaviour
 
         if (clockPartCounter >= clockpartsToCollect && _doOnce)
         {
+			if(!CompletedAudio.isPlaying)
+				CompletedAudio.Play();
             if(!(clockParts[0].GetComponent<Clockpart>().finishedReassembling && clockParts[1].GetComponent<Clockpart>().finishedReassembling))
             {
                 return;
@@ -73,8 +82,15 @@ public class CharacterInventory : MonoBehaviour
                 }
             }
         }
+		if(clockPartCounter == 0)
+		{
+			AmbientAddition.enabled = true;
+			GameObject.Find("Addition").GetComponent<AudioSource>().time = GameObject.Find("Ambience").GetComponent<AudioSource>().time;
+		}
         clockParts[clockPartCounter] = clockpart;
         clockPartCounter++;
+		if(clockPartCounter < clockpartsToCollect)
+			PickUpSound.Play();
         for (int i = 0; i < clockPartCounter; i++)
         {
             clockParts[i].transform.rotation = Quaternion.Euler(0, 360 / clockPartCounter * i, 0);

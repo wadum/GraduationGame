@@ -9,8 +9,7 @@ public class Clockpart : MonoBehaviour
     public GameObject clockPart;
     public float speed = 1.0f;
     public float RotationSpeed = 1.0f;
-    public AudioSource PickupSound;
-
+    public float AnimateSpeed = 1.5f;
     public bool
         finishedReassembling = false;
     private bool
@@ -59,8 +58,6 @@ public class Clockpart : MonoBehaviour
         pickedUp = true;
         this.GetComponent<Collider>().enabled = false;
         player.GetComponent<CharacterInventory>().AddClockPart(this.gameObject);
-        if (PickupSound)
-            PickupSound.Play();
     }
 
     public void CollectToFinalPiece(Vector3 ReassemblePos)
@@ -100,7 +97,7 @@ public class Clockpart : MonoBehaviour
             yield return null;
         }
 
-        float time = Time.time + 1.5f;
+        float time = Time.time + AnimateSpeed;
 
         while(time > Time.time)
         {

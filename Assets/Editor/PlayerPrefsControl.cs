@@ -6,7 +6,8 @@ public class PlayerPrefsControl : MonoBehaviour
 {
 
     public static List<string> IntKeys = new List<string>(){ TutorialController.PlayerPrefAlreadySeen };
-    public static List<string> StringKeys = new List<string>() {  };
+	public static List<string> FloatKeys = new List<string>() { "masterVol", "sfxVol", "musicVol" };
+    public static List<string> StringKeys = new List<string>() { "LastLevel" };
 
     [MenuItem("PlayerPrefs/Delete All")]
     public static void DeletePlayePrefs()
@@ -18,11 +19,13 @@ public class PlayerPrefsControl : MonoBehaviour
     public static void PrintPlayePrefs()
     {
         IntKeys.ForEach(k => {
-                Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.HasKey(k) ? PlayerPrefs.GetInt(k).ToString() : "Not Set"));
+            Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.HasKey(k) ? PlayerPrefs.GetInt(k).ToString() : "Not Set"));
         });
+		FloatKeys.ForEach(k => {
+			Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.HasKey(k) ? PlayerPrefs.GetInt(k).ToString() : "Not Set"));
+		});
         StringKeys.ForEach(k => {
-            if (PlayerPrefs.HasKey(k))
-                Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.HasKey(k) ? PlayerPrefs.GetString(k) : "Not Set"));
+        	Debug.Log(string.Format("Key: {0}\nValue: {1}", k, PlayerPrefs.HasKey(k) ? PlayerPrefs.GetString(k) : "Not Set"));
         });
     }
 }

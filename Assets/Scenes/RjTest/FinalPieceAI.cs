@@ -8,9 +8,11 @@ public class FinalPieceAI : MonoBehaviour {
     public string NextLevel = "Main Menu";
     public Transform ClockPosition;
     public GameObject Effects;
-    public float speed = 1.0f;
+    public float TravelTime = 5.0f;
     float _startTime;
-    float _distCovered = 0;
+    public float EndLevelWait1 = 2.5f;
+    public float EndLevelWait2 = 1.5f;
+//    float _distCovered = 0;
     float _fracJourney = 0;
 
     // Update is called once per frame
@@ -32,20 +34,21 @@ public class FinalPieceAI : MonoBehaviour {
         // fly to position in clock
         while (_fracJourney < 1)
         {
-            _distCovered = (Time.time - _startTime) * speed;
-            _fracJourney = _distCovered / _journeyLength;
+            _fracJourney = (Time.time - _startTime) / TravelTime;
             transform.position = Vector3.Lerp(_lerpStartingPos, ClockPosition.position, _fracJourney);
             transform.rotation = Quaternion.Lerp(_lerpStartingot, ClockPosition.transform.rotation, _fracJourney);
             yield return null;
         }
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(EndLevelWait1);
 
         Effects.GetComponent<ParticleSystem>().enableEmission = false;
         
         //spray gay particles
         // to b implemented
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(EndLevelWait2);
+        if (SaveLoad.saveLoad)
+            SaveLoad.saveLoad.Reset();
         Application.LoadLevel(NextLevel);
         // this will never be reached but Ienumerators demands a return value on all endings
         yield return null;

@@ -157,20 +157,33 @@ public class CharacterJumping : MonoBehaviour
         if (_jumping)
             return;
 
-        // Check if we are already on the object
-        if (transform.parent == hit.collider.gameObject.transform)
-            return;
-
+        var v1 = hit.point;
+        // If the angle is too high for our initial click, we look if we might be able to stand elsewhere on the model.
         if (Vector3.Angle(hit.normal, Vector3.up) > MaximumAcceptableSlant)
-            return;
+        {
+            Bounds bounds = hit.collider.GetComponent<Renderer>().bounds;
+            RaycastHit hitInfo;
+            if (Physics.SphereCast(bounds.center + Vector3.up*10, 0.5f, Vector3.down * 15, out hitInfo))
+            {
+                Debug.Log(Vector3.Angle(hitInfo.normal, Vector3.up));
+                float v = Vector3.Angle(hitInfo.normal, Vector3.up);
+                if (v <= MaximumAcceptableSlant || Mathf.Abs(v -180) <= MaximumAcceptableSlant)
+                    v1 = hitInfo.point;
+                else return;
+            }
+            else
+            {
+                Debug.Log("Not hitting shit");
+                return;
+            }
+        }
+
         // Store current parent;
         var currentParent = transform.parent;
 
         // Detach the player and put him back into world coordinates
         transform.parent = null;
 
-        // Get location on top of target
-        var v1 = hit.point;
 
         // Get location at bottom of player
         var v2 = PlayerFeet;
@@ -238,10 +251,14 @@ public class CharacterJumping : MonoBehaviour
         GameOverlayController.gameOverlayController.DeactivateSlider();
 
         var lookDirection = Vector3.ProjectOnPlane(target - transform.position, Vector3.up);
-        var lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-        while (Vector3.Angle(lookDirection, transform.forward) > 0.1f) {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 5f);
-            yield return null;
+        if (lookDirection != Vector3.zero)
+        {
+            var lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+            while (Vector3.Angle(lookDirection, transform.forward) > 0.1f)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 5f);
+                yield return null;
+            }
         }
 
         if (_animator) {
