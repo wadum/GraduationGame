@@ -516,7 +516,7 @@ Transform:
   - {fileID: 1771316645}
   - {fileID: 717685809}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
 --- !u!1 &247391589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,7 +2120,7 @@ Transform:
   m_LocalScale: {x: 9.03259754, y: .160468638, z: 7.49039173}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!1 &447295991
 GameObject:
   m_ObjectHideFlags: 0
@@ -3825,7 +3825,7 @@ Transform:
   - {fileID: 1077839623}
   - {fileID: 47762868}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 16
 --- !u!1001 &773450425
 Prefab:
   m_ObjectHideFlags: 0
@@ -4230,6 +4230,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 824836155a4afa04b9664b6cf8f29883, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1034522942 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 463640, guid: 824836155a4afa04b9664b6cf8f29883, type: 2}
+  m_PrefabInternal: {fileID: 938608916}
 --- !u!1 &1077839622
 GameObject:
   m_ObjectHideFlags: 0
@@ -5272,7 +5276,7 @@ Transform:
   m_LocalScale: {x: 7.33982229, y: .160468638, z: 7.49039173}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &1170231525 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 107840, guid: 2c246b792df81d643a16649108bd9a89, type: 2}
@@ -5938,7 +5942,7 @@ MonoBehaviour:
   clockPart: {fileID: 247391589}
   speed: 5
   RotationSpeed: 1
-  PickupSound: {fileID: 1631162923}
+  AnimateSpeed: 1.5
   finishedReassembling: 0
 --- !u!1001 &1634961219
 Prefab:
@@ -6125,7 +6129,7 @@ MonoBehaviour:
   clockPart: {fileID: 701278927}
   speed: 5
   RotationSpeed: 1
-  PickupSound: {fileID: 1636422180}
+  AnimateSpeed: 1.5
   finishedReassembling: 0
 --- !u!1001 &1636940395
 Prefab:
@@ -6534,7 +6538,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 450224, guid: 3e495ed24669f704b925ff13bf0498ae, type: 2}
       propertyPath: m_RootOrder
-      value: 33
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 474062, guid: 3e495ed24669f704b925ff13bf0498ae, type: 2}
       propertyPath: m_LocalScale.x
@@ -6548,6 +6552,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.70000005
       objectReference: {fileID: 0}
+    - target: {fileID: 11414768, guid: 3e495ed24669f704b925ff13bf0498ae, type: 2}
+      propertyPath: ClockPosition
+      value: 
+      objectReference: {fileID: 1034522942}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e495ed24669f704b925ff13bf0498ae, type: 2}
   m_IsPrefabParent: 0
