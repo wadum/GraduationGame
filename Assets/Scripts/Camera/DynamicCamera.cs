@@ -173,6 +173,22 @@ public class DynamicCamera : MonoBehaviour {
         SetPosition(rot, distance, relative);
     }
 
+    public Vector3 GetPosition(float yaw, float pitch, float distance, bool relative = true, GameObject target = null) {
+        Transform previousTarget = null;
+        if (target) {
+            previousTarget = _target;
+            _target = target.transform;
+        }
+
+        var rot = Rotation(yaw, pitch, relative);
+        var result = rot * (relative? RelativeDirection: AbsoluteDirection) * distance + TopOfTarget;
+
+        if (previousTarget)
+            _target = previousTarget;
+
+        return result;
+    }
+
     public void SetTarget(Transform target) {
         _target = target;
         _targetRenderer = _target.GetComponent<Renderer>();
