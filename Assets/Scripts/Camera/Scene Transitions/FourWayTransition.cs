@@ -15,6 +15,30 @@ public class FourWayTransition : MonoBehaviour {
     private BaseDynamicCameraAI _rightExit;
     private BaseDynamicCameraAI _leftExit;
 
+    private static BoxCollider _boxCollider;
+    private BoxCollider BoxCol { get { return _boxCollider ?? (_boxCollider = GetComponent<BoxCollider>()); } }
+
+    private Bounds? _trueBounds;
+    private Bounds TrueBounds { get { return _trueBounds ?? (_trueBounds = GetTrueBounds()).Value; } }
+
+    private Vector3 Center { get { return TrueBounds.center; } }
+    private Vector3 Forward { get { return transform.forward*TrueBounds.extents.z; } }
+    private Vector3 Backward { get { return -Forward; } }
+    private Vector3 Right { get { return transform.right*TrueBounds.extents.x; } }
+    private Vector3 Left { get { return -Right; } }
+
+    private Bounds GetTrueBounds() {
+        // Counteract unity stupidity.
+	    var currentRotation = transform.rotation;
+	    transform.rotation = Quaternion.identity;
+
+	    var bounds = BoxCol.bounds;
+
+        transform.rotation = currentRotation;
+
+        return bounds;
+    }
+
 	void Start () {
 	    if (Enter) {
     	    _enter = Enter.GetComponent<BaseDynamicCameraAI>();
@@ -41,6 +65,9 @@ public class FourWayTransition : MonoBehaviour {
             if (!_leftExit)
                 Debug.LogError("Left exit gameobject set, but target gameobject does not have a dynamic camera ai.");
 	    }
+
+	    _boxCollider = GetComponent<BoxCollider>();
+	    _trueBounds = GetTrueBounds();
 	}
 
     void OnTriggerEnter(Collider other) {
@@ -54,42 +81,40 @@ public class FourWayTransition : MonoBehaviour {
         if (other.tag != "Player")
             return;
 
-        var relativePosition = other.transform.position - transform.position;
-        var projection = Vector3.ProjectOnPlane(relativePosition, transform.up);
-        var angle = Vector3.Angle(transform.forward, projection);
-        angle = Vector3.Dot(Vector3.Cross(transform.forward, projection), transform.up) >= 0? angle: -angle;
-        angle += 180;
+        var relativePosition = other.transform.position - TrueBounds.center;
+        var alignForward = Quaternion.FromToRotation(transform.forward, Vector3.forward);
+        var alignedDirection = alignForward*relativePosition;
+        
+        Debug.Log(alignedDirection);
 
-        if (angle >= 135 && angle < 225 && _forwardExit) {
+        if (alignedDirection.z >= TrueBounds.extents.z && _forwardExit) {
             _forwardExit.AssumeDirectControl();
+            Debug.Log("Exit front");
             return;
         }
 
-        if (angle >= 225 && angle < 315 && _rightExit) {
+        if (alignedDirection.z <= -TrueBounds.extents.z && _backwardExit) {
             _rightExit.AssumeDirectControl();
+            Debug.Log("Exit back");
             return;
         }
 
-        if (angle >= 315 || angle < 45 && _backwardExit) {
+        if (alignedDirection.x >= TrueBounds.extents.x && _rightExit) {
             _backwardExit.AssumeDirectControl();
+            Debug.Log("Exit right");
             return;
         }
 
-        if (angle >= 45 && angle < 135 && _leftExit) {
+        if (alignedDirection.x <= TrueBounds.extents.x && _leftExit) {
             _leftExit.AssumeDirectControl();
+            Debug.Log("Exit left");
             return;
         }
     }
 
-    private static BoxCollider _bcol;
-    private BoxCollider BCol { get { return _bcol ?? (_bcol = GetComponent<BoxCollider>()); } }
-    private Vector3 Center { get { return BCol.bounds.center; } }
-    private Vector3 Front { get { return Center + BCol.transform.forward*BCol.size.x/2; } }
-    private Vector3 Back { get { return Center - BCol.transform.forward*BCol.size.x/2; } }
-    private Vector3 Right { get { return Center + BCol.transform.right*BCol.size.z/2; } }
-    private Vector3 Left { get { return Center - BCol.transform.right*BCol.size.z/2; } }
-
     void OnDrawGizmosSelected() {
+        _trueBounds = GetTrueBounds();
+
         if (Enter) {
             Gizmos.color = Color.black;
             Gizmos.DrawLine(Center, Enter.transform.position);
@@ -97,22 +122,22 @@ public class FourWayTransition : MonoBehaviour {
 
         if (ForwardExit) {
             Gizmos.color = Color.blue;
-            Gizmos.DrawLine(Front, ForwardExit.transform.position);
+            Gizmos.DrawLine(Forward + Center, ForwardExit.transform.position);
         }
 
         if (BackwardExit) {
             Gizmos.color = Color.white;
-            Gizmos.DrawLine(Back, BackwardExit.transform.position);
+            Gizmos.DrawLine(Backward + Center, BackwardExit.transform.position);
         }
 
         if (RightExit) {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(Right, RightExit.transform.position);
+            Gizmos.DrawLine(Right + Center, RightExit.transform.position);
         }
 
         if (LeftExit) {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(Left, LeftExit.transform.position);
+            Gizmos.DrawLine(Left + Center, LeftExit.transform.position);
         }
     }
 }
