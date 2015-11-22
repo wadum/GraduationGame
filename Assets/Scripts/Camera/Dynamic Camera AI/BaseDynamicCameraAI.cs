@@ -2,8 +2,8 @@
 
 /// <summary>
 /// Base dynamic camera ai. This abstract class functions both to collect common
-///  operations and to expose a common function, AssumeDirectControl, for
-///  stopping all other dynamic camera ais from running.
+/// operations and to expose a common function, AssumeDirectControl, for
+/// stopping all other dynamic camera ais from running.
 /// 
 /// Notice that this assumes that dynamic camera ais function using coroutines
 /// running directly on the dynamic camera itself.
