@@ -94,13 +94,13 @@ public class FourWayTransition : MonoBehaviour {
         }
 
         if (alignedDirection.z <= -TrueBounds.extents.z && _backwardExit) {
-            _rightExit.AssumeDirectControl();
+            _backwardExit.AssumeDirectControl();
             Debug.Log("Exit back");
             return;
         }
 
         if (alignedDirection.x >= TrueBounds.extents.x && _rightExit) {
-            _backwardExit.AssumeDirectControl();
+            _rightExit.AssumeDirectControl();
             Debug.Log("Exit right");
             return;
         }
