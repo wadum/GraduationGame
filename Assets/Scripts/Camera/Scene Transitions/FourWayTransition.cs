@@ -79,7 +79,40 @@ public class FourWayTransition : MonoBehaviour {
             _leftExit.AssumeDirectControl();
             return;
         }
+    }
 
-        Debug.Log("Should not happen: " + angle);
+    private static BoxCollider _bcol;
+    private BoxCollider BCol { get { return _bcol ?? (_bcol = GetComponent<BoxCollider>()); } }
+    private Vector3 Center { get { return BCol.bounds.center; } }
+    private Vector3 Front { get { return Center + BCol.transform.forward*BCol.size.x/2; } }
+    private Vector3 Back { get { return Center - BCol.transform.forward*BCol.size.x/2; } }
+    private Vector3 Right { get { return Center + BCol.transform.right*BCol.size.z/2; } }
+    private Vector3 Left { get { return Center - BCol.transform.right*BCol.size.z/2; } }
+
+    void OnDrawGizmosSelected() {
+        if (Enter) {
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(Center, Enter.transform.position);
+        }
+
+        if (ForwardExit) {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(Front, ForwardExit.transform.position);
+        }
+
+        if (BackwardExit) {
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(Back, BackwardExit.transform.position);
+        }
+
+        if (RightExit) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(Right, RightExit.transform.position);
+        }
+
+        if (LeftExit) {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(Left, LeftExit.transform.position);
+        }
     }
 }
