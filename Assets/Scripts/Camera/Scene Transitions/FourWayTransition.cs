@@ -15,7 +15,7 @@ public class FourWayTransition : MonoBehaviour {
     private BaseDynamicCameraAI _rightExit;
     private BaseDynamicCameraAI _leftExit;
 
-    private static BoxCollider _boxCollider;
+    private BoxCollider _boxCollider;
     private BoxCollider BoxCol { get { return _boxCollider ?? (_boxCollider = GetComponent<BoxCollider>()); } }
 
     private Bounds? _trueBounds;
