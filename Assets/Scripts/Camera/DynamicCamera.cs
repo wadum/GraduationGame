@@ -177,14 +177,14 @@ public class DynamicCamera : MonoBehaviour {
         Transform previousTarget = null;
         if (target) {
             previousTarget = _target;
-            _target = target.transform;
+            SetTarget(target);
         }
 
         var rot = Rotation(yaw, pitch, relative);
         var result = rot * (relative? RelativeDirection: AbsoluteDirection) * distance + TopOfTarget;
 
         if (previousTarget)
-            _target = previousTarget;
+            SetTarget(previousTarget);
 
         return result;
     }
