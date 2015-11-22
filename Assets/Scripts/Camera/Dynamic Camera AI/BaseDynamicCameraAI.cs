@@ -10,12 +10,15 @@
 /// </summary>
 public abstract class BaseDynamicCameraAI : MonoBehaviour {
 
-    protected DynamicCamera DynCam;
-    protected GameObject Player;
+    private static DynamicCamera _dynCam;
+    protected DynamicCamera DynCam { get { return _dynCam ?? (_dynCam = FindObjectOfType<DynamicCamera>()); } }
+
+    private static GameObject _player;
+    protected GameObject Player { get { return _player ?? (_player = GameObject.FindGameObjectWithTag("Player")); } }
 
     void Start() {
-        DynCam = FindObjectOfType<DynamicCamera>();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        _dynCam = FindObjectOfType<DynamicCamera>();
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void AssumeDirectControl() {
