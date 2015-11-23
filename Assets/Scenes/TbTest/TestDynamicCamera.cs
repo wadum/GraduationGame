@@ -11,6 +11,6 @@ public class TestDynamicCamera : MonoBehaviour {
         _dynamicCamera = GetComponent<DynamicCamera>();
 
         foreach (var objTag in TapAndHoldRetargetingCameraTags)
-            MultiTouch.RegisterTapAndHoldHandlerByTag(objTag, hit => _dynamicCamera.SetTarget(hit.transform));
+			MultiTouch.RegisterTapAndHoldHandlerByTag(objTag, hit => { _dynamicCamera.SetTarget(hit.transform); return true; });
     }
 }
