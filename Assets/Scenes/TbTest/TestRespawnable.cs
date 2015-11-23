@@ -12,6 +12,6 @@ public class TestRespawnable : MonoBehaviour
 	        return;
 	    }
 
-        MultiTouch.RegisterTapHandlerByTag(tag, t => respawnable.Respawn());
+		MultiTouch.RegisterTapHandlerByTag(tag, t => { respawnable.Respawn(); return true; });
 	}
 }
