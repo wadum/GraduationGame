@@ -20,6 +20,7 @@ public class DeconstructWall : TimeControllable {
                 Debug.Log("Got Hit");
                 FindObjectOfType<GameOverlayController>().ActivateSlider(this);
             }
+			return true;
         });
     }
 	

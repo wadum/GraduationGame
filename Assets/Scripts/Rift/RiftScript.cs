@@ -16,6 +16,7 @@ public class RiftScript : MonoBehaviour {
         MultiTouch.RegisterTapHandlerByTag("PortalRift", hit => {
             if(hit.collider.gameObject == gameObject)
                 FindObjectOfType<RiftMaster>().TagRift(gameObject);
+			return true;
             });
 
         if (active)
