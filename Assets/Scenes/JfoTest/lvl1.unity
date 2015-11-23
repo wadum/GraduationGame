@@ -4620,6 +4620,60 @@ Transform:
   - {fileID: 1460197939}
   m_Father: {fileID: 761162778}
   m_RootOrder: 0
+--- !u!1001 &682931713
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 839574943}
+    m_Modifications:
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.703943729
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.319184899
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 7.12631989
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .222072572
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .975030124
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 121938, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_Name
+      value: SceneViewCamSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &682931714 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+  m_PrefabInternal: {fileID: 682931713}
 --- !u!1 &701370887
 GameObject:
   m_ObjectHideFlags: 0
@@ -5334,6 +5388,34 @@ SkinnedMeshRenderer:
     m_Center: {x: 4.76837158e-07, y: -3.15124512, z: -1.1920929e-06}
     m_Extent: {x: 2.75542068, y: 2.01293945, z: 2.68633604}
   m_DirtyAABB: 0
+--- !u!1 &839574942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 839574943}
+  m_Layer: 0
+  m_Name: SceneViews
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &839574943
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 839574942}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.85605621, y: .929184914, z: -14.9563198}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 682931714}
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
 --- !u!1 &842299825
 GameObject:
   m_ObjectHideFlags: 0
@@ -6001,7 +6083,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &951704822
 Transform:
   m_ObjectHideFlags: 0
