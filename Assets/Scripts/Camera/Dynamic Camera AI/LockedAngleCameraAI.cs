@@ -56,12 +56,17 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     private IEnumerator SmoothMovement() {
         var currentPosition = DynCam.transform.position;
         var desiredPosition = DynCam.GetPosition(Yaw, Pitch, Distance, Relative);
+        var timeToTravel = Vector3.Distance(currentPosition, desiredPosition)*UnitTimeToTravel;
 
-        var distance = Vector3.Distance(currentPosition, desiredPosition);
-        var timeToTravel = distance*UnitTimeToTravel;
+        var midpoint = (currentPosition + desiredPosition)/2;
+        var relStart = currentPosition - midpoint;
+        var relEnd = desiredPosition - midpoint;
+
+        var rotateAroundMidpoint = Quaternion.FromToRotation(relStart, relEnd);
+
         var startTime = Time.time;
         Func<float, float> timePos = time => (time - startTime)/timeToTravel;
-        Func<float, Vector3> smooth = ratio => ratio*desiredPosition + (1 - ratio)*currentPosition;
+        Func<float, Vector3> smooth = ratio => Quaternion.Lerp(Quaternion.identity, rotateAroundMidpoint, ratio) * relStart + midpoint;
 
         var pos = 0f;
         while (pos < 1) {
