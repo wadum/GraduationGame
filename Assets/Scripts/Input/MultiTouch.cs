@@ -10,6 +10,7 @@ public class MultiTouch : MonoBehaviour
 {
     public float SwipeSensitivity = 4f;
     public float TapHoldSeconds = 1f;
+	public float TapHoldIndicatorDelay = 0.1f;
     public bool SimulateMouseTapInEditor = true;
 
     private static readonly Dictionary<string, List<Action<RaycastHit>>> TapEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
@@ -18,6 +19,8 @@ public class MultiTouch : MonoBehaviour
     private static Action<Touch> _swipeHandler = (s) => { };
     private static Action<List<Touch>> _pinchHandler = (p) => { };
     private GraphicRaycaster _guiCaster;
+
+	private RadialSlider _tapAndHoldIndicator;
 
     void Awake() {
         ClearAllHandlers();
@@ -30,8 +33,9 @@ public class MultiTouch : MonoBehaviour
         {
             Debug.Log("No tagged canvas Gui, getting canvas by fallback...");
             var canvas = FindObjectOfType<Canvas>();
-            if (canvas)
+            if (canvas){
                 gui = canvas.gameObject;
+			}
             else
                 Debug.Log("No canvas found for fallback.");
         }
@@ -43,6 +47,7 @@ public class MultiTouch : MonoBehaviour
     }
 
     void OnEnable() {
+		_tapAndHoldIndicator = GameObject.FindGameObjectWithTag("Gui").GetComponentInChildren<RadialSlider>();
         StartCoroutine(AwaitInput());
     }
 
@@ -68,22 +73,33 @@ public class MultiTouch : MonoBehaviour
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
                 var position = touches[0].position;
+				_tapAndHoldIndicator.SetValue(0);
                 if (Time.time - touch1Began <= TapHoldSeconds)
                     HandleTap(position);
                 yield return null;
                 continue;
             }
 
-            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary && (Time.time - touch1Began > TapHoldSeconds) )
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary)
             {
-                var position = touches[0].position;
-                HandleTapAndHold(position);
-                yield return null;
-                continue;
+				if(Time.time - touch1Began > TapHoldIndicatorDelay){
+					var position = touches[0].position;
+					_tapAndHoldIndicator.SetPosition(position);
+					_tapAndHoldIndicator.SetValue((Time.time - touch1Began - TapHoldIndicatorDelay) / (TapHoldSeconds - TapHoldIndicatorDelay));
+				}
+
+
+				if(Time.time - touch1Began > TapHoldSeconds){
+					var position = touches[0].position;
+	                HandleTapAndHold(position);
+	                yield return null;
+	                continue;
+				}
             }
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
-                yield return StartCoroutine(HandleGesture());
+				_tapAndHoldIndicator.SetValue(0);
+				yield return StartCoroutine(HandleGesture(touches));
                 continue;
             }
 
@@ -92,10 +108,9 @@ public class MultiTouch : MonoBehaviour
     }
 
 
-    private IEnumerator HandleGesture() {
-        while (Input.touchCount > 0) {
-            var touches = GetTouches();
-
+    private IEnumerator HandleGesture(List<Touch> initialTouches) {
+        var touches = initialTouches;
+        while (touches.Count > 0) {
             if (!touches.Any()) {
                 yield return null;
                 continue;
@@ -107,6 +122,7 @@ public class MultiTouch : MonoBehaviour
                 HandlePinch(touches);
 
             yield return null;
+            touches = GetTouches();
         }
     }
     #endregion

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class GoToLevel : MonoBehaviour
 {
     public int timeToWait = 2;
     private float _time = 0.0f;
     private string level;
+    public AudioMixer Audiomixer;
 
     void Start()
     {
@@ -31,7 +33,14 @@ public class GoToLevel : MonoBehaviour
             else
             {
                 // If we have no previus level, this must be the first time we play, and we must set the start volume, or we have no sound.
-                PlayerPrefs.SetFloat("Volume", 65);
+                float v;
+                Audiomixer.GetFloat("masterVol", out v);
+                PlayerPrefs.SetFloat("masterVol",v);
+                Audiomixer.GetFloat("sfxVol", out v);
+                PlayerPrefs.SetFloat("sfxVol", v);
+                Audiomixer.GetFloat("musicVol", out v);
+                PlayerPrefs.SetFloat("musicVol", v);
+
                 Application.LoadLevel("Intro Cinematic");
             }
     }

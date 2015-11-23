@@ -9,8 +9,8 @@ public class Tutorial2TapAndHold : TutorialStep {
 	public GameObject Backward;
 
 	override public IEnumerator Run()
-	{
-		MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit => Completed = true);
+    {
+        MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit => Completed = true);
 
 		Backward.GetComponent<EventTrigger>().enabled = false;
 		Backward.GetComponent<Button>().interactable = false;
