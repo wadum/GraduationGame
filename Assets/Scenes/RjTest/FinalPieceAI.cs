@@ -15,6 +15,8 @@ public class FinalPieceAI : MonoBehaviour {
 //    float _distCovered = 0;
     float _fracJourney = 0;
 
+    LockedAngleCameraAI Cam;
+
     // Update is called once per frame
 
     void Start()
@@ -22,10 +24,20 @@ public class FinalPieceAI : MonoBehaviour {
         this.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = transform.parent.position + Vector3.up * 2;
         transform.gameObject.SetActive(false);
+
+        Cam = GetComponent<LockedAngleCameraAI>();
     }
    
     public IEnumerator PositionFinalPiece()
     {
+        if (Cam)
+        {
+            Cam.AssumeDirectControl();
+        }
+        else
+        {
+            Debug.Log("Add Follow cam AI to final piece");
+        }
         float _startTime = Time.time;
         Vector3 _lerpStartingPos = transform.position;
         Quaternion _lerpStartingot = transform.rotation;

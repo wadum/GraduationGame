@@ -72,31 +72,31 @@ public class DynamicCamera : MonoBehaviour {
 
     private Quaternion PlayerDesiredAbsoluteRotation { get { return Rotation(PlayerDesiredAbsoluteYaw, PlayerDesiredPitch, false); } }
 
-    private static Vector3 AbsoluteYawAxis { get { return -Vector3.up; } }
+    public static Vector3 AbsoluteYawAxis { get { return -Vector3.up; } }
 
-    private static Vector3 AbsoluteDirection { get { return -Vector3.forward; } }
+    public static Vector3 AbsoluteDirection { get { return -Vector3.forward; } }
 
-    private static Vector3 BaseAbsolutePitchAxis { get { return Vector3.right; } }
+    public static Vector3 BaseAbsolutePitchAxis { get { return Vector3.right; } }
 
-    private Vector3 RelativeYawAxis { get { return -_target.up; } }
+    public Vector3 RelativeYawAxis { get { return -_target.up; } }
 
-    private Vector3 RelativeDirection { get { return -_target.forward; } }
+    public Vector3 RelativeDirection { get { return -_target.forward; } }
 
-    private Vector3 BaseRelativePitchAxis { get { return _target.right; } }
+    public Vector3 BaseRelativePitchAxis { get { return _target.right; } }
 
-    private Vector3 RelativePosition { get { return transform.position - TopOfTarget; } }
+    public Vector3 RelativePosition { get { return transform.position - TopOfTarget; } }
 
-    private Quaternion NeutralRelativeRotation { get { return Rotation(NeutralYaw, NeutralPitch); } }
+    public Quaternion NeutralRelativeRotation { get { return Rotation(NeutralYaw, NeutralPitch); } }
 
-    private Quaternion NeutralAbsoluteRotation { get { return Rotation(NeutralYaw, NeutralPitch, false); } }
+    public Quaternion NeutralAbsoluteRotation { get { return Rotation(NeutralYaw, NeutralPitch, false); } }
 
-    private float CurrentDistance { get { return RelativePosition.magnitude; } }
+    public float CurrentDistance { get { return RelativePosition.magnitude; } }
 
-    private Quaternion CurrentRelativeRotation { get { return Quaternion.FromToRotation(RelativeDirection, RelativePosition); } }
+    public Quaternion CurrentRelativeRotation { get { return Quaternion.FromToRotation(RelativeDirection, RelativePosition); } }
 
-    private Quaternion CurrentAbsoluteRotation { get { return Quaternion.FromToRotation(AbsoluteDirection, RelativePosition); } }
+    public Quaternion CurrentAbsoluteRotation { get { return Quaternion.FromToRotation(AbsoluteDirection, RelativePosition); } }
 
-    private float CurrentAbsoluteYaw {
+    public float CurrentAbsoluteYaw {
         get {
             var yawComponent = Vector3.ProjectOnPlane(RelativePosition, AbsoluteYawAxis);
             var angle = Vector3.Angle(yawComponent, AbsoluteDirection);
@@ -105,7 +105,7 @@ public class DynamicCamera : MonoBehaviour {
         }
     }
 
-    private float CurrentRelativeYaw {
+    public float CurrentRelativeYaw {
         get {
             var yawComponent = Vector3.ProjectOnPlane(RelativePosition, RelativeYawAxis);
             var angle = Vector3.Angle(yawComponent, RelativeDirection);
@@ -114,7 +114,7 @@ public class DynamicCamera : MonoBehaviour {
         }
     }
 
-    private float CurrentPitch {
+    public float CurrentPitch {
         get {
             var yawRot = CurrentRelativeYawRotation;
             var yawForward = yawRot * RelativeDirection;
@@ -128,11 +128,11 @@ public class DynamicCamera : MonoBehaviour {
         }
     }
 
-    private Quaternion CurrentRelativeYawRotation { get { return Quaternion.AngleAxis(CurrentRelativeYaw, RelativeYawAxis); } }
+    public Quaternion CurrentRelativeYawRotation { get { return Quaternion.AngleAxis(CurrentRelativeYaw, RelativeYawAxis); } }
 
-    private Quaternion CurrentRelativePitchRotation { get { return Quaternion.AngleAxis(CurrentPitch, CurrentRelativeYawRotation*BaseRelativePitchAxis); } }
+    public Quaternion CurrentRelativePitchRotation { get { return Quaternion.AngleAxis(CurrentPitch, CurrentRelativeYawRotation*BaseRelativePitchAxis); } }
 
-    private Vector3 TopOfTarget {
+    public Vector3 TopOfTarget {
         get {
             return _targetRenderer?
                 _targetRenderer.bounds.center + new Vector3(0, _targetRenderer.bounds.extents.y, 0):
@@ -173,6 +173,22 @@ public class DynamicCamera : MonoBehaviour {
         SetPosition(rot, distance, relative);
     }
 
+    public Vector3 GetPosition(float yaw, float pitch, float distance, bool relative = true, GameObject target = null) {
+        Transform previousTarget = null;
+        if (target) {
+            previousTarget = _target;
+            SetTarget(target);
+        }
+
+        var rot = Rotation(yaw, pitch, relative);
+        var result = rot * (relative? RelativeDirection: AbsoluteDirection) * distance + TopOfTarget;
+
+        if (previousTarget)
+            SetTarget(previousTarget);
+
+        return result;
+    }
+
     public void SetTarget(Transform target) {
         _target = target;
         _targetRenderer = _target.GetComponent<Renderer>();
@@ -182,7 +198,7 @@ public class DynamicCamera : MonoBehaviour {
         SetTarget(target.transform);
     }
 
-    private bool TargetPlayer() {
+    public bool TargetPlayer() {
         var players = GameObject.FindGameObjectsWithTag("Player");
         if (!players.Any()) {
             Debug.Log("No GameObject tagged Player found.");
