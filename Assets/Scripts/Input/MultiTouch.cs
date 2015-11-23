@@ -64,6 +64,8 @@ public class MultiTouch : MonoBehaviour
             var touches = GetTouches();
 
             if (!touches.Any()) {
+				if(_tapAndHoldIndicator)
+					_tapAndHoldIndicator.SetValue(0);
                 yield return null;
                 continue;
             }
@@ -73,11 +75,10 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
-                var position = touches[0].position;
 				_tapAndHoldIndicator.SetValue(0);
 				firedTapAndHold = false;
                 if (Time.time - touch1Began <= TapHoldSeconds)
-                    HandleTap(position);
+					HandleTap(touches[0].position);
                 yield return null;
                 continue;
             }
