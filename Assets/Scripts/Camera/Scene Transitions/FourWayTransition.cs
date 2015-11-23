@@ -85,8 +85,6 @@ public class FourWayTransition : MonoBehaviour {
         var alignForward = Quaternion.FromToRotation(transform.forward, Vector3.forward);
         var alignedDirection = alignForward*relativePosition;
         
-        Debug.Log(alignedDirection);
-
         if (alignedDirection.z >= TrueBounds.extents.z && _forwardExit) {
             _forwardExit.AssumeDirectControl();
             return;

@@ -13,8 +13,8 @@ public class MultiTouch : MonoBehaviour
 	public float TapHoldIndicatorDelay = 0.1f;
     public bool SimulateMouseTapInEditor = true;
 
-    private static readonly Dictionary<string, List<Action<RaycastHit>>> TapEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
-    private static readonly Dictionary<string, List<Action<RaycastHit>>> TapAndHoldEventHandlers = new Dictionary<string, List<Action<RaycastHit>>>();
+	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
+	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapAndHoldEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 
     private static Action<Touch> _swipeHandler = (s) => { };
     private static Action<List<Touch>> _pinchHandler = (p) => { };
@@ -58,11 +58,14 @@ public class MultiTouch : MonoBehaviour
     #region State machine for recognizing multitouch taps and gestures
     private IEnumerator AwaitInput() {
         var touch1Began = 0f;
+		var firedTapAndHold = false;
 
         while (true) {
             var touches = GetTouches();
 
             if (!touches.Any()) {
+				if(_tapAndHoldIndicator)
+					_tapAndHoldIndicator.SetValue(0);
                 yield return null;
                 continue;
             }
@@ -72,10 +75,10 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
-                var position = touches[0].position;
 				_tapAndHoldIndicator.SetValue(0);
+				firedTapAndHold = false;
                 if (Time.time - touch1Began <= TapHoldSeconds)
-                    HandleTap(position);
+					HandleTap(touches[0].position);
                 yield return null;
                 continue;
             }
@@ -89,8 +92,9 @@ public class MultiTouch : MonoBehaviour
 				}
 
 
-				if(Time.time - touch1Began > TapHoldSeconds){
+				if(Time.time - touch1Began > TapHoldSeconds && !firedTapAndHold){
 					var position = touches[0].position;
+					firedTapAndHold = true;
 	                HandleTapAndHold(position);
 	                yield return null;
 	                continue;
@@ -140,10 +144,10 @@ public class MultiTouch : MonoBehaviour
         _swipeHandler(touch);
     }
 
-    private static void HandleTap(Vector3 position)
+    private void HandleTap(Vector3 position)
     {
         var hit = Raycast(position);
-        List<Action<RaycastHit>> handlers;
+		List<Func<RaycastHit, bool>> handlers;
 		int hits = 0;
         if (hit.HasValue && TapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
             foreach(var handler in handlers){
@@ -154,35 +158,40 @@ public class MultiTouch : MonoBehaviour
 			GameOverlayController.gameOverlayController.DeactivateSlider();
     }
 
-    private static void HandleTapAndHold(Vector3 position)
+    private void HandleTapAndHold(Vector3 position)
     {
+		_tapAndHoldIndicator.SetValue(2);
+
         var hit = Raycast(position);
-        List<Action<RaycastHit>> handlers;
+		List<Func<RaycastHit, bool>> handlers;
         if (hit.HasValue && TapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
-            foreach(var handler in handlers)
-                handler(hit.Value);
+			if(handlers.Any(h => !h(hit.Value)))
+				_tapAndHoldIndicator.TransitionWrong();
+			else _tapAndHoldIndicator.TransitionRight();
+		else
+			_tapAndHoldIndicator.TransitionWrong();
     }
     #endregion
 
     #region registration of handlers
-    public static void RegisterTapHandlerByTag(string objTag, Action<RaycastHit> handler)
+	public static void RegisterTapHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
     {
         if (string.IsNullOrEmpty(objTag))
             return;
 
         if (!TapEventHandlers.ContainsKey(objTag))
-            TapEventHandlers[objTag] = new List<Action<RaycastHit>>();
+            TapEventHandlers[objTag] = new List<Func<RaycastHit, bool>>();
 
         TapEventHandlers[objTag].Add(handler);
     }
 
-    public static void RegisterTapAndHoldHandlerByTag(string objTag, Action<RaycastHit> handler)
+	public static void RegisterTapAndHoldHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
     {
         if (string.IsNullOrEmpty(objTag))
             return;
 
         if (!TapAndHoldEventHandlers.ContainsKey(objTag))
-            TapAndHoldEventHandlers[objTag] = new List<Action<RaycastHit>>();
+            TapAndHoldEventHandlers[objTag] = new List<Func<RaycastHit, bool>>();
 
         TapAndHoldEventHandlers[objTag].Add(handler);
     }

@@ -152,29 +152,43 @@ public class CharacterJumping : MonoBehaviour
         return true;
     }
 
-    private void JumpForJoy(RaycastHit hit)
+    private bool JumpForJoy(RaycastHit hit)
     {
         if (_jumping)
-            return;
+            return false;
 
         var v1 = hit.point;
         // If the angle is too high for our initial click, we look if we might be able to stand elsewhere on the model.
         if (Vector3.Angle(hit.normal, Vector3.up) > MaximumAcceptableSlant)
         {
+            // we get the boundies of the box, these are not the same as the actual rendering, but it'll give us the center of the object
             Bounds bounds = hit.collider.GetComponent<Renderer>().bounds;
             RaycastHit hitInfo;
-            if (Physics.SphereCast(bounds.center + Vector3.up*10, 0.5f, Vector3.down * 15, out hitInfo))
+            // First we try a raycast, to hit the middle of the surface
+            if (Physics.Raycast((bounds.center + Vector3.up * (1 + 2 * bounds.extents.y)), Vector3.down, out hitInfo))
             {
-                Debug.Log(Vector3.Angle(hitInfo.normal, Vector3.up));
                 float v = Vector3.Angle(hitInfo.normal, Vector3.up);
-                if (v <= MaximumAcceptableSlant || Mathf.Abs(v -180) <= MaximumAcceptableSlant)
+                if (v <= MaximumAcceptableSlant || Mathf.Abs(v - 180) <= MaximumAcceptableSlant)
+                {
                     v1 = hitInfo.point;
-                else return;
+                } else 
+                // if the raycast missed, there might be holes in the model, so we're casting a spherecast instead
+                if (Physics.SphereCast(bounds.center + Vector3.up * (1 + 2 * bounds.extents.y), Mathf.Max(bounds.extents.x, bounds.extents.z)/2, Vector3.down * (1 + 2 * bounds.extents.y), out hitInfo))
+                {
+// for debugging reasons I saw drawing a line, might want to draw again 
+//  Debug.DrawRay(bounds.center + Vector3.up * (1 + 2 * Mathf.Max(bounds.extents.y)), Vector3.down * (1 + 2 * Mathf.Max(bounds.extents.y)), Color.green, 2);
+                    v = Vector3.Angle(hitInfo.normal, Vector3.up);
+                    if (v <= MaximumAcceptableSlant || Mathf.Abs(v - 180) <= MaximumAcceptableSlant)
+                        v1 = hitInfo.point;
+                    else return false;
+                    // we didnt hit anything, so we dont know where to jump, hence we return
+                }
+
             }
             else
             {
-                Debug.Log("Not hitting shit");
-                return;
+                Debug.DrawRay(bounds.center + Vector3.up * (1 + 2 * Mathf.Max(bounds.extents.y)), Vector3.down * (1 + 2 * Mathf.Max(bounds.extents.y)), Color.red, 2);
+                return false;
             }
         }
 
@@ -192,22 +206,23 @@ public class CharacterJumping : MonoBehaviour
         {
             // Put the player back :|
             transform.parent = currentParent;
-            return;
+            return false;
         }
 
         // Do the actual jump
         StartCoroutine(Jumping(v1, hit.collider.gameObject.transform, false));
+		return true;
     }
 
-    private void ReturnToTerraFirma(RaycastHit hit)
+    private bool ReturnToTerraFirma(RaycastHit hit)
     {
         if (_jumping)
-            return;
+            return false;
         if (!transform.parent)
-            return;
+            return true;
         // Check if we are standing on a valid jumpable object, otherwise return
         if (!TagsToJumpOnto.Contains(transform.parent.tag))//!TagsToJumpOnto.Contains(transform.root.tag))
-            return;
+            return false;
 
         // Store current parent;
         var currentParent = transform.parent;
@@ -224,11 +239,12 @@ public class CharacterJumping : MonoBehaviour
         {
             // Put the player back :|
             transform.parent = currentParent;
-            return;
+            return false;
         }
 
         // Do the actual jump
         StartCoroutine(Jumping(v1, null, true));
+		return true;
     }
 
     private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to)

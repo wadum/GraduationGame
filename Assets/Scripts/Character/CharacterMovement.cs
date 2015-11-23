@@ -25,14 +25,16 @@ public class CharacterMovement : MonoBehaviour
 
         MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
         {
-            if (TutorialMoveFreeze) return;
+            if (TutorialMoveFreeze) return false;
             GoTo(hit.point);
             StartCoroutine(DrawGreenHalos());
             GameOverlayController.gameOverlayController.DeactivateSlider();
+			return true;
         });
         MultiTouch.RegisterTapHandlerByTag("Clockpart", hit => {
-            if (TutorialMoveFreeze) return;
+            if (TutorialMoveFreeze) return false;
             GoTo(hit.collider.transform.position);
+			return true;
         });
     }
 
