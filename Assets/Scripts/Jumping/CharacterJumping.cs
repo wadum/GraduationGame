@@ -152,10 +152,10 @@ public class CharacterJumping : MonoBehaviour
         return true;
     }
 
-    private void JumpForJoy(RaycastHit hit)
+    private bool JumpForJoy(RaycastHit hit)
     {
         if (_jumping)
-            return;
+            return false;
 
         var v1 = hit.point;
         // If the angle is too high for our initial click, we look if we might be able to stand elsewhere on the model.
@@ -169,12 +169,12 @@ public class CharacterJumping : MonoBehaviour
                 float v = Vector3.Angle(hitInfo.normal, Vector3.up);
                 if (v <= MaximumAcceptableSlant || Mathf.Abs(v -180) <= MaximumAcceptableSlant)
                     v1 = hitInfo.point;
-                else return;
+                else return false;
             }
             else
             {
                 Debug.Log("Not hitting shit");
-                return;
+                return false;
             }
         }
 
@@ -192,22 +192,23 @@ public class CharacterJumping : MonoBehaviour
         {
             // Put the player back :|
             transform.parent = currentParent;
-            return;
+            return false;
         }
 
         // Do the actual jump
         StartCoroutine(Jumping(v1, hit.collider.gameObject.transform, false));
+		return true;
     }
 
-    private void ReturnToTerraFirma(RaycastHit hit)
+    private bool ReturnToTerraFirma(RaycastHit hit)
     {
         if (_jumping)
-            return;
+            return false;
         if (!transform.parent)
-            return;
+            return true;
         // Check if we are standing on a valid jumpable object, otherwise return
         if (!TagsToJumpOnto.Contains(transform.parent.tag))//!TagsToJumpOnto.Contains(transform.root.tag))
-            return;
+            return false;
 
         // Store current parent;
         var currentParent = transform.parent;
@@ -224,11 +225,12 @@ public class CharacterJumping : MonoBehaviour
         {
             // Put the player back :|
             transform.parent = currentParent;
-            return;
+            return false;
         }
 
         // Do the actual jump
         StartCoroutine(Jumping(v1, null, true));
+		return true;
     }
 
     private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to)
