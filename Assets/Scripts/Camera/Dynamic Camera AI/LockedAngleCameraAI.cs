@@ -22,7 +22,7 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
         DynCam.SetTarget(Target);
 
         if (EnableSmoothing) {
-            StartCoroutine(SmoothMovement());
+            DynCam.StartCoroutine(SmoothMovement());
             DynCam.StartCoroutine(SmoothLookAt());
         }
         else {
