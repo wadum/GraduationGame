@@ -14,6 +14,7 @@ public class MultiTouch : MonoBehaviour
     public bool SimulateMouseTapInEditor = true;
 
     public AudioSource
+        TapAndHoldCharge,
         TapAndHoldSucces,
         TapAndHoldFail;
 
@@ -67,9 +68,9 @@ public class MultiTouch : MonoBehaviour
         while (true) {
             var touches = GetTouches();
 
-            if (!touches.Any()) {
-				if(_tapAndHoldIndicator)
-					_tapAndHoldIndicator.SetValue(0);
+            if (!touches.Any())
+            {
+                StopTapAndHoldIndicator();
                 yield return null;
                 continue;
             }
@@ -79,8 +80,8 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
-				_tapAndHoldIndicator.SetValue(0);
-				firedTapAndHold = false;
+                StopTapAndHoldIndicator();
+                firedTapAndHold = false;
                 if (Time.time - touch1Began <= TapHoldSeconds)
 					HandleTap(touches[0].position);
                 yield return null;
@@ -92,7 +93,9 @@ public class MultiTouch : MonoBehaviour
 				if(Time.time - touch1Began > TapHoldIndicatorDelay){
 					var position = touches[0].position;
 					_tapAndHoldIndicator.SetPosition(position);
-					_tapAndHoldIndicator.SetValue((Time.time - touch1Began - TapHoldIndicatorDelay) / (TapHoldSeconds - TapHoldIndicatorDelay));
+                    if(!TapAndHoldCharge.isPlaying)
+                        TapAndHoldCharge.Play();
+                    _tapAndHoldIndicator.SetValue((Time.time - touch1Began - TapHoldIndicatorDelay) / (TapHoldSeconds - TapHoldIndicatorDelay));
 				}
 
 
@@ -106,8 +109,8 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
-				_tapAndHoldIndicator.SetValue(0);
-				yield return StartCoroutine(HandleGesture(touches));
+                StopTapAndHoldIndicator();
+                yield return StartCoroutine(HandleGesture(touches));
                 continue;
             }
 
@@ -115,6 +118,13 @@ public class MultiTouch : MonoBehaviour
         }
     }
 
+    private void StopTapAndHoldIndicator()
+    {
+        if (_tapAndHoldIndicator)
+            _tapAndHoldIndicator.SetValue(0);
+        if (TapAndHoldCharge.isPlaying)
+            TapAndHoldCharge.Stop();
+    }
 
     private IEnumerator HandleGesture(List<Touch> initialTouches) {
         var touches = initialTouches;
@@ -164,7 +174,7 @@ public class MultiTouch : MonoBehaviour
 
     private void HandleTapAndHold(Vector3 position)
     {
-		_tapAndHoldIndicator.SetValue(2);
+        _tapAndHoldIndicator.SetValue(2);
 
         var hit = Raycast(position);
 		List<Func<RaycastHit, bool>> handlers;
