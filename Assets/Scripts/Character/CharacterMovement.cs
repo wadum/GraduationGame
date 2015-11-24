@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     private bool _lootAtMovingObject = false;
     private GameObject _lookAtTarget = null;
     private NavMeshAgent _agent;
+    public AudioSource TapSound;
 
     LookHERE tmpLTarget;
 
@@ -22,10 +23,12 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
+        TapSound = gameObject.GetComponent<AudioSource>();
 
         MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
         {
             if (TutorialMoveFreeze) return false;
+            TapSound.Play();
             GoTo(hit.point);
             StartCoroutine(DrawGreenHalos());
             GameOverlayController.gameOverlayController.DeactivateSlider();

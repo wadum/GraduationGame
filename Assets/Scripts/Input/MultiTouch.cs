@@ -13,6 +13,10 @@ public class MultiTouch : MonoBehaviour
 	public float TapHoldIndicatorDelay = 0.1f;
     public bool SimulateMouseTapInEditor = true;
 
+    public AudioSource
+        TapAndHoldSucces,
+        TapAndHoldFail;
+
 	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapAndHoldEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 
@@ -165,11 +169,21 @@ public class MultiTouch : MonoBehaviour
         var hit = Raycast(position);
 		List<Func<RaycastHit, bool>> handlers;
         if (hit.HasValue && TapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
-			if(handlers.Any(h => !h(hit.Value)))
-				_tapAndHoldIndicator.TransitionWrong();
-			else _tapAndHoldIndicator.TransitionRight();
-		else
-			_tapAndHoldIndicator.TransitionWrong();
+            if (handlers.Any(h => !h(hit.Value)))
+            {
+                _tapAndHoldIndicator.TransitionWrong();
+                TapAndHoldFail.Play();
+            }
+            else
+            {
+                _tapAndHoldIndicator.TransitionRight();
+                TapAndHoldSucces.Play();
+            }
+        else
+        {
+            _tapAndHoldIndicator.TransitionWrong();
+            TapAndHoldFail.Play();
+        }
     }
     #endregion
 
