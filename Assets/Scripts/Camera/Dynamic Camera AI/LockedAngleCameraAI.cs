@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,62 +19,65 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     public float UnitTimeToTravel = 1f;
 
     protected override void Begin() {
-        DynCam.SetTarget(Target);
+        DynCam.SetTarget(Target, Vector3.zero);
 
-        if (EnableSmoothing) {
+        if (EnableSmoothing)
             DynCam.StartCoroutine(SmoothMovement());
-            DynCam.StartCoroutine(SmoothLookAt());
-        }
         else {
             DynCam.StartCoroutine(Movement());
-            DynCam.StartCoroutine(LookAt());
-        }
-    }
-
-    private IEnumerator LookAt() {
-        while (true) {
-            DynCam.transform.LookAt(Target.transform);
-            yield return true;
-        }
-    }
-
-    private IEnumerator SmoothLookAt() {
-        while (true) {
-            // lol soooooo smooooooooth. Not.
-            DynCam.transform.LookAt(Target.transform);
-            yield return null;
         }
     }
 
     private IEnumerator Movement() {
         while (true) {
             DynCam.SetPosition(Yaw, Pitch, Distance, Relative);
+            DynCam.transform.LookAt(Target.transform);
 
             yield return null;
         }
     }
 
     private IEnumerator SmoothMovement() {
+        // Calculate moving into position
         var currentPosition = DynCam.transform.position;
         var desiredPosition = DynCam.GetPosition(Yaw, Pitch, Distance, Relative);
         var timeToTravel = Vector3.Distance(currentPosition, desiredPosition)*UnitTimeToTravel;
 
-        var midpoint = (currentPosition + desiredPosition)/2;
-        var relStart = currentPosition - midpoint;
-        var relEnd = desiredPosition - midpoint;
+        // if the travel time is too small, we simply cut. This removes problems with near-zero distance travels
+        if (timeToTravel > 0.05f) {
+            // We find the pivot point by finding the closest point to the target that is equidistant from the current and desired positions.
+            var midpoint = (currentPosition + desiredPosition)/2;
+            var relTarget = Target.transform.position - midpoint;
+            var projectionNormal = (currentPosition - midpoint).normalized;
+            var relPivot = Vector3.ProjectOnPlane(relTarget, projectionNormal);
+            var pivot = relPivot + midpoint;
+            // make motion more or less circular depending on relative target closeness to relative pivot. Closer means more circular, further means more linear.
+            pivot += relPivot.normalized*Vector3.Distance(relPivot, relTarget);
 
-        var rotateAroundMidpoint = Quaternion.FromToRotation(relStart, relEnd);
+            var aroundPivot = Quaternion.FromToRotation(currentPosition - pivot, desiredPosition - pivot);
+            Func<float, Vector3> smoothedMovement = ratio => Quaternion.Lerp(Quaternion.identity, aroundPivot, ratio) * (currentPosition - pivot) + pivot;
 
-        var startTime = Time.time;
-        Func<float, float> timePos = time => (time - startTime)/timeToTravel;
-        Func<float, Vector3> smooth = ratio => Quaternion.Lerp(Quaternion.identity, rotateAroundMidpoint, ratio) * relStart + midpoint;
+            // Calculate look at rotation
+            var currentLookDirection = DynCam.transform.forward;
+            var desiredLookDirection = Target.transform.position - desiredPosition;
+            Func<float, Quaternion> smoothedLookAt = ratio => Quaternion.LookRotation(Vector3.Slerp(currentLookDirection, desiredLookDirection, ratio));
 
-        var pos = 0f;
-        while (pos < 1) {
-            pos = timePos(Time.time);
-            DynCam.transform.position = smooth(MovementCurve.Evaluate(pos));
+            var startTime = Time.time;
+            Func<float, float> timePos = time => (time - startTime)/timeToTravel;
 
-            yield return null;
+            var pos = 0f;
+            while (pos < 1) {
+                pos = timePos(Time.time);
+                if (pos > 1)
+                    pos = 1;
+
+                var ratio = MovementCurve.Evaluate(pos);
+
+                DynCam.transform.position = smoothedMovement(ratio);
+                DynCam.transform.rotation = smoothedLookAt(ratio);
+
+                yield return null;
+            }
         }
 
         yield return DynCam.StartCoroutine(Movement());
