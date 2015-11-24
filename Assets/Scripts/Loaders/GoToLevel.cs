@@ -41,7 +41,7 @@ public class GoToLevel : MonoBehaviour
                 Audiomixer.GetFloat("musicVol", out v);
                 PlayerPrefs.SetFloat("musicVol", v);
 
-                Application.LoadLevel("Intro Cinematic");
+			Application.LoadLevel("intro_cinemtaic_2");
             }
     }
 }

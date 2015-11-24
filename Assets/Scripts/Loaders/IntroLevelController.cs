@@ -9,7 +9,7 @@ public class IntroLevelController : MonoBehaviour
     public Canvas canva;
     public Camera animationCamera;
     public Camera oldCamera;
-    bool skipable;
+    public bool Skipable;
     public Button button;
     float fadeout;
 
@@ -21,7 +21,7 @@ public class IntroLevelController : MonoBehaviour
     public void PlayAnimations() // called from close button
     {
         oldCamera.gameObject.SetActive(false);
-        skipable = true;
+        Skipable = true;
         AnimationToEnable.SetActive(true);
         IntroObject.SetActive(false);
         canva.worldCamera = animationCamera;
@@ -29,7 +29,7 @@ public class IntroLevelController : MonoBehaviour
 
     void Update()
     {
-        if (!skipable)
+        if (!Skipable)
             return;
         if (button.gameObject.activeSelf)
         {

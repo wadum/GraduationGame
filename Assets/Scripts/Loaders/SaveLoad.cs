@@ -65,7 +65,7 @@ public class SaveLoad : MonoBehaviour {
         if (level == 2)
             return;
         PlayerPrefs.SetString("LastLevel", Application.loadedLevelName);
-        if (Application.loadedLevelName == "Main Menu" || Application.loadedLevelName == "Intro Cinematic")
+		if (Application.loadedLevelName == "Main Menu" || Application.loadedLevelName == "intro_cinemtaic_2")
             SaveLoad.saveLoad.SaveInterval = 0f;
         else
         {
