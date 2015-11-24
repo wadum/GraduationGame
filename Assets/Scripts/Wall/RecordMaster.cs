@@ -10,7 +10,6 @@ public class RecordMaster : MonoBehaviour {
     public float _time;
     public float tmp;
     public Slider slider;
-    private float epsilon = 0.1f;
     public bool tracking = false;
 
     // Use this for initialization
@@ -115,9 +114,5 @@ public class RecordMaster : MonoBehaviour {
 
     public void SaveState()
     {
-        foreach(TimeTrackable track in trackers)
-        {
-
-        }
     }
 }

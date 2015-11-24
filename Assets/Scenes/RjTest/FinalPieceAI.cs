@@ -41,7 +41,6 @@ public class FinalPieceAI : MonoBehaviour {
         float _startTime = Time.time;
         Vector3 _lerpStartingPos = transform.position;
         Quaternion _lerpStartingot = transform.rotation;
-        float _journeyLength = Vector3.Distance(transform.position, ClockPosition.position);
 
         // fly to position in clock
         while (_fracJourney < 1)
