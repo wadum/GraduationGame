@@ -93,7 +93,7 @@ public class MultiTouch : MonoBehaviour
 				if(Time.time - touch1Began > TapHoldIndicatorDelay){
 					var position = touches[0].position;
 					_tapAndHoldIndicator.SetPosition(position);
-                    if(!TapAndHoldCharge.isPlaying)
+                    if(!TapAndHoldCharge.isPlaying && !firedTapAndHold)
                         TapAndHoldCharge.Play();
                     _tapAndHoldIndicator.SetValue((Time.time - touch1Began - TapHoldIndicatorDelay) / (TapHoldSeconds - TapHoldIndicatorDelay));
 				}
@@ -101,7 +101,9 @@ public class MultiTouch : MonoBehaviour
 
 				if(Time.time - touch1Began > TapHoldSeconds && !firedTapAndHold){
 					var position = touches[0].position;
-					firedTapAndHold = true;
+                    if (TapAndHoldCharge.isPlaying)
+                        TapAndHoldCharge.Stop();
+                    firedTapAndHold = true;
 	                HandleTapAndHold(position);
 	                yield return null;
 	                continue;
