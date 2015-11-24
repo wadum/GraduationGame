@@ -12,6 +12,8 @@ GameObject:
   - 124: {fileID: 12407910}
   - 92: {fileID: 9271060}
   - 114: {fileID: 11439252}
+  - 114: {fileID: 11478366}
+  - 114: {fileID: 11422142}
   m_Layer: 0
   m_Name: Dynamic Camera
   m_TagString: MainCamera
@@ -72,6 +74,35 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 163814}
   m_Enabled: 1
+--- !u!114 &11422142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd70d448b18cfbc46af26466f752332c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualizeFocus: 0
+  focalLength: 10
+  focalSize: 1.70000005
+  aperture: .75
+  focalTransform: {fileID: 0}
+  maxBlurSize: 2
+  highResolution: 0
+  blurType: 0
+  blurSampleCount: 2
+  nearBlur: 0
+  foregroundOverlap: 1
+  dofHdrShader: {fileID: 4800000, guid: acd613035ff3e455e8abf23fdc8c8c24, type: 3}
+  dx11BokehShader: {fileID: 4800000, guid: d8e82664aa8686642a424c88ab10164a, type: 3}
+  dx11BokehThreshold: .5
+  dx11SpawnHeuristic: .0874999985
+  dx11BokehTexture: {fileID: 2800000, guid: a4cdca73d61814d33ac1587f6c163bca, type: 3}
+  dx11BokehScale: 1.20000005
+  dx11BokehIntensity: 2.5
 --- !u!114 &11439252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,6 +119,7 @@ MonoBehaviour:
   NeutralDistance: 6.5
   NeutralPitch: 15
   NeutralYaw: 0
+  TargetOffset: {x: 0, y: 0, z: 0}
   NeutralFieldOfView: 60
   MinimumFieldOfView: 20
   MaximumFieldOfView: 100
@@ -102,6 +134,25 @@ MonoBehaviour:
   PitchByHeight: 180
   YawByWidth: 360
   ZoomFactor: 4
+--- !u!114 &11478366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 0
+  excludeFarPixels: 1
+  useRadialDistance: 0
+  heightFog: 1
+  height: 18.2600002
+  heightDensity: .0170000009
+  startDistance: 0
+  fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
 --- !u!124 &12407910
 Behaviour:
   m_ObjectHideFlags: 1
