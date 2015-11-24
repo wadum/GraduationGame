@@ -119,7 +119,7 @@ public class TimeSliderController : MonoBehaviour
                 if (Physics.Raycast(_player.transform.position, -Vector3.up, out hit))
                 {
                     // If what we're standing on is the _obj, then we jag
-                    if(hit.collider.gameObject.transform.root == _obj.transform)
+                    if(_obj.tag != "Moveable Rock" && hit.collider.gameObject.transform.root == _obj.transform)
                     {
                         jagging = true;
                         _bottunsToRotate.ForEach(cock => cock.SaveRot());
