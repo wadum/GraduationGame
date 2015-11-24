@@ -83,6 +83,20 @@ public class ObjectTimeController : TimeControllable
             }
 			return true;
         });
+
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Moveable Rock", hit =>
+        {
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
+            {
+                if (InRange)
+                {
+                    FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+                    return true;
+                }
+                else return false;
+            }
+            return true;
+        });
         //Enabling
         foreach (GameObject obj in EnableObjectsBeforeTimeLimit)
         {

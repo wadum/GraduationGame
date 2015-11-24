@@ -64,7 +64,7 @@ public class MasterHighlight : MonoBehaviour
                 script.rend.material.SetFloat("_Emission1", p);
             }
         }
-        
+
         // If we are in range, but not already blinking, we start blinking, from zero so it fades in
         if (_inRange && !highlighted)
         {
