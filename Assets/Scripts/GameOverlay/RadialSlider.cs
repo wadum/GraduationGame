@@ -27,7 +27,8 @@ public class RadialSlider : MonoBehaviour {
 	{
 		if(value < 1f)
 		{
-			_i.color = DefaultColor;
+			if(_i)
+				_i.color = DefaultColor;
 			if(_transitionRoutine != null)
 				StopCoroutine(_transitionRoutine);
 		}

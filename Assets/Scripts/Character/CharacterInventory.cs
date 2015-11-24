@@ -20,13 +20,10 @@ public class CharacterInventory : MonoBehaviour
 
     private bool _doOnce;
 
-    private CharacterMovement _playerMovement;
     
     void Start()
     {
         _doOnce = false;
-        //if (!WholePiecePos) WholePiecePos = gameObject;
-        _playerMovement = gameObject.GetComponent<CharacterMovement>();
         foreach (Clockpart clockpart in GameObject.FindObjectsOfType<Clockpart>())
             clockpart.AnimateSpeed = AnimateSpeed;
     }

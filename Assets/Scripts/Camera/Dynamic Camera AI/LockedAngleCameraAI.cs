@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LockedAngleCameraAI : BaseDynamicCameraAI {
     public GameObject Target;
@@ -13,16 +14,14 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
 
     [Header("Smoothing")]
     public bool EnableSmoothing = true;
-    public float YawMaximumDegreesPerSecond = 5f;
-    public float PitchMaximumDegreesPerSecond = 3f;
-    public float DistanceMaximumDeltaPerSecond = 1.25f;
-    public float LookAtMaximumDegreesPerSecond = 25f;
+    public AnimationCurve MovementCurve;
+    public float UnitTimeToTravel = 1f;
 
     protected override void Begin() {
         DynCam.SetTarget(Target);
 
         if (EnableSmoothing) {
-            StartCoroutine(SmoothMovement());
+            DynCam.StartCoroutine(SmoothMovement());
             DynCam.StartCoroutine(SmoothLookAt());
         }
         else {
@@ -39,10 +38,9 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     }
 
     private IEnumerator SmoothLookAt() {
-        Func<Quaternion> lookRotation = () => Quaternion.LookRotation(Target.transform.position - DynCam.transform.position);
-
         while (true) {
-            DynCam.transform.rotation = Quaternion.Slerp(DynCam.transform.rotation, lookRotation(), Time.deltaTime);
+            // lol soooooo smooooooooth. Not.
+            DynCam.transform.LookAt(Target.transform);
             yield return null;
         }
     }
@@ -50,30 +48,35 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     private IEnumerator Movement() {
         while (true) {
             DynCam.SetPosition(Yaw, Pitch, Distance, Relative);
-            DynCam.transform.LookAt(Target.transform);
 
             yield return null;
         }
     }
 
     private IEnumerator SmoothMovement() {
-        var distanceVelocity = 0f;
-        var yawVelocity = 0f;
-        var pitchVelocty = 0f;
+        var currentPosition = DynCam.transform.position;
+        var desiredPosition = DynCam.GetPosition(Yaw, Pitch, Distance, Relative);
+        var timeToTravel = Vector3.Distance(currentPosition, desiredPosition)*UnitTimeToTravel;
 
-        // These are functions as they _may_ change if the target moves while we transition.
-        Func<float> currentYaw = () => Relative? DynCam.CurrentRelativeYaw: DynCam.CurrentAbsoluteYaw;
-        Func<float> currentPitch = () => DynCam.CurrentPitch;
-        Func<float> currentDistance = () => DynCam.CurrentDistance;
-        
-        Func<float> smoothYaw = () => Mathf.SmoothDampAngle(currentYaw(), Yaw, ref yawVelocity, 0.1f, YawMaximumDegreesPerSecond);
-        Func<float> smoothPitch = () => Mathf.SmoothDampAngle(currentPitch(), Pitch, ref pitchVelocty, 0.1f, PitchMaximumDegreesPerSecond);
-        Func<float> smoothDistance = () => Mathf.SmoothDampAngle(currentDistance(), Distance, ref distanceVelocity, 0.1f, DistanceMaximumDeltaPerSecond);
+        var midpoint = (currentPosition + desiredPosition)/2;
+        var relStart = currentPosition - midpoint;
+        var relEnd = desiredPosition - midpoint;
 
-        while (true) {
-            DynCam.SetPosition(smoothYaw(), smoothPitch(), smoothDistance(), Relative);
+        var rotateAroundMidpoint = Quaternion.FromToRotation(relStart, relEnd);
+
+        var startTime = Time.time;
+        Func<float, float> timePos = time => (time - startTime)/timeToTravel;
+        Func<float, Vector3> smooth = ratio => Quaternion.Lerp(Quaternion.identity, rotateAroundMidpoint, ratio) * relStart + midpoint;
+
+        var pos = 0f;
+        while (pos < 1) {
+            pos = timePos(Time.time);
+            DynCam.transform.position = smooth(MovementCurve.Evaluate(pos));
+
             yield return null;
         }
+
+        yield return DynCam.StartCoroutine(Movement());
     }
 
     void OnDrawGizmosSelected() {

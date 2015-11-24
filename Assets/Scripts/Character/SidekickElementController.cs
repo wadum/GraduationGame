@@ -18,7 +18,6 @@ public class SidekickElementController : MonoBehaviour
     GameObject _player;
     Transform _endPos;
     Vector3 _originalPos;
-    Vector3 _rotationPos;
     Vector3 _startpos;
     Vector3 _SAOPos;
     Quaternion _originalRot;
@@ -34,7 +33,6 @@ public class SidekickElementController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _originalPos = transform.localPosition;
-        _rotationPos = transform.localPosition;
         _originalRot = transform.localRotation;
         _rotationSpeed = OriginalRotationSpeed / 4;
 
