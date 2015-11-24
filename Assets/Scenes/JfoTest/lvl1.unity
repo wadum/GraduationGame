@@ -180,10 +180,6 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 187510, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
   m_PrefabInternal: {fileID: 1215838700}
---- !u!4 &64914048 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 498750, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
-  m_PrefabInternal: {fileID: 1215838700}
 --- !u!1 &105186474 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 21ef34033b352c04394ab716422e36c4, type: 3}
@@ -347,23 +343,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
@@ -1352,10 +1348,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
-    - target: {fileID: 11422142, guid: 7a3f23166fe8bc946971259f37effb27, type: 2}
-      propertyPath: focalTransform
-      value: 
-      objectReference: {fileID: 64914048}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a3f23166fe8bc946971259f37effb27, type: 2}
   m_IsPrefabParent: 0
@@ -1483,7 +1475,7 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
-    m_Resolution: 1
+    m_Resolution: 2
     m_Strength: 1
     m_Bias: .0359999985
     m_NormalBias: .0799999982
@@ -1574,6 +1566,14 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eb83f702069d1cd49ad2c679f77e1fc5, type: 2}
+    - target: {fileID: 13773428, guid: bf46f5f4b70b48f4a8363ac50960934b, type: 2}
+      propertyPath: m_AABB.m_Center.y
+      value: 7.94538498
+      objectReference: {fileID: 0}
+    - target: {fileID: 13773428, guid: bf46f5f4b70b48f4a8363ac50960934b, type: 2}
+      propertyPath: m_AABB.m_Extent.y
+      value: 8.28861809
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf46f5f4b70b48f4a8363ac50960934b, type: 2}
   m_IsPrefabParent: 0
