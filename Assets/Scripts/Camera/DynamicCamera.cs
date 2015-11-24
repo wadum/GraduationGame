@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class DynamicCamera : MonoBehaviour {
     public float NeutralDistance = 5f;
     [Range(-89, 89)] public float NeutralPitch = 20f;
     [Range(-180, 180)] public float NeutralYaw = 0f;
+    public Vector3 TargetOffset = Vector3.zero;
 
     [Header("Field of View")]
     [Range(10, 170)] public float NeutralFieldOfView = 60;
@@ -36,7 +38,6 @@ public class DynamicCamera : MonoBehaviour {
     
     private Camera _camera;
     private Transform _target;
-    private Renderer _targetRenderer;
 
     // Used to override the camera agent
     private bool _playerIntent;
@@ -84,7 +85,7 @@ public class DynamicCamera : MonoBehaviour {
 
     public Vector3 BaseRelativePitchAxis { get { return _target.right; } }
 
-    public Vector3 RelativePosition { get { return transform.position - TopOfTarget; } }
+    public Vector3 RelativePosition { get { return transform.position - TargetPositionWithOffset; } }
 
     public Quaternion NeutralRelativeRotation { get { return Rotation(NeutralYaw, NeutralPitch); } }
 
@@ -132,12 +133,8 @@ public class DynamicCamera : MonoBehaviour {
 
     public Quaternion CurrentRelativePitchRotation { get { return Quaternion.AngleAxis(CurrentPitch, CurrentRelativeYawRotation*BaseRelativePitchAxis); } }
 
-    public Vector3 TopOfTarget {
-        get {
-            return _targetRenderer?
-                _targetRenderer.bounds.center + new Vector3(0, _targetRenderer.bounds.extents.y, 0):
-                _target.position;
-        }
+    public Vector3 TargetPositionWithOffset {
+        get { return _target.position + TargetOffset; }
     }
 
     #endregion
@@ -157,7 +154,7 @@ public class DynamicCamera : MonoBehaviour {
     }
 
     private void SetPosition(Quaternion rotation, float distance, bool relative = true) {
-        transform.position = rotation * (relative? RelativeDirection: AbsoluteDirection) * distance + TopOfTarget;
+        transform.position = rotation * (relative? RelativeDirection: AbsoluteDirection) * distance + TargetPositionWithOffset;
     }
 
     /// <summary>
@@ -175,27 +172,33 @@ public class DynamicCamera : MonoBehaviour {
 
     public Vector3 GetPosition(float yaw, float pitch, float distance, bool relative = true, GameObject target = null) {
         Transform previousTarget = null;
+        var previousOffset = Vector3.zero;
         if (target) {
             previousTarget = _target;
-            SetTarget(target);
+            previousOffset = TargetOffset;
+            SetTarget(target, Vector3.zero);
         }
 
         var rot = Rotation(yaw, pitch, relative);
-        var result = rot * (relative? RelativeDirection: AbsoluteDirection) * distance + TopOfTarget;
+        var result = rot * (relative? RelativeDirection: AbsoluteDirection) * distance + TargetPositionWithOffset;
 
         if (previousTarget)
-            SetTarget(previousTarget);
+            SetTarget(previousTarget, previousOffset);
 
         return result;
     }
 
-    public void SetTarget(Transform target) {
+    public void SetTarget(Transform target, Vector3 offset) {
         _target = target;
-        _targetRenderer = _target.GetComponent<Renderer>();
+        TargetOffset = offset;
     }
 
-    public void SetTarget(GameObject target) {
-        SetTarget(target.transform);
+    public void SetTarget(GameObject target, Vector3 offset) {
+        SetTarget(target.transform, offset);
+    }
+
+    public Transform GetTarget() {
+        return _target;
     }
 
     public bool TargetPlayer() {
@@ -211,7 +214,10 @@ public class DynamicCamera : MonoBehaviour {
             return false;
         }
 
-        SetTarget(players.First().transform);
+        var player = players.First();
+        var rend = player.GetComponent<Renderer>();
+
+        SetTarget(player, new Vector3(0, rend.bounds.extents.y, 0));
 
         return true;
     }
@@ -245,10 +251,6 @@ public class DynamicCamera : MonoBehaviour {
         }
         else
             return true;
-
-        _targetRenderer = _target.GetComponent<Renderer>();
-        if (!_targetRenderer)
-            Debug.Log("Warn: player missing renderer, camera offset might be wrong");
 
         return true;
     }
@@ -316,7 +318,7 @@ public class DynamicCamera : MonoBehaviour {
             var ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
-                SetTarget(hit.transform);
+                SetTarget(hit.transform, Vector3.zero);
         }
 
         if (Input.GetKeyDown(KeyCode.Backspace)) {
@@ -341,7 +343,7 @@ public class DynamicCamera : MonoBehaviour {
 
         SetPosition(PlayerDesiredAbsoluteRotation, zoom, false);
 
-        transform.LookAt(TopOfTarget);
+        transform.LookAt(TargetPositionWithOffset);
     }
 
     private void FullyAutomaticCameraControl() {
@@ -349,7 +351,7 @@ public class DynamicCamera : MonoBehaviour {
 
         SetPosition(rot, NeutralDistance);
 
-        transform.LookAt(TopOfTarget);
+        transform.LookAt(TargetPositionWithOffset);
     }
 
     #endregion
