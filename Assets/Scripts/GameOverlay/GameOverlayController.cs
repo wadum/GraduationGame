@@ -108,10 +108,7 @@ public class GameOverlayController : MonoBehaviour
         _currentObj = obj;
         MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
         if (master)
-            master.Activate();
-
-        //TimeSlider.SetActive(true);
-      
+            master.Activate();      
 
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
         SliderController.SetTimeControllable(obj);
@@ -139,7 +136,6 @@ public class GameOverlayController : MonoBehaviour
         _bottunsToRotate.ForEach(cock => cock.moveIn = false);
         _bottunsToRotate.ForEach(cock => cock.MoveOutside());
 
-        //TimeSlider.SetActive(false);
         _currentObj = null;
 
         if (_animController == null)
