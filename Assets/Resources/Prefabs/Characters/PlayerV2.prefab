@@ -1654,6 +1654,7 @@ GameObject:
   - 82: {fileID: 8296438}
   - 82: {fileID: 8269256}
   - 82: {fileID: 8239224}
+  - 135: {fileID: 13543324}
   m_Layer: 2
   m_Name: PlayerV2
   m_TagString: Player
@@ -5207,6 +5208,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1257076ee9561a4e8f8fe7bfa0b9859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &13543324
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .842125058
+  m_Center: {x: .0564042851, y: .838395834, z: -.0135273933}
 --- !u!137 &13732336
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -5372,7 +5385,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 187510}
   m_Enabled: 1
   m_Radius: .5
-  m_Speed: 8
+  m_Speed: 3
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 3000
