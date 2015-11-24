@@ -4,39 +4,39 @@ using System.Collections.Generic;
 public class MasterHighlight : MonoBehaviour
 {
     List<HighlightScript> _list;
-    public float width;
-    private bool _inRange, active, highlighted, blinking;
-    Vector3 emission;
-    public Color OutlineColour = new Color(0, 1, 0.9586205f, 0);
-  //  public Color Emmission = new Color(0.5f, 0.5f, 0);
+    private bool _inRange, active, highlighted;
+    // p is the intensity of the blinking, emission is used to ensure a blink always start from 0
+    private float p, emission;
 
     void Awake()
     {
+        // We have a list of all the children connected to this MasterHighlight script
         _list = new List<HighlightScript>();
-
-    }
-
-    void Start()
-    {
+        // Find children, and add them to list
         TagChildren(transform);
     }
 
+    // We locate all relevant children, and assign them a highlight script.
     void TagChildren(Transform _transform)
     {
+        // A child is a transform.
         foreach (Transform child in _transform.GetComponentsInChildren<Transform>())
         {
+            // If the child is has a Master of its own, we break - Elef wrote this!
             if (child.GetComponent<MasterHighlight>() && child.transform != transform)
             {
-                //Debug.Log(child.name);
                 break;
             }
+            // If the child has a tag which needs to be highlighted, we continue, expand this as needed
             if (child.tag == "TimeManipulationObject" || child.tag == "Rock")
             {
+                // The child should have some sort of Renderer.
                 var mesh = child.GetComponent<MeshRenderer>();
                 var mesh2 = child.GetComponent<SkinnedMeshRenderer>();
                 if (mesh || mesh2)
                 {
                     HighlightScript script = child.gameObject.AddComponent<HighlightScript>();
+                    // We ask the script if it has a useable renderer, and kill if it's not the case.
                     if (script.TextureShader)
                     {
                         _list.Add(script);
@@ -50,84 +50,60 @@ public class MasterHighlight : MonoBehaviour
 
     void Update()
     {
+        // If selected, we dont need to blink
         if (active)
             return;
+        // If we're not active, but still in range, we blink
         if (highlighted)
         {
-       //     Debug.Log("I should work now?");
-            float p = Mathf.PingPong(Time.time * 0.2f, 0.5f);
+            emission += Time.deltaTime;
+            // A nice back and forward fade in and out effect is achieved with PingPong, adjust the last value to make it faster or slower.
+            p = Mathf.PingPong(emission, 1.5f);
             foreach (HighlightScript script in _list)
             {
                 script.rend.material.SetFloat("_Emission1", p);
             }
         }
-        /*
-        if (active)
-        {
-            Debug.Log("I'm active");
-            if (!blinking)
-                blinking = true;
-            float p = Mathf.PingPong(Time.time * 0.2f, 0.5f);
-            foreach (HighlightScript script in _list)
-            {
-                script.rend.material.SetFloat("_Emission2", 0.5f + p);
-            }
-            return;
-        }
-        else if (blinking)
-        {
-            foreach (HighlightScript script in _list)
-                script.Deactivate();
-//                script.OrgEmission();
-            blinking = false;
-        }
-        */
+        
+        // If we are in range, but not already blinking, we start blinking, from zero so it fades in
         if (_inRange && !highlighted)
         {
+            emission = 0;
             highlighted = true;
-     //       foreach (HighlightScript script in _list)
-      //          script.Activate();
         }
+        // If we are no longer in range, but were blinking, we stop blinking
         else if (!_inRange && highlighted)
         {
             highlighted = false;
-      //      foreach (HighlightScript script in _list)
-      //          script.Deactivate();
+            foreach (HighlightScript script in _list)
+            {
+                script.rend.material.SetFloat("_Emission1", 0);
+            }
         }
     }
 
+    // If a slider is telling us to be active, we stop blinking and keep values at max
     public void Activate()
     {
-        Debug.Log("I'm being activated");
         active = true;
-//        active = true;
         foreach (HighlightScript script in _list)
-            script.Activate();
-     //   blinking = true;
-   //     highlighted = false;
-
+        {
+            script.rend.material.SetFloat("_Emission1", 1);
+        }
+        // for when we fade down, we should be at max intensity
+        emission = 1;
     }
 
+    // If a slider tells us we are no longer active, we return to blinking.
     public void Deactivate()
     {
-        Debug.Log("I'm being deactivated");
         active = false;
-        foreach (HighlightScript script in _list)
-            script.Deactivate();
-
-//        active = false;
     }
 
+    // GET / SET for a InRange boolean.
     public bool InRange
     {
         get { return _inRange; }
-        set
-        {
-            foreach (HighlightScript script in _list)
-            {
-                script.InRange = value;
-            }
-            _inRange = value;
-        }
+        set { _inRange = value; }
     }
 }

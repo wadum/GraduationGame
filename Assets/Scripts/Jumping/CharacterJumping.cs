@@ -303,4 +303,29 @@ public class CharacterJumping : MonoBehaviour
         transform.parent = targetParent;
         _jumping = false;
     }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if(TagsToJumpOnto.Contains(collider.tag))
+        {
+            // Since we have no good indication of the "rock"'s surface,  it's hard to tell if we can actually reach it.
+//            var feet = PlayerFeet;
+//            if (!CanReach(feet, collider.bounds.center))
+//            {
+                HighlightScript script = collider.gameObject.GetComponent<HighlightScript>();
+                if (script)
+                    script.Activate();
+            //            }
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (TagsToJumpOnto.Contains(collider.tag))
+        {
+            HighlightScript script = collider.gameObject.GetComponent<HighlightScript>();
+            if (script)
+                script.Deactivate();
+        }
+    }
 }
