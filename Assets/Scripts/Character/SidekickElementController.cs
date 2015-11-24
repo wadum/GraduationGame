@@ -59,6 +59,17 @@ public class SidekickElementController : MonoBehaviour
             }
 			return true;
         });
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Moveable Rock", hit =>
+        {
+            var parentTransform = hit.transform;
+            ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
+            if (timecontroller)
+            {
+                if (timecontroller.InRange)
+                    FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
+            }
+            return true;
+        });
         MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
         {
             if (_myStatus != Status.SwirlingAroundPlayer && _myStatus != Status.FlyBack)

@@ -11,6 +11,7 @@ public class TimeSliderController : MonoBehaviour
     public float JaggingTime = 0.5f;
     public float JaggingCD = 0.5f;
     public bool HalfJaggedSpeed = false;
+    private bool jagging = false;
 
     //Audio sources
     public AudioSource
@@ -22,14 +23,17 @@ public class TimeSliderController : MonoBehaviour
     private Slider _slider;
     private SoundMaster _soundMaster;
     private TimeControllable _obj;
+    private GameObject _player;
 
     private Coroutine _increaseCorout;
     private Coroutine _decreaseCorout;
     private float bar { get { return JaggingTime; } set { JaggingTime = value; } }
     private List<CockRotator> _bottunsToRotate = new List<CockRotator>();
-
+    RaycastHit hit;
+ 
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
         _soundMaster = FindObjectOfType<SoundMaster>();
         _slider = GetComponentInChildren<Slider>();
         _jaggeringSound = GetComponent<AudioSource>();
@@ -44,36 +48,40 @@ public class TimeSliderController : MonoBehaviour
     public void IncreaseTimePressed()
     {
         _increaseCorout = StartCoroutine(changeValue(TimeSpeed));
-        _obj.MusicForward();
+        if(!jagging)
+            _obj.MusicForward();
     }
 
     public void IncreaseTimeReleased()
     {
         if (_increaseCorout == null) return;
         StopCoroutine(_increaseCorout);
-        _obj.StopMusic();
+        if(!jagging)
+            _obj.StopMusic();
     }
 
     public void DecreaseTimePressed()
     {
-        if (_soundMaster)
+        if (_soundMaster && !jagging)
             _soundMaster.PlayReversed();
         _decreaseCorout = StartCoroutine(changeValue(-TimeSpeed));
-        _obj.MusicBackward();
+        if(!jagging)
+            _obj.MusicBackward();
     }
 
     public void DecreaseTimeReleased()
     {
         if (_decreaseCorout == null) return;
-        if (_soundMaster)
+        if (_soundMaster && !jagging)
             _soundMaster.PlayNormal();
         StopCoroutine(_decreaseCorout);
-        _obj.StopMusic();
+        if(!jagging)
+            _obj.StopMusic();
     }
 
     IEnumerator changeValue(float var)
     {
-        bool jagging = false;
+        jagging = false;
         float foo = 0;
         float jaggingCDTime = 10;
         while (true)
@@ -94,8 +102,6 @@ public class TimeSliderController : MonoBehaviour
 
                     if (foo > bar)
                     {
-                        
-
                         foo = 0;
                         _bottunsToRotate.ForEach(cock => cock.ResetRot());
                         jaggingCDTime = 0;
@@ -106,17 +112,35 @@ public class TimeSliderController : MonoBehaviour
             }
             BackwardsButton.mute = false;
             ForwardsButton.mute = false;
-            _slider.value += 100f * Time.deltaTime / var;
-            if (_slider.value < 100 && _slider.value > 0)
+            // If the slider is valid to move (in between max or min), and we're not a child of it, then it can move.
+            if (_slider.value < (100 - 100f * Time.deltaTime / var) && _slider.value > - (100f * Time.deltaTime / var) && (!_player.transform.IsChildOf(_obj.transform.root) || _obj.tag == "Moveable Rock"))
             {
-
-                _bottunsToRotate.ForEach(cock => cock.RotateWheel(Mathf.Sign(var)));
+                // If we are not standing on it via parenting, then we might stand on it as a bridge
+                if (Physics.Raycast(_player.transform.position, -Vector3.up, out hit))
+                {
+                    // If what we're standing on is the _obj, then we jag
+                    if(hit.collider.gameObject.transform.root == _obj.transform)
+                    {
+                        jagging = true;
+                        _bottunsToRotate.ForEach(cock => cock.SaveRot());
+                        yield return null;
+                        continue;
+                    }
+                    else
+                    {
+                        _bottunsToRotate.ForEach(cock => cock.RotateWheel(Mathf.Sign(var)));
+                    }
+                }
             }
             else
             {
                 jagging = true;
                 _bottunsToRotate.ForEach(cock => cock.SaveRot());
+                yield return null;
+                continue;
             }
+            if (!jagging)
+                _slider.value += 100f * Time.deltaTime / var;
             yield return null;
         }
     }
