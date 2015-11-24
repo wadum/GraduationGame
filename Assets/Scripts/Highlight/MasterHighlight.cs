@@ -30,7 +30,7 @@ public class MasterHighlight : MonoBehaviour
                 //Debug.Log(child.name);
                 break;
             }
-            if (child.tag == "TimeManipulationObject" || child.tag == "Rock")
+            if (child.tag == "TimeManipulationObject" || child.tag == "Rock" || child.tag == "Moveable Rock")
             {
                 var mesh = child.GetComponent<MeshRenderer>();
                 var mesh2 = child.GetComponent<SkinnedMeshRenderer>();
