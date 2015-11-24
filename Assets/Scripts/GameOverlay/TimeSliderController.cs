@@ -126,10 +126,6 @@ public class TimeSliderController : MonoBehaviour
                         yield return null;
                         continue;
                     }
-                    else
-                    {
-                        _bottunsToRotate.ForEach(cock => cock.RotateWheel(Mathf.Sign(var)));
-                    }
                 }
             }
             else
@@ -140,7 +136,10 @@ public class TimeSliderController : MonoBehaviour
                 continue;
             }
             if (!jagging)
+            {
+                _bottunsToRotate.ForEach(cock => cock.RotateWheel(Mathf.Sign(var)));
                 _slider.value += 100f * Time.deltaTime / var;
+            }
             yield return null;
         }
     }
