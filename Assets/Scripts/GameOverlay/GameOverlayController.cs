@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameOverlayController : MonoBehaviour
@@ -24,6 +26,8 @@ public class GameOverlayController : MonoBehaviour
     private AnimationController _animController;
     private CharacterMovement _player;
 
+    private List<CockRotator> _bottunsToRotate = new List<CockRotator>();
+
     void Awake()
     {
         gameOverlayController = this;
@@ -35,6 +39,7 @@ public class GameOverlayController : MonoBehaviour
         _canvas.worldCamera = Camera.main;
 
         _animController = FindObjectOfType<AnimationController>();
+        _bottunsToRotate.AddRange(GetComponentsInChildren<CockRotator>());
     }
 
     void Update()
@@ -104,9 +109,16 @@ public class GameOverlayController : MonoBehaviour
         MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
         if (master)
             master.Activate();
-        TimeSlider.SetActive(true);
+
+        //TimeSlider.SetActive(true);
+      
+
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
         SliderController.SetTimeControllable(obj);
+
+        //move buttons in
+        _bottunsToRotate.ForEach(cock => cock.moveIn = true);
+        _bottunsToRotate.ForEach(cock => cock.MoveInside());
 
         if (_player == null)
             _player = FindObjectOfType<CharacterMovement>();
@@ -123,8 +135,11 @@ public class GameOverlayController : MonoBehaviour
             if (master)
                 master.Deactivate();
         }
+        //move buttons out
+        _bottunsToRotate.ForEach(cock => cock.moveIn = false);
+        _bottunsToRotate.ForEach(cock => cock.MoveOutside());
 
-        TimeSlider.SetActive(false);
+        //TimeSlider.SetActive(false);
         _currentObj = null;
 
         if (_animController == null)

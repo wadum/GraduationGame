@@ -1590,6 +1590,7 @@ GameObject:
   - 114: {fileID: 11470452}
   - 114: {fileID: 11463624}
   - 82: {fileID: 8289176}
+  - 114: {fileID: 11450222}
   m_Layer: 5
   m_Name: Forwards
   m_TagString: Untagged
@@ -1721,6 +1722,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22402506}
   - 114: {fileID: 11408922}
+  - 82: {fileID: 8239322}
   m_Layer: 5
   m_Name: Time Control
   m_TagString: Untagged
@@ -1743,6 +1745,21 @@ GameObject:
   m_Name: Previous Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &165014
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 22400942}
+  m_Layer: 5
+  m_Name: PointToPushAwayFrom
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2463,6 +2480,7 @@ GameObject:
   - 114: {fileID: 11479908}
   - 114: {fileID: 11499432}
   - 82: {fileID: 8204720}
+  - 114: {fileID: 11474694}
   m_Layer: 5
   m_Name: Backwards
   m_TagString: Untagged
@@ -2785,7 +2803,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148768}
-  m_LocalRotation: {x: .179586381, y: .815432847, z: .0864254311, w: .543459773}
+  m_LocalRotation: {x: .179586396, y: .815432966, z: .0864254385, w: .543459833}
   m_LocalPosition: {x: -2, y: 3.56399989, z: -2.96700001}
   m_LocalScale: {x: 1, y: 1.5, z: 1.5}
   m_Children: []
@@ -3074,6 +3092,76 @@ AudioSource:
   m_Volume: .075000003
   m_Pitch: 1
   Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &8239322
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163740}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fd88c5e9b32e7764bb88508032d203ba, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   Priority: 128
@@ -3705,6 +3793,8 @@ MonoBehaviour:
   JaggingTime: .5
   JaggingCD: .5
   HalfJaggedSpeed: 1
+  BackwardsButton: {fileID: 8204720}
+  ForwardsButton: {fileID: 8289176}
 --- !u!114 &11409464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3755,8 +3845,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  RotSpeed: 5
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
   RotateClockwise: 1
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11410476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4405,8 +4499,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  RotSpeed: 5
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
   RotateClockwise: 0
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11426320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4513,8 +4611,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  RotSpeed: 5
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
   RotateClockwise: 1
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11430300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5624,6 +5726,23 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: $master$
+--- !u!114 &11450222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotSpeed: 0
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
+  RotateClockwise: 0
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11450246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6178,8 +6297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  RotSpeed: 5
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
   RotateClockwise: 1
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11461428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6830,8 +6953,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  RotSpeed: 5
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
   RotateClockwise: 0
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11474558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6859,6 +6986,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11474694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotSpeed: 0
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
+  RotateClockwise: 0
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11475202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7321,8 +7465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  RotSpeed: 5
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
   RotateClockwise: 0
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11482096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7988,8 +8136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6f474e0ccb7745ac8ea264d6f4746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  RotSpeed: 5
+  MoveInSpeed: 1
+  MoveOutSpeed: 3
   RotateClockwise: 0
+  PushAwayFromPoint: {fileID: 165014}
+  moveIn: 0
 --- !u!114 &11496378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8839,6 +8991,23 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 1
+--- !u!224 &22400942
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22402506}
+  m_RootOrder: 10
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 500}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: .5, y: .5}
 --- !u!224 &22402452
 RectTransform:
   m_ObjectHideFlags: 1
@@ -8877,6 +9046,7 @@ RectTransform:
   - {fileID: 22403740}
   - {fileID: 22428748}
   - {fileID: 22402452}
+  - {fileID: 22400942}
   m_Father: {fileID: 22487432}
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: 0}
