@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Linq;
 
 public class LightningGenerator : MonoBehaviour {
@@ -90,8 +89,9 @@ public class LightningGenerator : MonoBehaviour {
         {
             lightningConductor.GetComponent<Electrified>().Activate();
             lineRenderer.enabled = true;
-			if (Audio && !Audio.isPlaying && Audio.enabled)
+			if (Audio && Audio.isActiveAndEnabled && (!Audio.isPlaying) )
                 Audio.Play();
+                
 
             //if enough time has passed update the line
             if (timePassed > frecuency)
