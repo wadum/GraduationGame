@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LockedAngleCameraAI : BaseDynamicCameraAI {
     public GameObject Target;
@@ -13,37 +15,16 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
 
     [Header("Smoothing")]
     public bool EnableSmoothing = true;
-    public float YawMaximumDegreesPerSecond = 5f;
-    public float PitchMaximumDegreesPerSecond = 3f;
-    public float DistanceMaximumDeltaPerSecond = 1.25f;
-    public float LookAtMaximumDegreesPerSecond = 25f;
+    public AnimationCurve MovementCurve;
+    public float UnitTimeToTravel = 1f;
 
     protected override void Begin() {
-        DynCam.SetTarget(Target);
+        DynCam.SetTarget(Target, Vector3.zero);
 
-        if (EnableSmoothing) {
-            StartCoroutine(SmoothMovement());
-            DynCam.StartCoroutine(SmoothLookAt());
-        }
+        if (EnableSmoothing)
+            DynCam.StartCoroutine(SmoothMovement());
         else {
             DynCam.StartCoroutine(Movement());
-            DynCam.StartCoroutine(LookAt());
-        }
-    }
-
-    private IEnumerator LookAt() {
-        while (true) {
-            DynCam.transform.LookAt(Target.transform);
-            yield return true;
-        }
-    }
-
-    private IEnumerator SmoothLookAt() {
-        Func<Quaternion> lookRotation = () => Quaternion.LookRotation(Target.transform.position - DynCam.transform.position);
-
-        while (true) {
-            DynCam.transform.rotation = Quaternion.Slerp(DynCam.transform.rotation, lookRotation(), Time.deltaTime);
-            yield return null;
         }
     }
 
@@ -57,23 +38,49 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     }
 
     private IEnumerator SmoothMovement() {
-        var distanceVelocity = 0f;
-        var yawVelocity = 0f;
-        var pitchVelocty = 0f;
+        // Calculate moving into position
+        var currentPosition = DynCam.transform.position;
+        var desiredPosition = DynCam.GetPosition(Yaw, Pitch, Distance, Relative);
+        var timeToTravel = Vector3.Distance(currentPosition, desiredPosition)*UnitTimeToTravel;
 
-        // These are functions as they _may_ change if the target moves while we transition.
-        Func<float> currentYaw = () => Relative? DynCam.CurrentRelativeYaw: DynCam.CurrentAbsoluteYaw;
-        Func<float> currentPitch = () => DynCam.CurrentPitch;
-        Func<float> currentDistance = () => DynCam.CurrentDistance;
-        
-        Func<float> smoothYaw = () => Mathf.SmoothDampAngle(currentYaw(), Yaw, ref yawVelocity, 0.1f, YawMaximumDegreesPerSecond);
-        Func<float> smoothPitch = () => Mathf.SmoothDampAngle(currentPitch(), Pitch, ref pitchVelocty, 0.1f, PitchMaximumDegreesPerSecond);
-        Func<float> smoothDistance = () => Mathf.SmoothDampAngle(currentDistance(), Distance, ref distanceVelocity, 0.1f, DistanceMaximumDeltaPerSecond);
+        // if the travel time is too small, we simply cut. This removes problems with near-zero distance travels
+        if (timeToTravel > 0.05f) {
+            // We find the pivot point by finding the closest point to the target that is equidistant from the current and desired positions.
+            var midpoint = (currentPosition + desiredPosition)/2;
+            var relTarget = Target.transform.position - midpoint;
+            var projectionNormal = (currentPosition - midpoint).normalized;
+            var relPivot = Vector3.ProjectOnPlane(relTarget, projectionNormal);
+            var pivot = relPivot + midpoint;
+            // make motion more or less circular depending on relative target closeness to relative pivot. Closer means more circular, further means more linear.
+            pivot += relPivot.normalized*Vector3.Distance(relPivot, relTarget);
 
-        while (true) {
-            DynCam.SetPosition(smoothYaw(), smoothPitch(), smoothDistance(), Relative);
-            yield return null;
+            var aroundPivot = Quaternion.FromToRotation(currentPosition - pivot, desiredPosition - pivot);
+            Func<float, Vector3> smoothedMovement = ratio => Quaternion.Lerp(Quaternion.identity, aroundPivot, ratio) * (currentPosition - pivot) + pivot;
+
+            // Calculate look at rotation
+            var currentLookDirection = DynCam.transform.forward;
+            var desiredLookDirection = Target.transform.position - desiredPosition;
+            Func<float, Quaternion> smoothedLookAt = ratio => Quaternion.LookRotation(Vector3.Slerp(currentLookDirection, desiredLookDirection, ratio));
+
+            var startTime = Time.time;
+            Func<float, float> timePos = time => (time - startTime)/timeToTravel;
+
+            var pos = 0f;
+            while (pos < 1) {
+                pos = timePos(Time.time);
+                if (pos > 1)
+                    pos = 1;
+
+                var ratio = MovementCurve.Evaluate(pos);
+
+                DynCam.transform.position = smoothedMovement(ratio);
+                DynCam.transform.rotation = smoothedLookAt(ratio);
+
+                yield return null;
+            }
         }
+
+        yield return DynCam.StartCoroutine(Movement());
     }
 
     void OnDrawGizmosSelected() {

@@ -58,18 +58,44 @@ public class ObjectTimeController : TimeControllable
 
         MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
         {
-            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && InRange)
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {
-                FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+				if(InRange)
+				{
+                	FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+					return true;
+				}
+				else return false;
             }
+			return true;
         });
 
         MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
         {
-            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>() && InRange)
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
             {
-                FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+				if(InRange)
+				{
+					FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+					return true;
+				}
+				else return false;
             }
+			return true;
+        });
+
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Moveable Rock", hit =>
+        {
+            if (hit.collider.gameObject.GetComponentInParent<ObjectTimeController>() == gameObject.GetComponent<ObjectTimeController>())
+            {
+                if (InRange)
+                {
+                    FindObjectOfType<GameOverlayController>().ActivateSlider(this);
+                    return true;
+                }
+                else return false;
+            }
+            return true;
         });
         //Enabling
         foreach (GameObject obj in EnableObjectsBeforeTimeLimit)

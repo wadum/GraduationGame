@@ -18,7 +18,6 @@ public class SidekickElementController : MonoBehaviour
     GameObject _player;
     Transform _endPos;
     Vector3 _originalPos;
-    Vector3 _rotationPos;
     Vector3 _startpos;
     Vector3 _SAOPos;
     Quaternion _originalRot;
@@ -34,7 +33,6 @@ public class SidekickElementController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _originalPos = transform.localPosition;
-        _rotationPos = transform.localPosition;
         _originalRot = transform.localRotation;
         _rotationSpeed = OriginalRotationSpeed / 4;
 
@@ -48,6 +46,7 @@ public class SidekickElementController : MonoBehaviour
                 if (timecontroller.InRange)
                     FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
             }
+			return true;
         });
         MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
         {
@@ -58,6 +57,18 @@ public class SidekickElementController : MonoBehaviour
                 if (timecontroller.InRange)
                     FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
             }
+			return true;
+        });
+        MultiTouch.RegisterTapAndHoldHandlerByTag("Moveable Rock", hit =>
+        {
+            var parentTransform = hit.transform;
+            ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
+            if (timecontroller)
+            {
+                if (timecontroller.InRange)
+                    FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
+            }
+            return true;
         });
         MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
         {
@@ -76,6 +87,7 @@ public class SidekickElementController : MonoBehaviour
                 _startpos = transform.position;
                 _animationTimer = 2;
             }
+			return true;
         });
     }
 

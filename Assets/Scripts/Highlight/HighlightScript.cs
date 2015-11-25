@@ -6,7 +6,6 @@ public class HighlightScript : MonoBehaviour {
     Shader orgshader;
     Vector3 orgemmision;
     bool _inRange;
-    bool _activated;
     public Renderer rend;
 
     void OnEnable()
@@ -36,13 +35,11 @@ public class HighlightScript : MonoBehaviour {
     public void Activate()
     {
         rend.material.SetFloat("_AlphaToggle", 1);
-        _activated = true;
     }
 
     public void Deactivate()
     {
         rend.material.SetFloat("_AlphaToggle", 0);
-        _activated = false;
     }
 
     public void OrgEmission()
