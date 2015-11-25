@@ -140,9 +140,11 @@ public class MultiTouch : MonoBehaviour
     				_tapAndHoldIndicator.SetPosition(touch.position);
                 }
                 else {
-                    SetTapAndHoldValue(0, false);
-                    tapCharge = 0;
-                    currentTapChargeVelocity = 0;
+                    if (!firedTapAndHold) {
+                        SetTapAndHoldValue(0, false);
+                        tapCharge = 0;
+                        currentTapChargeVelocity = 0;
+                    }
                 }
 
 				if(tapCharge >= TapHoldSeconds && !firedTapAndHold){
@@ -168,13 +170,13 @@ public class MultiTouch : MonoBehaviour
         }
     }
 
-    private bool InteractableObjectInRange(Vector2 position) {
+    private static bool InteractableObjectInRange(Vector2 position) {
         var hit = Raycast(position);
         if (!hit.HasValue)
             return false;
 
         var highlight = hit.Value.transform.GetComponent<HighlightScript>();
-        return highlight && highlight.InRange;
+        return highlight && highlight.InRange && !GameOverlayController.gameOverlayController.IsCurrentlySelected(highlight.gameObject);
     }
 
     private void SetTapAndHoldValue(float val, bool touching) {
@@ -235,17 +237,21 @@ public class MultiTouch : MonoBehaviour
         _swipeHandler(touch);
     }
 
-    private void HandleTap(Vector3 position)
-    {
+    private static void HandleTap(Vector3 position) {
         var hit = Raycast(position);
+        if (!hit.HasValue) {
+            GameOverlayController.gameOverlayController.DeactivateSlider();
+            return;
+        }
+
+        var obj = hit.Value.transform.gameObject;
 		List<Func<RaycastHit, bool>> handlers;
-		int hits = 0;
-        if (hit.HasValue && TapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
-            foreach(var handler in handlers){
-				hits++;
+        if (TapEventHandlers.TryGetValue(obj.tag, out handlers))
+            foreach(var handler in handlers) {
                 handler(hit.Value);
 		}
-		if (hits == 0)
+
+		if (!GameOverlayController.gameOverlayController.IsCurrentlySelected(obj))
 			GameOverlayController.gameOverlayController.DeactivateSlider();
     }
 
