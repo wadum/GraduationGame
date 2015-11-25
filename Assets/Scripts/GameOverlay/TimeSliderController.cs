@@ -47,6 +47,10 @@ public class TimeSliderController : MonoBehaviour
 
     public void IncreaseTimePressed()
     {
+		if(_increaseCorout != null)
+			StopCoroutine(_increaseCorout);
+		if(_decreaseCorout != null)
+			StopCoroutine(_decreaseCorout);
         _increaseCorout = StartCoroutine(changeValue(TimeSpeed));
         if(!jagging)
             _obj.MusicForward();
@@ -60,8 +64,7 @@ public class TimeSliderController : MonoBehaviour
 			StopCoroutine(_decreaseCorout);
         if (_increaseCorout == null) return;
         StopCoroutine(_increaseCorout);
-        if(!jagging)
-            _obj.StopMusic();
+        _obj.StopMusic();
     }
 
     public void DecreaseTimePressed()
@@ -70,7 +73,7 @@ public class TimeSliderController : MonoBehaviour
 			StopCoroutine(_decreaseCorout);
 		if(_increaseCorout != null)
 			StopCoroutine(_increaseCorout);
-        if (_soundMaster && !jagging)
+		if (_soundMaster)
             _soundMaster.PlayReversed();
         _decreaseCorout = StartCoroutine(changeValue(-TimeSpeed));
         if(!jagging)
@@ -79,12 +82,15 @@ public class TimeSliderController : MonoBehaviour
 
     public void DecreaseTimeReleased()
     {
+		if(_increaseCorout != null)
+			StopCoroutine(_increaseCorout);
+		if(_decreaseCorout != null)
+			StopCoroutine(_decreaseCorout);
         if (_decreaseCorout == null) return;
-        if (_soundMaster && !jagging)
+        if (_soundMaster)
             _soundMaster.PlayNormal();
         StopCoroutine(_decreaseCorout);
-        if(!jagging)
-            _obj.StopMusic();
+        _obj.StopMusic();
     }
 
     IEnumerator changeValue(float var)
