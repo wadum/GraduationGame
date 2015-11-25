@@ -277,20 +277,22 @@ public class CharacterJumping : MonoBehaviour
             }
         }
 
-        if (_animator) {
-            _animator.Jumping();
-            yield return new WaitForSeconds(0.2f);
-        }
+        if (Vector3.Distance(transform.position, target) > 0.01f) {
+            if (_animator) {
+                _animator.Jumping();
+                yield return new WaitForSeconds(0.2f);
+            }
 
-        var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
-        var jumpCurve = MakeBezierJump(transform.position, target);
+            var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
+            var jumpCurve = MakeBezierJump(transform.position, target);
 
-        var t = 0f;
-        while (t <= 1)
-        {
-            transform.position = jumpCurve(t);
-            t += Time.deltaTime / jumpingSpeed;
-            yield return null;
+            var t = 0f;
+            while (t <= 1)
+            {
+                transform.position = jumpCurve(t);
+                t += Time.deltaTime / jumpingSpeed;
+                yield return null;
+            }
         }
 
         transform.position = target;
