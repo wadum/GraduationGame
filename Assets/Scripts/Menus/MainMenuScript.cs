@@ -73,7 +73,7 @@ public class MainMenuScript : MonoBehaviour {
         if (lvl == 5)
         {
             PlayerPrefs.SetInt(TutorialController.PlayerPrefAlreadySeen, 0);
-            Application.LoadLevel("Intro Cinematic");
+            Application.LoadLevel(4);
         }
         else
         {

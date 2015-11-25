@@ -13,6 +13,11 @@ public class MultiTouch : MonoBehaviour
 	public float TapHoldIndicatorDelay = 0.1f;
     public bool SimulateMouseTapInEditor = true;
 
+    public AudioSource
+        TapAndHoldCharge,
+        TapAndHoldSucces,
+        TapAndHoldFail;
+
 	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapAndHoldEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 
@@ -63,7 +68,9 @@ public class MultiTouch : MonoBehaviour
         while (true) {
             var touches = GetTouches();
 
-            if (!touches.Any()) {
+            if (!touches.Any())
+            {
+                StopTapAndHoldIndicator();
                 yield return null;
                 continue;
             }
@@ -73,11 +80,10 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
-                var position = touches[0].position;
-				_tapAndHoldIndicator.SetValue(0);
-				firedTapAndHold = false;
+                StopTapAndHoldIndicator();
+                firedTapAndHold = false;
                 if (Time.time - touch1Began <= TapHoldSeconds)
-                    HandleTap(position);
+					HandleTap(touches[0].position);
                 yield return null;
                 continue;
             }
@@ -87,13 +93,17 @@ public class MultiTouch : MonoBehaviour
 				if(Time.time - touch1Began > TapHoldIndicatorDelay){
 					var position = touches[0].position;
 					_tapAndHoldIndicator.SetPosition(position);
-					_tapAndHoldIndicator.SetValue((Time.time - touch1Began - TapHoldIndicatorDelay) / (TapHoldSeconds - TapHoldIndicatorDelay));
+                    if(!TapAndHoldCharge.isPlaying && !firedTapAndHold)
+                        TapAndHoldCharge.Play();
+                    _tapAndHoldIndicator.SetValue((Time.time - touch1Began - TapHoldIndicatorDelay) / (TapHoldSeconds - TapHoldIndicatorDelay));
 				}
 
 
 				if(Time.time - touch1Began > TapHoldSeconds && !firedTapAndHold){
 					var position = touches[0].position;
-					firedTapAndHold = true;
+                    if (TapAndHoldCharge.isPlaying)
+                        TapAndHoldCharge.Stop();
+                    firedTapAndHold = true;
 	                HandleTapAndHold(position);
 	                yield return null;
 	                continue;
@@ -101,8 +111,8 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
-				_tapAndHoldIndicator.SetValue(0);
-				yield return StartCoroutine(HandleGesture(touches));
+                StopTapAndHoldIndicator();
+                yield return StartCoroutine(HandleGesture(touches));
                 continue;
             }
 
@@ -110,6 +120,13 @@ public class MultiTouch : MonoBehaviour
         }
     }
 
+    private void StopTapAndHoldIndicator()
+    {
+        if (_tapAndHoldIndicator)
+            _tapAndHoldIndicator.SetValue(0);
+        if (TapAndHoldCharge.isPlaying)
+            TapAndHoldCharge.Stop();
+    }
 
     private IEnumerator HandleGesture(List<Touch> initialTouches) {
         var touches = initialTouches;
@@ -159,16 +176,26 @@ public class MultiTouch : MonoBehaviour
 
     private void HandleTapAndHold(Vector3 position)
     {
-		_tapAndHoldIndicator.SetValue(2);
+        _tapAndHoldIndicator.SetValue(2);
 
         var hit = Raycast(position);
 		List<Func<RaycastHit, bool>> handlers;
         if (hit.HasValue && TapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
-			if(handlers.Any(h => !h(hit.Value)))
-				_tapAndHoldIndicator.TransitionWrong();
-			else _tapAndHoldIndicator.TransitionRight();
-		else
-			_tapAndHoldIndicator.TransitionWrong();
+            if (handlers.Any(h => !h(hit.Value)))
+            {
+                _tapAndHoldIndicator.TransitionWrong();
+                TapAndHoldFail.Play();
+            }
+            else
+            {
+                _tapAndHoldIndicator.TransitionRight();
+                TapAndHoldSucces.Play();
+            }
+        else
+        {
+            _tapAndHoldIndicator.TransitionWrong();
+            TapAndHoldFail.Play();
+        }
     }
     #endregion
 
