@@ -18,7 +18,7 @@ public class LightningGenerator : MonoBehaviour {
 
     float LengthForEachSection;
     float timePassed = 0.0f;
-
+    Camera cam = null;
     GameObject lightningConductor;
     float conductorDistance;
 
@@ -40,6 +40,11 @@ public class LightningGenerator : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (cam == null)
+        {
+            cam = Camera.main;
+            if (cam == null) return;
+        }
         // Add time
         timePassed += Time.deltaTime;
 
@@ -97,7 +102,7 @@ public class LightningGenerator : MonoBehaviour {
                 {
                     Vector3 originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     Vector3 dirMoveDist = (lightningConductor.transform.position - originalPos).normalized * LengthForEachSection;
-                    Vector3 RandomDisplacement = (Vector3.Cross(dirMoveDist, Camera.main.transform.position - originalPos)).normalized * Random.Range(-JitterDistance, JitterDistance);
+                    Vector3 RandomDisplacement = (Vector3.Cross(dirMoveDist, cam.transform.position - originalPos)).normalized * Random.Range(-JitterDistance, JitterDistance);
                     Vector3 SinusCurver = new Vector3(0, SinScale, 0);
 
                     if ( i < lengthOfLineRenderer / 2) { 

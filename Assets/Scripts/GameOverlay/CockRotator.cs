@@ -11,19 +11,20 @@ public class CockRotator : MonoBehaviour {
     public bool moveIn = false;
 
     Quaternion _rot;
-    float _rotationDirection;
+    float _rotationDirection { get { return (RotateClockwise ? 1f : -1f); } }
 
     Vector3 _originalPos;
     Vector3 _currentPos;
     Vector3 _PushOutState;
 
+    private bool done = false;
+
     void Start()
     {
-        _rotationDirection = RotateClockwise ? 1 : -1;
-
         _originalPos = transform.localPosition;
-        _PushOutState = transform.localPosition - (_originalPos - PushAwayFromPoint.transform.localPosition).normalized * -700;
+        _PushOutState = Vector3.LerpUnclamped(PushAwayFromPoint.transform.localPosition, transform.localPosition, 2);
         transform.localPosition = _PushOutState;
+        done = true;
     }
 
     public void RotateWheel(float Direction, bool half = false)
@@ -53,6 +54,8 @@ public class CockRotator : MonoBehaviour {
 
     IEnumerator moveInside()
     {
+        while (!done)
+            yield return null;
         _currentPos = transform.localPosition;
 
         float fracJourney = Vector3.Distance(_PushOutState, _currentPos) / Vector3.Distance(_PushOutState, _originalPos);
@@ -72,6 +75,8 @@ public class CockRotator : MonoBehaviour {
 
     IEnumerator moveOutside()
     {
+        while (!done)
+            yield return null;
         _currentPos = transform.localPosition;
 
         float fracJourney = Vector3.Distance(_originalPos, _currentPos) / Vector3.Distance(_originalPos, _PushOutState); ;
