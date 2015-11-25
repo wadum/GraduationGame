@@ -8,51 +8,35 @@ public class HighlightScript : MonoBehaviour {
     bool _inRange;
     public Renderer rend;
 
-    void OnEnable()
+    // When assigned, if there's no a collider, add one, so we can click the object
+    void Awake()
     {
-        rend = GetComponent<Renderer>();
-        if (!rend)
-            Debug.Log(name);
         MeshCollider collider = GetComponent<MeshCollider>();
         if (!collider)
             gameObject.AddComponent<MeshCollider>();
-        //   orgshader = rend.material.shader;
-        if (rend.material.shader.name != "Shader Forge/ObejctDissolver")
-        {
-            Destroy(this);
-         //   Debug.Log(name + "Shader does not support highlight");
-        }
-        else
-            orgemmision = rend.material.GetVector("_Emission");
+        rend = GetComponent<Renderer>();
     }
 
-    public void SetWidth(float width)
-    {
-        rend.material.SetFloat("_OutlineWidth", width);
-    }
-
-
+    // When active, turn up the Emission of the top, should only happen on rocks (called from CharacterJumping script).
     public void Activate()
     {
-        rend.material.SetFloat("_AlphaToggle", 1);
+        rend.material.SetFloat("_Emission2", 1);
     }
-
+    // When deactivated, turn off the Emission on the top, once again from CharacterJumping.
     public void Deactivate()
     {
-        rend.material.SetFloat("_AlphaToggle", 0);
+        rend.material.SetFloat("_Emission2", 0);
     }
 
-    public void OrgEmission()
+    // A bool for testing if the shader is ObjectDissolver.
+    public bool TextureShader
     {
-        rend.material.SetVector("_Emission", orgemmision);
+        get { return rend.material.shader.name == "Shader Forge/ObejctDissolver"; }
     }
 
     public bool InRange
     {
         get { return _inRange; }
-        set {
-            if(!value)
-                rend.material.SetVector("_Emission", orgemmision);
-            _inRange = value; }
+        set { _inRange = value; }
     }
 }

@@ -38,60 +38,78 @@ public class SaveLoad : MonoBehaviour {
     // When the script is loaded for the first time, it will load progress from last time.
     void OnEnable()
     {
+        // there can only be one, so if there's not one, this will be the one
         if (saveLoad == null)
         {
+            // this will persist between levels.
             DontDestroyOnLoad(gameObject);
             saveLoad = this;
         }
+        // there's already a saveload script, so we destroy this one and leave.
         else if (saveLoad != this)
         {
             Destroy(this.gameObject);
         }
     }
 
+    // Pepares to save and load levels, by finding all objects of intreset, and clear the lists for storing data.
     void Prepare()
     {
+        // The level number
         _lvl = Application.loadedLevel;
+        // The ObjectTimeControllers, we are interested in their float values.
         _TimeControllers = GameObject.FindObjectsOfType<ObjectTimeController>();
+        // The datastructre we save is defined in this class
         _SaveData = new List<SaveState>();
-        // Load on enable?
+        // The inventory of the player, in case a piece is already looted.
         inv = FindObjectOfType<CharacterInventory>();
+        // The pieces in the level, in case they are already looted.
         cogs = GameObject.FindObjectsOfType<Clockpart>();
+        // We load the data for the current level
         Load();
     }
 
+    // When loading a level, we check if it's a special case level, like the intro or the main menu, in which case we do not save.
     void OnLevelWasLoaded(int level)
     {
         if (level == 2)
             return;
         PlayerPrefs.SetString("LastLevel", Application.loadedLevelName);
-		if (Application.loadedLevelName == "Main Menu" || Application.loadedLevelName == "intro_cinemtaic_2")
+        // 3 = Intro, 4 = Main menu, 8 = Ending, if the build order changes, this also needs to be adjusted, alternative is by name, but they are just as liekly to change or be misspelled.
+		if (Application.loadedLevel == 3 || Application.loadedLevel == 4 || Application.loadedLevel == 8)
+            // We simple set the interval for saving to 0, and we do not save.
             SaveLoad.saveLoad.SaveInterval = 0f;
         else
         {
+            // We set the interval for the saves to the initially set value, 2 sec by default
             SaveLoad.saveLoad.SaveInterval = _SaveInterval;
+            // We Prepare a level
             Prepare();
         }
     }
 
+    // If the application is trying to shut down, we save the game state and allow it to continue to shut down.
     void OnApplicationQuit()
     {
-        // If there's no save interval, we're giving input on when to save, this also allows us to reset the savedata.
+        // If SaveInterval is zero, we are do not care to save here either as it will very likely cause problems
         if(SaveInterval != 0)
             Save();
     }
 
+    // Function for saving the game, public in order to be triggered by game events.
     public void Save()
     {
-        // Add all the TimePos data for the objects we need to save
+        // Add all the float TimePos data for the objects we need to save
         foreach (ObjectTimeController TimeController in _TimeControllers)
         {
+            // We identify the ObjectTimeController object by name, so changing the names or have them share a name is ill adviced.
             _SaveData.Add(new SaveState(TimeController.name, TimeController.TimePos));
         }
         // Prepare a new string for all the pickupitems' names.
         List<string> pickups = new List<string>();
         foreach (GameObject clock in inv.clockParts)
         {
+            // If the inventory is empty, we do not save the info
             if(clock != null)
                 if (!pickups.Contains(clock.name))
                 {
@@ -100,6 +118,7 @@ public class SaveLoad : MonoBehaviour {
         }
         // Open new BinaryFormatter, with a filename depending on the level we're playing.
         BinaryFormatter bf = new BinaryFormatter();
+        // Every level has its own .save file
         FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save", FileMode.Create);
         // Save the data to the file.
         bf.Serialize(file, new SaveData(_SaveData, pickups));
@@ -113,6 +132,7 @@ public class SaveLoad : MonoBehaviour {
     {
         // Reverse from Save, now we load.
         BinaryFormatter bf = new BinaryFormatter();
+        // If there's a file, we can continnue to load, this is not always the case, for example when we prepare a new game or after reset, thus we just skip loading.
         if(File.Exists(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save"))
         {
             FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save", FileMode.Open);
@@ -148,10 +168,12 @@ public class SaveLoad : MonoBehaviour {
     // Instead of deleting the file, we can simply overwrite it with blank data
     public void Reset()
     {
+        // If there's data, we clear it out
         if(_SaveData.Count > 0)
             _SaveData.Clear();
         List<string> taggedclocks = new List<string>();
         BinaryFormatter bf = new BinaryFormatter();
+        // we overwrite the .save file, with our empty information effectively resetting its data
         FileStream file = File.Open(Application.persistentDataPath + "/save" + Application.loadedLevel + ".save", FileMode.Create);
         bf.Serialize(file, new SaveData(_SaveData, taggedclocks));
         file.Close();
@@ -160,18 +182,6 @@ public class SaveLoad : MonoBehaviour {
 
     void Update()
     {
-        // If there's no automatic saving, we save on keyinput instead.
-        if (SaveInterval == 0)
-        {
-            if (Input.anyKey)
-            {
-                if (Input.GetKeyDown(KeyCode.S)) { Save(); }
-                if (Input.GetKeyDown(KeyCode.L)) { Load(); }
-                if (Input.GetKeyDown(KeyCode.R)) { Reset(); }
-            }
-            return;
-        }
-
         // Save on fixed time interval.
         if (elapsedtime < SaveInterval)
         {
@@ -184,6 +194,7 @@ public class SaveLoad : MonoBehaviour {
 
     public void ResetEverything()
     {
+        // If we are Resetting Everything we delete all save files, couldn't be easier.
         int q = Application.levelCount;
 
         for (int i = 0; i < q; i++)
@@ -192,9 +203,9 @@ public class SaveLoad : MonoBehaviour {
                 File.Delete(Application.persistentDataPath + "/save" + i + ".save");
                 }
             }
-
     }
 
+    // Allows to reset from a certain level, deleting all savedata beyond this point
     public void ResetFrom(int level)
     {
         int q = Application.levelCount;
@@ -223,7 +234,7 @@ class SaveData
     }
 }
 
-// Helper class for the pilars
+// Helper class for the pillars
 [Serializable]
 class SaveState
 {
