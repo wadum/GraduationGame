@@ -5,6 +5,7 @@ public class HighlightScript : MonoBehaviour {
 
     Shader orgshader;
     Vector3 orgemmision;
+    bool _inRange;
     public Renderer rend;
 
     // When assigned, if there's no a collider, add one, so we can click the object
@@ -31,5 +32,11 @@ public class HighlightScript : MonoBehaviour {
     public bool TextureShader
     {
         get { return rend.material.shader.name == "Shader Forge/ObejctDissolver"; }
+    }
+
+    public bool InRange
+    {
+        get { return _inRange; }
+        set { _inRange = value; }
     }
 }

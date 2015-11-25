@@ -104,6 +104,9 @@ public class MasterHighlight : MonoBehaviour
     public bool InRange
     {
         get { return _inRange; }
-        set { _inRange = value; }
+        set {
+                foreach (HighlightScript script in _list)
+                script.InRange = value;
+                _inRange = value; }
     }
 }
