@@ -171,4 +171,9 @@ public class GameOverlayController : MonoBehaviour
         if (MenuClickSound)
             MenuClickSound.Play();
     }
+
+    public bool IsCurrentlySelected(GameObject obj) {
+        // time controllable objects should always be at root, so we compare those.
+        return _currentObj && _currentObj.transform.root == obj.transform.root;
+    }
 }
