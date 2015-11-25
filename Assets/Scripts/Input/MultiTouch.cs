@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -62,56 +64,104 @@ public class MultiTouch : MonoBehaviour
 
     #region State machine for recognizing multitouch taps and gestures
     private IEnumerator AwaitInput() {
-        var touch1Began = 0f;
+        var tapCharge = 0f;
+        var currentTapChargeVelocity = 0f;
+        const float baseDechargeAcceleration = 7f;
+        Func<float, float> normalizeCharge = charge =>
+            charge >= TapHoldSeconds ? 1f :
+            charge <= 0f ? 0f :
+            charge / TapHoldSeconds;
+
 		var firedTapAndHold = false;
 
         while (true) {
+            // We calculate the current tapCharge based on the information from the last frame.
+            if (Math.Abs(currentTapChargeVelocity) > 0.0001f) {
+                if (tapCharge < 0f) {
+                    tapCharge = 0f;
+                    currentTapChargeVelocity = 0f;
+                }
+
+                tapCharge += Time.deltaTime * currentTapChargeVelocity;
+
+                if (tapCharge > TapHoldSeconds) {
+                    tapCharge = TapHoldSeconds;
+                    currentTapChargeVelocity = 0f;
+                }
+            }
+
             var touches = GetTouches();
 
-            if (!touches.Any())
-            {
-                StopTapAndHoldIndicator();
+            if (!touches.Any()) {
+                SetTapAndHoldValue(normalizeCharge(tapCharge), false);
+
+                if (tapCharge > 0)
+                    currentTapChargeVelocity -= Time.deltaTime*baseDechargeAcceleration;
+
                 yield return null;
                 continue;
             }
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Began) {
-                touch1Began = Time.time;
+
+                var touch = touches[0];
+                if (InteractableObjectInRange(touch.position)) {
+                    _tapAndHoldIndicator.SetPosition(touch.position);
+                    SetTapAndHoldValue(normalizeCharge(tapCharge), true);
+                    currentTapChargeVelocity = 1f;
+                }
+                else {
+                    SetTapAndHoldValue(0, false);
+                    tapCharge = 0;
+                    currentTapChargeVelocity = 0;
+                }
             }
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
-                StopTapAndHoldIndicator();
-                firedTapAndHold = false;
-                if (Time.time - touch1Began <= TapHoldSeconds)
+                if (tapCharge <= TapHoldSeconds && !firedTapAndHold)
 					HandleTap(touches[0].position);
+
+                if (firedTapAndHold) {
+                    tapCharge = 0;
+                    currentTapChargeVelocity = 0;
+                }
+
+                firedTapAndHold = false;
+
                 yield return null;
                 continue;
             }
 
-            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary)
-            {
-				if(Time.time - touch1Began > TapHoldIndicatorDelay){
-					var position = touches[0].position;
-					_tapAndHoldIndicator.SetPosition(position);
-                    if(!TapAndHoldCharge.isPlaying && !firedTapAndHold)
-                        TapAndHoldCharge.Play();
-                    _tapAndHoldIndicator.SetValue((Time.time - touch1Began - TapHoldIndicatorDelay) / (TapHoldSeconds - TapHoldIndicatorDelay));
-				}
+            if (touches.Count == 1 && touches[0].phase == TouchPhase.Stationary) {
+                var touch = touches[0];
 
+                if (InteractableObjectInRange(touch.position)) {
+                    SetTapAndHoldValue(normalizeCharge(tapCharge), true);
+    				_tapAndHoldIndicator.SetPosition(touch.position);
+                }
+                else {
+                    if (!firedTapAndHold) {
+                        SetTapAndHoldValue(0, false);
+                        tapCharge = 0;
+                        currentTapChargeVelocity = 0;
+                    }
+                }
 
-				if(Time.time - touch1Began > TapHoldSeconds && !firedTapAndHold){
-					var position = touches[0].position;
-                    if (TapAndHoldCharge.isPlaying)
-                        TapAndHoldCharge.Stop();
+				if(tapCharge >= TapHoldSeconds && !firedTapAndHold){
+					var position = touch.position;
                     firedTapAndHold = true;
 	                HandleTapAndHold(position);
+
 	                yield return null;
 	                continue;
 				}
             }
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
-                StopTapAndHoldIndicator();
+                SetTapAndHoldValue(0, false);
+                tapCharge = 0f;
+                currentTapChargeVelocity = 0f;
+
                 yield return StartCoroutine(HandleGesture(touches));
                 continue;
             }
@@ -120,11 +170,38 @@ public class MultiTouch : MonoBehaviour
         }
     }
 
-    private void StopTapAndHoldIndicator()
-    {
-        if (_tapAndHoldIndicator)
+    private static bool InteractableObjectInRange(Vector2 position) {
+        var hit = Raycast(position);
+        if (!hit.HasValue)
+            return false;
+
+        var highlight = hit.Value.transform.GetComponent<HighlightScript>();
+        return highlight && highlight.InRange && !GameOverlayController.gameOverlayController.IsCurrentlySelected(highlight.gameObject);
+    }
+
+    private void SetTapAndHoldValue(float val, bool touching) {
+        if (!_tapAndHoldIndicator || !TapAndHoldCharge) 
+            return;
+
+        if (val <= 0) {
             _tapAndHoldIndicator.SetValue(0);
-        if (TapAndHoldCharge.isPlaying)
+            if (TapAndHoldCharge.isPlaying)
+                TapAndHoldCharge.Stop();
+            return;
+        }
+
+        if (val >= 1) {
+            _tapAndHoldIndicator.SetValue(1);
+            if (TapAndHoldCharge.isPlaying)
+                TapAndHoldCharge.Stop();
+            return;
+        }
+
+        _tapAndHoldIndicator.SetValue(val);
+
+        if (touching && !TapAndHoldCharge.isPlaying)
+            TapAndHoldCharge.Play();
+        if (!touching && TapAndHoldCharge.isPlaying)
             TapAndHoldCharge.Stop();
     }
 
@@ -160,18 +237,21 @@ public class MultiTouch : MonoBehaviour
         _swipeHandler(touch);
     }
 
-    private void HandleTap(Vector3 position)
-    {
+    private static void HandleTap(Vector3 position) {
         var hit = Raycast(position);
-		List<Func<RaycastHit, bool>> handlers;
-		int hits = 0;
+        if (!hit.HasValue) {
+            GameOverlayController.gameOverlayController.DeactivateSlider();
+            return;
+        }
 
-        if (hit.HasValue && TapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
-            foreach(var handler in handlers){
-				hits++;
+        var obj = hit.Value.transform.gameObject;
+		List<Func<RaycastHit, bool>> handlers;
+        if (TapEventHandlers.TryGetValue(obj.tag, out handlers))
+            foreach(var handler in handlers) {
                 handler(hit.Value);
 		}
-		if (hits == 0)
+
+		if (!GameOverlayController.gameOverlayController.IsCurrentlySelected(obj))
 			GameOverlayController.gameOverlayController.DeactivateSlider();
     }
 
