@@ -165,6 +165,7 @@ public class MultiTouch : MonoBehaviour
         var hit = Raycast(position);
 		List<Func<RaycastHit, bool>> handlers;
 		int hits = 0;
+
         if (hit.HasValue && TapEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
             foreach(var handler in handlers){
 				hits++;
