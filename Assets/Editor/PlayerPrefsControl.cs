@@ -5,7 +5,7 @@ using UnityEditor;
 public class PlayerPrefsControl : MonoBehaviour
 {
 
-    public static List<string> IntKeys = new List<string>(){ TutorialController.PlayerPrefAlreadySeen };
+    public static List<string> IntKeys = new List<string>(){ TutorialController.PlayerPrefAlreadySeen, StoreScreenController.PurchasedLevels };
 	public static List<string> FloatKeys = new List<string>() { "masterVol", "sfxVol", "musicVol" };
     public static List<string> StringKeys = new List<string>() { "LastLevel" };
 
