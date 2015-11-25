@@ -76,7 +76,7 @@ public class LightningGenerator : MonoBehaviour {
             }
             lightningConductor = null;
             lineRenderer.enabled = false;
-            if (Audio)
+            if (Audio && Audio.enabled)
                 Audio.Stop();
             return;
         }
@@ -85,7 +85,7 @@ public class LightningGenerator : MonoBehaviour {
         {
             lightningConductor.GetComponent<Electrified>().Activate();
             lineRenderer.enabled = true;
-            if (Audio && !Audio.isPlaying)
+			if (Audio && !Audio.isPlaying && Audio.enabled)
                 Audio.Play();
 
             //if enough time has passed update the line
