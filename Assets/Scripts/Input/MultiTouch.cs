@@ -199,8 +199,10 @@ public class MultiTouch : MonoBehaviour
 
         _tapAndHoldIndicator.SetValue(val);
 
-        if (touching && !TapAndHoldCharge.isPlaying)
-            TapAndHoldCharge.Play();
+        if (touching && !TapAndHoldCharge.isPlaying){
+			TapAndHoldCharge.time = TapAndHoldCharge.clip.length * val;
+			TapAndHoldCharge.Play();
+		} 
         if (!touching && TapAndHoldCharge.isPlaying)
             TapAndHoldCharge.Stop();
     }
