@@ -258,7 +258,7 @@ GameObject:
   - 65: {fileID: 186310043}
   - 114: {fileID: 186310042}
   m_Layer: 0
-  m_Name: mainPlatformTransitionLeftView
+  m_Name: mainPlatformLeftView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,7 +447,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 295034355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 2.92000008, z: 0}
+  m_LocalPosition: {x: -0, y: 1.23000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 682931714}
@@ -466,9 +466,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 295034355}
   Relative: 0
-  Yaw: 197
-  Pitch: 17.8999996
-  Distance: 10
+  Yaw: 165
+  Pitch: 13
+  Distance: 8
   EnableSmoothing: 1
   MovementCurve:
     serializedVersion: 2
@@ -706,23 +706,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMin.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
@@ -738,7 +738,7 @@ GameObject:
   - 65: {fileID: 442262937}
   - 114: {fileID: 442262936}
   m_Layer: 0
-  m_Name: SceneViewCamSystem
+  m_Name: 1stPieceSceneView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enter: {fileID: 818931527}
-  ForwardExit: {fileID: 0}
+  ForwardExit: {fileID: 295034355}
   BackwardExit: {fileID: 0}
   RightExit: {fileID: 0}
   LeftExit: {fileID: 0}
@@ -980,7 +980,7 @@ GameObject:
   - 4: {fileID: 569346863}
   - 114: {fileID: 569346864}
   m_Layer: 0
-  m_Name: SceneViewCam
+  m_Name: column1Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -993,7 +993,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 569346862}
   m_LocalRotation: {x: 0, y: -.175799295, z: 0, w: .984426081}
-  m_LocalPosition: {x: -1.18912792, y: 6.14723587, z: -6.34819555}
+  m_LocalPosition: {x: .800000012, y: .550000012, z: -4.46999979}
   m_LocalScale: {x: .547329247, y: 1.39631355, z: .870380461}
   m_Children: []
   m_Father: {fileID: 720903740}
@@ -1010,10 +1010,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1077886792}
+  Target: {fileID: 569346862}
   Relative: 1
-  Yaw: 181
-  Pitch: 32
+  Yaw: 106
+  Pitch: 36
   Distance: 10
   EnableSmoothing: 1
   MovementCurve:
@@ -1043,7 +1043,7 @@ GameObject:
   - 65: {fileID: 636566281}
   - 114: {fileID: 636566280}
   m_Layer: 0
-  m_Name: columnTransitionSceneView
+  m_Name: columnTransitionView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enter: {fileID: 1324209983}
-  ForwardExit: {fileID: 0}
+  ForwardExit: {fileID: 569346862}
   BackwardExit: {fileID: 839127558}
   RightExit: {fileID: 0}
   LeftExit: {fileID: 0}
@@ -1087,11 +1087,11 @@ Transform:
   m_GameObject: {fileID: 636566279}
   m_LocalRotation: {x: 0, y: -.679990947, z: 0, w: .733220518}
   m_LocalPosition: {x: 4.90999985, y: 7.75, z: -4.48999977}
-  m_LocalScale: {x: .5, y: .400000006, z: 5}
+  m_LocalScale: {x: .5, y: .400000006, z: 2.43749952}
   m_Children:
   - {fileID: 1324209984}
   m_Father: {fileID: 839574943}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &682931714
 Transform:
   m_ObjectHideFlags: 0
@@ -1099,12 +1099,75 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910050837}
   m_LocalRotation: {x: 0, y: .288591534, z: 0, w: .957452357}
-  m_LocalPosition: {x: -23.6346931, y: 10.9232922, z: -8.02125072}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -.985307693, y: -.319185257, z: 6.70125103}
+  m_LocalScale: {x: 1, y: 1, z: .589966416}
   m_Children:
   - {fileID: 295034356}
-  m_Father: {fileID: 2097476585}
-  m_RootOrder: 3
+  - {fileID: 701979883}
+  m_Father: {fileID: 839574943}
+  m_RootOrder: 0
+--- !u!1 &701979881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 110008, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 701979883}
+  - 114: {fileID: 701979882}
+  m_Layer: 0
+  m_Name: crossingPillarView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &701979882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11489172, guid: 18876e34fc6d70d4ca805d63b365cd9b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 701979881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 701979881}
+  Relative: 0
+  Yaw: 170
+  Pitch: 18
+  Distance: 5
+  EnableSmoothing: 1
+  MovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  UnitTimeToTravel: .125
+--- !u!4 &701979883
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 483778, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 701979881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.22999954, z: -8.69999981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 682931714}
+  m_RootOrder: 1
 --- !u!4 &720903740
 Transform:
   m_ObjectHideFlags: 0
@@ -1117,7 +1180,7 @@ Transform:
   m_Children:
   - {fileID: 569346863}
   m_Father: {fileID: 839574943}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &733113221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,7 +1210,7 @@ Transform:
   m_Children:
   - {fileID: 1553962542}
   m_Father: {fileID: 839574943}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!114 &733113223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1301,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  UnitTimeToTravel: .400000006
+  UnitTimeToTravel: .300000012
 --- !u!1 &746732632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1370,7 @@ GameObject:
   - 4: {fileID: 818931528}
   - 114: {fileID: 818931529}
   m_Layer: 0
-  m_Name: SceneViewCam
+  m_Name: centerPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1320,7 +1383,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 818931527}
   m_LocalRotation: {x: 0, y: -.736310959, z: 0, w: .676643312}
-  m_LocalPosition: {x: -.930000007, y: 2.92000008, z: -2.06999993}
+  m_LocalPosition: {x: .730000019, y: .600000024, z: .75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1051395359}
@@ -1339,8 +1402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 818931527}
   Relative: 1
-  Yaw: 208
-  Pitch: 27.8999996
+  Yaw: 185
+  Pitch: 21
   Distance: 6.9000001
   EnableSmoothing: 1
   MovementCurve:
@@ -1424,7 +1487,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839127558}
   m_LocalRotation: {x: 0, y: -.175799295, z: 0, w: .984426081}
-  m_LocalPosition: {x: -1.18912792, y: 6.14723587, z: -6.34819555}
+  m_LocalPosition: {x: 2.66000009, y: -2.79999995, z: -4.92999983}
   m_LocalScale: {x: .547329247, y: 1.39631355, z: .870380461}
   m_Children: []
   m_Father: {fileID: 889268298}
@@ -1441,9 +1504,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 901174707}
+  Target: {fileID: 839127558}
   Relative: 1
-  Yaw: 310
+  Yaw: 130
   Pitch: 32
   Distance: 10
   EnableSmoothing: 1
@@ -1488,6 +1551,7 @@ Transform:
   m_LocalPosition: {x: -4.85605621, y: .929184914, z: -14.9563198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 682931714}
   - {fileID: 1051395359}
   - {fileID: 720903740}
   - {fileID: 636566282}
@@ -1706,7 +1770,7 @@ Transform:
   m_Children:
   - {fileID: 839127559}
   m_Father: {fileID: 839574943}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &889268299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,10 +1847,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 417764, guid: 824836155a4afa04b9664b6cf8f29883, type: 2}
   m_PrefabInternal: {fileID: 896430297}
---- !u!1 &901174707 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 194020, guid: 678e97f25ade58547bfd215ca7fc4ec2, type: 2}
-  m_PrefabInternal: {fileID: 1054987328}
 --- !u!1 &910050837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,7 +1858,7 @@ GameObject:
   - 65: {fileID: 910050839}
   - 114: {fileID: 910050838}
   m_Layer: 0
-  m_Name: mainPlatformTransitionTower
+  m_Name: mainPlatformTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1818,8 +1878,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enter: {fileID: 295034355}
   ForwardExit: {fileID: 294225817}
-  BackwardExit: {fileID: 818931527}
-  RightExit: {fileID: 0}
+  BackwardExit: {fileID: 701979881}
+  RightExit: {fileID: 740950591}
   LeftExit: {fileID: 294225817}
 --- !u!65 &910050839
 BoxCollider:
@@ -1841,12 +1901,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 442262935}
   m_LocalRotation: {x: 0, y: .222072572, z: 0, w: .975030124}
-  m_LocalPosition: {x: -6.92000008, y: .396051526, z: -2.02999997}
+  m_LocalPosition: {x: -7.44999981, y: .396051526, z: -3.13000011}
   m_LocalScale: {x: 1, y: 1, z: 1.07006288}
   m_Children:
   - {fileID: 818931528}
   m_Father: {fileID: 839574943}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1001 &1054987328
 Prefab:
   m_ObjectHideFlags: 0
@@ -1889,10 +1949,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 678e97f25ade58547bfd215ca7fc4ec2, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1077886792 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100668, guid: 45ee7fce8cd67974c966b2917bf68d77, type: 2}
-  m_PrefabInternal: {fileID: 448749851}
 --- !u!1001 &1209588544
 Prefab:
   m_ObjectHideFlags: 0
@@ -2141,7 +2197,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1324209983}
   m_LocalRotation: {x: 0, y: .143589735, z: 0, w: .989637375}
-  m_LocalPosition: {x: 2.82999992, y: -3.08999991, z: .0500000007}
+  m_LocalPosition: {x: 7.11999989, y: -1.55999994, z: -.171000004}
   m_LocalScale: {x: 1.98080432, y: 2.5, z: .342685223}
   m_Children: []
   m_Father: {fileID: 636566282}
@@ -2160,9 +2216,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1324209983}
   Relative: 1
-  Yaw: 193
+  Yaw: 174
   Pitch: 37
-  Distance: 8
+  Distance: 6
   EnableSmoothing: 1
   MovementCurve:
     serializedVersion: 2
@@ -2191,7 +2247,7 @@ GameObject:
   - 65: {fileID: 1414247880}
   - 114: {fileID: 1414247879}
   m_Layer: 0
-  m_Name: mainPlatformTransitionRightView
+  m_Name: mainPlatformRightView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2247,7 +2303,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1430503180}
   m_Layer: 0
-  m_Name: mainPlatforTransitionClockView
+  m_Name: mainPlatforClockView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2321,7 +2377,7 @@ GameObject:
   - 4: {fileID: 1553962542}
   - 114: {fileID: 1553962543}
   m_Layer: 0
-  m_Name: SceneViewCam
+  m_Name: centerPlatformAndClock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2334,7 +2390,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1553962541}
   m_LocalRotation: {x: 0, y: .143589735, z: 0, w: .989637375}
-  m_LocalPosition: {x: 2.82999992, y: -3.08999991, z: .0500000007}
+  m_LocalPosition: {x: -3.20000005, y: .300000012, z: -.209999993}
   m_LocalScale: {x: 1.98080432, y: 2.5, z: .342685223}
   m_Children: []
   m_Father: {fileID: 733113222}
@@ -2353,9 +2409,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1553962541}
   Relative: 1
-  Yaw: 323
-  Pitch: 16
-  Distance: 13
+  Yaw: 162
+  Pitch: 13
+  Distance: 9
   EnableSmoothing: 1
   MovementCurve:
     serializedVersion: 2
@@ -2753,7 +2809,6 @@ Transform:
   - {fileID: 1430503180}
   - {fileID: 186310041}
   - {fileID: 1414247878}
-  - {fileID: 682931714}
   m_Father: {fileID: 0}
   m_RootOrder: 17
 --- !u!1 &2112473309
