@@ -61,7 +61,7 @@ public class MasterHighlight : MonoBehaviour
             p = Mathf.PingPong(emission, 1.5f);
             foreach (HighlightScript script in _list)
             {
-                script.rend.material.SetFloat("_Emission1", p);
+                script.rend.material.SetFloat("_Emission1", 0.125f + 0.375f * p);
             }
         }
 
