@@ -5,7 +5,7 @@ public abstract class TutorialStep : MonoBehaviour {
 
 	public GameObject Overlay;
 	public GameObject Text;
-	public Transform CameraPoint;
+	//public Transform CameraPoint;
 	
 	public float CameraRotationTime = 1.5f;
 	
@@ -32,8 +32,8 @@ public abstract class TutorialStep : MonoBehaviour {
 		if(Overlay) Overlay.SetActive(false);
 		if(Text) Text.SetActive(false);
 
-		if(CameraPoint)
-			yield return StartCoroutine(TutorialController.MoveCamera(CameraPoint.position, CameraRotationTime));
+		/*if(CameraPoint)
+			yield return StartCoroutine(TutorialController.MoveCamera(CameraPoint.position, CameraRotationTime));*/
 
 	}
 }

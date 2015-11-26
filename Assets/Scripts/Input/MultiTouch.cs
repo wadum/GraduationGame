@@ -283,26 +283,30 @@ public class MultiTouch : MonoBehaviour
     #endregion
 
     #region registration of handlers
-	public static void RegisterTapHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
+	public static Func<RaycastHit, bool> RegisterTapHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
     {
         if (string.IsNullOrEmpty(objTag))
-            return;
+            return handler;
 
         if (!TapEventHandlers.ContainsKey(objTag))
             TapEventHandlers[objTag] = new List<Func<RaycastHit, bool>>();
 
         TapEventHandlers[objTag].Add(handler);
+
+        return handler;
     }
 
-	public static void RegisterTapAndHoldHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
+	public static Func<RaycastHit, bool> RegisterTapAndHoldHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
     {
         if (string.IsNullOrEmpty(objTag))
-            return;
+            return handler;
 
         if (!TapAndHoldEventHandlers.ContainsKey(objTag))
             TapAndHoldEventHandlers[objTag] = new List<Func<RaycastHit, bool>>();
 
         TapAndHoldEventHandlers[objTag].Add(handler);
+
+        return handler;
     }
 
     public static void RegisterSwipeHandler(Action<Touch> handler) {
@@ -318,8 +322,21 @@ public class MultiTouch : MonoBehaviour
     public static void ClearTapHandler(string objTag) {
         TapEventHandlers.Remove(objTag);
     }
+
     public static void ClearTapAndHoldHandler(string objTag) {
         TapAndHoldEventHandlers.Remove(objTag);
+    }
+
+    public static void RemoveSpecificTapHandler(Func<RaycastHit, bool> handler) {
+        foreach (var handlerList in TapEventHandlers.Values) {
+            handlerList.RemoveAll(h => h == handler);
+        }
+    }
+
+    public static void RemoveSpecificTapAndHoldHandler(Func<RaycastHit, bool> handler) {
+        foreach (var handlerList in TapAndHoldEventHandlers.Values) {
+            handlerList.RemoveAll(h => h == handler);
+        }
     }
 
     public static void ClearAllTapHandlers() {

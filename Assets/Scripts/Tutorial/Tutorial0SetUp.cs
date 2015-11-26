@@ -22,7 +22,7 @@ public class Tutorial0SetUp : TutorialStep {
 			yield return null;
 		}
 
-		yield return StartCoroutine(TutorialController.MoveCamera(CameraPoint.position, CameraRotationTime));
+		//yield return StartCoroutine(TutorialController.MoveCamera(CameraPoint.position, CameraRotationTime));
 
 	}
 

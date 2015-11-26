@@ -1,17 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Tutorial1Move : TutorialStep
 {
-    bool done;
+    Func<RaycastHit, bool> handler = null;
+    private GameObject _player;
+    public Transform MoveToPoint;
 
     override public IEnumerator Run()
     {
-        // We allow the player to move freely.. For one click, then the player is frozen again.
-        GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = false;
-        // The TapHandler will still remember this command, even after the tutorial is destroyed, so I'm making sure that it only actually does something once (when it's destroyed the bool is always false (null)).
-		MultiTouch.RegisterTapHandlerByTag("Terrain", hit => { if (done) return false; done = true;  GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = true; Completed = true; return true; });
+        handler = MultiTouch.RegisterTapHandlerByTag("Terrain", hit => { Completed = true; return true; });
 
         yield return StartCoroutine(base.Run());
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _player.GetComponent<NavMeshAgent>().SetDestination(MoveToPoint.position);
+        MultiTouch.RemoveSpecificTapHandler(handler);
+    }
+
+    void OnDestroy()
+    {
+        if(handler != null)
+            MultiTouch.RemoveSpecificTapHandler(handler);
     }
 }

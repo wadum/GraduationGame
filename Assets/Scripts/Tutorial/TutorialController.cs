@@ -65,7 +65,7 @@ public class TutorialController : MonoBehaviour
         //    cam.RegisterHandlers();
     }
 
-    public static IEnumerator MoveCamera(Vector3 desiredPos, float cameraRotationTime)
+    /*public static IEnumerator MoveCamera(Vector3 desiredPos, float cameraRotationTime)
     {
         float time = 0;
         Vector3 origCamPos = _camera.transform.position;
@@ -78,7 +78,7 @@ public class TutorialController : MonoBehaviour
             _camera.transform.LookAt(playerRenderer.bounds.center + new Vector3(0, playerRenderer.bounds.extents.y, 0));
             yield return null;
         }
-    }
+    }*/
 
     public static void EnableTouch()
     {
