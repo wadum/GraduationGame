@@ -182,6 +182,8 @@ public class SaveLoad : MonoBehaviour {
 
     void Update()
     {
+        if (SaveInterval == 0)
+            return;
         // Save on fixed time interval.
         if (elapsedtime < SaveInterval)
         {
