@@ -4,32 +4,26 @@ using System.Collections.Generic;
 
 public class MasterDissolver : MonoBehaviour {
     List<Dissolver> Dissolvers;
+    public GameObject root;
+    public bool Dissolving;
+    public float GonnaGetHigh = 3f;
 	// Use this for initialization
-	void Start () {
+    void OnEnable()
+    {
         Dissolvers = new List<Dissolver>();
-        Renderer[] rends = GameObject.FindObjectsOfType<Renderer>();
+        Renderer[] rends = root.GetComponentsInChildren<Renderer>();
         foreach(Renderer rend in rends)
         {
             if (rend.material.shader.name == "Shader Forge/ObejctDissolver")
             {
-                Dissolvers.Add(rend.gameObject.AddComponent<Dissolver>());
+                Dissolver script = rend.gameObject.AddComponent<Dissolver>();
+                script.AmountOfTime = GonnaGetHigh;
+                if (Dissolving)
+                {
+                    StartCoroutine(script.Dissolve());
+                }
+                else StartCoroutine(rend.gameObject.AddComponent<Dissolver>().Resolve());
             }
-
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            foreach(Dissolver script in Dissolvers)
-                StartCoroutine(script.Dissolve());
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            foreach (Dissolver script in Dissolvers)
-                StartCoroutine(script.Resolve());
-        }
-    }
-
 }
