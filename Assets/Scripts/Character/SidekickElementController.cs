@@ -37,58 +37,6 @@ public class SidekickElementController : MonoBehaviour
         _rotationSpeed = OriginalRotationSpeed / 4;
 
         SwirlingAroundPlayer = true;
-        MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit =>
-        {
-            var parentTransform = hit.transform;
-            ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
-            if (timecontroller)
-            {
-                if (timecontroller.InRange)
-                    FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
-            }
-			return true;
-        });
-        MultiTouch.RegisterTapAndHoldHandlerByTag("Rock", hit =>
-        {
-            var parentTransform = hit.transform;
-            ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
-            if (timecontroller)
-            {
-                if (timecontroller.InRange)
-                    FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
-            }
-			return true;
-        });
-        MultiTouch.RegisterTapAndHoldHandlerByTag("Moveable Rock", hit =>
-        {
-            var parentTransform = hit.transform;
-            ObjectTimeController timecontroller = parentTransform.GetComponentInParent<ObjectTimeController>();
-            if (timecontroller)
-            {
-                if (timecontroller.InRange)
-                    FlyToObject(parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlAroundLocation.transform, parentTransform.GetComponentInParent<HelperSwirlAroundLocation>().SwirlDistance);
-            }
-            return true;
-        });
-        MultiTouch.RegisterTapHandlerByTag("Terrain", hit =>
-        {
-            if (_myStatus != Status.SwirlingAroundPlayer && _myStatus != Status.FlyBack)
-            {
-                _myStatus = Status.FlyBack;
-                _time = 0;
-                _startpos = transform.position;
-                _animationTimer = 1;
-            }
-
-            if (_myStatus == Status.SwirlingAroundObject)
-            {
-                _myStatus = Status.FlyBack;
-                _time = 0;
-                _startpos = transform.position;
-                _animationTimer = 2;
-            }
-			return true;
-        });
     }
 
     // Update is called once per frame
@@ -206,4 +154,29 @@ public class SidekickElementController : MonoBehaviour
         _myStatus = Status.FlyOut;
         _time = 0;
     }
+
+	public void MoveBack()
+	{
+		if (_myStatus != Status.SwirlingAroundPlayer && _myStatus != Status.FlyBack)
+		{
+			_myStatus = Status.FlyBack;
+			_time = 0;
+			_startpos = transform.position;
+			_animationTimer = 1;
+		}
+		
+		if (_myStatus == Status.SwirlingAroundObject)
+		{
+			_myStatus = Status.FlyBack;
+			_time = 0;
+			_startpos = transform.position;
+			_animationTimer = 2;
+		}
+	}
+
+	public void MoveOut(TimeControllable obj)
+	{
+		HelperSwirlAroundLocation swirl = obj.GetComponentInChildren<HelperSwirlAroundLocation>();
+		FlyToObject(swirl.SwirlAroundLocation.transform, swirl.SwirlDistance);
+	}
 }

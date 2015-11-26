@@ -1,7 +1,7 @@
 Shader "Hidden/GlobalFog" {
 	Properties{
 		_MainTex("Base (RGB)", 2D) = "black" {}
-		_MyColor("Some Color", Color) = (0.15,0.18,0.20,0) 
+		_MyColor("Some Color", Color) = (0.68,0.77,0.82,0)
 
 }
 
