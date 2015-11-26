@@ -1,7 +1,7 @@
 Shader "Hidden/DistanceFog" {
 	Properties{
 		_MainTex("Base (RGB)", 2D) = "black" {}
-		_MyColor("Some Color", Color) = (.43,.51,.59,0) 
+		_MyColor("Some Color", Color) = (0,0,0,1) 
 
 }
 
