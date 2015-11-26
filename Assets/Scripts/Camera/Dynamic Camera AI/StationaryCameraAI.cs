@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 
-public class LockedAngleCameraAI : BaseDynamicCameraAI {
-    public GameObject Target;
+public class StationaryCameraAI : BaseDynamicCameraAI {
 
-    [Header("Positioning")]
-    public bool Relative = false;
-    [Range(0, 360)] public float Yaw;
-    [Range(-90, 90)] public float Pitch;
-    [Range(0, 100)] public float Distance;
+    public GameObject LookAt;
 
     [Header("Smoothing")]
     public bool EnableSmoothing = true;
@@ -23,15 +16,13 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     public GameObject NextAI;
 
     protected override void Begin() {
-        DynCam.SetTarget(Target, Vector3.zero);
-
         DynCam.StartCoroutine(EnableSmoothing ? SmoothMovement() : Movement());
     }
 
     private IEnumerator Movement() {
         while (true) {
-            DynCam.SetPosition(Yaw, Pitch, Distance, Relative);
-            DynCam.transform.LookAt(Target.transform);
+            DynCam.transform.position = transform.position;
+            DynCam.transform.LookAt(LookAt.transform);
 
             yield return null;
         }
@@ -40,7 +31,7 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     private IEnumerator SmoothMovement() {
         // Calculate moving into position
         var currentPosition = DynCam.transform.position;
-        var desiredPosition = DynCam.GetPosition(Yaw, Pitch, Distance, Relative);
+        var desiredPosition = transform.position;
         var timeToTravel = Vector3.Distance(currentPosition, desiredPosition)*UnitTimeToTravel;
         if (timeToTravel < MinimalTimeToTravel)
             timeToTravel = MinimalTimeToTravel;
@@ -49,7 +40,7 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
         if (timeToTravel > 0.05f) {
             // We find the pivot point by finding the closest point to the target that is equidistant from the current and desired positions.
             var midpoint = (currentPosition + desiredPosition)/2;
-            var relTarget = Target.transform.position - midpoint;
+            var relTarget = LookAt.transform.position - midpoint;
             var projectionNormal = (currentPosition - midpoint).normalized;
             var relPivot = Vector3.ProjectOnPlane(relTarget, projectionNormal);
             var pivot = relPivot + midpoint;
@@ -61,8 +52,7 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
 
             // Calculate look at rotation
             var currentLookDirection = DynCam.transform.forward;
-            var desiredLookDirection = Target.transform.position - desiredPosition;
-            Func<float, Quaternion> smoothedLookAt = ratio => Quaternion.LookRotation(Vector3.Slerp(currentLookDirection, desiredLookDirection, ratio));
+            Func<float, Quaternion> smoothedLookAt = ratio => Quaternion.LookRotation(Vector3.Slerp(currentLookDirection, LookAt.transform.position - desiredPosition, ratio));
 
             var startTime = Time.time;
             Func<float, float> timePos = time => (time - startTime)/timeToTravel;
@@ -94,14 +84,11 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     }
 
     void OnDrawGizmosSelected() {
-        if (!Target)
+        if (!LookAt)
             return;
 
-        Gizmos.color = Color.black;
-        var position = DynCam.GetPosition(Yaw, Pitch, Distance, Relative, Target);
-
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(Target.transform.position, position);
-        Gizmos.DrawSphere(position, 0.25f);
+        Gizmos.DrawLine(LookAt.transform.position, transform.position);
+        Gizmos.DrawSphere(transform.position, 0.25f);
     }
 }
