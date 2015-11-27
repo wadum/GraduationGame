@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
@@ -18,6 +19,12 @@ public class AnimationController : MonoBehaviour
     void Update()
     {
         CheckForWalkingOrStanding();
+    }
+
+
+    public void ShortJump()
+    {
+        _animationController.Play("JumpIdleState");
     }
 
     public void Jumping()
