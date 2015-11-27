@@ -716,6 +716,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &128606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 482084}
+  - 114: {fileID: 11460900}
+  m_Layer: 0
+  m_Name: PathHighlighter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &128906
 GameObject:
   m_ObjectHideFlags: 1
@@ -2914,7 +2930,7 @@ Transform:
   - {fileID: 486556}
   - {fileID: 494144}
   m_Father: {fileID: 485584}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &412088
 Transform:
   m_ObjectHideFlags: 1
@@ -3196,7 +3212,7 @@ Transform:
   - {fileID: 450494}
   - {fileID: 405788}
   m_Father: {fileID: 485584}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &428850
 Transform:
   m_ObjectHideFlags: 1
@@ -3247,7 +3263,7 @@ Transform:
   m_Children:
   - {fileID: 489300}
   m_Father: {fileID: 485584}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &431436
 Transform:
   m_ObjectHideFlags: 1
@@ -3274,7 +3290,7 @@ Transform:
   - {fileID: 433788}
   - {fileID: 487824}
   m_Father: {fileID: 485584}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!4 &432262
 Transform:
   m_ObjectHideFlags: 1
@@ -3464,7 +3480,7 @@ Transform:
   m_LocalScale: {x: .780769944, y: 1, z: 1.09613883}
   m_Children: []
   m_Father: {fileID: 485584}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &440838
 Transform:
   m_ObjectHideFlags: 1
@@ -3556,7 +3572,7 @@ Transform:
   - {fileID: 478046}
   - {fileID: 456886}
   m_Father: {fileID: 485584}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!4 &443032
 Transform:
   m_ObjectHideFlags: 1
@@ -3747,7 +3763,7 @@ Transform:
   - {fileID: 498284}
   - {fileID: 447238}
   m_Father: {fileID: 485584}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &450494
 Transform:
   m_ObjectHideFlags: 1
@@ -3824,7 +3840,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 485584}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!4 &453864
 Transform:
   m_ObjectHideFlags: 1
@@ -3875,7 +3891,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 485584}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &455394
 Transform:
   m_ObjectHideFlags: 1
@@ -3967,7 +3983,7 @@ Transform:
   m_Children:
   - {fileID: 458672}
   m_Father: {fileID: 485584}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &462444
 Transform:
   m_ObjectHideFlags: 1
@@ -4158,7 +4174,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 485584}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &468274
 Transform:
   m_ObjectHideFlags: 1
@@ -4197,7 +4213,7 @@ Transform:
   - {fileID: 483296}
   - {fileID: 484142}
   m_Father: {fileID: 485584}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &469320
 Transform:
   m_ObjectHideFlags: 1
@@ -4343,6 +4359,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 482762}
   m_RootOrder: 3
+--- !u!4 &482084
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128606}
+  m_LocalRotation: {x: 0, y: -3.7252903e-09, z: .990924418, w: .134420723}
+  m_LocalPosition: {x: -1.46139932, y: 1.76476562, z: -2.02969265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 485584}
+  m_RootOrder: 0
 --- !u!4 &482762
 Transform:
   m_ObjectHideFlags: 1
@@ -4464,6 +4492,7 @@ Transform:
   m_LocalPosition: {x: 11.1300001, y: -4.11000013, z: -23.8199997}
   m_LocalScale: {x: 1.71139157, y: 1.71139288, z: 1.71139288}
   m_Children:
+  - {fileID: 482084}
   - {fileID: 429628}
   - {fileID: 461548}
   - {fileID: 454976}
@@ -8317,6 +8346,7 @@ MonoBehaviour:
   - {fileID: 193776}
   - {fileID: 121864}
   - {fileID: 146608}
+  - {fileID: 128606}
   EnableObjectsAfterTimeLimit: []
   DisableObjectsBeforeTimeLimit: []
   DisableObjectsWithinTimeLimit:
@@ -8360,6 +8390,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForwardEffect: {fileID: 8275560}
   BackwardEffect: {fileID: 8297190}
+--- !u!114 &11460900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f926adfa8cf8994a8fd8d873d562a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToHighlight:
+  - {fileID: 452518}
+  - {fileID: 499814}
+  - {fileID: 499796}
+  - {fileID: 443032}
+  - {fileID: 486574}
+  - {fileID: 450494}
+  - {fileID: 405788}
+  ActivateSelectedItemsAfterValue: 0
+  ValueToActivateSelectedItems: 0
 --- !u!114 &11467380
 MonoBehaviour:
   m_ObjectHideFlags: 1
