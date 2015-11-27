@@ -20,7 +20,10 @@ public class MultiTouch : MonoBehaviour
         TapAndHoldSucces,
         TapAndHoldFail;
 
-	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
+    private float _prevVolume;
+    private float _volumeFadeTime = 0.03f;
+
+    private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapAndHoldEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 
     private static Action<Touch> _swipeHandler = (s) => { };
@@ -35,6 +38,7 @@ public class MultiTouch : MonoBehaviour
 
     void Start()
     {
+        _prevVolume = TapAndHoldCharge.volume;
         var gui = GameObject.FindGameObjectWithTag("Gui");
         if (!gui)
         {
@@ -186,14 +190,20 @@ public class MultiTouch : MonoBehaviour
         if (val <= 0) {
             _tapAndHoldIndicator.SetValue(0);
             if (TapAndHoldCharge.isPlaying)
-                TapAndHoldCharge.Stop();
+            {
+                StopCoroutine("StopSound");
+                StartCoroutine("StopSound", TapAndHoldCharge);
+            }
             return;
         }
 
         if (val >= 1) {
             _tapAndHoldIndicator.SetValue(1);
             if (TapAndHoldCharge.isPlaying)
-                TapAndHoldCharge.Stop();
+            {
+                StopCoroutine("StopSound");
+                StartCoroutine("StopSound", TapAndHoldCharge);
+            }
             return;
         }
 
@@ -201,10 +211,28 @@ public class MultiTouch : MonoBehaviour
 
         if (touching && !TapAndHoldCharge.isPlaying){
 			TapAndHoldCharge.time = TapAndHoldCharge.clip.length * val;
-			TapAndHoldCharge.Play();
-		} 
+            StopCoroutine("StopSound");
+            TapAndHoldCharge.volume = _prevVolume;
+            TapAndHoldCharge.Play();
+		}
         if (!touching && TapAndHoldCharge.isPlaying)
-            TapAndHoldCharge.Stop();
+        {
+            StopCoroutine("StopSound");
+            StartCoroutine("StopSound", TapAndHoldCharge);
+        }
+    }
+
+    private IEnumerator StopSound(AudioSource a)
+    {
+        float time = Time.time + _volumeFadeTime;
+        var amount = _prevVolume / (Time.deltaTime / _volumeFadeTime);
+        while (time > Time.time)
+        {
+            a.volume -= amount;
+            yield return null;
+        }
+        a.Stop();
+        a.volume = _prevVolume;
     }
 
     private IEnumerator HandleGesture(List<Touch> initialTouches) {
