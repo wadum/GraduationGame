@@ -49,8 +49,10 @@ public class CharacterJumping : MonoBehaviour
 
     private IEnumerator HandleNavJumps()
     {
-        while (true) {
-            if (_jumping) {
+        while (true)
+        {
+            if (_jumping)
+            {
                 yield return null;
                 continue;
             }
@@ -171,12 +173,13 @@ public class CharacterJumping : MonoBehaviour
                 if (v <= MaximumAcceptableSlant || Mathf.Abs(v - 180) <= MaximumAcceptableSlant)
                 {
                     v1 = hitInfo.point;
-                } else 
+                }
+                else
                 // if the raycast missed, there might be holes in the model, so we're casting a spherecast instead
-                if (Physics.SphereCast(bounds.center + Vector3.up * (1 + 2 * bounds.extents.y), Mathf.Max(bounds.extents.x, bounds.extents.z)/2, Vector3.down * (1 + 2 * bounds.extents.y), out hitInfo))
+                if (Physics.SphereCast(bounds.center + Vector3.up * (1 + 2 * bounds.extents.y), Mathf.Max(bounds.extents.x, bounds.extents.z) / 2, Vector3.down * (1 + 2 * bounds.extents.y), out hitInfo))
                 {
-// for debugging reasons I saw drawing a line, might want to draw again 
-//  Debug.DrawRay(bounds.center + Vector3.up * (1 + 2 * Mathf.Max(bounds.extents.y)), Vector3.down * (1 + 2 * Mathf.Max(bounds.extents.y)), Color.green, 2);
+                    // for debugging reasons I saw drawing a line, might want to draw again 
+                    //  Debug.DrawRay(bounds.center + Vector3.up * (1 + 2 * Mathf.Max(bounds.extents.y)), Vector3.down * (1 + 2 * Mathf.Max(bounds.extents.y)), Color.green, 2);
                     v = Vector3.Angle(hitInfo.normal, Vector3.up);
                     if (v <= MaximumAcceptableSlant || Mathf.Abs(v - 180) <= MaximumAcceptableSlant)
                         v1 = hitInfo.point;
@@ -211,7 +214,7 @@ public class CharacterJumping : MonoBehaviour
 
         // Do the actual jump
         StartCoroutine(Jumping(v1, hit.collider.gameObject.transform, false));
-		return true;
+        return true;
     }
 
     private bool ReturnToTerraFirma(RaycastHit hit)
@@ -244,7 +247,7 @@ public class CharacterJumping : MonoBehaviour
 
         // Do the actual jump
         StartCoroutine(Jumping(v1, null, true));
-		return true;
+        return true;
     }
 
     private Func<float, Vector3> MakeBezierJump(Vector3 from, Vector3 to)
@@ -277,9 +280,18 @@ public class CharacterJumping : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(transform.position, target) > 0.01f) {
-            if (_animator) {
-                _animator.Jumping();
+        float tmpDistance = Vector3.Distance(transform.position, target);
+
+        if (tmpDistance > 0.01f)
+        {
+            if (_animator)
+            {
+                Debug.Log(tmpDistance);
+                if (tmpDistance > 1)
+                    _animator.Jumping();
+                else
+                    _animator.ShortJump();
+
                 yield return new WaitForSeconds(0.2f);
             }
 
@@ -310,13 +322,13 @@ public class CharacterJumping : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         // if the object is of type jumpable
-        if(TagsToJumpOnto.Contains(collider.tag))
+        if (TagsToJumpOnto.Contains(collider.tag))
         {
             // Since we have no good indication of the "rock"'s surface,  it's hard to tell if we can actually reach it
-//            if (!CanReach(feet, collider.bounds.center)) // would be nice, but it doesn't work as easily as this might seem
-                HighlightScript script = collider.gameObject.GetComponent<HighlightScript>();
-                if (script)
-                    script.Activate();
+            //            if (!CanReach(feet, collider.bounds.center)) // would be nice, but it doesn't work as easily as this might seem
+            HighlightScript script = collider.gameObject.GetComponent<HighlightScript>();
+            if (script)
+                script.Activate();
         }
     }
 
