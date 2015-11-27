@@ -61,8 +61,7 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
 
             // Calculate look at rotation
             var currentLookDirection = DynCam.transform.forward;
-            var desiredLookDirection = Target.transform.position - desiredPosition;
-            Func<float, Quaternion> smoothedLookAt = ratio => Quaternion.LookRotation(Vector3.Slerp(currentLookDirection, desiredLookDirection, ratio));
+            Func<float, Quaternion> smoothedLookAt = ratio => Quaternion.LookRotation(Vector3.Slerp(currentLookDirection, Target.transform.position - desiredPosition, ratio));
 
             var startTime = Time.time;
             Func<float, float> timePos = time => (time - startTime)/timeToTravel;
