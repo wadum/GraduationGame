@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: hairTestColor
-  m_Shader: {fileID: 4800000, guid: 1130eef763a03634e8197e2c60d88e58, type: 3}
+  m_Name: hairColor
+  m_Shader: {fileID: 4800000, guid: 39a1b803e9354474eb759d65b132f296, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2450
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -36,6 +36,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _EmissionTexture
+        second:
+          m_Texture: {fileID: 2800000, guid: 73a462b0a90b3d448a603cb73435ced8, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -44,11 +51,11 @@ Material:
       data:
         first:
           name: _Metallic
-        second: .904760122
+        second: 0
       data:
         first:
           name: _Gloss
-        second: .675315917
+        second: 1
       data:
         first:
           name: _DissolveAmount
@@ -64,12 +71,16 @@ Material:
     m_Colors:
       data:
         first:
+          name: _EmissionColor
+        second: {r: .0808823705, g: .0808823705, b: .0808823705, a: 1}
+      data:
+        first:
           name: _Color
         second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _Emission
-        second: {r: .5, g: .5, b: .5, a: 1}
+        second: {r: .41911763, g: .30509299, b: .30509299, a: 1}
       data:
         first:
           name: _OutlineColor
