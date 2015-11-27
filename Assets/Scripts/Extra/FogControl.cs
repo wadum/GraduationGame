@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class FogControl : MonoBehaviour {
 
@@ -17,5 +16,13 @@ public class FogControl : MonoBehaviour {
     {
         get { return RenderSettings.fogDensity; }
         set { RenderSettings.fogDensity = value; }
+    }
+
+    [Range(0,1)]
+    public float ambientIntensity;
+
+    public float ambientIntensityProperty {
+        get { return RenderSettings.ambientIntensity; }
+        set { RenderSettings.ambientIntensity = ambientIntensity; }
     }
 }

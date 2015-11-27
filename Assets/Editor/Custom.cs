@@ -1,5 +1,4 @@
 ﻿using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(FogControl))]
 public class CustomInspector : Editor
@@ -10,9 +9,10 @@ public class CustomInspector : Editor
         {
             if (target.GetType() == typeof(FogControl))
             {
-                FogControl getterSetter = (FogControl)target;
+                var getterSetter = (FogControl)target;
                 getterSetter.colorProperty = getterSetter.color;
                 getterSetter.densityProperty = getterSetter.density;
+                getterSetter.ambientIntensityProperty = getterSetter.ambientIntensity;
             }
         }
     }
