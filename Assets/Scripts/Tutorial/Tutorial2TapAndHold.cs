@@ -12,10 +12,14 @@ public class Tutorial2TapAndHold : TutorialStep {
     {
         MultiTouch.RegisterTapAndHoldHandlerByTag("TimeManipulationObject", hit => Completed = true);
 
+        TouchRequired = true;
+
 		Backward.GetComponent<EventTrigger>().enabled = false;
 		Backward.GetComponent<Button>().interactable = false;
 		Forward.GetComponent<EventTrigger>().enabled = false;
 		Forward.GetComponent<Button>().interactable = false;
 		yield return StartCoroutine(base.Run());
+
+        GameObject.FindGameObjectWithTag("Gui").GetComponentInChildren<RadialSlider>().SetValue(0);
 	}
 }
