@@ -28,6 +28,8 @@ public class GameOverlayController : MonoBehaviour
 
     private List<CockRotator> _bottunsToRotate = new List<CockRotator>();
 
+	List<SidekickElementController> _sideKickElementControllers = null;
+
     void Awake()
     {
         gameOverlayController = this;
@@ -40,6 +42,7 @@ public class GameOverlayController : MonoBehaviour
 
         _animController = FindObjectOfType<AnimationController>();
         _bottunsToRotate.AddRange(GetComponentsInChildren<CockRotator>());
+		_sideKickElementControllers = FindObjectsOfType<SidekickElementController>().ToList();
     }
 
     void Update()
@@ -113,6 +116,8 @@ public class GameOverlayController : MonoBehaviour
         TimeSlider.GetComponentInChildren<Slider>().value = _currentObj.GetFloat();
         SliderController.SetTimeControllable(obj);
 
+		_sideKickElementControllers.ForEach(s => s.MoveOut(obj));
+
         //move buttons in
         _bottunsToRotate.ForEach(cock => cock.moveIn = true);
         _bottunsToRotate.ForEach(cock => cock.MoveInside());
@@ -132,6 +137,9 @@ public class GameOverlayController : MonoBehaviour
             if (master)
                 master.Deactivate();
         }
+		if (_sideKickElementControllers != null)
+			_sideKickElementControllers.ForEach(s => s.MoveBack());
+
         //move buttons out
         _bottunsToRotate.ForEach(cock => cock.moveIn = false);
         _bottunsToRotate.ForEach(cock => cock.MoveOutside());
