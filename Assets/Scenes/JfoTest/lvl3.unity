@@ -675,6 +675,10 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &123196905 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 171276, guid: 9b9c67a13f796e544ae3d3646db6d39d, type: 2}
+  m_PrefabInternal: {fileID: 1788080114}
 --- !u!1 &124503073
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,6 +738,69 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.5, y: 2, z: 5.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &126175006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 126175007}
+  - 114: {fileID: 126175008}
+  m_Layer: 0
+  m_Name: Glorious Loot2 View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &126175007
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126175006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.9000001, y: 0, z: 5.57000017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2029531482}
+  m_RootOrder: 0
+--- !u!114 &126175008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 126175006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 126175006}
+  Relative: 0
+  Yaw: 91
+  Pitch: 9.89999962
+  Distance: 12.3000002
+  EnableSmoothing: 1
+  MovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  UnitTimeToTravel: .300000012
+  MinimalTimeToTravel: 1.5
+  NextAI: {fileID: 0}
 --- !u!4 &139898303 stripped
 Transform:
   m_PrefabParentObject: {fileID: 453556, guid: 8e481ae27087c4246b01a88ffe1fb5c9, type: 2}
@@ -900,7 +967,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 4d33902724b0a0c47941a31ee1f7e558, type: 2}
     - target: {fileID: 120034, guid: e36ad2e0eb1ba0a45aa3868874d3163e, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e36ad2e0eb1ba0a45aa3868874d3163e, type: 2}
@@ -2111,7 +2178,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 265873051}
   m_LocalRotation: {x: 0, y: .00846759416, z: 0, w: .999964178}
-  m_LocalPosition: {x: -3.92000008, y: 9.64000034, z: -20.5}
+  m_LocalPosition: {x: -3.98000002, y: 9.64000034, z: -21.8099995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1795598977}
@@ -2145,7 +2212,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 4}
+  m_Size: {x: 4, y: 1, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &270139331
 GameObject:
@@ -2434,9 +2501,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 358215881}
   Relative: 0
-  Yaw: 68
-  Pitch: 16.6000004
-  Distance: 15
+  Yaw: 78
+  Pitch: 18.2000008
+  Distance: 17.2999992
   EnableSmoothing: 1
   MovementCurve:
     serializedVersion: 2
@@ -5027,6 +5094,69 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e78db57961913e9448482a1b79d08603, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &919664904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 919664905}
+  - 114: {fileID: 919664906}
+  m_Layer: 0
+  m_Name: Lock Onto Lootevator Platform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &919664905
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 919664904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5, y: 1.51999998, z: 6.05999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2029531482}
+  m_RootOrder: 1
+--- !u!114 &919664906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 919664904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 123196905}
+  Relative: 0
+  Yaw: 75
+  Pitch: 32.9000015
+  Distance: 11.5
+  EnableSmoothing: 1
+  MovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  UnitTimeToTravel: .349999994
+  MinimalTimeToTravel: 1.5
+  NextAI: {fileID: 0}
 --- !u!1001 &938608916
 Prefab:
   m_ObjectHideFlags: 0
@@ -7599,7 +7729,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1847706416}
   m_LocalRotation: {x: 0, y: .38714093, z: 0, w: .922020614}
-  m_LocalPosition: {x: 16.3500004, y: -3.25999999, z: -8.63999939}
+  m_LocalPosition: {x: 16.7700005, y: -3.25999999, z: -8.72999954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2091633897}
@@ -7978,6 +8108,65 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2007921492}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2029531481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2029531482}
+  - 65: {fileID: 2029531484}
+  - 114: {fileID: 2029531483}
+  m_Layer: 0
+  m_Name: Loot2 Get Path
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2029531482
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2029531481}
+  m_LocalRotation: {x: 0, y: -.501598537, z: 0, w: .865100563}
+  m_LocalPosition: {x: 27.3700008, y: -.0500000119, z: 7.28000021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 126175007}
+  - {fileID: 919664905}
+  m_Father: {fileID: 2091633897}
+  m_RootOrder: 10
+--- !u!114 &2029531483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2029531481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f46891c502d2249b799dac6af4bae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enter: {fileID: 126175006}
+  ForwardExit: {fileID: 919664904}
+  BackwardExit: {fileID: 0}
+  RightExit: {fileID: 0}
+  LeftExit: {fileID: 358215881}
+--- !u!65 &2029531484
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2029531481}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 3, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2041911209 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 165320, guid: 824836155a4afa04b9664b6cf8f29883, type: 2}
@@ -8176,6 +8365,7 @@ Transform:
   - {fileID: 124503074}
   - {fileID: 1847706417}
   - {fileID: 1870213546}
+  - {fileID: 2029531482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!1 &2114308368
