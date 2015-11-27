@@ -170,6 +170,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &171276
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 466518}
+  m_Layer: 0
+  m_Name: Lockon Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &192422
 GameObject:
   m_ObjectHideFlags: 1
@@ -276,7 +291,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 472464}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &439030
 Transform:
   m_ObjectHideFlags: 1
@@ -289,6 +304,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 474292}
   m_RootOrder: 0
+--- !u!4 &466518
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171276}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0219999999, y: .0423000008, z: .00139999995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 472464}
+  m_RootOrder: 0
 --- !u!4 &472464
 Transform:
   m_ObjectHideFlags: 1
@@ -299,6 +326,7 @@ Transform:
   m_LocalPosition: {x: 14.082674, y: 11.6886292, z: 16.146698}
   m_LocalScale: {x: 113.782784, y: 113.782784, z: 113.782784}
   m_Children:
+  - {fileID: 466518}
   - {fileID: 438218}
   m_Father: {fileID: 474292}
   m_RootOrder: 4
@@ -314,7 +342,7 @@ Transform:
   m_Children:
   - {fileID: 402154}
   m_Father: {fileID: 474292}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!4 &474292
 Transform:
   m_ObjectHideFlags: 1
@@ -330,8 +358,8 @@ Transform:
   - {fileID: 486018}
   - {fileID: 424912}
   - {fileID: 472464}
-  - {fileID: 482172}
   - {fileID: 473950}
+  - {fileID: 482172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &482172
@@ -345,7 +373,7 @@ Transform:
   m_LocalScale: {x: 172.101044, y: 77.3338852, z: 172.101028}
   m_Children: []
   m_Father: {fileID: 474292}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &486018
 Transform:
   m_ObjectHideFlags: 1
@@ -807,7 +835,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 13.6000004
+  m_Radius: 16
   m_Center: {x: 6.90999985, y: 13.5, z: 18.2000008}
 --- !u!1001 &100100000
 Prefab:
