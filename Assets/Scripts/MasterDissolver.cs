@@ -11,6 +11,8 @@ public class MasterDissolver : MonoBehaviour {
     public bool Dissolving;
     [Tooltip("Amount of time to dissolve, at start and end not much happens")]
     public float AmountOfTime = 3f;
+    [Tooltip("Values for tweaking the dissolving start and end value")]
+    public float StartAmount = 0.15f, EndAmount=1;
     private float _disAmount = 0, _timeAmount = 0;
 
     void OnEnable()
@@ -41,7 +43,7 @@ public class MasterDissolver : MonoBehaviour {
                 foreach (Material mat in Dissolvers)
                 {
                     // We dissolve to zero
-                    mat.SetFloat("_DissolveAmount", _disAmount);
+                    mat.SetFloat("_DissolveAmount", StartAmount + ((EndAmount-StartAmount)*_disAmount));
                 }
                 _disAmount = _timeAmount / AmountOfTime;
                 _timeAmount += Time.deltaTime;
@@ -55,7 +57,7 @@ public class MasterDissolver : MonoBehaviour {
                 foreach (Material mat in Dissolvers)
                 {
                     // We un-dissolve from zero
-                    mat.SetFloat("_DissolveAmount", 1 - _disAmount);
+                    mat.SetFloat("_DissolveAmount", EndAmount - ((EndAmount-StartAmount)*_disAmount));
                 }
                 _timeAmount += Time.deltaTime;
                 _disAmount = _timeAmount / AmountOfTime;
