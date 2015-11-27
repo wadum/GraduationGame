@@ -12,12 +12,12 @@ public class Tutorial4SliderBackward : TutorialStep {
 
 	protected override bool Continue ()
 	{
-		return TimeSlider.value < 50;
+		return TimeSlider.value < 30;
 	}
 
 	override public IEnumerator Run()
 	{
-		TouchRequired = false;
+		/*TouchRequired = false;
 
 		Backward.GetComponent<EventTrigger>().enabled = true;
 		Backward.GetComponent<Button>().interactable = true;
@@ -32,6 +32,22 @@ public class Tutorial4SliderBackward : TutorialStep {
 		Backward.GetComponent<Button>().interactable = true;
 		Forward.GetComponent<EventTrigger>().enabled = true;
 		Forward.GetComponent<Button>().interactable = true;
-		GameOverlayController.gameOverlayController.DeactivateSlider();
-	}
+		GameOverlayController.gameOverlayController.DeactivateSlider();*/
+
+        TouchRequired = false;
+
+        Backward.GetComponent<EventTrigger>().enabled = true;
+        Backward.GetComponent<Button>().interactable = true;
+
+        yield return StartCoroutine(base.Run());
+
+        Backward.GetComponent<EventTrigger>().triggers.ForEach(t => {
+            if (t.eventID == EventTriggerType.PointerUp)
+                t.callback.Invoke(new BaseEventData(GameObject.FindObjectOfType<EventSystem>()));
+        });
+        Backward.GetComponent<EventTrigger>().enabled = false;
+        Backward.GetComponent<Button>().interactable = false;
+
+
+    }
 }
