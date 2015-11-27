@@ -26,7 +26,7 @@ public class GameOverlayController : MonoBehaviour
     private AnimationController _animController;
     private CharacterMovement _player;
 
-    private List<CockRotator> _bottunsToRotate = new List<CockRotator>();
+    private readonly List<CockRotator> _buttonsToRotate = new List<CockRotator>();
 
 	List<SidekickElementController> _sideKickElementControllers = null;
 
@@ -41,7 +41,7 @@ public class GameOverlayController : MonoBehaviour
         _canvas.worldCamera = Camera.main;
 
         _animController = FindObjectOfType<AnimationController>();
-        _bottunsToRotate.AddRange(GetComponentsInChildren<CockRotator>());
+        _buttonsToRotate.AddRange(GetComponentsInChildren<CockRotator>());
 		_sideKickElementControllers = FindObjectsOfType<SidekickElementController>().ToList();
     }
 
@@ -109,7 +109,7 @@ public class GameOverlayController : MonoBehaviour
         if (ActivateSliderSounds != null && (!TimeSlider.activeSelf || _currentObj != obj))
             ActivateSliderSounds.ForEach(a => a.Play());
         _currentObj = obj;
-        MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
+        var master = _currentObj.GetComponent<MasterHighlight>();
         if (master)
             master.Activate();      
 
@@ -119,8 +119,8 @@ public class GameOverlayController : MonoBehaviour
 		_sideKickElementControllers.ForEach(s => s.MoveOut(obj));
 
         //move buttons in
-        _bottunsToRotate.ForEach(cock => cock.moveIn = true);
-        _bottunsToRotate.ForEach(cock => cock.MoveInside());
+        _buttonsToRotate.ForEach(cock => cock.moveIn = true);
+        _buttonsToRotate.ForEach(cock => cock.MoveInside());
 
         if (_player == null)
             _player = FindObjectOfType<CharacterMovement>();
@@ -133,7 +133,7 @@ public class GameOverlayController : MonoBehaviour
     {
         if (_currentObj)
         {
-            MasterHighlight master = _currentObj.GetComponent<MasterHighlight>();
+            var master = _currentObj.GetComponent<MasterHighlight>();
             if (master)
                 master.Deactivate();
         }
@@ -141,8 +141,8 @@ public class GameOverlayController : MonoBehaviour
 			_sideKickElementControllers.ForEach(s => s.MoveBack());
 
         //move buttons out
-        _bottunsToRotate.ForEach(cock => cock.moveIn = false);
-        _bottunsToRotate.ForEach(cock => cock.MoveOutside());
+        _buttonsToRotate.ForEach(cock => cock.moveIn = false);
+        _buttonsToRotate.ForEach(cock => cock.MoveOutside());
 
         _currentObj = null;
 
@@ -181,7 +181,23 @@ public class GameOverlayController : MonoBehaviour
     }
 
     public bool IsCurrentlySelected(GameObject obj) {
-        // time controllable objects should always be at root, so we compare those.
-        return _currentObj && _currentObj.transform.root == obj.transform.root;
+        if (!_currentObj || !obj)
+            return false;
+
+        var tc = FindFirstTimeControllableIn(obj);
+        return tc && tc == _currentObj;
+    }
+
+    private static TimeControllable FindFirstTimeControllableIn(GameObject target) {
+        var parent = target.transform;
+        while (parent) {
+            var tc = parent.GetComponent<TimeControllable>();
+            if (tc)
+                return tc;
+
+            parent = parent.parent;
+        }
+
+        return null;
     }
 }
