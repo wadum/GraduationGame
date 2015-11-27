@@ -7,6 +7,8 @@ public class TutorialController : MonoBehaviour
 
     public bool ForceTutorial = false;
     public bool DisableTutorial = true;
+    public GameObject SceneViews;
+    public GameObject MainPlatformViews;
 
     public List<TutorialStep> Steps;
     public List<GameObject> ObjectsToDestroy;
@@ -14,6 +16,7 @@ public class TutorialController : MonoBehaviour
 
     private static MultiTouch _multiTouch;
     private static DynamicCamera _camera;
+    public BaseDynamicCameraAI dynamicCameraAi;
 
     public const string PlayerPrefAlreadySeen = "TutorialAlreadySeen";
 
@@ -30,6 +33,8 @@ public class TutorialController : MonoBehaviour
 
     void Start()
     {
+        SceneViews.SetActive(false);
+        MainPlatformViews.SetActive(false);
         StartCoroutine(RunAllSteps());
     }
 
@@ -48,10 +53,16 @@ public class TutorialController : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefAlreadySeen, 1);
         // When the tutorial is done the player is free to move around.
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = false;
-        
+
+        //We activate te sceneViews within he game.
+        SceneViews.SetActive(true);
+        MainPlatformViews.SetActive(true);
+
         // We yield control to the camera built-in AI.
+        dynamicCameraAi.AssumeDirectControl();
         _camera.Run();
 
+        //Destroy the tutorial
         Destroy(gameObject);
     }
 

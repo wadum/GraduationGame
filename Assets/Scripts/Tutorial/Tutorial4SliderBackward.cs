@@ -47,5 +47,7 @@ public class Tutorial4SliderBackward : TutorialStep {
         });
         Backward.GetComponent<EventTrigger>().enabled = false;
         Backward.GetComponent<Button>().interactable = false;
+
+
     }
 }

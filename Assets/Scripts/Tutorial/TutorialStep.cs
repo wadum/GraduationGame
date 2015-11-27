@@ -22,15 +22,15 @@ public abstract class TutorialStep : MonoBehaviour {
 	{
 		Completed = false;
 
-		if(Overlay) Overlay.SetActive(true);
-		if(TouchRequired) TutorialController.EnableTouch();
+        if (Overlay) Overlay.SetActive(true);
+        if (TouchRequired) TutorialController.EnableTouch();
 		if(Text) Text.SetActive(true);
 		
 		while(!Continue()) yield return null;
-		
-		if(TouchRequired) TutorialController.DisableTouch();
+        
 		if(Overlay) Overlay.SetActive(false);
-		if(Text) Text.SetActive(false);
+        if (TouchRequired) TutorialController.DisableTouch();
+        if (Text) Text.SetActive(false);
 
 		/*if(CameraPoint)
 			yield return StartCoroutine(TutorialController.MoveCamera(CameraPoint.position, CameraRotationTime));*/
