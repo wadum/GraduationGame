@@ -807,7 +807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &132728
 GameObject:
   m_ObjectHideFlags: 1
@@ -1198,7 +1198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &147020
 GameObject:
   m_ObjectHideFlags: 1
@@ -1755,6 +1755,22 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &165830
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 451116}
+  - 82: {fileID: 8298058}
+  m_Layer: 0
+  m_Name: AudioLightning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &166332
 GameObject:
@@ -2197,6 +2213,22 @@ GameObject:
   m_Layer: 2
   m_Name: glassPart5
   m_TagString: TimeManipulationObject
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &182910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400582}
+  - 114: {fileID: 11465642}
+  m_Layer: 0
+  m_Name: PathHighlighter
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2700,6 +2732,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 461664}
   m_RootOrder: 0
+--- !u!4 &400582
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182910}
+  m_LocalRotation: {x: 0, y: -.991895854, z: 0, w: .127053782}
+  m_LocalPosition: {x: -.765015185, y: .0584319495, z: -7.62013388}
+  m_LocalScale: {x: .584319651, y: .584319353, z: .584319234}
+  m_Children: []
+  m_Father: {fileID: 444868}
+  m_RootOrder: 0
 --- !u!4 &401646
 Transform:
   m_ObjectHideFlags: 1
@@ -3092,7 +3136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 434618}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!4 &423042
 Transform:
   m_ObjectHideFlags: 1
@@ -3148,7 +3192,7 @@ Transform:
   - {fileID: 477608}
   - {fileID: 494968}
   m_Father: {fileID: 444868}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &426978
 Transform:
   m_ObjectHideFlags: 1
@@ -3233,7 +3277,7 @@ Transform:
   - {fileID: 404248}
   - {fileID: 468878}
   m_Father: {fileID: 444868}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &431294
 Transform:
   m_ObjectHideFlags: 1
@@ -3307,10 +3351,11 @@ Transform:
   m_LocalPosition: {x: -1.46139932, y: 1.76476574, z: -2.02969241}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 423028}
+  - {fileID: 451116}
   - {fileID: 460848}
+  - {fileID: 423028}
   m_Father: {fileID: 444868}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &435592
 Transform:
   m_ObjectHideFlags: 1
@@ -3489,7 +3534,7 @@ Transform:
   - {fileID: 406602}
   - {fileID: 456308}
   m_Father: {fileID: 444868}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!4 &443568
 Transform:
   m_ObjectHideFlags: 1
@@ -3530,9 +3575,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148786}
   m_LocalRotation: {x: 0, y: .991895854, z: 0, w: .127053782}
-  m_LocalPosition: {x: 2.01999998, y: -.100000001, z: -12.9499998}
+  m_LocalPosition: {x: 2.02000046, y: -.100000024, z: -12.9499998}
   m_LocalScale: {x: 1.71139157, y: 1.71139288, z: 1.71139288}
   m_Children:
+  - {fileID: 400582}
   - {fileID: 485666}
   - {fileID: 429464}
   - {fileID: 460092}
@@ -3706,6 +3752,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 429422}
   m_RootOrder: 3
+--- !u!4 &451116
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 434618}
+  m_RootOrder: 0
 --- !u!4 &451662
 Transform:
   m_ObjectHideFlags: 1
@@ -3777,7 +3835,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.6800003, y: -0, z: 14.5500002}
+  m_LocalPosition: {x: 15.6800003, y: .200000003, z: 14.5500002}
   m_LocalScale: {x: 1.96445882, y: 1, z: .349999964}
   m_Children: []
   m_Father: {fileID: 456274}
@@ -3811,7 +3869,7 @@ Transform:
   - {fileID: 466490}
   - {fileID: 448428}
   m_Father: {fileID: 444868}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &456308
 Transform:
   m_ObjectHideFlags: 1
@@ -3893,7 +3951,7 @@ Transform:
   - {fileID: 449430}
   - {fileID: 408898}
   m_Father: {fileID: 444868}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &457504
 Transform:
   m_ObjectHideFlags: 1
@@ -4000,7 +4058,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 444868}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &460530
 Transform:
   m_ObjectHideFlags: 1
@@ -4080,7 +4138,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 444868}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &462204
 Transform:
   m_ObjectHideFlags: 1
@@ -4252,7 +4310,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 444868}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &471750
 Transform:
   m_ObjectHideFlags: 1
@@ -4415,7 +4473,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 444868}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!4 &481324
 Transform:
   m_ObjectHideFlags: 1
@@ -4507,7 +4565,7 @@ Transform:
   m_Children:
   - {fileID: 487972}
   m_Father: {fileID: 444868}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &485696
 Transform:
   m_ObjectHideFlags: 1
@@ -4630,7 +4688,7 @@ Transform:
   - {fileID: 461664}
   - {fileID: 475396}
   m_Father: {fileID: 444868}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!4 &491750
 Transform:
   m_ObjectHideFlags: 1
@@ -7981,6 +8039,77 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!82 &8298058
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165830}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 4b03f107f2f6d3a479a4a1953bcdfcce, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: .400000006
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 8
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9552520
 Animator:
   serializedVersion: 3
@@ -8172,6 +8301,7 @@ MonoBehaviour:
   - {fileID: 115308}
   - {fileID: 183972}
   - {fileID: 114154}
+  - {fileID: 182910}
   EnableObjectsAfterTimeLimit: []
   DisableObjectsBeforeTimeLimit: []
   DisableObjectsWithinTimeLimit:
@@ -8179,6 +8309,25 @@ MonoBehaviour:
   - {fileID: 166332}
   DisableObjectsAfterTimeLimit: []
   InRange: 0
+--- !u!114 &11465642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f926adfa8cf8994a8fd8d873d562a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToHighlight:
+  - {fileID: 435830}
+  - {fileID: 448806}
+  - {fileID: 446274}
+  - {fileID: 403996}
+  - {fileID: 439774}
+  ActivateSelectedItemsAfterValue: 0
+  ValueToActivateSelectedItems: 0
 --- !u!114 &11475816
 MonoBehaviour:
   m_ObjectHideFlags: 1
