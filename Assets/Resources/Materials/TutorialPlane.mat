@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 47ce84e9d2d8a3e4297f70d1a31fbd9b, type: 3}
+          m_Texture: {fileID: 2800000, guid: 65eb0b23ddfa6d0478b4f58635e4893b, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -38,7 +38,21 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _Ramp
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _ParallaxMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ToonShade
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -85,20 +99,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Ramp
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ToonShade
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -114,12 +114,20 @@ Material:
         second: .5
       data:
         first:
-          name: _Metallic
-        second: 0
+          name: _Outline
+        second: .00499999989
       data:
         first:
           name: _Parallax
         second: .0199999996
+      data:
+        first:
+          name: _Metallic
+        second: 0
+      data:
+        first:
+          name: _Gloss
+        second: .207000002
       data:
         first:
           name: _ZWrite
@@ -148,14 +156,6 @@ Material:
         first:
           name: _Mode
         second: 0
-      data:
-        first:
-          name: _Gloss
-        second: .207000002
-      data:
-        first:
-          name: _Outline
-        second: .00499999989
       data:
         first:
           name: _outlinewidth
