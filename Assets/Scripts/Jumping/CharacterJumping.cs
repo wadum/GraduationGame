@@ -286,7 +286,6 @@ public class CharacterJumping : MonoBehaviour
         {
             if (_animator)
             {
-                Debug.Log(tmpDistance);
                 if (tmpDistance > 1)
                     _animator.Jumping();
                 else
@@ -321,26 +320,24 @@ public class CharacterJumping : MonoBehaviour
     // The sphere on the player has collided with something, if it's something jumpable, we enable the highlight script for that particular item.
     void OnTriggerEnter(Collider collider)
     {
-        // if the object is of type jumpable
-        if (TagsToJumpOnto.Contains(collider.tag))
-        {
-            // Since we have no good indication of the "rock"'s surface,  it's hard to tell if we can actually reach it
-            //            if (!CanReach(feet, collider.bounds.center)) // would be nice, but it doesn't work as easily as this might seem
-            HighlightScript script = collider.gameObject.GetComponent<HighlightScript>();
-            if (script)
-                script.Activate();
-        }
+        if (!TagsToJumpOnto.Contains(collider.tag))
+            return;
+
+        // Since we have no good indication of the "rock"'s surface,  it's hard to tell if we can actually reach it
+        //            if (!CanReach(feet, collider.bounds.center)) // would be nice, but it doesn't work as easily as this might seem
+        var script = collider.gameObject.GetComponent<HighlightScript>();
+        if (script)
+            script.Activate();
     }
 
     // Something left the sphere around the player, if it's something jumpable, we deactivate the highlight script, so it no longer shines.
     void OnTriggerExit(Collider collider)
     {
-        // if the object is of type jumpable
-        if (TagsToJumpOnto.Contains(collider.tag))
-        {
-            HighlightScript script = collider.gameObject.GetComponent<HighlightScript>();
-            if (script)
-                script.Deactivate();
-        }
+        if (!TagsToJumpOnto.Contains(collider.tag))
+            return;
+
+        var script = collider.gameObject.GetComponent<HighlightScript>();
+        if (script)
+            script.Deactivate();
     }
 }

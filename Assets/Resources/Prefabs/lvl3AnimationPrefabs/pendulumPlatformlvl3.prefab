@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2320504}
   m_Layer: 0
   m_Name: PlatformPiece010
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ GameObject:
   - 23: {fileID: 2395000}
   m_Layer: 0
   m_Name: polePiece
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - 23: {fileID: 2387866}
   m_Layer: 0
   m_Name: circlePiece
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,22 @@ GameObject:
   - 114: {fileID: 11436306}
   m_Layer: 0
   m_Name: pendulumPlatformlvl3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &146370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 469632}
+  - 114: {fileID: 11476596}
+  m_Layer: 0
+  m_Name: PathHighlighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +234,7 @@ GameObject:
   - 23: {fileID: 2330806}
   m_Layer: 0
   m_Name: PlatformPiece008
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +251,7 @@ GameObject:
   - 23: {fileID: 2328972}
   m_Layer: 0
   m_Name: PlatformPiece005
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,7 +300,7 @@ GameObject:
   - 23: {fileID: 2386390}
   m_Layer: 0
   m_Name: PlatformPiece003
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,7 +317,7 @@ GameObject:
   - 23: {fileID: 2376504}
   m_Layer: 0
   m_Name: pendulum
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,7 +349,7 @@ GameObject:
   - 23: {fileID: 2312110}
   m_Layer: 0
   m_Name: pendulumConnector
-  m_TagString: Rock
+  m_TagString: TimeManipulationObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -366,7 +382,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &400780
 Transform:
   m_ObjectHideFlags: 1
@@ -429,7 +445,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &411494
 Transform:
   m_ObjectHideFlags: 1
@@ -442,7 +458,7 @@ Transform:
   m_Children:
   - {fileID: 400780}
   m_Father: {fileID: 457944}
-  m_RootOrder: 13
+  m_RootOrder: 14
 --- !u!4 &411660
 Transform:
   m_ObjectHideFlags: 1
@@ -454,7 +470,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 12
+  m_RootOrder: 13
 --- !u!4 &418622
 Transform:
   m_ObjectHideFlags: 1
@@ -478,7 +494,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &426100
 Transform:
   m_ObjectHideFlags: 1
@@ -490,7 +506,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &429380
 Transform:
   m_ObjectHideFlags: 1
@@ -503,7 +519,7 @@ Transform:
   m_Children:
   - {fileID: 403616}
   m_Father: {fileID: 457944}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &440992
 Transform:
   m_ObjectHideFlags: 1
@@ -516,7 +532,7 @@ Transform:
   m_Children:
   - {fileID: 403466}
   m_Father: {fileID: 457944}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &457944
 Transform:
   m_ObjectHideFlags: 1
@@ -527,6 +543,7 @@ Transform:
   m_LocalPosition: {x: -3.71000004, y: 6.57999992, z: -31.3199997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 469632}
   - {fileID: 429380}
   - {fileID: 440992}
   - {fileID: 486038}
@@ -554,7 +571,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!4 &464416
 Transform:
   m_ObjectHideFlags: 1
@@ -566,7 +583,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &466560
 Transform:
   m_ObjectHideFlags: 1
@@ -578,7 +595,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!4 &469472
 Transform:
   m_ObjectHideFlags: 1
@@ -590,7 +607,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 9
+  m_RootOrder: 10
+--- !u!4 &469632
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.65483189, y: -.364300251, z: -.0201705992}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 457944}
+  m_RootOrder: 0
 --- !u!4 &470730
 Transform:
   m_ObjectHideFlags: 1
@@ -614,7 +643,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &486038
 Transform:
   m_ObjectHideFlags: 1
@@ -626,7 +655,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 457944}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!23 &2300800
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1274,12 +1303,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimePos: 0
-  workingStateStartPercent: 0
-  workingStateEndPercent: 0
+  workingStateStartPercent: 90
+  workingStateEndPercent: 100
   ActiveObjects: []
   DeactiveObjects: []
   EnableObjectsBeforeTimeLimit: []
-  EnableObjectsWithinTimeLimit: []
+  EnableObjectsWithinTimeLimit:
+  - {fileID: 146370}
   EnableObjectsAfterTimeLimit: []
   DisableObjectsBeforeTimeLimit: []
   DisableObjectsWithinTimeLimit: []
@@ -1309,6 +1339,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11476596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f926adfa8cf8994a8fd8d873d562a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToHighlight: []
+  ActivateSelectedItemsAfterValue: 0
+  ValueToActivateSelectedItems: 0
 --- !u!114 &11488372
 MonoBehaviour:
   m_ObjectHideFlags: 1
