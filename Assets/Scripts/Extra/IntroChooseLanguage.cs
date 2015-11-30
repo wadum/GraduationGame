@@ -5,6 +5,7 @@ public class IntroChooseLanguage : MonoBehaviour
 {
     public List<GameObject> ObjectsToEnable;
     public IntroLevelController IntroController;
+    public bool ShowStoryText = false;
 
     public void SetDanish()
     {
@@ -20,8 +21,16 @@ public class IntroChooseLanguage : MonoBehaviour
 
     void ShutDown()
     {
-        IntroController.StartText();
-        ObjectsToEnable.ForEach(obj => { if (obj) { obj.SetActive(true); } });
+        if (ShowStoryText)
+        {
+            IntroController.StartText();
+            ObjectsToEnable.ForEach(obj => { if (obj) { obj.SetActive(true); } });
+        }
+        else
+        {
+            IntroController.PlayAnimations();
+        }
+
         gameObject.SetActive(false);
     }
 }
