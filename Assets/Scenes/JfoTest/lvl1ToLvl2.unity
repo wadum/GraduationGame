@@ -2854,6 +2854,47 @@ MonoBehaviour:
   RotationSpeed: 1
   AnimateSpeed: 1.5
   finishedReassembling: 0
+  PickUpParticles: {fileID: 0}
+  LootParticles: {fileID: 0}
+--- !u!1 &1171028361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1171028362}
+  - 114: {fileID: 1171028363}
+  m_Layer: 0
+  m_Name: LoadNextLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1171028362
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1171028361}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1532284756}
+  m_RootOrder: 4
+--- !u!114 &1171028363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1171028361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5231d75de3543704aac94372d0ac9da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1181324353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,6 +3124,34 @@ Prefab:
       objectReference: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
         type: 2}
     - target: {fileID: 8186324, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11490128, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423730, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11489018, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19558936, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11491444, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425594, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11410892, guid: 3204434e0cc48444a89bbac6aef95aa8, type: 2}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -4488,6 +4557,7 @@ Transform:
   - {fileID: 1747224639}
   - {fileID: 1813379840}
   - {fileID: 1464811452}
+  - {fileID: 1171028362}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!95 &1532284757
@@ -4977,6 +5047,8 @@ MonoBehaviour:
   RotationSpeed: 1
   AnimateSpeed: 1.5
   finishedReassembling: 0
+  PickUpParticles: {fileID: 0}
+  LootParticles: {fileID: 0}
 --- !u!1 &1840252439
 GameObject:
   m_ObjectHideFlags: 0
@@ -4996,7 +5068,7 @@ GameObject:
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1840252440
 Transform:
   m_ObjectHideFlags: 0
