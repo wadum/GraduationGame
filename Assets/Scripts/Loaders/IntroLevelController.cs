@@ -11,7 +11,6 @@ public class IntroLevelController : MonoBehaviour
     public Camera oldCamera;
     public bool Skipable;
     public Button button;
-    public AudioSource AudioToEnable;
 
     float fadeout;
 
@@ -26,8 +25,6 @@ public class IntroLevelController : MonoBehaviour
         Skipable = true;
         button.gameObject.SetActive(false);
         AnimationToEnable.SetActive(true);
-        if (AudioToEnable)
-            AudioToEnable.Play();
         IntroObject.SetActive(false); // LanguagePicker and StoryText
         canva.worldCamera = animationCamera;
     }

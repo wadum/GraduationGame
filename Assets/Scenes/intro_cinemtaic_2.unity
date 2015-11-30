@@ -421,6 +421,8 @@ MonoBehaviour:
   RotationSpeed: 1
   AnimateSpeed: 1.5
   finishedReassembling: 0
+  PickUpParticles: {fileID: 0}
+  LootParticles: {fileID: 0}
 --- !u!1001 &47535948
 Prefab:
   m_ObjectHideFlags: 0
@@ -736,6 +738,7 @@ Transform:
   - {fileID: 804765439}
   - {fileID: 542306264}
   - {fileID: 1946023714}
+  - {fileID: 1085008627}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!95 &165747105
@@ -3042,7 +3045,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24367750, guid: f368730579da7a24891221e009237811,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 86a7b325021d37941968d456a4886b02, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3109,11 +3112,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1085008625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.7872887, y: 4.4512825, z: -9.49318695}
+  m_LocalPosition: {x: 23.0373383, y: -19.7670555, z: 10.1859283}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 165747104}
+  m_RootOrder: 15
 --- !u!1 &1107597728 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100136, guid: e86ec10f370703e48935b286d56c0cc9, type: 3}
@@ -4615,7 +4618,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 444486, guid: feb460ac08f604d1db49727f265dca5b, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11433524, guid: feb460ac08f604d1db49727f265dca5b, type: 2}
       propertyPath: AnimationToEnable
@@ -5030,6 +5033,8 @@ MonoBehaviour:
   RotationSpeed: 1
   AnimateSpeed: 1.5
   finishedReassembling: 0
+  PickUpParticles: {fileID: 0}
+  LootParticles: {fileID: 0}
 --- !u!1 &1946023713
 GameObject:
   m_ObjectHideFlags: 0
