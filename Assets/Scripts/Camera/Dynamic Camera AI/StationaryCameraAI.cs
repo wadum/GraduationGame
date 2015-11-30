@@ -24,7 +24,17 @@ public class StationaryCameraAI : BaseDynamicCameraAI {
             DynCam.transform.position = transform.position;
             DynCam.transform.LookAt(LookAt.transform);
 
-            yield return null;
+            if (NextAI == null)
+                yield return null;
+            else {
+                var ai = NextAI.GetComponent<BaseDynamicCameraAI>();
+                if (!ai)
+                    Debug.Log("Next AI is not valid - no dynamic camera ai script attached");
+                else {
+                    ai.AssumeDirectControl();
+                    break;
+                }
+            }
         }
     }
 
