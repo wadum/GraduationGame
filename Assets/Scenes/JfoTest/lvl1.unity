@@ -413,7 +413,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 211103419}
-  m_LocalRotation: {x: 0, y: -.00843886007, z: 0, w: .999964476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.80999994, y: 6.94999981, z: -4.07999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -587,7 +587,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 350803265}
-  m_LocalRotation: {x: 0, y: .224951074, z: 0, w: .974370062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.77999997, y: 0, z: 25.5400009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -736,6 +736,14 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11453794, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
+      propertyPath: SceneViews
+      value: 
+      objectReference: {fileID: 839574942}
+    - target: {fileID: 11453794, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
+      propertyPath: dynamicCameraAi
+      value: 
+      objectReference: {fileID: 1174903869}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
   m_IsPrefabParent: 0
@@ -750,7 +758,7 @@ GameObject:
   - 65: {fileID: 442262937}
   - 114: {fileID: 442262936}
   m_Layer: 0
-  m_Name: 1stPieceSceneView
+  m_Name: Loot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1055,7 +1063,7 @@ GameObject:
   - 4: {fileID: 642003025}
   - 114: {fileID: 642003026}
   m_Layer: 0
-  m_Name: centerPlatform
+  m_Name: Loot 1 Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1067,9 +1075,9 @@ Transform:
   m_PrefabParentObject: {fileID: 483778, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 642003024}
-  m_LocalRotation: {x: 0, y: -.736310959, z: 0, w: .676643312}
-  m_LocalPosition: {x: .330000013, y: .600000024, z: -.479999989}
-  m_LocalScale: {x: 1.00003242, y: 1, z: 1.00003242}
+  m_LocalRotation: {x: 0, y: -.879446447, z: 0, w: .475997984}
+  m_LocalPosition: {x: .534141243, y: .600000024, z: -.276291907}
+  m_LocalScale: {x: 1.02050984, y: 1, z: .980939388}
   m_Children: []
   m_Father: {fileID: 1051395359}
   m_RootOrder: 0
@@ -1249,7 +1257,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 679920726}
-  m_LocalRotation: {x: 0, y: -.224951074, z: 0, w: .974370062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.42999983, y: 0, z: 25.7999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1289,7 +1297,7 @@ Transform:
   m_PrefabParentObject: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910050837}
-  m_LocalRotation: {x: 0, y: .288591534, z: 0, w: .957452357}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.12, y: -.319185257, z: 5.71000004}
   m_LocalScale: {x: 1, y: 1, z: .589966416}
   m_Children:
@@ -1334,7 +1342,7 @@ GameObject:
   - 65: {fileID: 733113224}
   - 114: {fileID: 733113223}
   m_Layer: 0
-  m_Name: '2ndPieceSceneView '
+  m_Name: Loot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1346,7 +1354,7 @@ Transform:
   m_PrefabParentObject: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 733113221}
-  m_LocalRotation: {x: 0, y: -.406412482, z: 0, w: .913689792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.3500004, y: 1.34000015, z: 3.52999973}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1727,8 +1735,8 @@ Transform:
   m_PrefabParentObject: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 442262935}
-  m_LocalRotation: {x: 0, y: .222072572, z: 0, w: .975030124}
-  m_LocalPosition: {x: -6.48999977, y: .396051526, z: -2.1500001}
+  m_LocalRotation: {x: 0, y: .244589016, z: 0, w: .969626904}
+  m_LocalPosition: {x: -6.48999977, y: .396051526, z: -2.14999962}
   m_LocalScale: {x: 1, y: 1, z: 1.07006288}
   m_Children:
   - {fileID: 642003025}
@@ -2384,7 +2392,7 @@ GameObject:
   - 4: {fileID: 1553962542}
   - 114: {fileID: 1553962543}
   m_Layer: 0
-  m_Name: centerPlatformAndClock
+  m_Name: Loot 2 Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
