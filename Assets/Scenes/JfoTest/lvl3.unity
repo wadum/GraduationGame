@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientGroundColor: {r: .58431375, g: .372549027, b: .235294119, a: 1}
-  m_AmbientIntensity: .206
+  m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SkyboxMaterial: {fileID: 2100000, guid: 6f22cae273d15a048ad26ca61f10de1f, type: 2}
   m_HaloStrength: .5
@@ -476,23 +476,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMin.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8239322, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: OutputAudioMixerGroup
@@ -1632,11 +1632,11 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 0
+  moveWithTransform: 1
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 2
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1669,7 +1669,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 4
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1684,7 +1684,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .100000001
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1783,7 +1783,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4291962989
       minMaxState: 0
     startSize:
       scalar: 1
@@ -1833,7 +1833,7 @@ ParticleSystem:
       minMaxState: 3
     gravityModifier: .5
     inheritVelocity: 0
-    maxNumParticles: 300
+    maxNumParticles: 40
   ShapeModule:
     serializedVersion: 2
     enabled: 1
@@ -1884,7 +1884,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 300
+    cnt0: 40
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -4406,10 +4406,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4291962989
       minMaxState: 0
     startSize:
-      scalar: .5
+      scalar: .800000012
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4424,7 +4424,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .200000003
+          value: .125
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -11601,10 +11601,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4291962989
       minMaxState: 0
     startSize:
-      scalar: .5
+      scalar: .800000012
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -11619,7 +11619,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .200000003
+          value: .125
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -13245,6 +13245,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 11425080, guid: 143c35749bd3b85449a98be0f1d5458d, type: 2}
+      propertyPath: workingStateStartPercent
+      value: 67
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425080, guid: 143c35749bd3b85449a98be0f1d5458d, type: 2}
+      propertyPath: workingStateEndPercent
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 143c35749bd3b85449a98be0f1d5458d, type: 2}
   m_IsPrefabParent: 0
@@ -14740,22 +14748,6 @@ Prefab:
     - target: {fileID: 479278, guid: e78db57961913e9448482a1b79d08603, type: 2}
       propertyPath: m_RootOrder
       value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 13554312, guid: e78db57961913e9448482a1b79d08603, type: 2}
-      propertyPath: m_Radius
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 8243990, guid: e78db57961913e9448482a1b79d08603, type: 2}
-      propertyPath: m_Volume
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8264252, guid: e78db57961913e9448482a1b79d08603, type: 2}
-      propertyPath: m_Volume
-      value: .5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8243200, guid: e78db57961913e9448482a1b79d08603, type: 2}
-      propertyPath: m_Volume
-      value: .100000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e78db57961913e9448482a1b79d08603, type: 2}
@@ -17276,6 +17268,18 @@ Prefab:
       propertyPath: m_Center.z
       value: -.129999995
       objectReference: {fileID: 0}
+    - target: {fileID: 2323406, guid: 2c246b792df81d643a16649108bd9a89, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 158686, guid: 2c246b792df81d643a16649108bd9a89, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 401956, guid: 2c246b792df81d643a16649108bd9a89, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .324200004
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c246b792df81d643a16649108bd9a89, type: 2}
   m_IsPrefabParent: 0
@@ -18328,11 +18332,11 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 0
+  moveWithTransform: 1
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 2
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -18365,7 +18369,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 4
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -18380,7 +18384,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .100000001
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -18479,7 +18483,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4291962989
       minMaxState: 0
     startSize:
       scalar: 1
@@ -18529,7 +18533,7 @@ ParticleSystem:
       minMaxState: 3
     gravityModifier: .5
     inheritVelocity: 0
-    maxNumParticles: 300
+    maxNumParticles: 40
   ShapeModule:
     serializedVersion: 2
     enabled: 1
@@ -18580,7 +18584,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    cnt0: 300
+    cnt0: 40
     cnt1: 30
     cnt2: 30
     cnt3: 30
@@ -21450,22 +21454,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 18
       objectReference: {fileID: 0}
-    - target: {fileID: 432540, guid: 6782b8ab1c931ec4dae693ff806b2b5c, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: .213400006
-      objectReference: {fileID: 0}
-    - target: {fileID: 432540, guid: 6782b8ab1c931ec4dae693ff806b2b5c, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: .00960000046
-      objectReference: {fileID: 0}
-    - target: {fileID: 114054, guid: 6782b8ab1c931ec4dae693ff806b2b5c, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323202, guid: 6782b8ab1c931ec4dae693ff806b2b5c, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f0371a1049858fe4abb72bff576109cc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6782b8ab1c931ec4dae693ff806b2b5c, type: 2}
   m_IsPrefabParent: 0
@@ -27763,7 +27751,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437938, guid: e98a5ea2601794946bb2efd047bd1e16, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e98a5ea2601794946bb2efd047bd1e16, type: 2}
