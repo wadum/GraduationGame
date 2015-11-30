@@ -12,6 +12,9 @@ public class Clockpart : MonoBehaviour
     public float AnimateSpeed = 1.5f;
     public bool
         finishedReassembling = false;
+	public GameObject PickUpParticles;
+	public ParticleSystem LootParticles;
+
     private bool
         _reassemble = false;
     private float 
@@ -53,6 +56,14 @@ public class Clockpart : MonoBehaviour
             return;
         }
 
+		if(PickUpParticles){
+			PickUpParticles.SetActive(true);
+		}
+
+		if(LootParticles){
+			LootParticles.enableEmission = false;
+		}
+
         transform.parent = player.transform;
         transform.position += Vector3.up;
         pickedUp = true;
@@ -75,8 +86,6 @@ public class Clockpart : MonoBehaviour
     {
         clockPart.transform.localPosition = Vector3.right;
         pickedUp = false;
-
-
 
         float distCovered = (Time.time - _startTime);
         float fracJourney = distCovered / _journeyLength;
