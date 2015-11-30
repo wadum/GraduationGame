@@ -4,7 +4,7 @@ public class AutoStartDynamicCameraAI : MonoBehaviour {
 
     public BaseDynamicCameraAI TargetDynamicCameraAi;
 
-    private void LateUpdate() {
+    void LateUpdate() {
         TargetDynamicCameraAi.AssumeDirectControl();
         enabled = false;
     }
