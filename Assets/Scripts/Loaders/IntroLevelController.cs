@@ -18,12 +18,12 @@ public class IntroLevelController : MonoBehaviour
         STC.Show("IntroScene");
     }
 
-    public void PlayAnimations() // called from close button
+    public void PlayAnimations() // called from close button of storytext or language picker when the storytext is disabled
     {
         oldCamera.gameObject.SetActive(false);
         Skipable = true;
         AnimationToEnable.SetActive(true);
-        IntroObject.SetActive(false);
+        IntroObject.SetActive(false); // LanguagePicker and StoryText
         canva.worldCamera = animationCamera;
     }
 

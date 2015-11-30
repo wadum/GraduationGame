@@ -710,7 +710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &165747104
 Transform:
   m_ObjectHideFlags: 0
@@ -4490,6 +4490,14 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300104, guid: 46d2a8686bc250749b2786b9c254630c, type: 3}
+    - target: {fileID: 11439114, guid: bf46f5f4b70b48f4a8363ac50960934b, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427696, guid: bf46f5f4b70b48f4a8363ac50960934b, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf46f5f4b70b48f4a8363ac50960934b, type: 2}
   m_IsPrefabParent: 0
@@ -4609,8 +4617,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 22339556, guid: feb460ac08f604d1db49727f265dca5b, type: 2}
-      propertyPath: m_Camera
+    - target: {fileID: 11433524, guid: feb460ac08f604d1db49727f265dca5b, type: 2}
+      propertyPath: AnimationToEnable
+      value: 
+      objectReference: {fileID: 165747103}
+    - target: {fileID: 11433524, guid: feb460ac08f604d1db49727f265dca5b, type: 2}
+      propertyPath: animationCamera
       value: 
       objectReference: {fileID: 2052825304}
     m_RemovedComponents: []
