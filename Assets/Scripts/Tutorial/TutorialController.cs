@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,7 +9,6 @@ public class TutorialController : MonoBehaviour
     public bool ForceTutorial = false;
     public bool DisableTutorial = true;
     public GameObject SceneViews;
-    public GameObject MainPlatformViews;
 
     public List<TutorialStep> Steps;
     public List<GameObject> ObjectsToDestroy;
@@ -27,21 +27,23 @@ public class TutorialController : MonoBehaviour
         if ((PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl1") &&
             !ForceTutorial)
             Destroy(gameObject);
-        else
+        else {
             ObjectsToToggle.ForEach(obj => { if (obj) obj.SetActive(false); });
+            FindObjectsOfType<AutoStartDynamicCameraAI>().ToList().ForEach(Destroy);
+        }
     }
 
     void Start()
     {
         SceneViews.SetActive(false);
-        MainPlatformViews.SetActive(false);
         StartCoroutine(RunAllSteps());
     }
 
     IEnumerator RunAllSteps()
     {
-        // We take control of the camera, so we turn off the built-in AI.
+        // We take control of the camera, so we turn off the built-in AI and any dynamic ai's currently running.
         _camera.Stop();
+        _camera.StopAllCoroutines();
 
         // Only once a tutorial start will we freeze the player.
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = true;
@@ -54,13 +56,11 @@ public class TutorialController : MonoBehaviour
         // When the tutorial is done the player is free to move around.
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = false;
 
-        //We activate te sceneViews within he game.
-        SceneViews.SetActive(true);
-        MainPlatformViews.SetActive(true);
-
         // We yield control to the camera built-in AI.
         dynamicCameraAi.AssumeDirectControl();
-        _camera.Run();
+
+        //We activate te sceneViews within he game.
+        SceneViews.SetActive(true);
 
         //Destroy the tutorial
         Destroy(gameObject);
