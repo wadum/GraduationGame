@@ -70,7 +70,8 @@ public class FadeInOut : MonoBehaviour {
 
     public void LoadNextLevel()
     {
-        SaveLoad.saveLoad.Reset(); ;
+        if(SaveLoad.saveLoad)
+            SaveLoad.saveLoad.Reset(); ;
         Application.LoadLevel(Application.loadedLevel + 1);
     }
 }
