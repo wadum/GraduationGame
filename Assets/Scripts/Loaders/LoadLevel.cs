@@ -17,7 +17,9 @@ public class LoadLevel : MonoBehaviour
     void Start()
     {
         if (!File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
-            GetComponent<MeshRenderer>().enabled = false;
+        {
+            this.gameObject.SetActive(false);
+        }
         crystalclick = GetComponent<AudioSource>();
     }
 
