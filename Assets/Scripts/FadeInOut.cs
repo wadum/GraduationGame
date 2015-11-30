@@ -6,6 +6,7 @@ public class FadeInOut : MonoBehaviour {
     public bool ToBlack, FadeOnEnable, LoadNextAfterFade;
     CanvasGroup canvasGroup;
     public float FadeTime;
+    public Image image;
 
     void OnEnable()
     {
@@ -33,9 +34,10 @@ public class FadeInOut : MonoBehaviour {
 
     IEnumerator Black(float time)
     {
+        image.raycastTarget = true;
         float elapsedTime = 0;
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.interactable = false;
+//        canvasGroup.interactable = false;
         float dist = 1;
         while (elapsedTime < time)
         {
@@ -53,9 +55,9 @@ public class FadeInOut : MonoBehaviour {
 
     IEnumerator Clear(float time)
     {
+        image.raycastTarget = true;
         float elapsedTime = 0;
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-  //      canvasGroup.interactable = false;
         float dist = 0;
 
         while (elapsedTime < time)
@@ -65,6 +67,7 @@ public class FadeInOut : MonoBehaviour {
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        image.raycastTarget = false;
         yield return null;
     }
 
