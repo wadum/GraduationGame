@@ -46,10 +46,10 @@ public class FinalPieceAI : MonoBehaviour {
         // fly to position in clock
         while (_fracJourney < 1)
         {
-            _fracJourney = (Time.time - _startTime) / TravelTime;
+            _fracJourney = (Time.fixedTime - _startTime) / TravelTime;
             transform.position = Vector3.Lerp(_lerpStartingPos, ClockPosition.position, _fracJourney);
             transform.rotation = Quaternion.Lerp(_lerpStartingot, ClockPosition.transform.rotation, _fracJourney);
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(EndLevelWait1);
 
