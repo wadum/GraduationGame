@@ -1311,6 +1311,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &155878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 460902}
+  - 114: {fileID: 11467414}
+  m_Layer: 0
+  m_Name: PathHighlighter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &156376
 GameObject:
   m_ObjectHideFlags: 1
@@ -2410,7 +2426,7 @@ Transform:
   - {fileID: 417724}
   - {fileID: 485208}
   m_Father: {fileID: 468028}
-  m_RootOrder: 24
+  m_RootOrder: 25
 --- !u!4 &414570
 Transform:
   m_ObjectHideFlags: 1
@@ -2422,7 +2438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 26, z: 3}
   m_Children: []
   m_Father: {fileID: 468028}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &415498
 Transform:
   m_ObjectHideFlags: 1
@@ -2460,7 +2476,7 @@ Transform:
   - {fileID: 455466}
   - {fileID: 433644}
   m_Father: {fileID: 468028}
-  m_RootOrder: 22
+  m_RootOrder: 23
 --- !u!4 &417450
 Transform:
   m_ObjectHideFlags: 1
@@ -2500,7 +2516,7 @@ Transform:
   - {fileID: 464402}
   - {fileID: 413588}
   m_Father: {fileID: 468028}
-  m_RootOrder: 26
+  m_RootOrder: 27
 --- !u!4 &418006
 Transform:
   m_ObjectHideFlags: 1
@@ -2621,7 +2637,7 @@ Transform:
   m_Children:
   - {fileID: 457638}
   m_Father: {fileID: 468028}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &429996
 Transform:
   m_ObjectHideFlags: 1
@@ -2696,7 +2712,7 @@ Transform:
   m_Children:
   - {fileID: 454352}
   m_Father: {fileID: 468028}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &434754
 Transform:
   m_ObjectHideFlags: 1
@@ -2911,7 +2927,7 @@ Transform:
   - {fileID: 482138}
   - {fileID: 465844}
   m_Father: {fileID: 468028}
-  m_RootOrder: 12
+  m_RootOrder: 13
 --- !u!4 &450976
 Transform:
   m_ObjectHideFlags: 1
@@ -2951,7 +2967,7 @@ Transform:
   - {fileID: 413066}
   - {fileID: 404676}
   m_Father: {fileID: 468028}
-  m_RootOrder: 23
+  m_RootOrder: 24
 --- !u!4 &454038
 Transform:
   m_ObjectHideFlags: 1
@@ -2965,7 +2981,7 @@ Transform:
   - {fileID: 456752}
   - {fileID: 467114}
   m_Father: {fileID: 468028}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &454352
 Transform:
   m_ObjectHideFlags: 1
@@ -3043,7 +3059,7 @@ Transform:
   - {fileID: 496136}
   - {fileID: 465218}
   m_Father: {fileID: 468028}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!4 &457638
 Transform:
   m_ObjectHideFlags: 1
@@ -3068,6 +3084,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 479246}
   m_RootOrder: 1
+--- !u!4 &460902
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155878}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .196709469, y: .527252793, z: -2.9919641}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 468028}
+  m_RootOrder: 0
 --- !u!4 &461472
 Transform:
   m_ObjectHideFlags: 1
@@ -3169,7 +3197,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 468028}
-  m_RootOrder: 27
+  m_RootOrder: 28
 --- !u!4 &467114
 Transform:
   m_ObjectHideFlags: 1
@@ -3195,7 +3223,7 @@ Transform:
   - {fileID: 468570}
   - {fileID: 406102}
   m_Father: {fileID: 468028}
-  m_RootOrder: 19
+  m_RootOrder: 20
 --- !u!4 &468028
 Transform:
   m_ObjectHideFlags: 1
@@ -3203,9 +3231,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102214}
   m_LocalRotation: {x: 0, y: -.142784148, z: 0, w: .989753902}
-  m_LocalPosition: {x: 22.2299995, y: 6.09000015, z: -7.82000017}
-  m_LocalScale: {x: .549985468, y: .549985468, z: .549985468}
+  m_LocalPosition: {x: 22.2299995, y: 6.09000015, z: -7.81999969}
+  m_LocalScale: {x: .549985588, y: .549985468, z: .549985349}
   m_Children:
+  - {fileID: 460902}
   - {fileID: 434662}
   - {fileID: 480900}
   - {fileID: 454038}
@@ -3263,7 +3292,7 @@ Transform:
   - {fileID: 404378}
   - {fileID: 497134}
   m_Father: {fileID: 468028}
-  m_RootOrder: 15
+  m_RootOrder: 16
 --- !u!4 &469056
 Transform:
   m_ObjectHideFlags: 1
@@ -3428,7 +3457,7 @@ Transform:
   - {fileID: 470450}
   - {fileID: 409172}
   m_Father: {fileID: 468028}
-  m_RootOrder: 25
+  m_RootOrder: 26
 --- !u!4 &479246
 Transform:
   m_ObjectHideFlags: 1
@@ -3442,7 +3471,7 @@ Transform:
   - {fileID: 413012}
   - {fileID: 460310}
   m_Father: {fileID: 468028}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &479584
 Transform:
   m_ObjectHideFlags: 1
@@ -3480,7 +3509,7 @@ Transform:
   - {fileID: 499122}
   - {fileID: 433374}
   m_Father: {fileID: 468028}
-  m_RootOrder: 18
+  m_RootOrder: 19
 --- !u!4 &480900
 Transform:
   m_ObjectHideFlags: 1
@@ -3493,7 +3522,7 @@ Transform:
   m_Children:
   - {fileID: 444672}
   m_Father: {fileID: 468028}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &481138
 Transform:
   m_ObjectHideFlags: 1
@@ -3505,7 +3534,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 468028}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &481374
 Transform:
   m_ObjectHideFlags: 1
@@ -3519,7 +3548,7 @@ Transform:
   - {fileID: 477644}
   - {fileID: 494466}
   m_Father: {fileID: 468028}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &481612
 Transform:
   m_ObjectHideFlags: 1
@@ -3533,7 +3562,7 @@ Transform:
   - {fileID: 472694}
   - {fileID: 418930}
   m_Father: {fileID: 468028}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!4 &482138
 Transform:
   m_ObjectHideFlags: 1
@@ -3571,7 +3600,7 @@ Transform:
   - {fileID: 434864}
   - {fileID: 442892}
   m_Father: {fileID: 468028}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!4 &485208
 Transform:
   m_ObjectHideFlags: 1
@@ -3597,7 +3626,7 @@ Transform:
   - {fileID: 469292}
   - {fileID: 429996}
   m_Father: {fileID: 468028}
-  m_RootOrder: 13
+  m_RootOrder: 14
 --- !u!4 &488536
 Transform:
   m_ObjectHideFlags: 1
@@ -3623,7 +3652,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 468028}
-  m_RootOrder: 17
+  m_RootOrder: 18
 --- !u!4 &489230
 Transform:
   m_ObjectHideFlags: 1
@@ -3663,7 +3692,7 @@ Transform:
   - {fileID: 471688}
   - {fileID: 409728}
   m_Father: {fileID: 468028}
-  m_RootOrder: 14
+  m_RootOrder: 15
 --- !u!4 &491868
 Transform:
   m_ObjectHideFlags: 1
@@ -3701,7 +3730,7 @@ Transform:
   - {fileID: 488536}
   - {fileID: 431340}
   m_Father: {fileID: 468028}
-  m_RootOrder: 16
+  m_RootOrder: 17
 --- !u!4 &492928
 Transform:
   m_ObjectHideFlags: 1
@@ -3742,7 +3771,7 @@ Transform:
   - {fileID: 494614}
   - {fileID: 448220}
   m_Father: {fileID: 468028}
-  m_RootOrder: 21
+  m_RootOrder: 22
 --- !u!4 &494466
 Transform:
   m_ObjectHideFlags: 1
@@ -3780,7 +3809,7 @@ Transform:
   - {fileID: 451132}
   - {fileID: 444170}
   m_Father: {fileID: 468028}
-  m_RootOrder: 20
+  m_RootOrder: 21
 --- !u!4 &496136
 Transform:
   m_ObjectHideFlags: 1
@@ -3849,7 +3878,7 @@ Transform:
   m_Children:
   - {fileID: 442414}
   m_Father: {fileID: 468028}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!23 &2300700
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -7664,6 +7693,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a0d41be6e4ab945a54651f77d13fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11467414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f926adfa8cf8994a8fd8d873d562a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToHighlight: []
 --- !u!114 &11477932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7676,12 +7717,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimePos: 0
-  workingStateStartPercent: 0
-  workingStateEndPercent: 0
+  workingStateStartPercent: 58
+  workingStateEndPercent: 71
   ActiveObjects: []
   DeactiveObjects: []
   EnableObjectsBeforeTimeLimit: []
-  EnableObjectsWithinTimeLimit: []
+  EnableObjectsWithinTimeLimit:
+  - {fileID: 155878}
   EnableObjectsAfterTimeLimit: []
   DisableObjectsBeforeTimeLimit: []
   DisableObjectsWithinTimeLimit: []

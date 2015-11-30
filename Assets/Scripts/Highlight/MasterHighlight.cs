@@ -99,6 +99,20 @@ public class MasterHighlight : MonoBehaviour
     {
         active = false;
     }
+    /*
+    public void ActivatePath()
+    {
+        foreach (HighlightScript script in _list)
+            if (script.tag == "Rock")
+                script.Activate();
+    }
+
+    public void DeactivatePath()
+    {
+        foreach (HighlightScript script in _list)
+            if (script.tag == "Rock")
+                script.Deactivate();
+    }*/
 
     // GET / SET for a InRange boolean.
     public bool InRange

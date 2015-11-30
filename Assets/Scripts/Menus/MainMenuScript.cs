@@ -58,6 +58,7 @@ public class MainMenuScript : MonoBehaviour {
         ClickSound();
         main.SetActive(!main.activeSelf);
         shop.SetActive(!shop.activeSelf);
+        anim.SetBool("Bazzaar", !anim.GetBool("Bazzaar"));
     }
 
     public void Load()
