@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class IntroLevelController : MonoBehaviour
 {
     public StoryTextController STC;
-    public GameObject AnimationToEnable;
+    public GameObject[] AnimationToEnable;
     public GameObject IntroObject;
     public Canvas canva;
     public Camera animationCamera;
@@ -21,10 +21,14 @@ public class IntroLevelController : MonoBehaviour
 
     public void PlayAnimations() // called from close button of storytext or language picker when the storytext is disabled
     {
-        oldCamera.gameObject.SetActive(false);
+        if(oldCamera)
+            oldCamera.gameObject.SetActive(false);
         Skipable = true;
         button.gameObject.SetActive(false);
-        AnimationToEnable.SetActive(true);
+        foreach(GameObject ani in AnimationToEnable)
+        {
+            ani.SetActive(true);
+        }
         IntroObject.SetActive(false); // LanguagePicker and StoryText
         canva.worldCamera = animationCamera;
     }
