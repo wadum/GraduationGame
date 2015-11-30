@@ -245,6 +245,70 @@ MonoBehaviour:
   UnitTimeToTravel: .125
   MinimalTimeToTravel: 1.5
   NextAI: {fileID: 0}
+--- !u!1 &109294646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 110008, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 109294647}
+  - 114: {fileID: 109294648}
+  m_Layer: 0
+  m_Name: towerView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109294647
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 483778, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 109294646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.5999999, y: 3.69999981, z: -1.70000017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 682931714}
+  m_RootOrder: 0
+--- !u!114 &109294648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11489172, guid: 18876e34fc6d70d4ca805d63b365cd9b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 109294646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 109294646}
+  Relative: 0
+  Yaw: 214
+  Pitch: 45
+  Distance: 8.5
+  EnableSmoothing: 1
+  MovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  UnitTimeToTravel: .125
+  MinimalTimeToTravel: 1.5
+  NextAI: {fileID: 0}
 --- !u!1001 &155061198
 Prefab:
   m_ObjectHideFlags: 0
@@ -587,8 +651,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 350803265}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.77999997, y: 0, z: 25.5400009}
+  m_LocalRotation: {x: 0, y: .224951074, z: 0, w: .974370062}
+  m_LocalPosition: {x: 2.78999996, y: -.5, z: 25.7999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 171207999}
@@ -1257,8 +1321,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 679920726}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.42999983, y: 0, z: 25.7999992}
+  m_LocalRotation: {x: 0, y: -.224951074, z: 0, w: .974370062}
+  m_LocalPosition: {x: 6.94000006, y: -.5, z: 25.7999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 171207999}
@@ -1289,7 +1353,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 9}
+  m_Size: {x: 9, y: 1, z: 9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &682931714
 Transform:
@@ -1297,11 +1361,11 @@ Transform:
   m_PrefabParentObject: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910050837}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.12, y: -.319185257, z: 5.71000004}
+  m_LocalRotation: {x: 0, y: .241921917, z: 0, w: .970295727}
+  m_LocalPosition: {x: -1.1144886, y: -.319127679, z: 5.72148991}
   m_LocalScale: {x: 1, y: 1, z: .589966416}
   m_Children:
-  - {fileID: 1720250388}
+  - {fileID: 109294647}
   m_Father: {fileID: 839574943}
   m_RootOrder: 2
 --- !u!1 &700814952
@@ -1687,7 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f46891c502d2249b799dac6af4bae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enter: {fileID: 1720250387}
+  Enter: {fileID: 109294646}
   ForwardExit: {fileID: 1266488645}
   BackwardExit: {fileID: 0}
   RightExit: {fileID: 1266488645}
@@ -1729,7 +1793,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 926827093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.86999989, y: 0, z: 10.5}
+  m_LocalPosition: {x: 4.86999989, y: -.5, z: 10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 171207999}
@@ -1760,7 +1824,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .800000012, y: 1, z: 18}
+  m_Size: {x: .800000012, y: 1, z: 18.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &965430625
 GameObject:
@@ -1831,7 +1895,7 @@ Transform:
   m_PrefabParentObject: {fileID: 425116, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 442262935}
-  m_LocalRotation: {x: 0, y: .244589016, z: 0, w: .969626904}
+  m_LocalRotation: {x: 0, y: .241921917, z: 0, w: .970295727}
   m_LocalPosition: {x: -6.48999977, y: .396051526, z: -2.14999962}
   m_LocalScale: {x: 1, y: 1, z: 1.07006288}
   m_Children:
@@ -2801,70 +2865,6 @@ MonoBehaviour:
   UnitTimeToTravel: 1
   MinimalTimeToTravel: 1.5
   NextAI: {fileID: 665347071}
---- !u!1 &1720250387
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 110008, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1720250388}
-  - 114: {fileID: 1720250389}
-  m_Layer: 0
-  m_Name: towerView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1720250388
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 483778, guid: 18876e34fc6d70d4ca805d63b365cd9b, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720250387}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.85138416, y: 3.27999997, z: -3.10362267}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 682931714}
-  m_RootOrder: 0
---- !u!114 &1720250389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11489172, guid: 18876e34fc6d70d4ca805d63b365cd9b,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720250387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 1720250387}
-  Relative: 0
-  Yaw: 214
-  Pitch: 45.0999985
-  Distance: 8.39999962
-  EnableSmoothing: 1
-  MovementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  UnitTimeToTravel: .125
-  MinimalTimeToTravel: 1.5
-  NextAI: {fileID: 0}
 --- !u!1 &1762234635
 GameObject:
   m_ObjectHideFlags: 0
