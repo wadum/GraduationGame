@@ -6,7 +6,6 @@ public class FadeInOut : MonoBehaviour {
     public bool ToBlack, FadeOnEnable, LoadNextAfterFade;
     CanvasGroup canvasGroup;
     public float FadeTime;
-    public UnityEngine.Audio.AudioMixer GameAudioMixer;
 
     void OnEnable()
     {
@@ -34,8 +33,6 @@ public class FadeInOut : MonoBehaviour {
 
     IEnumerator Black(float time)
     {
-        float startVol; 
-        GameAudioMixer.GetFloat("volume", out startVol);
         float elapsedTime = 0;
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.interactable = false;
@@ -44,7 +41,6 @@ public class FadeInOut : MonoBehaviour {
         {
             dist = Mathf.Lerp(0, 1, elapsedTime / time);
             canvasGroup.alpha = dist;
-            GameAudioMixer.SetFloat("volume", startVol * dist);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -57,18 +53,15 @@ public class FadeInOut : MonoBehaviour {
 
     IEnumerator Clear(float time)
     {
-        float startVol;
-        GameAudioMixer.GetFloat("volume", out startVol);
         float elapsedTime = 0;
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.interactable = false;
+  //      canvasGroup.interactable = false;
         float dist = 0;
 
         while (elapsedTime < time)
         {
             dist = Mathf.Lerp(1, 0, elapsedTime / time);
             canvasGroup.alpha = dist;
-            GameAudioMixer.SetFloat("volume", startVol * dist);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
