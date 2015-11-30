@@ -114,7 +114,7 @@ public class SettingsMenu : MonoBehaviour
         credits.gameObject.SetActive(true);
         buttons.SetActive(false);
         back.gameObject.SetActive(false);
-        showCredits = true;
+       // showCredits = true;
         image.gameObject.SetActive(false);
     }
 
@@ -150,6 +150,15 @@ public class SettingsMenu : MonoBehaviour
             showCredits = false;
             image.gameObject.SetActive(true);
         }
+    }
+    public void ReturnFromCredits()
+    {
+        clicksound.Play();
+        credits.gameObject.SetActive(false);
+        buttons.SetActive(true);
+        back.gameObject.SetActive(true);
+        showCredits = false;
+        image.gameObject.SetActive(true);
     }
 
 }
