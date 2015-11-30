@@ -12,6 +12,7 @@ public class FinalPieceAI : MonoBehaviour {
     float _startTime;
     public float EndLevelWait1 = 2.5f;
     public float EndLevelWait2 = 1.5f;
+    public FadeInOut fader;
 //    float _distCovered = 0;
     float _fracJourney = 0;
 
@@ -53,14 +54,11 @@ public class FinalPieceAI : MonoBehaviour {
         yield return new WaitForSeconds(EndLevelWait1);
 
         Effects.GetComponent<ParticleSystem>().enableEmission = false;
-        
+
         //spray gay particles
         // to b implemented
-
         yield return new WaitForSeconds(EndLevelWait2);
-        if (SaveLoad.saveLoad)
-            SaveLoad.saveLoad.Reset();
-        Application.LoadLevel(NextLevel);
+        fader.FadeToBlack();
         // this will never be reached but Ienumerators demands a return value on all endings
         yield return null;
     }

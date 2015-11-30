@@ -79,6 +79,7 @@ MonoBehaviour:
   FadeOnEnable: 1
   LoadNextAfterFade: 0
   FadeTime: 5
+  GameAudioMixer: {fileID: 24100000, guid: f368730579da7a24891221e009237811, type: 2}
 --- !u!114 &11488770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,7 +192,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: GameAudioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: f368730579da7a24891221e009237811,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157742}
