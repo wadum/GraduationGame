@@ -16,9 +16,9 @@ public class LightningGenerator : MonoBehaviour {
     LineRenderer lineRenderer;
 
     float LengthForEachSection;
-    float timePassed = 0.0f;
+    public float timePassed { get; set; }
     Camera cam = null;
-    GameObject lightningConductor;
+    public GameObject lightningConductor { get; set; }
     float conductorDistance;
 
     // Use this for initialization
@@ -43,6 +43,14 @@ public class LightningGenerator : MonoBehaviour {
         {
             cam = Camera.main;
             if (cam == null) return;
+        }
+
+        if (LightningConductors == null || LightningConductors.Length < 1)
+        {
+            lineRenderer.enabled = false;
+            if(Audio)
+                Audio.Stop();
+            return;
         }
         // Add time
         timePassed += Time.deltaTime;
