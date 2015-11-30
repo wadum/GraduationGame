@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,7 +9,6 @@ public class TutorialControllerLevel2 : MonoBehaviour
     public bool ForceTutorial = false;
     public bool DisableTutorial = true;
     public GameObject SceneViews;
-    public GameObject MainPlatformViews;
 
     public List<TutorialStep> Steps;
     public List<GameObject> ObjectsToDestroy;
@@ -27,16 +27,16 @@ public class TutorialControllerLevel2 : MonoBehaviour
         if ((PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl2") &&
             !ForceTutorial)
             Destroy(gameObject);
-        else
+        else {
             ObjectsToToggle.ForEach(obj => { if (obj) obj.SetActive(false); });
+            FindObjectsOfType<AutoStartDynamicCameraAI>().ToList().ForEach(Destroy);
+        }
     }
 
     void Start()
     {
         if(SceneViews)
             SceneViews.SetActive(false);
-        if (MainPlatformViews)
-            MainPlatformViews.SetActive(false);
         StartCoroutine(RunAllSteps());
     }
 
@@ -44,6 +44,8 @@ public class TutorialControllerLevel2 : MonoBehaviour
     {
         // We take control of the camera, so we turn off the built-in AI.
         _camera.Stop();
+        _camera.StopAllCoroutines();
+
         DisableTouch();
         // Only once a tutorial start will we freeze the player.
         GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMovement>().TutorialMoveFreeze = true;
@@ -59,12 +61,9 @@ public class TutorialControllerLevel2 : MonoBehaviour
         //We activate te sceneViews within he game.
         if (SceneViews)
             SceneViews.SetActive(true);
-        if (MainPlatformViews)
-            MainPlatformViews.SetActive(true);
 
         // We yield control to the camera built-in AI.
         dynamicCameraAi.AssumeDirectControl();
-        _camera.Run();
         EnableTouch();
         //Destroy the tutorial
         Destroy(gameObject);
