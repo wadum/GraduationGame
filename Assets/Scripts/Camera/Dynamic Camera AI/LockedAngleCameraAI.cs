@@ -30,10 +30,20 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
 
     private IEnumerator Movement() {
         while (true) {
-            DynCam.SetPosition(Yaw, Pitch, Distance, Relative);
+            DynCam.transform.position = DynCam.GetPosition(Yaw, Pitch, Distance, Relative, Target);
             DynCam.transform.LookAt(Target.transform);
 
-            yield return null;
+            if (NextAI == null)
+                yield return null;
+            else {
+                var ai = NextAI.GetComponent<BaseDynamicCameraAI>();
+                if (!ai)
+                    Debug.Log("Next AI is not valid - no dynamic camera ai script attached");
+                else {
+                    ai.AssumeDirectControl();
+                    break;
+                }
+            }
         }
     }
 
