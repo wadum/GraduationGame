@@ -63,6 +63,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void Load()
     {
+        confirm.SetActive(false);
         if(SaveLoad.saveLoad)
             SaveLoad.saveLoad.SaveInterval = 2f;
         Application.LoadLevel(lvl);
@@ -70,6 +71,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public void RestartLevel()
     {
+        confirm.SetActive(false);
         SaveLoad.saveLoad.ResetFrom(lvl);
         if (lvl == 5)
         {
