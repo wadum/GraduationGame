@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: FX_TimePiece01
-  m_Shader: {fileID: 202, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: aca4f263a3fd50c458067e3f32841e6d, type: 3}
+          m_Texture: {fileID: 2800000, guid: dcc3d73c9c15441449c1c58ee61ee34e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -97,6 +97,10 @@ Material:
         second: .0199999996
       data:
         first:
+          name: _Metallic
+        second: 0
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -125,10 +129,6 @@ Material:
         second: 0
       data:
         first:
-          name: _Metallic
-        second: 0
-      data:
-        first:
           name: _InvFade
         second: 1
     m_Colors:
@@ -144,3 +144,7 @@ Material:
         first:
           name: _TintColor
         second: {r: .5, g: .5, b: .5, a: .5}
+      data:
+        first:
+          name: _EmisColor
+        second: {r: .200000003, g: .200000003, b: .200000003, a: 0}
