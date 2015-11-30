@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Level99GameOverDetector : MonoBehaviour
 {
-
     public float DeathWaitTime = 5;
 
     public Transform ZoomedInState;
@@ -32,8 +31,8 @@ public class Level99GameOverDetector : MonoBehaviour
         if (col.transform.root.gameObject.tag == "Wind")
         {
             col.transform.root.gameObject.GetComponent<NavMeshAgent>().ResetPath();
+            FindObjectOfType<Level99EnemySpawnController>().EnemiesCelebrate();
             StartCoroutine(MurderTheBitch());
-
             EnableDeathCollider(false);
         }
     }

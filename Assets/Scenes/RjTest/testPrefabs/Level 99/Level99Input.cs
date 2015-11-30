@@ -7,6 +7,7 @@ public class Level99Input : MonoBehaviour {
     public Camera Cam;
     public Animator PlayerAnimator;
     public GameObject Player;
+    public CapsuleCollider DeathDetection;
 
     bool _shooting;
     LightningGenerator[] _lightnings;
@@ -21,7 +22,7 @@ public class Level99Input : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && DeathDetection.enabled)
             DoRaycast(Input.mousePosition);
     }
 
