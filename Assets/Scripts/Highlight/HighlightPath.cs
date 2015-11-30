@@ -22,6 +22,8 @@ public class HighlightPath : MonoBehaviour
 
     void Update()
     {
+        if (!_obj)
+            return;
         if(ActivateSelectedItemsAfterValue)
             if(_activatedExtra && _obj.TimePos < ValueToActivateSelectedItems)
                 foreach (Transform child in objectsToHighlight)
