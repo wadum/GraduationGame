@@ -3509,6 +3509,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2.47378969
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 21ef34033b352c04394ab716422e36c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21ef34033b352c04394ab716422e36c4, type: 3}
   m_IsPrefabParent: 0
@@ -4759,6 +4763,10 @@ Prefab:
     - target: {fileID: 400000, guid: 21ef34033b352c04394ab716422e36c4, type: 3}
       propertyPath: m_LocalScale.z
       value: 2.3297863
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 21ef34033b352c04394ab716422e36c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 21ef34033b352c04394ab716422e36c4, type: 3}
@@ -8186,6 +8194,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1279443840}
   - 212: {fileID: 1279443839}
+  - 114: {fileID: 1279443841}
   m_Layer: 0
   m_Name: LvlSelect3
   m_TagString: Untagged
@@ -8231,6 +8240,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 689892989}
   m_RootOrder: 0
+--- !u!114 &1279443841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1279443838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd187eeec6a6733429f85bc530d35826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinAlpha: 75
+  MaxAlpha: 255
+  TransitionTime: 1.5
+  Offset: 1
 --- !u!1 &1285066138
 GameObject:
   m_ObjectHideFlags: 0
@@ -9292,6 +9316,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1455284147}
   - 212: {fileID: 1455284146}
+  - 114: {fileID: 1455284148}
   m_Layer: 0
   m_Name: LvlSelect1
   m_TagString: Untagged
@@ -9337,6 +9362,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1401471759}
   m_RootOrder: 0
+--- !u!114 &1455284148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455284145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd187eeec6a6733429f85bc530d35826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinAlpha: 75
+  MaxAlpha: 255
+  TransitionTime: 1.5
+  Offset: 0
 --- !u!1 &1455989463
 GameObject:
   m_ObjectHideFlags: 0
@@ -9765,6 +9805,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1519809670}
   - 212: {fileID: 1519809669}
+  - 114: {fileID: 1519809671}
   m_Layer: 0
   m_Name: LvlSelect2
   m_TagString: Untagged
@@ -9810,6 +9851,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1266137832}
   m_RootOrder: 0
+--- !u!114 &1519809671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1519809668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd187eeec6a6733429f85bc530d35826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinAlpha: 75
+  MaxAlpha: 255
+  TransitionTime: 1.5
+  Offset: .5
 --- !u!1 &1559830524
 GameObject:
   m_ObjectHideFlags: 0
@@ -12043,7 +12099,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1993919251}
-  - 114: {fileID: 1993919252}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Player
@@ -12063,17 +12118,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 271831032}
   m_RootOrder: 0
---- !u!114 &1993919252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1993919250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c53faf9db436d40afe4d68afa6c774, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2017490684
 GameObject:
   m_ObjectHideFlags: 0
