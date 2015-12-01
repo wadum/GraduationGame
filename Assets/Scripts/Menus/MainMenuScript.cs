@@ -76,6 +76,7 @@ public class MainMenuScript : MonoBehaviour {
         if (lvl == 5)
         {
             PlayerPrefs.SetInt(TutorialController.PlayerPrefAlreadySeen, 0);
+            PlayerPrefs.SetInt(TutorialControllerLevel2.PlayerPrefAlreadySeen, 0);
             Application.LoadLevel(4);
         }
         else if (lvl == 7)
