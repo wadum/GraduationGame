@@ -13176,6 +13176,7 @@ GameObject:
   - 137: {fileID: 1662504622}
   - 33: {fileID: 1662504621}
   - 64: {fileID: 1662504620}
+  - 208: {fileID: 1662504623}
   m_Layer: 0
   m_Name: basePlatform
   m_TagString: TimeManipulationObject
@@ -13254,6 +13255,21 @@ SkinnedMeshRenderer:
     m_Center: {x: .225020722, y: .0126771927, z: -.0195757151}
     m_Extent: {x: .631108224, y: .744383872, z: .723353028}
   m_DirtyAABB: 0
+--- !u!208 &1662504623
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1662504618}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: .0100000007, y: .00900000054, z: .0100000007}
+  m_MoveThreshold: .100000001
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: .119000003, y: .00400000019, z: -.0210000016}
+  m_TimeToStationary: .5
 --- !u!1 &1662720926
 GameObject:
   m_ObjectHideFlags: 0
@@ -16890,23 +16906,23 @@ Prefab:
       objectReference: {fileID: 1169984905}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMin.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
