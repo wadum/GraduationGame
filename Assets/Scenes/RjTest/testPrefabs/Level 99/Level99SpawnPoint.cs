@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 public class Level99SpawnPoint : MonoBehaviour {
 
@@ -21,8 +22,8 @@ public class Level99SpawnPoint : MonoBehaviour {
         }
     }
 
-    public bool AmIFree()
+    public bool AmIFree(List<GameObject> enemies)
     {
-        return !_enemyHere;
+        return !enemies.Any(e => Vector3.Distance(transform.position, e.transform.position) < 1);
     }
 }
