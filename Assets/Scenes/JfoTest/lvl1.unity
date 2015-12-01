@@ -960,23 +960,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMin.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: .00999999978
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11453794, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: SceneViews
@@ -1859,6 +1859,10 @@ Prefab:
       propertyPath: FloatWaypoints.Array.data[1]
       value: 
       objectReference: {fileID: 887257994}
+    - target: {fileID: 19816960, guid: 260d9c0d3b5bbc3498fe45fa97ef7414, type: 2}
+      propertyPath: InitialModule.gravityModifier
+      value: -.699999988
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 260d9c0d3b5bbc3498fe45fa97ef7414, type: 2}
   m_IsPrefabParent: 0
@@ -2666,6 +2670,22 @@ Prefab:
       propertyPath: InitialModule.startSpeed.scalar
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 11459676, guid: 7d98a4b2d1c0c914f9108f52a5511606, type: 2}
+      propertyPath: EnableSmoothing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459676, guid: 7d98a4b2d1c0c914f9108f52a5511606, type: 2}
+      propertyPath: MovementCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459676, guid: 7d98a4b2d1c0c914f9108f52a5511606, type: 2}
+      propertyPath: UnitTimeToTravel
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 11459676, guid: 7d98a4b2d1c0c914f9108f52a5511606, type: 2}
+      propertyPath: MinimalTimeToTravel
+      value: .100000001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d98a4b2d1c0c914f9108f52a5511606, type: 2}
   m_IsPrefabParent: 0
@@ -3050,6 +3070,10 @@ Prefab:
       propertyPath: FloatWaypoints.Array.data[1]
       value: 
       objectReference: {fileID: 887257994}
+    - target: {fileID: 19880494, guid: d76c6f558ce82be4aae365aa65435dcf, type: 2}
+      propertyPath: InitialModule.gravityModifier
+      value: -.699999988
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d76c6f558ce82be4aae365aa65435dcf, type: 2}
   m_IsPrefabParent: 0
