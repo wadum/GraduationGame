@@ -36,7 +36,7 @@ public class FadeInOut : MonoBehaviour {
     {
         image.raycastTarget = true;
         float elapsedTime = 0;
-        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        //CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 //        canvasGroup.interactable = false;
         float dist = 1;
         while(elapsedTime < Delay)
@@ -64,7 +64,7 @@ public class FadeInOut : MonoBehaviour {
     {
         image.raycastTarget = true;
         float elapsedTime = 0;
-        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        //CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         float dist = 0;
 
         while (elapsedTime < Delay)
