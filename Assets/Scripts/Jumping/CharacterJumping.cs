@@ -100,19 +100,6 @@ public class CharacterJumping : MonoBehaviour
             return false;
         }
 
-        var inputs = FindObjectsOfType<MultiTouch>();
-        if (!inputs.Any())
-        {
-            Debug.Log("Jumping disabled: No input system in scene.");
-            return false;
-        }
-
-        if (inputs.Length > 1)
-        {
-            Debug.Log("Jumping disabled: Too many input systems in scene, only one expected, change this script?");
-            return false;
-        }
-
         _nav = GetComponent<NavMeshAgent>();
         if (!_nav)
         {
