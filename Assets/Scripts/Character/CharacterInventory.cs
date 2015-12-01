@@ -73,6 +73,14 @@ public class CharacterInventory : MonoBehaviour
             obj.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
 
+		if(clockpart.GetComponent<Clockpart>().PickUpParticles){
+			clockpart.GetComponent<Clockpart>().PickUpParticles.SetActive(true);
+		}
+		
+		if(clockpart.GetComponent<Clockpart>().LootParticles){
+			clockpart.GetComponent<Clockpart>().LootParticles.enableEmission = false;
+		}
+
         clockpart.layer = LayerMask.NameToLayer("Ignore Raycast");
         // Sanity.. This is an ugly fix, but I dont know why my loading gives two cogs..
         foreach (GameObject cog in clockParts)
