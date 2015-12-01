@@ -76,6 +76,11 @@ public class MainMenuScript : MonoBehaviour {
             PlayerPrefs.SetInt(TutorialController.PlayerPrefAlreadySeen, 0);
             Application.LoadLevel(4);
         }
+        else if (lvl == 7)
+        {
+            PlayerPrefs.SetInt(TutorialControllerLevel2.PlayerPrefAlreadySeen, 0);
+            Application.LoadLevel(7);
+        }
         else
         {
             SaveLoad.saveLoad.SaveInterval = 2f;
