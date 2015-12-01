@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class FadeInOut : MonoBehaviour {
 
     public bool ToBlack, FadeOnEnable, LoadNextAfterFade;
-    CanvasGroup canvasGroup;
     public float FadeTime, Delay;
     public Image image;
 
@@ -15,11 +14,6 @@ public class FadeInOut : MonoBehaviour {
                 FadeToBlack();
             else
                 FadeFromBlack();
-    }
-
-    void Start()
-    {
-       canvasGroup = GetComponent<CanvasGroup>();            
     }
 
     public void FadeToBlack()
@@ -36,7 +30,7 @@ public class FadeInOut : MonoBehaviour {
     {
         image.raycastTarget = true;
         float elapsedTime = 0;
-        //CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 //        canvasGroup.interactable = false;
         float dist = 1;
         while(elapsedTime < Delay)
@@ -64,7 +58,7 @@ public class FadeInOut : MonoBehaviour {
     {
         image.raycastTarget = true;
         float elapsedTime = 0;
-        //CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         float dist = 0;
 
         while (elapsedTime < Delay)
@@ -73,7 +67,7 @@ public class FadeInOut : MonoBehaviour {
             yield return null;
         }
         elapsedTime = 0;
-        Debug.Log("fading to clear");
+
         while (elapsedTime < time)
         {
             dist = Mathf.Lerp(1, 0, elapsedTime / time);
