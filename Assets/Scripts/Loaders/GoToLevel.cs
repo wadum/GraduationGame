@@ -6,15 +6,15 @@ public class GoToLevel : MonoBehaviour
 {
     public int timeToWait = 2;
     private float _time = 0.0f;
-    private string level;
+    private int level;
     public AudioMixer Audiomixer;
 
     void Start()
     {
-        level = PlayerPrefs.GetString("LastLevel");
+        level = PlayerPrefs.GetInt("LastLevel");
         SaveLoad.saveLoad.SaveInterval = 0f;
-        string language = PlayerPrefs.GetString("Lan");
-        if(language == "Danish")
+        string language = PlayerPrefs.GetString(I18n.PlayerPrefKey);
+        if(language == I18n.LanguageKeys.Danish.ToString())
         {
             I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
         }else
@@ -26,7 +26,7 @@ public class GoToLevel : MonoBehaviour
     {
         _time += Time.deltaTime;
         if (_time > timeToWait)
-            if (level != "") // this script should only be in the scene with the team logo
+            if (level > 2) // this script should only be in the scene with the team logo
             {
                 Application.LoadLevel(level);
             }

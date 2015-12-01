@@ -9,6 +9,8 @@ public class LoadLevel : MonoBehaviour
     bool active;
     public UnityEngine.UI.Button button;
     public GameObject confirm;
+    public MoveClock Clock;
+
 
     public GUIStyle tex;
     AudioSource crystalclick;
@@ -35,6 +37,7 @@ public class LoadLevel : MonoBehaviour
                 if(hit.transform.gameObject == gameObject)
                 {
                     crystalclick.Play();
+                    Clock.SetLevel(level);
                     confirm.SetActive(true);
                     GameObject.FindObjectOfType<MainMenuScript>().lvl = level;
                     button.gameObject.SetActive(false);

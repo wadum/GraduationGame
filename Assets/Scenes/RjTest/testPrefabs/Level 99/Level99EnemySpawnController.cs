@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Level99EnemySpawnController : MonoBehaviour {
 
-    
+    public int EnemiesSpawned;
+    public int EnemiesKilled;
     public GameObject EnemyPrefab;
-    public float RespawnTimer = 5;
 
-    float _lastSpawn = 0;
+    public float RespawnTimer = 5f;
+
+    public CapsuleCollider DeathDetection;
+
+    float _backupRespawnTimer;
+    List<GameObject> enemies = new List<GameObject>();
     Level99SpawnPoint[] _spawnPoints;
     GameObject _player;
 
@@ -15,30 +21,71 @@ public class Level99EnemySpawnController : MonoBehaviour {
         _spawnPoints = GetComponentsInChildren<Level99SpawnPoint>();
         _player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine("Spawner");
-	}
+        _backupRespawnTimer = RespawnTimer;
+    }
+
+    void Update()
+    {
+        if(EnemiesSpawned == EnemiesKilled && DeathDetection.enabled)
+        {
+            SpawnEnemy();
+        }
+    }
 
     IEnumerator Spawner()
     {
 
         while (true)
         {
-            yield return new WaitForSeconds(RespawnTimer);
-            SpawnEnemy();
+            yield return new WaitForSeconds(RespawnTimer / Mathf.Ceil(Mathf.Max(EnemiesKilled, 1) / RespawnTimer) + 0.2f);
+            if (DeathDetection.enabled)
+            {
+                SpawnEnemy();
+            }
+            else
+            {
+                yield return null;
+            }
         }
     }
 
     void SpawnEnemy()
     {
         int spawnPos = Random.Range(0,_spawnPoints.Length-1);
-        int initPos = spawnPos;
-        while (!_spawnPoints[spawnPos].AmIFree())
+
+        // Enable this to make sure enemies does not spawn on top of each other.
+
+        /*int initPos = spawnPos;
+        while (!_spawnPoints[spawnPos].AmIFree(enemies))
         {
             spawnPos = (spawnPos + 1) % _spawnPoints.Length;
             if (initPos == spawnPos)
                 return;
-        }
-        GameObject Enemy =(GameObject) Instantiate(EnemyPrefab, _spawnPoints[spawnPos].transform.position, Quaternion.identity);
+        }*/
+        EnemiesSpawned++;
+        GameObject Enemy = (GameObject) Instantiate(EnemyPrefab, _spawnPoints[spawnPos].transform.position, Quaternion.identity);
+        enemies.Add(Enemy);
         Enemy.GetComponent<NavMeshAgent>().SetDestination(_player.transform.position);
-        _lastSpawn = Time.time;
+    }
+
+    public void KillEnemy (GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        EnemiesKilled++;
+        Destroy(enemy);
+    }
+
+    public void EnemiesCelebrate()
+    {
+        enemies.ForEach(e => { e.GetComponent<NavMeshAgent>().ResetPath(); e.GetComponentInChildren<Animator>().Play("JumpUpTransition"); });
+    }
+
+    public void Reset()
+    {
+        EnemiesSpawned = 0;
+        EnemiesKilled = 0;
+        RespawnTimer = _backupRespawnTimer;
+        enemies.ForEach(e => { Destroy(e); });
+        enemies = new List<GameObject>();
     }
 }

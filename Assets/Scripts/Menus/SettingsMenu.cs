@@ -78,7 +78,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetDanish()
     {
         clicksound.Play();
-        PlayerPrefs.SetString("Lan", "Danish");
+        PlayerPrefs.SetString(I18n.PlayerPrefKey, I18n.LanguageKeys.Danish.ToString());
         I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
         foreach(Image butt in _clickers) {
             if (butt.gameObject.activeSelf)
@@ -94,7 +94,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetEnglish()
     {
         clicksound.Play();
-        PlayerPrefs.SetString("Lan", "English");
+        PlayerPrefs.SetString(I18n.PlayerPrefKey, I18n.LanguageKeys.English.ToString());
         I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
         foreach (Image butt in _clickers)
         {
