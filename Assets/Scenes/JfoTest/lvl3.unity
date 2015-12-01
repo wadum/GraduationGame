@@ -1054,69 +1054,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.5, y: 2, z: 5.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &126175006
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 126175007}
-  - 114: {fileID: 126175008}
-  m_Layer: 0
-  m_Name: Glorious Loot2 View
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &126175007
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 126175006}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9000001, y: 0, z: 5.57000017}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2029531482}
-  m_RootOrder: 0
---- !u!114 &126175008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 126175006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 126175006}
-  Relative: 0
-  Yaw: 91
-  Pitch: 9.89999962
-  Distance: 12.3000002
-  EnableSmoothing: 1
-  MovementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  UnitTimeToTravel: .300000012
-  MinimalTimeToTravel: 1.5
-  NextAI: {fileID: 0}
 --- !u!4 &139898303
 Transform:
   m_ObjectHideFlags: 0
@@ -17335,6 +17272,69 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1836343113}
   m_Mesh: {fileID: 4300020, guid: 80813bee256137f42982d5272cc75bd6, type: 3}
+--- !u!1 &1844318934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1844318935}
+  - 114: {fileID: 1844318936}
+  m_Layer: 0
+  m_Name: Glorious Loot2 View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844318935
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844318934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.20000052, y: -1.1400001, z: 3.45000124}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2029531482}
+  m_RootOrder: 0
+--- !u!114 &1844318936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844318934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d90091f32f707459a159a093f3ea1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1844318934}
+  Relative: 0
+  Yaw: 91
+  Pitch: 19.7999992
+  Distance: 12.3000002
+  EnableSmoothing: 1
+  MovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  UnitTimeToTravel: .300000012
+  MinimalTimeToTravel: 1.5
+  NextAI: {fileID: 0}
 --- !u!1 &1844851697
 GameObject:
   m_ObjectHideFlags: 0
@@ -19531,7 +19531,7 @@ Transform:
   m_LocalPosition: {x: 27.3700008, y: -.0500000119, z: 7.28000021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 126175007}
+  - {fileID: 1844318935}
   - {fileID: 919664905}
   m_Father: {fileID: 2091633897}
   m_RootOrder: 11
@@ -19546,7 +19546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f46891c502d2249b799dac6af4bae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enter: {fileID: 126175006}
+  Enter: {fileID: 1844318934}
   ForwardExit: {fileID: 919664904}
   BackwardExit: {fileID: 0}
   RightExit: {fileID: 0}
