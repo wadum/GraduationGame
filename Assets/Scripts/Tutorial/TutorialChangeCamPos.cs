@@ -17,7 +17,7 @@ public class TutorialChangeCamPos : TutorialStep {
 
     public void IncrementTaps()
     {
-        Debug.Log(transform.name);
+        //Debug.Log(transform.name);
         _taps++;
     }
 
