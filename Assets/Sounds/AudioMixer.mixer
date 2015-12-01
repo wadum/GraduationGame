@@ -226,6 +226,7 @@ AudioMixerGroupController:
   - {fileID: 24485518}
   - {fileID: 24495766}
   - {fileID: 24492856}
+  - {fileID: 24408178}
   m_UserColorIndex: 5
   m_Mute: 0
   m_Solo: 0
@@ -310,6 +311,7 @@ AudioMixerGroupController:
   m_Volume: 004bcae6ab274074d896524bac211979
   m_Pitch: 4bbb3add72d2cb14ab78d298cd1651a6
   m_Effects:
+  - {fileID: 24494496}
   - {fileID: 24470632}
   m_UserColorIndex: 1
   m_Mute: 0
@@ -326,6 +328,19 @@ AudioMixerEffectController:
   m_MixLevel: 0b881651cec36a441b122c6ddfb36657
   m_Parameters: []
   m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24408178
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 58e9ac27e3d6bea448d6518b5e3f1466
+  m_EffectName: Send
+  m_MixLevel: ab19fe875a23290469ea6333d5d31495
+  m_Parameters: []
+  m_SendTarget: {fileID: 24494496}
   m_EnableWetMix: 0
   m_Bypass: 0
 --- !u!244 &24412710
@@ -630,6 +645,33 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 24450694}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24494496
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: ebe8e4df8eec5eb44906d639bd99998b
+  m_EffectName: Duck Volume
+  m_MixLevel: 45e5c9955f3cf3f42bcfbc314b0466b9
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: 8164b2655d14db94cafd196a5d781d0b
+  - m_ParameterName: Ratio
+    m_GUID: 9172d982d59fb714890f768ecb29d6b4
+  - m_ParameterName: Attack Time
+    m_GUID: 6a3e4b700cb57ea41bf7941fdc0d5745
+  - m_ParameterName: Release Time
+    m_GUID: 3b696895bd223444389561da492dfd86
+  - m_ParameterName: Make-up Gain
+    m_GUID: 02d19754fede8f44c85342a4e31a6bfc
+  - m_ParameterName: Knee
+    m_GUID: 6e1a455d1a9732a43a01132c4d14b19b
+  - m_ParameterName: Sidechain Mix
+    m_GUID: 5bed6ac07b5830842b3d41bbf8b02f02
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &24495766
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -669,7 +711,8 @@ AudioMixerSnapshotController:
     6e86a110c58c706409a90583bb2ad0db: -3.0999999
     dc58c71053c7ac94da72ed42df85bbe6: 4.03200006
     81a305603ef419b4aa0ced39401be82b: 4
-    af159c60625f6f844b568a2b76b5b19e: 2
+    af159c60625f6f844b568a2b76b5b19e: 3.5
+    6a3e4b700cb57ea41bf7941fdc0d5745: 10
     2ceabf70394c6844f80ef4c69b253aa1: -2.64718103
     ce9a1990d4bd88e44810bcf441f16391: 1.5
     c6ffcb90643bc5e48b64ac4e3b7a6520: 10
@@ -689,6 +732,7 @@ AudioMixerSnapshotController:
     e6973312981b6024fbe8c08feb8f4dea: -24.900753
     8b267652ecb92b44ca24630edbe4a3b7: 0
     f4673982d2b1bf54a82eddfc4efe1735: -80
+    9172d982d59fb714890f768ecb29d6b4: 10
     c404f1c246fbdaa43bbabc9313e3ebe1: 0
     7d7466e221d82e147b0f9595529b271b: 1.5
     ee77ca03f4fcc1141988ed41c831ae4d: -.00244187564
@@ -717,8 +761,10 @@ AudioMixerSnapshotController:
     fdb60a3538050cf4d81f9af78aef0d90: 7
     3ddf105539db35148a9f2a350bda00a0: 6.79238272
     8fec195580dd6ad45a09a009b8c4229f: 18.7000008
+    8164b2655d14db94cafd196a5d781d0b: -80
     72a5f2755d0f6b142a30b7b7a580ef0e: -80
     47abaa85751e63746a46b5bb3abca1df: -80
+    3b696895bd223444389561da492dfd86: 10
     949c26b59e47e324d93ace40ece7b845: 12.5
     cda4ce46006bf9e46b40ff32bb48dd5a: 10
     9f6a6e56cce75dd4c856eea038e2633d: 10
@@ -730,6 +776,7 @@ AudioMixerSnapshotController:
     004bcae6ab274074d896524bac211979: -5.32307148
     4b07e1073bdb7794a82e05a3fae6aa36: -10
     bf0adc77293e7c9448863e1d0ed026ef: 0
+    ab19fe875a23290469ea6333d5d31495: 0
     0d6071d76d49a3c4d9280f1eb4e34d38: .467000008
     41c212d743deef548b403bce00ce036b: 50
     78079cd71f3fe1d4989f43cacc9dcd4b: 50
@@ -760,6 +807,7 @@ AudioMixerSnapshotController:
     1bb36c4ce53458f4881121319ce25106: .561999977
     df5e425c79ab1194ba9c09288c06c7fd: -70.5
     d94ef4fcefb8c1a40b2a797944e5c6cf: 0
+    6e1a455d1a9732a43a01132c4d14b19b: 50
     f7a87c6ddffdd5e47bd174a0f998e407: -2.28898478
     472d577d9e4153d4c8059ca5a80055f9: 0
     1dddb18d25efa1e49b50b9bbc59b8a15: 1
