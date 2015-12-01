@@ -18,6 +18,8 @@ public class Level99GameOverDetector : MonoBehaviour
 
     public Camera MainCam;
 
+    public GameObject GameOverScreen;
+
     void Start()
     {
         _playerBodyMaterial = _playerBody.GetComponent<Renderer>().material;
@@ -49,6 +51,7 @@ public class Level99GameOverDetector : MonoBehaviour
             _disAmount += Time.deltaTime / DeathWaitTime;
             yield return null;
         }
+        GameOverScreen.SetActive(true);
     }
 
     public void EnableDeathCollider(bool state)
@@ -60,6 +63,7 @@ public class Level99GameOverDetector : MonoBehaviour
             _playerBodyMaterial.SetFloat("_DissolveAmount", 0);
             _playerEyesMaterial.SetFloat("_DissolveAmount", 0);
             _playerHairMaterial.SetFloat("_DissolveAmount", 0);
+
             MainCam.transform.localPosition = ZoomedOutState.localPosition;
             MainCam.transform.localRotation = ZoomedOutState.localRotation;
         }
