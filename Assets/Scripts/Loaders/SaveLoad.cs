@@ -25,7 +25,6 @@ public class SaveLoad : MonoBehaviour {
     public int _lvl = -1;
 
     public CharacterInventory inv;
-    public string lastLevel;
     Clockpart[] cogs;
 
 
@@ -74,9 +73,10 @@ public class SaveLoad : MonoBehaviour {
     {
         if (level == 2)
             return;
-        PlayerPrefs.SetString("LastLevel", Application.loadedLevelName);
-        // 3 = Intro, 4 = Main menu, 8 = Ending, if the build order changes, this also needs to be adjusted, alternative is by name, but they are just as liekly to change or be misspelled.
-		if (Application.loadedLevel == 3 || Application.loadedLevel == 4 || Application.loadedLevel == 8)
+        PlayerPrefs.SetInt("LastLevel", Application.loadedLevel);
+        // 4 = Intro, 3 = Main menu, 10 = Ending, if the build order changes, this also needs to be adjusted, alternative is by name, but they are just as liekly to change or be misspelled.
+        // 6 & 8 are cutscenes.
+		if (Application.loadedLevel == 3 || Application.loadedLevel == 4 || Application.loadedLevel == 10)// || Application.loadedLevel == 6 || Application.loadedLevel == 8)
             // We simple set the interval for saving to 0, and we do not save.
             SaveLoad.saveLoad.SaveInterval = 0f;
         else
