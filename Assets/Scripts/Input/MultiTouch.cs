@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,12 +18,15 @@ public class MultiTouch : MonoBehaviour
         TapAndHoldSucces,
         TapAndHoldFail;
 
+    public static MultiTouch Instance { get { return _instance; } }
+
     private float _prevVolume;
-    private float _volumeFadeTime = 0.03f;
+    private const float VolumeFadeTime = 0.03f;
 
     private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 	private static readonly Dictionary<string, List<Func<RaycastHit, bool>>> TapAndHoldEventHandlers = new Dictionary<string, List<Func<RaycastHit, bool>>>();
 
+    private static MultiTouch _instance;
     private static Action<Touch> _swipeHandler = (s) => { };
     private static Action<List<Touch>> _pinchHandler = (p) => { };
     private GraphicRaycaster _guiCaster;
@@ -34,6 +35,8 @@ public class MultiTouch : MonoBehaviour
 
     void Awake() {
         ClearAllHandlers();
+
+        _instance = this;
     }
 
     void Start()
@@ -224,8 +227,8 @@ public class MultiTouch : MonoBehaviour
 
     private IEnumerator StopSound(AudioSource a)
     {
-        float time = Time.time + _volumeFadeTime;
-        var amount = _prevVolume / (Time.deltaTime / _volumeFadeTime);
+        float time = Time.time + VolumeFadeTime;
+        var amount = _prevVolume / (Time.deltaTime / VolumeFadeTime);
         while (time > Time.time)
         {
             a.volume -= amount;

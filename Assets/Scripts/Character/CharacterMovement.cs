@@ -19,6 +19,8 @@ public class CharacterMovement : MonoBehaviour
 
     LookHERE tmpLTarget;
 
+    bool _haveMoved;
+
     // Use this for initialization
     void Start()
     {
@@ -44,6 +46,15 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Vector3.Distance(_agent.velocity, Vector3.zero)> 0.1f)
+        {
+            _haveMoved = true;
+        }
+        if (_agent.velocity == Vector3.zero && _haveMoved)
+        {
+            _agent.ResetPath();
+            _haveMoved = false;
+        }
         if (_lootAtMovingObject)
         {
             if (_lookAtTarget != null)

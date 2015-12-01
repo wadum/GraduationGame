@@ -11,7 +11,6 @@ public abstract class TutorialStep : MonoBehaviour {
 	
 	protected bool Completed;
 	protected bool TouchRequired = true;
-	private MultiTouch _multiTouch;
 
 	protected virtual bool Continue()
 	{
