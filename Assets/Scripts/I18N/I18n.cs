@@ -4,8 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class I18n {
-	
-	public enum LanguageKeys {
+
+
+    public static string PlayerPrefKey = "Lan";
+
+    public enum LanguageKeys {
 		Danish, English
 	};
 
