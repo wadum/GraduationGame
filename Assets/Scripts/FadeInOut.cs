@@ -5,7 +5,7 @@ public class FadeInOut : MonoBehaviour {
 
     public bool ToBlack, FadeOnEnable, LoadNextAfterFade;
     CanvasGroup canvasGroup;
-    public float FadeTime;
+    public float FadeTime, Delay;
     public Image image;
 
     void OnEnable()
@@ -39,6 +39,13 @@ public class FadeInOut : MonoBehaviour {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 //        canvasGroup.interactable = false;
         float dist = 1;
+        while(elapsedTime < Delay)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        elapsedTime = 0;
+
         while (elapsedTime < time)
         {
             dist = Mathf.Lerp(0, 1, elapsedTime / time);
@@ -60,6 +67,13 @@ public class FadeInOut : MonoBehaviour {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         float dist = 0;
 
+        while (elapsedTime < Delay)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        elapsedTime = 0;
+        Debug.Log("fading to clear");
         while (elapsedTime < time)
         {
             dist = Mathf.Lerp(1, 0, elapsedTime / time);
