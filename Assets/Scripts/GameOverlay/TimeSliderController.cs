@@ -130,7 +130,7 @@ public class TimeSliderController : MonoBehaviour
             if (_slider.value < (100 - 100f * Time.deltaTime / var) && _slider.value > - (100f * Time.deltaTime / var) && (!_player.transform.IsChildOf(_obj.transform.root) || _obj.tag == "Moveable Rock"))
             {
                 RaycastHit[] hits;
-                hits = Physics.RaycastAll(_player.transform.position, -Vector3.up, 2f);
+                hits = Physics.RaycastAll(_player.transform.position, -Vector3.up, 0.6f);
 
                 for (int i = 0; i < hits.Length; i++)
                 {
