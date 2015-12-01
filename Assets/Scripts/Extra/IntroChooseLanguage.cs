@@ -9,12 +9,14 @@ public class IntroChooseLanguage : MonoBehaviour
 
     public void SetDanish()
     {
+        PlayerPrefs.SetString(I18n.PlayerPrefKey, I18n.LanguageKeys.Danish.ToString());
         I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.Danish);
         ShutDown();
     }
 
     public void SetEnglish()
     {
+        PlayerPrefs.SetString(I18n.PlayerPrefKey, I18n.LanguageKeys.English.ToString());
         I18n.GetInstance().LoadLanguage(I18n.LanguageKeys.English);
         ShutDown();
     }
