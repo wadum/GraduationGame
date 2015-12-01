@@ -56,14 +56,6 @@ public class Clockpart : MonoBehaviour
             return;
         }
 
-		if(PickUpParticles){
-			PickUpParticles.SetActive(true);
-		}
-
-		if(LootParticles){
-			LootParticles.enableEmission = false;
-		}
-
         transform.parent = player.transform;
         transform.position += Vector3.up;
         pickedUp = true;
