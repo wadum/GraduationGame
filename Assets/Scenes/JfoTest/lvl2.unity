@@ -1973,6 +1973,10 @@ Prefab:
       propertyPath: m_Center.z
       value: -2.47000003
       objectReference: {fileID: 0}
+    - target: {fileID: 11466710, guid: 14d8f1ece7f3f2545ac49d96c3fff53a, type: 2}
+      propertyPath: TimePos
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14d8f1ece7f3f2545ac49d96c3fff53a, type: 2}
   m_IsPrefabParent: 0
@@ -2024,6 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991971fa4ab177f45bc58a5ef5cd8ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BridgeBlockers: {fileID: 0}
   ActiveMe: {fileID: 1785604346}
   Ani: {fileID: 215700093}
   Speed: .150000006
@@ -2750,6 +2755,10 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 337142172}
   m_Mesh: {fileID: 4300010, guid: 997ce82939ca1c9479bdc4f209286dec, type: 3}
+--- !u!4 &351113777 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 463640, guid: 824836155a4afa04b9664b6cf8f29883, type: 2}
+  m_PrefabInternal: {fileID: 870307731}
 --- !u!1 &355229230
 GameObject:
   m_ObjectHideFlags: 0
@@ -5331,6 +5340,10 @@ Prefab:
       propertyPath: m_TagString
       value: TimeManipulationObject
       objectReference: {fileID: 0}
+    - target: {fileID: 11410204, guid: 2ea39f45c700e437db38e03b62d3e434, type: 2}
+      propertyPath: TimePos
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ea39f45c700e437db38e03b62d3e434, type: 2}
   m_IsPrefabParent: 0
@@ -5372,6 +5385,10 @@ Prefab:
     - target: {fileID: 406156, guid: b2117040a618ae64c917ba6ffce2f5e9, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11446908, guid: b2117040a618ae64c917ba6ffce2f5e9, type: 2}
+      propertyPath: TimePos
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b2117040a618ae64c917ba6ffce2f5e9, type: 2}
@@ -5442,7 +5459,7 @@ Prefab:
     - target: {fileID: 11482038, guid: 5103f92b4812eb040809cfd8b138a69a, type: 2}
       propertyPath: ClockPosition
       value: 
-      objectReference: {fileID: 2147200068}
+      objectReference: {fileID: 351113777}
     - target: {fileID: 494966, guid: 5103f92b4812eb040809cfd8b138a69a, type: 2}
       propertyPath: m_LocalScale.x
       value: 1.70000005
@@ -8657,6 +8674,10 @@ Prefab:
     - target: {fileID: 190474, guid: 472141d57a733dd4588b3eeee3e62fd4, type: 2}
       propertyPath: m_Name
       value: pendulumPlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11480664, guid: 472141d57a733dd4588b3eeee3e62fd4, type: 2}
+      propertyPath: TimePos
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 472141d57a733dd4588b3eeee3e62fd4, type: 2}
@@ -12756,6 +12777,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .549985349
       objectReference: {fileID: 0}
+    - target: {fileID: 11477932, guid: 5518f35e26fc0ef49a3827810e67c6fb, type: 2}
+      propertyPath: TimePos
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5518f35e26fc0ef49a3827810e67c6fb, type: 2}
   m_IsPrefabParent: 0
@@ -12772,7 +12797,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 441988, guid: e6fa5177004ff444dbbd7470552aafe8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .699999988
+      value: 2.71000004
       objectReference: {fileID: 0}
     - target: {fileID: 441988, guid: e6fa5177004ff444dbbd7470552aafe8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -16282,6 +16307,10 @@ Prefab:
       propertyPath: m_Name
       value: pendulumPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 11489388, guid: 755e7b688023a4a4597257aa0d604c3f, type: 2}
+      propertyPath: TimePos
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 755e7b688023a4a4597257aa0d604c3f, type: 2}
   m_IsPrefabParent: 0
@@ -16930,23 +16959,23 @@ Prefab:
       objectReference: {fileID: 1169984905}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
@@ -17444,10 +17473,6 @@ Transform:
   - {fileID: 85147733}
   m_Father: {fileID: 83655431}
   m_RootOrder: 0
---- !u!4 &2147200068 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 469262, guid: 824836155a4afa04b9664b6cf8f29883, type: 2}
-  m_PrefabInternal: {fileID: 870307731}
 --- !u!1 &2147200069 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 165320, guid: 824836155a4afa04b9664b6cf8f29883, type: 2}
