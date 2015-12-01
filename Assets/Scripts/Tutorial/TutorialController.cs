@@ -14,7 +14,6 @@ public class TutorialController : MonoBehaviour
     public List<GameObject> ObjectsToDestroy;
     public List<GameObject> ObjectsToToggle;
 
-    private static MultiTouch _multiTouch;
     private static DynamicCamera _camera;
     public BaseDynamicCameraAI dynamicCameraAi;
 
@@ -22,7 +21,6 @@ public class TutorialController : MonoBehaviour
 
     void Awake()
     {
-        _multiTouch = FindObjectOfType<MultiTouch>();
         _camera = FindObjectOfType<DynamicCamera>();
         if ((PlayerPrefs.GetInt(PlayerPrefAlreadySeen) > 0 || DisableTutorial || Application.loadedLevelName != "lvl1") &&
             !ForceTutorial)
@@ -93,13 +91,11 @@ public class TutorialController : MonoBehaviour
 
     public static void EnableTouch()
     {
-        if (_multiTouch)
-            _multiTouch.enabled = true;
+        MultiTouch.Instance.enabled = true;
     }
 
     public static void DisableTouch()
     {
-        if (_multiTouch)
-            _multiTouch.enabled = false;
+        MultiTouch.Instance.enabled = false;
     }
 }
