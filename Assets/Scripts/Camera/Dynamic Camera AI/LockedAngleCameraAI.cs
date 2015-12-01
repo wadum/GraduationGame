@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LockedAngleCameraAI : BaseDynamicCameraAI {
     public GameObject Target;
