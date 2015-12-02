@@ -41,6 +41,7 @@ public class CharacterInventory : MonoBehaviour
 
         if (clockPartCounter >= clockpartsToCollect && _doOnce)
         {
+            MultiTouch.Instance.enabled = false;
 			if(!CompletedAudio.isPlaying)
 				CompletedAudio.Play();
             if(!(clockParts[0].GetComponent<Clockpart>().finishedReassembling && clockParts[1].GetComponent<Clockpart>().finishedReassembling))

@@ -60,13 +60,14 @@ public class TutorialController : MonoBehaviour
         //We activate te sceneViews within he game.
         SceneViews.SetActive(true);
 
+        GameOverlayController.gameOverlayController.StartCoroutine(DelayUserControl());
+
         //Destroy the tutorial
         Destroy(gameObject);
     }
 
     void OnDestroy()
     {
-        EnableTouch();
         ObjectsToToggle.ForEach(obj => { if (obj) obj.SetActive(true); });
         ObjectsToDestroy.ForEach(obj => { if (obj) Destroy(obj); });
         //var cam = FindObjectOfType<TopDownCamController>();
@@ -91,11 +92,21 @@ public class TutorialController : MonoBehaviour
 
     public static void EnableTouch()
     {
-        MultiTouch.Instance.enabled = true;
+
+        if (MultiTouch.Instance)
+            MultiTouch.Instance.enabled = true;
     }
 
     public static void DisableTouch()
     {
+        if (MultiTouch.Instance)
+            MultiTouch.Instance.enabled = false;
+    }
+
+    private static IEnumerator DelayUserControl()
+    {
         MultiTouch.Instance.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        MultiTouch.Instance.enabled = true;
     }
 }

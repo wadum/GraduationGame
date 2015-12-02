@@ -59,28 +59,37 @@ public class TutorialControllerLevel2 : MonoBehaviour
         //We activate te sceneViews within he game.
         if (SceneViews)
             SceneViews.SetActive(true);
-
-        // We yield control to the camera built-in AI.
+        
         dynamicCameraAi.AssumeDirectControl();
-        EnableTouch();
+        
+        GameOverlayController.gameOverlayController.StartCoroutine(DelayUserControl());
+
         //Destroy the tutorial
         Destroy(gameObject);
     }
 
     void OnDestroy()
     {
-        EnableTouch();
         ObjectsToToggle.ForEach(obj => { if (obj) obj.SetActive(true); });
         ObjectsToDestroy.ForEach(obj => { if (obj) Destroy(obj); });
     }
 
     public static void EnableTouch()
     {
-        MultiTouch.Instance.enabled = true;
+        if(MultiTouch.Instance)
+            MultiTouch.Instance.enabled = true;
     }
 
     public static void DisableTouch()
     {
+        if (MultiTouch.Instance)
+            MultiTouch.Instance.enabled = false;
+    }
+
+    private static IEnumerator DelayUserControl()
+    {
         MultiTouch.Instance.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        MultiTouch.Instance.enabled = true;
     }
 }
