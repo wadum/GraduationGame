@@ -28,6 +28,8 @@ public class GoToLevel : MonoBehaviour
         if (_time > timeToWait)
             if (level > 2) // this script should only be in the scene with the team logo
             {
+              if (level == 5 && PlayerPrefs.GetInt(TutorialController.PlayerPrefAlreadySeen) == 0)
+                   SaveLoad.saveLoad.ResetLevel(5);
                 Application.LoadLevel(level);
             }
             else
