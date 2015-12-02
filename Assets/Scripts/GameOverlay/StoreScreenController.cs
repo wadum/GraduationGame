@@ -5,7 +5,7 @@ using System.Collections;
 
 public class StoreScreenController : MonoBehaviour {
 
-    public GameObject Preorder, PreorderPurchased, SeasonPass, SeasonPassPurchased, ThankYou;
+    public GameObject Preorder, PreorderPurchased, SeasonPass, SeasonPassPurchased, ThankYou, NotEnough;
     public int PreorderPrice, SeasonPassPrice, Wallet;
     // 0 = nothing, 1 = Preorder, 2 = Seasonpass
     public static String PurchasedLevels = "PurchasedLevels";
@@ -77,11 +77,16 @@ public class StoreScreenController : MonoBehaviour {
 
     void OutOfFunds()
     {
-
+        NotEnough.SetActive(true);
     }
 
     public void HideThankYou()
     {
         ThankYou.SetActive(false);
+    }
+
+    public void HideNotEnough()
+    {
+        NotEnough.SetActive(false);
     }
 }
