@@ -4,7 +4,11 @@ public class ScreenSleep : MonoBehaviour
 {
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        Screen.sleepTimeout = 300; // 5 minutes, I guess...
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
+
+	void OnDestroy()
+	{
+		Screen.sleepTimeout = SleepTimeout.SystemSetting;
+	}
 }
