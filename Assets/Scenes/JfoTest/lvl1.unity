@@ -1763,23 +1763,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22487312, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 22404268, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11453794, guid: ef49f7414f3aa472582dd471e609dd24, type: 2}
       propertyPath: SceneViews
@@ -3753,7 +3753,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 887257994}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 2.28200006, y: -.75999999, z: 7.22599983}
+  m_LocalPosition: {x: 1.32000005, y: -.75999999, z: 6.69999981}
   m_LocalScale: {x: 1, y: 2.60881162, z: 1}
   m_Children:
   - {fileID: 818810801}
@@ -5492,6 +5492,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1335584796}
   - 137: {fileID: 1335584797}
+  - 208: {fileID: 1335584798}
   m_Layer: 0
   m_Name: spaceChar_ref_charBody
   m_TagString: Untagged
@@ -5573,6 +5574,21 @@ SkinnedMeshRenderer:
     m_Center: {x: -.00719948113, y: -.0404339582, z: .304790437}
     m_Extent: {x: .475038886, y: .394516528, z: .524570405}
   m_DirtyAABB: 0
+--- !u!208 &1335584798
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335584795}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: .109999999, y: .687000036, z: .0149999997}
+  m_MoveThreshold: .100000001
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -.779999971, y: .596000016, z: .0810000002}
+  m_TimeToStationary: .5
 --- !u!1 &1336163507
 GameObject:
   m_ObjectHideFlags: 0
