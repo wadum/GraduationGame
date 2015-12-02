@@ -254,7 +254,7 @@ public class CharacterJumping : MonoBehaviour
         _jumping = true;
         _nav.enabled = false;
 
-        GameOverlayController.gameOverlayController.DeactivateSlider();
+        var restoreTouch = MultiTouch.Instance.enabled;
 
         var lookDirection = Vector3.ProjectOnPlane(target - transform.position, Vector3.up);
         if (lookDirection != Vector3.zero)
@@ -284,6 +284,8 @@ public class CharacterJumping : MonoBehaviour
             var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
             var jumpCurve = MakeBezierJump(transform.position, target);
 
+            MultiTouch.Instance.enabled = false;
+            GameOverlayController.gameOverlayController.DeactivateSlider();
             var t = 0f;
             while (t <= 1)
             {
@@ -302,6 +304,7 @@ public class CharacterJumping : MonoBehaviour
 
         transform.parent = targetParent;
         _jumping = false;
+        MultiTouch.Instance.enabled = restoreTouch;
     }
 
     // The sphere on the player has collided with something, if it's something jumpable, we enable the highlight script for that particular item.

@@ -2,11 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngineInternal;
 
 public class MultiTouch : MonoBehaviour
 {
@@ -74,6 +72,7 @@ public class MultiTouch : MonoBehaviour
 
     void OnDisable() {
         StopAllCoroutines();
+        SetTapAndHoldValue(0, false);
     }
 
     #region State machine for recognizing multitouch taps and gestures
