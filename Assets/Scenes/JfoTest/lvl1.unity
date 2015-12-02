@@ -2924,65 +2924,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 1, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &665347071
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 665347072}
-  - 114: {fileID: 665347073}
-  m_Layer: 0
-  m_Name: KeyTwo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &665347072
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 665347071}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.855000257, y: 2.70500016, z: -6.15299988}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2102539515}
-  m_RootOrder: 1
---- !u!114 &665347073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 665347071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0115811fc9b2b49439c57e2a9acf3f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LookAt: {fileID: 466546547}
-  EnableSmoothing: 1
-  MovementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  UnitTimeToTravel: .5
-  MinimalTimeToTravel: 1.5
-  NextAI: {fileID: 1398702977}
 --- !u!1 &672136492
 GameObject:
   m_ObjectHideFlags: 0
@@ -7021,8 +6962,8 @@ MonoBehaviour:
   Target: {fileID: 2102539514}
   Relative: 0
   Yaw: 346
-  Pitch: -16.2000008
-  Distance: 4.5999999
+  Pitch: 15
+  Distance: 11
   EnableSmoothing: 1
   MovementCurve:
     serializedVersion: 2
@@ -7039,9 +6980,9 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  UnitTimeToTravel: 1
+  UnitTimeToTravel: .400000006
   MinimalTimeToTravel: 1.5
-  NextAI: {fileID: 665347071}
+  NextAI: {fileID: 1266488645}
 --- !u!1 &1706945140
 GameObject:
   m_ObjectHideFlags: 0
@@ -8384,7 +8325,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1694545363}
-  - {fileID: 665347072}
   m_Father: {fileID: 839574943}
   m_RootOrder: 0
 --- !u!114 &2102539516
@@ -8401,8 +8341,8 @@ MonoBehaviour:
   Target: {fileID: 2102539514}
   Relative: 0
   Yaw: 346
-  Pitch: -16.2000008
-  Distance: 4.5999999
+  Pitch: 11
+  Distance: 2.29999995
   EnableSmoothing: 0
   MovementCurve:
     serializedVersion: 2
