@@ -5,9 +5,10 @@ public class MainMenuScript : MonoBehaviour {
     public Animator anim;
     public GameObject back;
     public GameObject confirm;
+    public GameObject yessure;
     AudioSource clicksound;
     public int lvl;
-
+    public GameObject Gems;
 	// Use this for initialization
 	void Start () {
         clicksound = GetComponent<AudioSource>();
@@ -55,17 +56,25 @@ public class MainMenuScript : MonoBehaviour {
         confirm.SetActive(false);
         if(SaveLoad.saveLoad)
             SaveLoad.saveLoad.SaveInterval = 2f;
+        if (lvl == 5 && PlayerPrefs.GetInt(TutorialController.PlayerPrefAlreadySeen) == 0)
+            SaveLoad.saveLoad.ResetLevel(5);
         Application.LoadLevel(lvl);
     }
 
     public void RestartLevel()
     {
+        if (!SaveLoad.saveLoad)
+        {
+            Debug.LogError("You dont have a SaveLoad instance, remember to start from the DADIU screen lvl");
+            return;
+        }
         confirm.SetActive(false);
-        SaveLoad.saveLoad.ResetFrom(lvl);
+        SaveLoad.saveLoad.ResetLevel(lvl);
+    //    SaveLoad.saveLoad.ResetFrom(lvl);
         if (lvl == 5)
         {
             PlayerPrefs.SetInt(TutorialController.PlayerPrefAlreadySeen, 0);
-            PlayerPrefs.SetInt(TutorialControllerLevel2.PlayerPrefAlreadySeen, 0);
+// PlayerPrefs.SetInt(TutorialControllerLevel2.PlayerPrefAlreadySeen, 0);
             Application.LoadLevel(4);
         }
         else if (lvl == 7)
@@ -91,4 +100,20 @@ public class MainMenuScript : MonoBehaviour {
         if (clicksound)
             clicksound.Play();
     }
+
+    public void ToggleYesActive()
+    {
+        yessure.SetActive(!yessure.activeSelf);
+        confirm.SetActive(!confirm.activeSelf);
+    }
+
+    public void RestartEVEYTHING()
+    {
+        PlayerPrefs.DeleteKey(TutorialController.PlayerPrefAlreadySeen);
+        PlayerPrefs.DeleteKey(TutorialControllerLevel2.PlayerPrefAlreadySeen);
+        SaveLoad.saveLoad.ResetEverything();
+        Gems.SetActive(false);
+        Gems.SetActive(true);
+    }
+
 }

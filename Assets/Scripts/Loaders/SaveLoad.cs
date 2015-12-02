@@ -52,7 +52,7 @@ public class SaveLoad : MonoBehaviour {
     }
 
     // Pepares to save and load levels, by finding all objects of intreset, and clear the lists for storing data.
-    void Prepare()
+    void Prepare(bool AndLoad)
     {
         // The level number
         _lvl = Application.loadedLevel;
@@ -65,7 +65,8 @@ public class SaveLoad : MonoBehaviour {
         // The pieces in the level, in case they are already looted.
         cogs = GameObject.FindObjectsOfType<Clockpart>();
         // We load the data for the current level
-        Load();
+        if(AndLoad)
+            Load();
     }
 
     // When loading a level, we check if it's a special case level, like the intro or the main menu, in which case we do not save.
@@ -84,7 +85,12 @@ public class SaveLoad : MonoBehaviour {
             // We set the interval for the saves to the initially set value, 2 sec by default
             SaveLoad.saveLoad.SaveInterval = _SaveInterval;
             // We Prepare a level
-            Prepare();
+            if (Application.loadedLevel == 5 && PlayerPrefs.GetInt(TutorialController.PlayerPrefAlreadySeen) == 1)
+            {
+                Prepare(false);
+                return;
+            }
+            Prepare(true);
         }
     }
 
@@ -218,6 +224,14 @@ public class SaveLoad : MonoBehaviour {
             {
                 File.Delete(Application.persistentDataPath + "/save" + i + ".save");
             }
+        }
+    }
+
+    public void ResetLevel(int level)
+    {
+        if (File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
+        {
+            File.Delete(Application.persistentDataPath + "/save" + level + ".save");
         }
     }
 

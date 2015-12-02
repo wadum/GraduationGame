@@ -16,9 +16,9 @@ public class LoadLevel : MonoBehaviour
     AudioSource crystalclick;
 
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
-        if (!File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
+        if (!File.Exists(Application.persistentDataPath + "/save" + level + ".save") && level != 5)
         {
             this.gameObject.SetActive(false);
         }
@@ -49,6 +49,12 @@ public class LoadLevel : MonoBehaviour
 
     public void Enable()
     {
+        if (level == 5)
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
+            this.gameObject.AddComponent<MeshCollider>();
+            return;
+        }
         if (File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
         {
             this.gameObject.layer = LayerMask.NameToLayer("Default");
