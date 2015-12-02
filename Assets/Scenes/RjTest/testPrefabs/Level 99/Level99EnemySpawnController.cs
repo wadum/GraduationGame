@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Level99EnemySpawnController : MonoBehaviour {
 
     public int EnemiesSpawned;
-    public int EnemiesKilled;
+    private int _enemiesKilled;
+    public int EnemiesKilled {
+        get { return _enemiesKilled; } set { CurrentGems.text = value.ToString(); _enemiesKilled = value; } }
     public GameObject EnemyPrefab;
 
     public float RespawnTimer = 5f;
@@ -16,6 +19,8 @@ public class Level99EnemySpawnController : MonoBehaviour {
     List<GameObject> enemies = new List<GameObject>();
     Level99SpawnPoint[] _spawnPoints;
     GameObject _player;
+
+    public Text CurrentGems;
 
     void Start () {
         _spawnPoints = GetComponentsInChildren<Level99SpawnPoint>();
