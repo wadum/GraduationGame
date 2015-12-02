@@ -39,7 +39,19 @@ public class LoadLevel : MonoBehaviour
                     crystalclick.Play();
                     Clock.SetLevel(level);
                     confirm.SetActive(true);
-                    GameObject.FindObjectOfType<MainMenuScript>().lvl = level;
+                    MainMenuScript script = GameObject.FindObjectOfType<MainMenuScript>();
+                    script.lvl = level;
+                    if (PlayerPrefs.GetInt("Playing" + level) == 0)
+                    {
+                        script.Restart.SetActive(false);
+                        script.Continue.text = "Start";
+                    }
+                    else
+                    {
+                        script.Restart.SetActive(true);
+                        script.Continue.text = I18n.GetInstance().Translate("resume");
+
+                    }
                     button.gameObject.SetActive(false);
                 }
             }

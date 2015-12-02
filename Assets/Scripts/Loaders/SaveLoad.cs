@@ -82,6 +82,7 @@ public class SaveLoad : MonoBehaviour {
             SaveLoad.saveLoad.SaveInterval = 0f;
         else
         {
+            PlayerPrefs.SetInt("Playing" + level, 1);
             // We set the interval for the saves to the initially set value, 2 sec by default
             SaveLoad.saveLoad.SaveInterval = _SaveInterval;
             // We Prepare a level
@@ -174,8 +175,9 @@ public class SaveLoad : MonoBehaviour {
     // Instead of deleting the file, we can simply overwrite it with blank data
     public void Reset()
     {
+        PlayerPrefs.GetInt("Playing" + Application.loadedLevel, 0);
         // If there's data, we clear it out
-        if(_SaveData.Count > 0)
+        if (_SaveData.Count > 0)
             _SaveData.Clear();
         List<string> taggedclocks = new List<string>();
         BinaryFormatter bf = new BinaryFormatter();
