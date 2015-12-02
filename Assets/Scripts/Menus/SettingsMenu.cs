@@ -23,12 +23,11 @@ public class SettingsMenu : MonoBehaviour
 
     void OnEnable()
     {
-        image.fillAmount = 0;
+      //  image.fillAmount = 0;
         back.gameObject.SetActive(true);
         
     }
-
-    void Update()
+/*    void Update()
     {
         if (active)
             return;
@@ -39,7 +38,7 @@ public class SettingsMenu : MonoBehaviour
         }
         active = true;
         buttons.SetActive(true);
-    }
+    }*/
 
     void Awake()
     {
@@ -52,8 +51,8 @@ public class SettingsMenu : MonoBehaviour
 
     public void Hide()
     {
-        buttons.SetActive(false);
-        active = false;
+//        buttons.SetActive(false);
+//        active = false;
         this.gameObject.SetActive(false);
     }
 

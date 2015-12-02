@@ -3,9 +3,6 @@ using System.Collections;
 
 public class MainMenuScript : MonoBehaviour {
     public Animator anim;
-    public GameObject settings;
-    public GameObject shop;
-    public GameObject main;
     public GameObject back;
     public GameObject confirm;
     AudioSource clicksound;
@@ -21,7 +18,6 @@ public class MainMenuScript : MonoBehaviour {
     public void ChooseCharacter()
     {
         ClickSound();
-        main.SetActive(!main.activeSelf);
         anim.SetBool("Character", true);
         foreach (LoadLevel load in GameObject.FindObjectsOfType<LoadLevel>())
             load.Enable();
@@ -31,7 +27,6 @@ public class MainMenuScript : MonoBehaviour {
     public void BackFromCharacter()
     {
         ClickSound();
-        main.SetActive(!main.activeSelf);
         anim.SetBool("Character", false);
         anim.SetBool("Settings", false);
         foreach (LoadLevel load in GameObject.FindObjectsOfType<LoadLevel>())
@@ -42,22 +37,16 @@ public class MainMenuScript : MonoBehaviour {
     public void GoToSettings()
     {
         ClickSound();
-        main.SetActive(!main.activeSelf);
         anim.SetBool("Settings", true);
-        settings.SetActive(true);
     }
 
     public void GoBackFromSettings() {
-        main.SetActive(!main.activeSelf);
         anim.SetBool("Settings", false);
-        settings.SetActive(false);
     }
 
     public void ToggleShop()
     {
         ClickSound();
-        main.SetActive(!main.activeSelf);
-        shop.SetActive(!shop.activeSelf);
         anim.SetBool("Bazzaar", !anim.GetBool("Bazzaar"));
     }
 
