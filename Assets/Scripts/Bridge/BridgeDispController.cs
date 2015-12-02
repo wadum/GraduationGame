@@ -15,11 +15,13 @@ public class BridgeDispController : MonoBehaviour {
 
         if (ActiveMe.activeSelf)
         {
-            BridgeBlockers.SetActive(false);
+            if (BridgeBlockers)
+                BridgeBlockers.SetActive(false);
         }
         else
         {
-            BridgeBlockers.SetActive(true);
+            if(BridgeBlockers)
+                BridgeBlockers.SetActive(true);
         }
 
     }
