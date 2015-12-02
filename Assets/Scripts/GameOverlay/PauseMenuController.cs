@@ -53,14 +53,31 @@ public class PauseMenuController : MonoBehaviour
 
     public void SetMusic(float volume)
     {
-        GameAudioMixer.SetFloat("musicVol", volume);
-        PlayerPrefs.SetFloat("musicVol", volume);
+        if (volume == -20)
+        {
+            GameAudioMixer.SetFloat("musicVol", -80);
+            PlayerPrefs.SetFloat("musicVol", -80);
+        }
+        else
+        {
+            GameAudioMixer.SetFloat("musicVol", volume);
+            PlayerPrefs.SetFloat("musicVol", volume);
+        }
     }
 
     public void SetSFX(float volume)
     {
-        GameAudioMixer.SetFloat("sfxVol", volume);
-        PlayerPrefs.SetFloat("sfxVol", volume);
+        if (volume == -20)
+        {
+            GameAudioMixer.SetFloat("sfxVol", -80);
+            PlayerPrefs.SetFloat("sfxVol", -80);
+        }
+        else
+        {
+            GameAudioMixer.SetFloat("sfxVol", volume);
+            PlayerPrefs.SetFloat("sfxVol", volume);
+
+        }
     }
 
     private static IEnumerator FrameDelayedRestore() {
