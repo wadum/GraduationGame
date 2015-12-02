@@ -35,7 +35,7 @@ public class MultiTouch : MonoBehaviour
 
 	private RadialSlider _tapAndHoldIndicator;
     private const string TapAndHoldIgnoreLayer = "Water"; // TODO: CHANGE THIS :D
-    private static int TapAndHoldIgnoreBitMask { get { return ~(1 << LayerMask.NameToLayer(TapAndHoldIgnoreLayer)); } }
+    private static int TapAndHoldIgnoreBitMask { get { return ~((1 << LayerMask.NameToLayer(TapAndHoldIgnoreLayer)) ^ (1 << LayerMask.NameToLayer("Ignore Raycast"))); } }
     
     void Awake() {
         ClearAllHandlers();

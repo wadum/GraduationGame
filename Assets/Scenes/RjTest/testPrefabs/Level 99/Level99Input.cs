@@ -9,6 +9,8 @@ public class Level99Input : MonoBehaviour {
     public GameObject Player;
     public CapsuleCollider DeathDetection;
 
+    public GameObject[] Overlays;
+
     bool _shooting;
     LightningGenerator[] _lightnings;
     Level99EnemySpawnController _spawnController;
@@ -28,11 +30,10 @@ public class Level99Input : MonoBehaviour {
 
     void DoRaycast(Vector2 pos)
     {
-        Debug.Log("Doing something");
+        if (Overlays.Any(o => o.activeInHierarchy)) return;
         RaycastHit hit;
         if (Physics.Raycast(Cam.ScreenPointToRay(pos), out hit, 1000))
         {
-            Debug.Log(hit.transform.name);
             if(hit.transform.root.tag == "Wind")
             {
                 if (_shooting) return;
