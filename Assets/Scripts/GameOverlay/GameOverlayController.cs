@@ -127,6 +127,11 @@ public class GameOverlayController : MonoBehaviour
 
         _player.SetPlayerLookAtWhenMagic(true, obj.gameObject);
         _animController.StartMagic();
+
+        // lol stop
+        var agent = _player.GetComponent<NavMeshAgent>();
+        if (agent && agent.isActiveAndEnabled)
+            agent.destination = _player.transform.position;
     }
 
     public void DeactivateSlider()

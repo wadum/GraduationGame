@@ -46,17 +46,6 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_agent.isActiveAndEnabled)
-            return;
-        if(Vector3.Distance(_agent.velocity, Vector3.zero)> 0.1f)
-        {
-            _haveMoved = true;
-        }
-        if (_agent.velocity == Vector3.zero && _haveMoved)
-        {
-            _agent.ResetPath();
-            _haveMoved = false;
-        }
         if (_lootAtMovingObject)
         {
             if (_lookAtTarget != null)
@@ -72,6 +61,19 @@ public class CharacterMovement : MonoBehaviour
                     Debug.LogWarning("LookHERE script has to be assigned to one of the children of the target gameObject: " + _lookAtTarget.name);
             }
         }
+
+        if (!_agent.isActiveAndEnabled)
+            return;
+        if(Vector3.Distance(_agent.velocity, Vector3.zero)> 0.1f)
+        {
+            _haveMoved = true;
+        }
+        if (_agent.velocity == Vector3.zero && _haveMoved)
+        {
+            _agent.ResetPath();
+            _haveMoved = false;
+        }
+        
 
         if (!DeliverClockPartArea)
         {
