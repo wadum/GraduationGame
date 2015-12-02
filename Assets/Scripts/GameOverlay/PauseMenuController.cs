@@ -14,9 +14,14 @@ public class PauseMenuController : MonoBehaviour
     {
         Time.timeScale = 1;
         if (_restoreTouch)
+        {
+            if (!GameOverlayController.gameOverlayController.isActiveAndEnabled)
+                return;
+
             // We need a place to run the coroutine, and it cannot be on us since we are disabled...
             // We know that the game overlay controller must be here. Sorta a hack.
             GameOverlayController.gameOverlayController.StartCoroutine(FrameDelayedRestore());
+        }
     }
 
     void Awake()

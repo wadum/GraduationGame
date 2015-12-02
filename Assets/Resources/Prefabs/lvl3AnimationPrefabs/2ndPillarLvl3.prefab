@@ -481,6 +481,7 @@ GameObject:
   - 33: {fileID: 3388698}
   - 23: {fileID: 2388178}
   - 64: {fileID: 6413142}
+  - 208: {fileID: 20815472}
   m_Layer: 0
   m_Name: polySurface56
   m_TagString: TimeManipulationObject
@@ -941,6 +942,7 @@ GameObject:
   - 33: {fileID: 3316238}
   - 23: {fileID: 2365014}
   - 64: {fileID: 6416358}
+  - 208: {fileID: 20803434}
   m_Layer: 0
   m_Name: shieldPart
   m_TagString: TimeManipulationObject
@@ -1459,6 +1461,7 @@ GameObject:
   - 33: {fileID: 3313794}
   - 23: {fileID: 2347694}
   - 64: {fileID: 6468764}
+  - 208: {fileID: 20822688}
   m_Layer: 0
   m_Name: polySurface53
   m_TagString: TimeManipulationObject
@@ -7363,9 +7366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777ab96fd3873b341a224e1159bd0272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimePos: 0
-  workingStateStartPercent: 90
-  workingStateEndPercent: 100
+  TimePos: 10
+  workingStateStartPercent: 67
+  workingStateEndPercent: 70
   ActiveObjects: []
   DeactiveObjects: []
   EnableObjectsBeforeTimeLimit: []
@@ -7476,6 +7479,51 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10.2200003
   m_Center: {x: 0, y: 5.1500001, z: 0}
+--- !u!208 &20803434
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143386}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.22300005, y: 1.50400007, z: 1.36600006}
+  m_MoveThreshold: .100000001
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: .0980000049, y: 0, z: -.0310000014}
+  m_TimeToStationary: .5
+--- !u!208 &20815472
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125366}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: .531000018, y: .91200006, z: .680000007}
+  m_MoveThreshold: .100000001
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: .5
+--- !u!208 &20822688
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168864}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: .532000005, y: 1.5660001, z: .680000007}
+  m_MoveThreshold: .100000001
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -.00100000005, y: 0, z: .00500000035}
+  m_TimeToStationary: .5
 --- !u!208 &20860634
 NavMeshObstacle:
   m_ObjectHideFlags: 1

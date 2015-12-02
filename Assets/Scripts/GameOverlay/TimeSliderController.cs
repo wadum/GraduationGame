@@ -129,11 +129,14 @@ public class TimeSliderController : MonoBehaviour
             // If the slider is valid to move (in between max or min), and we're not a child of it, then it can move.
             if (_slider.value < (100 - 100f * Time.deltaTime / var) && _slider.value > - (100f * Time.deltaTime / var) && (!_player.transform.IsChildOf(_obj.transform.root) || _obj.tag == "Moveable Rock"))
             {
-                // If we are not standing on it via parenting, then we might stand on it as a bridge
-                if (Physics.Raycast(_player.transform.position, -Vector3.up, out hit))
+                RaycastHit[] hits;
+                hits = Physics.RaycastAll(_player.transform.position, -Vector3.up, 0.6f);
+
+                for (int i = 0; i < hits.Length; i++)
                 {
-                    // If what we're standing on is the _obj, then we jag
-                    if(_obj.tag != "Moveable Rock" && hit.collider.gameObject.transform.root == _obj.transform)
+                    RaycastHit hit = hits[i];
+
+                    if (_obj.tag != "Moveable Rock" && hit.collider.gameObject.transform.root == _obj.transform)
                     {
                         jagging = true;
                         _bottunsToRotate.ForEach(cock => cock.SaveRot());

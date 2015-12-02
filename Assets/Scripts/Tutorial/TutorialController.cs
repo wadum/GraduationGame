@@ -91,11 +91,13 @@ public class TutorialController : MonoBehaviour
 
     public static void EnableTouch()
     {
-        MultiTouch.Instance.enabled = true;
+        if (MultiTouch.Instance)
+            MultiTouch.Instance.enabled = true;
     }
 
     public static void DisableTouch()
     {
-        MultiTouch.Instance.enabled = false;
+        if (MultiTouch.Instance)
+            MultiTouch.Instance.enabled = false;
     }
 }

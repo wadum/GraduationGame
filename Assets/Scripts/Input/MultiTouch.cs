@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngineInternal;
 
 public class MultiTouch : MonoBehaviour
 {
@@ -32,7 +34,9 @@ public class MultiTouch : MonoBehaviour
     private GraphicRaycaster _guiCaster;
 
 	private RadialSlider _tapAndHoldIndicator;
-
+    private const string TapAndHoldIgnoreLayer = "Water"; // TODO: CHANGE THIS :D
+    private static int TapAndHoldIgnoreBitMask { get { return ~(1 << LayerMask.NameToLayer(TapAndHoldIgnoreLayer)); } }
+    
     void Awake() {
         ClearAllHandlers();
 
@@ -58,6 +62,9 @@ public class MultiTouch : MonoBehaviour
         
         if (!_guiCaster)
             Debug.Log("GraphicRaycaster could not be gotten from canvas, ui blocking will not be available.");
+
+        // TODO: REMOVE ME
+        GameObject.FindGameObjectsWithTag("Terrain").ToList().ForEach(obj => obj.layer = LayerMask.NameToLayer(TapAndHoldIgnoreLayer));
     }
 
     void OnEnable() {
@@ -178,7 +185,7 @@ public class MultiTouch : MonoBehaviour
     }
 
     private static bool InteractableObjectInRange(Vector2 position) {
-        var hit = Raycast(position);
+        var hit = Raycast(position, TapAndHoldIgnoreBitMask);
         if (!hit.HasValue)
             return false;
 
@@ -292,7 +299,7 @@ public class MultiTouch : MonoBehaviour
     {
         _tapAndHoldIndicator.SetValue(2);
 
-        var hit = Raycast(position);
+        var hit = Raycast(position, TapAndHoldIgnoreBitMask);
 		List<Func<RaycastHit, bool>> handlers;
         if (hit.HasValue && TapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
             if (handlers.Any(h => !h(hit.Value)))
@@ -408,9 +415,15 @@ public class MultiTouch : MonoBehaviour
         return touches.Where(t => !IsPointerOverGui(t.position)).ToList();
     }
 
-    private static RaycastHit? Raycast(Vector3 position) {
+    private static RaycastHit? Raycast(Vector3 position, int? layerMask = null) {
         var ray = Camera.main.ScreenPointToRay(position);
         RaycastHit hit;
+        
+        if (layerMask.HasValue)
+            return Physics.Raycast(ray, out hit, float.PositiveInfinity, layerMask.Value)?
+                (RaycastHit?)hit :
+                null;
+
         return Physics.Raycast(ray, out hit)?
             (RaycastHit?)hit :
             null;
