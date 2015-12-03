@@ -76,8 +76,10 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
             Func<float, float> timePos = time => (time - startTime)/timeToTravel;
 
             var pos = 0f;
-            if (DisableTouchWhileSmoothing)
+            if (DisableTouchWhileSmoothing) {
                 MultiTouch.Instance.enabled = false;
+                Finalizer = () => MultiTouch.Instance.enabled = true;
+            }
 
             while (pos < 1) {
                 pos = timePos(Time.time);
@@ -92,8 +94,10 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
                 yield return null;
             }
 
-            if (DisableTouchWhileSmoothing)
+            if (DisableTouchWhileSmoothing) {
                 MultiTouch.Instance.enabled = true;
+                Finalizer = null;
+            }
         }
 
         if (NextAI == null)

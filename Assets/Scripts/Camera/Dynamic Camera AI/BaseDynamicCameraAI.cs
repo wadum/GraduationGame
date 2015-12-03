@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Base dynamic camera ai. This abstract class functions both to collect common
@@ -16,6 +17,8 @@ public abstract class BaseDynamicCameraAI : MonoBehaviour {
     private static GameObject _player;
     protected GameObject Player { get { return _player ?? (_player = GameObject.FindGameObjectWithTag("Player")); } }
 
+    protected static Action Finalizer;
+
     void Start() {
         _dynCam = FindObjectOfType<DynamicCamera>();
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -24,6 +27,12 @@ public abstract class BaseDynamicCameraAI : MonoBehaviour {
     public void AssumeDirectControl() {
         DynCam.Stop();
         DynCam.StopAllCoroutines();
+
+        if (Finalizer != null) {
+            Finalizer();
+            Finalizer = null;
+        }
+
         Begin();
     }
 
