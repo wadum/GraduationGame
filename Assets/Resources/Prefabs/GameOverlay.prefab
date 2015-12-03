@@ -1601,6 +1601,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22407586}
   - 114: {fileID: 11461428}
+  - 82: {fileID: 8298496}
   m_Layer: 5
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -4649,6 +4650,77 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!82 &8298496
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143634}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 67ae939b60ee70f4dbc7a66407a7d6b4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11400484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6772,7 +6844,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 22433242}
   m_HandleRect: {fileID: 22425266}
   m_Direction: 0
-  m_MinValue: -20
+  m_MinValue: -30
   m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
@@ -7865,7 +7937,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 22498880}
   m_HandleRect: {fileID: 22473372}
   m_Direction: 0
-  m_MinValue: -20
+  m_MinValue: -30
   m_MaxValue: 5
   m_WholeNumbers: 0
   m_Value: 5
@@ -8577,6 +8649,7 @@ MonoBehaviour:
   volume: {fileID: 11480308}
   sfx: {fileID: 11450246}
   music: {fileID: 11435654}
+  SFXVolSound: {fileID: 8298496}
 --- !u!114 &11461716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12623,7 +12696,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1000}
+  m_LocalPosition: {x: 0, y: 0, z: 8.37556934}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22487432}
@@ -12634,7 +12707,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.37140179, y: 16.5680847}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22418892

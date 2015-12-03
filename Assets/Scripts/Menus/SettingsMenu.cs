@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer GameAudioMixer;
-    AudioSource clicksound;
+    public AudioSource clicksound;
     public Image image;
     bool active;
     public GameObject buttons;
@@ -17,6 +17,8 @@ public class SettingsMenu : MonoBehaviour
     public Image CreditsDanish;
     public Image CreditsEnglish;
     public GUIStyle tex;
+    public AudioSource SFXVolSound;
+    private bool _FirstSFXVol = true;
 
     public List<string> members;
     public bool showCredits;
@@ -30,7 +32,6 @@ public class SettingsMenu : MonoBehaviour
 
     void Awake()
     {
-        clicksound = GetComponent<AudioSource>();
         _clickers = GetComponentsInChildren<Image>();
         volume.value = PlayerPrefs.GetFloat("masterVol");
         sfx.value = PlayerPrefs.GetFloat("sfxVol");
@@ -50,7 +51,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetMusic(float volume)
     {
-        if (volume == -20)
+        if (volume == -30)
         {
             GameAudioMixer.SetFloat("musicVol", -80);
             PlayerPrefs.SetFloat("musicVol", -80);
@@ -64,7 +65,25 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetSFX(float volume)
     {
-        if(volume == -20)
+        if(_FirstSFXVol)
+        {
+            _FirstSFXVol = false;
+        }
+        else
+        {
+            float oldVol = 0;
+            if (Mathf.Abs(volume - oldVol) > 1.5f)
+            {
+                GameAudioMixer.GetFloat("sfxVol", out oldVol);
+                if (SFXVolSound)
+                {
+                    if (!SFXVolSound.isPlaying)
+                        SFXVolSound.Play();
+
+                }
+            }
+        }
+        if (volume == -30)
         {
             GameAudioMixer.SetFloat("sfxVol", -80);
             PlayerPrefs.SetFloat("sfxVol", -80);

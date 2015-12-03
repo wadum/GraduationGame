@@ -389,7 +389,7 @@ RectTransform:
   m_Father: {fileID: 1659949975}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: .800000012, y: 1}
+  m_AnchorMax: {x: .857142866, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -2775,7 +2775,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 46926ff6bd066b94e81c41d7262c01af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d039431f1a5f1c544a69e7720085acf7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7111,7 +7111,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 46926ff6bd066b94e81c41d7262c01af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d039431f1a5f1c544a69e7720085acf7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10528,6 +10528,7 @@ GameObject:
   - 114: {fileID: 1329193740}
   - 82: {fileID: 1329193741}
   - 222: {fileID: 1329193743}
+  - 82: {fileID: 1329193742}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -10567,6 +10568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameAudioMixer: {fileID: 24100000, guid: f368730579da7a24891221e009237811, type: 2}
+  clicksound: {fileID: 1329193741}
   image: {fileID: 1155647707}
   buttons: {fileID: 1063288081}
   back: {fileID: 603504335}
@@ -10634,6 +10636,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 1
+  SFXVolSound: {fileID: 1329193742}
   members:
   - Benjamin Blaabjerg - Sound Designer
   - Ursula Blix - Game Director
@@ -10665,6 +10668,77 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 2a6d097a36c72264091fbe94263593be, type: 3}
   m_PlayOnAwake: 0
   m_Volume: .200000003
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &1329193742
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1329193738}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24317134, guid: f368730579da7a24891221e009237811,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 67ae939b60ee70f4dbc7a66407a7d6b4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11163,8 +11237,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1168424582}
   m_RootOrder: 0
-  m_AnchorMin: {x: .800000012, y: 0}
-  m_AnchorMax: {x: .800000012, y: 1}
+  m_AnchorMin: {x: .857142866, y: 0}
+  m_AnchorMax: {x: .857142866, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -14072,7 +14146,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 259520726}
   m_HandleRect: {fileID: 1015251434}
   m_Direction: 0
-  m_MinValue: -20
+  m_MinValue: -30
   m_MaxValue: -5
   m_WholeNumbers: 0
   m_Value: -5
@@ -14147,7 +14221,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 37754318}
   m_HandleRect: {fileID: 1391537742}
   m_Direction: 0
-  m_MinValue: -20
+  m_MinValue: -30
   m_MaxValue: 5
   m_WholeNumbers: 0
   m_Value: 0
