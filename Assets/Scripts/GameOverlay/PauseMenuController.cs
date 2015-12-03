@@ -109,6 +109,7 @@ public class PauseMenuController : MonoBehaviour
          * the menu.
          */
 
+        yield return new WaitForSeconds(0.35f);
         yield return new WaitForEndOfFrame();
         MultiTouch.Instance.enabled = true;
     }
