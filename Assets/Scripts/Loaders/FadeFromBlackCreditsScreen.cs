@@ -44,6 +44,6 @@ public class FadeFromBlackCreditsScreen : MonoBehaviour {
 
     void OnDisable()
     {
-        _sprite.color = _AlfaColor;
+        _sprite.color = _UnAlfaColor;
     }
 }
