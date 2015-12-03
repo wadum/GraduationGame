@@ -61,7 +61,7 @@ public class MainMenuScript : MonoBehaviour {
         if (_entering)
             return;
         confirm.SetActive(false);
-        if (lvl == 5 && !File.Exists(Application.persistentDataPath + "/save5.save"))
+        if (lvl == 5 &&  (!File.Exists(Application.persistentDataPath + "/save5.save") || PlayerPrefs.GetInt("Playing5") == 0))
         {
             _entering = true;
             Application.LoadLevel(4);
