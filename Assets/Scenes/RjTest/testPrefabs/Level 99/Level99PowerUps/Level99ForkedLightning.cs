@@ -8,6 +8,7 @@ public class Level99ForkedLightning : MonoBehaviour {
 	
 	public void StartForkedLightning()
 	{
+		StartCoroutine(DisableAfterSeconds());
 		Active = true;
 	}
 	
