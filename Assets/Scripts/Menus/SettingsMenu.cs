@@ -14,7 +14,8 @@ public class SettingsMenu : MonoBehaviour
     public Button back;
     public Slider volume, sfx, music;
     Image[] _clickers;
-    public Image credits;
+    public Image CreditsDanish;
+    public Image CreditsEnglish;
     public GUIStyle tex;
 
     public List<string> members;
@@ -112,7 +113,15 @@ public class SettingsMenu : MonoBehaviour
     public void ShowCredits()
     {
         clicksound.Play();
-        credits.gameObject.SetActive(true);
+
+        if (PlayerPrefs.GetString(I18n.PlayerPrefKey) == I18n.LanguageKeys.Danish.ToString())
+        {
+            CreditsDanish.gameObject.SetActive(true);
+        } else
+        {
+            CreditsEnglish.gameObject.SetActive(true);
+        }
+
         buttons.SetActive(false);
         back.gameObject.SetActive(false);
         image.gameObject.SetActive(false);
@@ -121,7 +130,15 @@ public class SettingsMenu : MonoBehaviour
     public void ReturnFromCredits()
     {
         clicksound.Play();
-        credits.gameObject.SetActive(false);
+
+        if (PlayerPrefs.GetString(I18n.PlayerPrefKey) == I18n.LanguageKeys.Danish.ToString())
+        {
+            CreditsDanish.gameObject.SetActive(false);
+        }
+        else
+        {
+            CreditsEnglish.gameObject.SetActive(false);
+        }
         buttons.SetActive(true);
         back.gameObject.SetActive(true);
         showCredits = false;
