@@ -312,6 +312,7 @@ GameObject:
   - 222: {fileID: 22245114}
   - 114: {fileID: 11406502}
   - 114: {fileID: 11483570}
+  - 114: {fileID: 11411212}
   m_Layer: 5
   m_Name: Power1
   m_TagString: Untagged
@@ -705,6 +706,7 @@ GameObject:
   - 222: {fileID: 22260272}
   - 114: {fileID: 11472062}
   - 114: {fileID: 11422784}
+  - 114: {fileID: 11436654}
   m_Layer: 5
   m_Name: Forked Lightning
   m_TagString: Untagged
@@ -809,6 +811,7 @@ GameObject:
   - 222: {fileID: 22290712}
   - 114: {fileID: 11463538}
   - 114: {fileID: 11428250}
+  - 114: {fileID: 11448708}
   m_Layer: 5
   m_Name: Power3
   m_TagString: Untagged
@@ -1084,6 +1087,7 @@ GameObject:
   - 222: {fileID: 22223324}
   - 114: {fileID: 11458800}
   - 114: {fileID: 11489580}
+  - 114: {fileID: 11487210}
   m_Layer: 5
   m_Name: ChainLightning
   m_TagString: Untagged
@@ -1924,6 +1928,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: back
+--- !u!114 &11411212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveSeconds: 0
 --- !u!114 &11411568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2448,8 +2464,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 11436654}
+        m_MethodName: StartForkedLightning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2564,8 +2580,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 11448708}
+        m_MethodName: StartForkedLightning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2856,6 +2872,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11436654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3525b5e50104ca6b569578646a87c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveSeconds: 0
 --- !u!114 &11437506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3321,6 +3349,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11448708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3525b5e50104ca6b569578646a87c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveSeconds: 0
 --- !u!114 &11448800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4039,7 +4079,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Chain Lightning
+  m_Text: Forked Lightning
 --- !u!114 &11466914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4772,8 +4812,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 11411212}
+        m_MethodName: StartChainLightning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4926,6 +4966,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: controls
+--- !u!114 &11487210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveSeconds: 0
 --- !u!114 &11487960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5051,8 +5103,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 11487210}
+        m_MethodName: StartChainLightning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

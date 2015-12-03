@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Level99Input : MonoBehaviour {
 
     public Camera Cam;
     public Animator PlayerAnimator;
     public GameObject Player;
+	public List<GameObject> LightningGenerators;
     public CapsuleCollider DeathDetection;
 
     public GameObject[] Overlays;
 
     bool _shooting;
-    LightningGenerator[] _lightnings;
     Level99EnemySpawnController _spawnController;
 
     void Start()
     {
-        _lightnings = Player.GetComponentsInChildren<LightningGenerator>();
         PlayerAnimator.speed = 4;
         _spawnController = FindObjectOfType<Level99EnemySpawnController>();
     }
@@ -44,11 +44,30 @@ public class Level99Input : MonoBehaviour {
         }
     }
 
-    IEnumerator Shoot(GameObject enemy)
+	private List<GameObject> GetLightningGenerators(int amount)
+	{
+		if(amount > LightningGenerators.Count)
+		{
+			int missing = amount - LightningGenerators.Count;
+			for (int i = 0; i < missing; i++){
+				GameObject l = (GameObject) Instantiate(LightningGenerators[0], LightningGenerators[0].transform.position, Quaternion.identity);
+				LightningGenerators.Add(l);
+			}
+		}
+		return LightningGenerators.Take(amount).ToList();
+	}
+
+	IEnumerator Shoot (GameObject enemy)
+	{
+		return Shoot(enemy, LightningGenerators[0]);
+	}
+
+    IEnumerator Shoot(GameObject enemy, GameObject lightning)
     {
+		LightningGenerator[] _lightnings = lightning.GetComponentsInChildren<LightningGenerator>();
         yield return new WaitForSeconds(0.2f);
         foreach (LightningGenerator l in _lightnings) { l.LightningConductors = enemy.GetComponentsInChildren<Electrified>().Select(b => b.gameObject).ToArray(); l.timePassed = 5; }
-        if (Level99ChainLightning.ChainLightning)
+        if (Level99ChainLightning.Active)
             yield return StartCoroutine(enemy.GetComponent<EnemyPowers>().ChainShoot(Level99UIController.ChainLevel));
         else yield return new WaitForSeconds(0.2f);
         foreach (LightningGenerator l in _lightnings) { l.LightningConductors = null; l.lightningConductor = null; }
