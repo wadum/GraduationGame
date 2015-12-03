@@ -42,7 +42,7 @@ public class LoadLevel : MonoBehaviour
                     confirm.SetActive(true);
                     MainMenuScript script = GameObject.FindObjectOfType<MainMenuScript>();
                     script.lvl = level;
-                    if (PlayerPrefs.GetInt("Playing" + level) == 0)
+                    if (PlayerPrefs.GetInt("Playing" + level) == 0 || PlayerPrefs.GetInt(TutorialController.PlayerPrefAlreadySeen) == 0)
                     {
                         script.Restart.SetActive(false);
                         script.Continue.text = "Start";
