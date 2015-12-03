@@ -29,16 +29,22 @@ public class IntroLevelController : MonoBehaviour
 
     public void PlayAnimations() // called from close button of storytext or language picker when the storytext is disabled
     {
-        if(oldCamera)
-            oldCamera.gameObject.SetActive(false);
+        if(Application.loadedLevel == 4)
+        {
+            if (oldCamera)
+                oldCamera.gameObject.SetActive(false);
+            Skipable = true;
+            button.gameObject.SetActive(false);
+            foreach (GameObject ani in AnimationToEnable)
+            {
+                ani.SetActive(true);
+            }
+            IntroObject.SetActive(false); // LanguagePicker and StoryText
+            canva.worldCamera = animationCamera;
+            return;
+        }
         Skipable = true;
         button.gameObject.SetActive(false);
-        foreach(GameObject ani in AnimationToEnable)
-        {
-            ani.SetActive(true);
-        }
-        IntroObject.SetActive(false); // LanguagePicker and StoryText
-        canva.worldCamera = animationCamera;
     }
 
     void Update()
