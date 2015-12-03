@@ -312,8 +312,7 @@ GameObject:
   - 222: {fileID: 22245114}
   - 114: {fileID: 11406502}
   - 114: {fileID: 11483570}
-  - 114: {fileID: 11411212}
-  - 114: {fileID: 11430590}
+  - 114: {fileID: 11480074}
   m_Layer: 5
   m_Name: Power1
   m_TagString: Untagged
@@ -1930,18 +1929,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: back
---- !u!114 &11411212
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActiveSeconds: 0
 --- !u!114 &11411568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2766,18 +2753,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &11430590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActiveSeconds: 0
 --- !u!114 &11431374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3374,7 +3349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3525b5e50104ca6b569578646a87c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveSeconds: 0
+  ActiveSeconds: 10
 --- !u!114 &11448800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4707,6 +4682,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: master
+--- !u!114 &11480074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveSeconds: 10
 --- !u!114 &11480574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4826,7 +4813,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11430590}
+      - m_Target: {fileID: 11480074}
         m_MethodName: StartChainLightning
         m_Mode: 1
         m_Arguments:
@@ -5303,6 +5290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85fef8a7e16601549a81277fc3907f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Level99Shield: {fileID: 0}
 --- !u!114 &11497726
 MonoBehaviour:
   m_ObjectHideFlags: 1

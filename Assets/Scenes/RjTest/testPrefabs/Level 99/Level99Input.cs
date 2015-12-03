@@ -39,7 +39,18 @@ public class Level99Input : MonoBehaviour {
                 _shooting = true;
                 PlayerAnimator.Play("Magic");
                 Player.transform.LookAt(hit.transform.position);
-                StartCoroutine(Shoot(hit.transform.root.gameObject));
+				if(Level99ForkedLightning.Active)
+				{
+					GameObject[] es = _spawnController.enemies
+						.OrderBy(e => Vector3.Distance(e.transform.position, hit.transform.root.gameObject.transform.position))
+							.Take(Mathf.Min(3, _spawnController.enemies.Count)).ToArray();
+					List<GameObject> ls = GetLightningGenerators(Mathf.Min(3, _spawnController.enemies.Count));
+					for(int i = 0; i < Mathf.Min(3, _spawnController.enemies.Count); i++){
+						StartCoroutine(Shoot(es[i], ls[i]));
+					}
+				}
+				else
+                	StartCoroutine(Shoot(hit.transform.root.gameObject));
             }
         }
     }
