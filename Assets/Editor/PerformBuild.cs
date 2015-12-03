@@ -28,7 +28,7 @@ class PerformBuild
     [MenuItem("Build/Build Test Release")]
     public static void TestBuild(){
 		
-        var settings = new Settings(PlayerSettings.productName+" Beta") {Scenes = GetBuildScenes() };
+        var settings = new Settings(PlayerSettings.productName+"") {Scenes = GetBuildScenes() };
 
         MakeBuild(settings);
 
@@ -98,7 +98,7 @@ class PerformBuild
         {
             set { PlayerSettings.productName = value;
                 ApkName = value;
-                PlayerSettings.bundleIdentifier = @"com.dadiu." + RemoveNonCharactersRgx.Replace(value.ToLower(), "");
+                PlayerSettings.bundleIdentifier = @"dk.dadiu.ClockworkDream" ;
             }
         }
 
@@ -132,8 +132,8 @@ class PerformBuild
             _origBundleVersion = PlayerSettings.bundleVersion;
             ProductName = productName;
             UseApkExpansionFiles = false;
-            PlayerSettings.keystorePass = "pjaskevand";
-            PlayerSettings.keyaliasPass = "534231";
+            PlayerSettings.keystorePass = "1nvader";
+            PlayerSettings.keyaliasPass = "dadiu2014";
         }
         
         public void Reset()

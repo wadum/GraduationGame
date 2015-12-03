@@ -20,6 +20,8 @@ public class SettingsMenu : MonoBehaviour
     public AudioSource SFXVolSound;
     private bool _FirstSFXVol = true;
 
+    public GameObject blackFadeScreen;
+
     public List<string> members;
     public bool showCredits;
     float h, w;
@@ -149,7 +151,7 @@ public class SettingsMenu : MonoBehaviour
     public void ReturnFromCredits()
     {
         clicksound.Play();
-
+        blackFadeScreen.SetActive(true);
         if (PlayerPrefs.GetString(I18n.PlayerPrefKey) == I18n.LanguageKeys.Danish.ToString())
         {
             CreditsDanish.gameObject.SetActive(false);
