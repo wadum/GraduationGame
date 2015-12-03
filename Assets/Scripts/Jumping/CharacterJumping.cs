@@ -313,8 +313,9 @@ public class CharacterJumping : MonoBehaviour
         transform.parent = targetParent;
         _jumping = false;
 
-        if (restoreTouch)
-            MultiTouch.Instance.enabled = true;
+        yield return new WaitForEndOfFrame();
+        // if (restoreTouch) fuckit
+        MultiTouch.Instance.enabled = true;
     }
 
     // The sphere on the player has collided with something, if it's something jumpable, we enable the highlight script for that particular item.
