@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Level99UIController : MonoBehaviour {
 
+    public static int ChainLevel = 2;
+
     public GameObject DeathScreen;
     public GameObject PowerUpChoosinScreen;
 	// Use this for initialization
