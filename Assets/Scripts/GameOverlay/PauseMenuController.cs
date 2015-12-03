@@ -9,6 +9,8 @@ public class PauseMenuController : MonoBehaviour
     public Slider volume, sfx, music;
 
     private bool _restoreTouch;
+    bool _FirstSFXVol = true;
+    public AudioSource SFXVolSound;
 
     void OnDisable()
     {
@@ -53,7 +55,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void SetMusic(float volume)
     {
-        if (volume == -20)
+        if (volume == -30)
         {
             GameAudioMixer.SetFloat("musicVol", -80);
             PlayerPrefs.SetFloat("musicVol", -80);
@@ -67,7 +69,25 @@ public class PauseMenuController : MonoBehaviour
 
     public void SetSFX(float volume)
     {
-        if (volume == -20)
+        if (_FirstSFXVol)
+        {
+            _FirstSFXVol = false;
+        }
+        else
+        {
+            float oldVol = 0;
+            if (Mathf.Abs(volume - oldVol) > 0.5f)
+            {
+                GameAudioMixer.GetFloat("sfxVol", out oldVol);
+                if (SFXVolSound)
+                {
+                    if (!SFXVolSound.isPlaying)
+                        SFXVolSound.Play();
+
+                }
+            }
+        }
+        if (volume == -30)
         {
             GameAudioMixer.SetFloat("sfxVol", -80);
             PlayerPrefs.SetFloat("sfxVol", -80);

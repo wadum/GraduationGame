@@ -13,6 +13,7 @@ public class MoveClock : MonoBehaviour {
 
     public void SetLevel(int value)
     {
+        _value = anim.GetFloat("Blend");
         _dist = 0;
         moving = true;
         _start = Time.time;
