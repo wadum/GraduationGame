@@ -17,12 +17,11 @@ public class Level99Input : MonoBehaviour {
 
     void Start()
     {
-        _lightnings = FindObjectsOfType<LightningGenerator>();
+        _lightnings = Player.GetComponentsInChildren<LightningGenerator>();
         PlayerAnimator.speed = 4;
         _spawnController = FindObjectOfType<Level99EnemySpawnController>();
     }
 
-	// Update is called once per frame
 	void Update () {
         if (Input.GetMouseButtonDown(0) && DeathDetection.enabled)
             DoRaycast(Input.mousePosition);
@@ -47,11 +46,13 @@ public class Level99Input : MonoBehaviour {
 
     IEnumerator Shoot(GameObject enemy)
     {
-
         yield return new WaitForSeconds(0.2f);
         foreach (LightningGenerator l in _lightnings) { l.LightningConductors = enemy.GetComponentsInChildren<Electrified>().Select(b => b.gameObject).ToArray(); l.timePassed = 5; }
-        yield return new WaitForSeconds(0.2f);
+        if (Level99ChainLightning.ChainLightning)
+            yield return StartCoroutine(enemy.GetComponent<EnemyPowers>().ChainShoot(Level99UIController.ChainLevel));
+        else yield return new WaitForSeconds(0.2f);
         foreach (LightningGenerator l in _lightnings) { l.LightningConductors = null; l.lightningConductor = null; }
+        
         _spawnController.KillEnemy(enemy);
         _shooting = false;
     }

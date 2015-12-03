@@ -7,6 +7,8 @@ public class CreditsController : MonoBehaviour {
     public float WaitTime = 1.5f;
     public float FinalScrollDistance;
 
+    public GameObject FadeScreen;
+
     Transform OriginalPos;
     public GameObject CombinedCredits;
 
@@ -39,7 +41,6 @@ public class CreditsController : MonoBehaviour {
         {
             transform.parent.gameObject.GetComponent<SettingsMenu>().ReturnFromCredits();
         }
-
     }
 
     
