@@ -13,6 +13,7 @@ public class MainMenuScript : MonoBehaviour {
     public int lvl;
     public GameObject Gems;
     public GameObject ResetConfirm;
+    private bool _entering;
 	// Use this for initialization
 	void Start () {
         clicksound = GetComponent<AudioSource>();
@@ -57,9 +58,12 @@ public class MainMenuScript : MonoBehaviour {
 
     public void Load()
     {
+        if (_entering)
+            return;
         confirm.SetActive(false);
         if (lvl == 5 && !File.Exists(Application.persistentDataPath + "/save5.save"))
         {
+            _entering = true;
             Application.LoadLevel(4);
             return;
         }
@@ -67,11 +71,11 @@ public class MainMenuScript : MonoBehaviour {
             SaveLoad.saveLoad.SaveInterval = 2f;
         if (lvl == 5 && PlayerPrefs.GetInt(TutorialController.PlayerPrefAlreadySeen) == 0)
         {
+            _entering = true;
             SaveLoad.saveLoad.ResetLevel(5);
-            return;
         }
+        _entering = true;
         Application.LoadLevel(lvl);
-
     }
 
     public void RestartLevel()
