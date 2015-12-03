@@ -105,7 +105,7 @@ public class TutorialController : MonoBehaviour
 
     private static IEnumerator DelayUserControl()
     {
-        MultiTouch.Instance.enabled = false;
+        //MultiTouch.Instance.enabled = false;
         yield return new WaitForSeconds(0.5f);
         MultiTouch.Instance.enabled = true;
     }
