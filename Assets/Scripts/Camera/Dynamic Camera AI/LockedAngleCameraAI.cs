@@ -16,6 +16,7 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
     public AnimationCurve MovementCurve;
     public float UnitTimeToTravel = 1f;
     public float MinimalTimeToTravel = 1.5f;
+    public bool DisableTouchWhileSmoothing = false;
 
     [Header("Chaining")]
     public GameObject NextAI;
@@ -50,6 +51,7 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
         var currentPosition = DynCam.transform.position;
         var desiredPosition = DynCam.GetPosition(Yaw, Pitch, Distance, Relative);
         var timeToTravel = Vector3.Distance(currentPosition, desiredPosition)*UnitTimeToTravel;
+        var toggleTouch = MultiTouch.Instance.enabled && DisableTouchWhileSmoothing;
         if (timeToTravel < MinimalTimeToTravel)
             timeToTravel = MinimalTimeToTravel;
 
@@ -75,6 +77,9 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
             Func<float, float> timePos = time => (time - startTime)/timeToTravel;
 
             var pos = 0f;
+            if (toggleTouch)
+                MultiTouch.Instance.enabled = false;
+
             while (pos < 1) {
                 pos = timePos(Time.time);
                 if (pos > 1)
@@ -87,6 +92,9 @@ public class LockedAngleCameraAI : BaseDynamicCameraAI {
 
                 yield return null;
             }
+
+            if (toggleTouch)
+                MultiTouch.Instance.enabled = true;
         }
 
         if (NextAI == null)

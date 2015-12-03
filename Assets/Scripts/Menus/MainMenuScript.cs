@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour {
     public Animator anim;
     public GameObject back;
     public GameObject confirm;
+    public GameObject Restart;
+    public Text Continue;
     AudioSource clicksound;
     public int lvl;
-
+    public GameObject Gems;
+    public GameObject ResetConfirm;
 	// Use this for initialization
 	void Start () {
         clicksound = GetComponent<AudioSource>();
@@ -53,19 +58,34 @@ public class MainMenuScript : MonoBehaviour {
     public void Load()
     {
         confirm.SetActive(false);
-        if(SaveLoad.saveLoad)
+        if (lvl == 5 && !File.Exists(Application.persistentDataPath + "/save5.save"))
+        {
+            Application.LoadLevel(4);
+            return;
+        }
+        if (SaveLoad.saveLoad)
             SaveLoad.saveLoad.SaveInterval = 2f;
+        if (lvl == 5 && PlayerPrefs.GetInt(TutorialController.PlayerPrefAlreadySeen) == 0)
+        {
+            SaveLoad.saveLoad.ResetLevel(5);
+            return;
+        }
         Application.LoadLevel(lvl);
+
     }
 
     public void RestartLevel()
     {
+        if (!SaveLoad.saveLoad)
+        {
+            Debug.LogError("You dont have a SaveLoad instance, remember to start from the DADIU screen lvl");
+            return;
+        }
         confirm.SetActive(false);
-        SaveLoad.saveLoad.ResetFrom(lvl);
+        SaveLoad.saveLoad.ResetLevel(lvl);
         if (lvl == 5)
         {
             PlayerPrefs.SetInt(TutorialController.PlayerPrefAlreadySeen, 0);
-            PlayerPrefs.SetInt(TutorialControllerLevel2.PlayerPrefAlreadySeen, 0);
             Application.LoadLevel(4);
         }
         else if (lvl == 7)
@@ -91,4 +111,23 @@ public class MainMenuScript : MonoBehaviour {
         if (clicksound)
             clicksound.Play();
     }
+
+    public void ToggleReset()
+    {
+        ResetConfirm.SetActive(!ResetConfirm.activeSelf);
+    }
+
+    public void RestartEVEYTHING()
+    {
+        ResetConfirm.SetActive(!ResetConfirm.activeSelf);
+        PlayerPrefs.SetInt("Playing5", 0);
+        PlayerPrefs.SetInt("Playing7", 0);
+        PlayerPrefs.SetInt("Playing9", 0);
+        PlayerPrefs.DeleteKey(TutorialController.PlayerPrefAlreadySeen);
+        PlayerPrefs.DeleteKey(TutorialControllerLevel2.PlayerPrefAlreadySeen);
+        SaveLoad.saveLoad.ResetEverything();
+        Gems.SetActive(false);
+        Gems.SetActive(true);
+    }
+
 }

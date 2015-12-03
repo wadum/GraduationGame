@@ -249,30 +249,41 @@ public class CharacterJumping : MonoBehaviour
         return t => Mathf.Pow(1 - t, 2) * from + 2 * (1 - t) * t * ctrl + Mathf.Pow(t, 2) * to;
     }
 
-    private IEnumerator Jumping(Vector3 target, Transform targetParent, bool restoreNagivation)
-    {
+    private IEnumerator Jumping(Vector3 target, Transform targetParent, bool restoreNagivation) {
+        if (_jumping)
+            yield break;
+
         _jumping = true;
         _nav.enabled = false;
+
+        var restoreTouch = MultiTouch.Instance.enabled;
+        if (restoreTouch) {
+            /* DO NOT REMOVE:
+             *  I honestly have no idea why this works, but it prevents a StackOverflowException from triggering.
+             *  Moving the script off the Player prefab and onto somewhere else also fixes it.
+             *  I am utterly baffled.
+             *
+             *  http://i.imgur.com/mwQ3d.png
+             */
+            yield return new WaitForEndOfFrame();
+            MultiTouch.Instance.enabled = false;
+        }
 
         GameOverlayController.gameOverlayController.DeactivateSlider();
 
         var lookDirection = Vector3.ProjectOnPlane(target - transform.position, Vector3.up);
-        if (lookDirection != Vector3.zero)
-        {
+        if (lookDirection != Vector3.zero) {
             var lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-            while (Vector3.Angle(lookDirection, transform.forward) > 0.1f)
-            {
+            while (Vector3.Angle(lookDirection, transform.forward) > 0.1f) {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 5f);
                 yield return null;
             }
         }
 
-        float tmpDistance = Vector3.Distance(transform.position, target);
+        var tmpDistance = Vector3.Distance(transform.position, target);
 
-        if (tmpDistance > 0.01f)
-        {
-            if (_animator)
-            {
+        if (tmpDistance > 0.01f) {
+            if (_animator) {
                 if (tmpDistance > 1)
                     _animator.Jumping();
                 else
@@ -281,14 +292,13 @@ public class CharacterJumping : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
 
-            var jumpingSpeed = Vector3.Distance(transform.position, target) / JumpWidth * JumpingSpeed;
+            var jumpingSpeed = Vector3.Distance(transform.position, target)/JumpWidth*JumpingSpeed;
             var jumpCurve = MakeBezierJump(transform.position, target);
 
             var t = 0f;
-            while (t <= 1)
-            {
+            while (t <= 1) {
                 transform.position = jumpCurve(t);
-                t += Time.deltaTime / jumpingSpeed;
+                t += Time.deltaTime/jumpingSpeed;
                 yield return null;
             }
         }
@@ -302,6 +312,9 @@ public class CharacterJumping : MonoBehaviour
 
         transform.parent = targetParent;
         _jumping = false;
+
+        if (restoreTouch)
+            MultiTouch.Instance.enabled = true;
     }
 
     // The sphere on the player has collided with something, if it's something jumpable, we enable the highlight script for that particular item.

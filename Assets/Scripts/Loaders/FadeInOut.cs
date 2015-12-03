@@ -31,7 +31,6 @@ public class FadeInOut : MonoBehaviour {
         image.raycastTarget = true;
         float elapsedTime = 0;
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-//        canvasGroup.interactable = false;
         float dist = 1;
         while(elapsedTime < Delay)
         {
@@ -82,7 +81,8 @@ public class FadeInOut : MonoBehaviour {
     public void LoadNextLevel()
     {
         if(SaveLoad.saveLoad)
-            SaveLoad.saveLoad.Reset(); ;
+            SaveLoad.saveLoad.Reset();
+        PlayerPrefs.SetInt("Playing" + Application.loadedLevel, 0);
         Application.LoadLevel(Application.loadedLevel + 1);
     }
 }

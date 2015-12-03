@@ -23,22 +23,9 @@ public class SettingsMenu : MonoBehaviour
 
     void OnEnable()
     {
-      //  image.fillAmount = 0;
         back.gameObject.SetActive(true);
-        
     }
-/*    void Update()
-    {
-        if (active)
-            return;
-        if (image.fillAmount < 1)
-        {
-            image.fillAmount += Time.deltaTime*1.5f;
-            return;
-        }
-        active = true;
-        buttons.SetActive(true);
-    }*/
+
 
     void Awake()
     {
@@ -51,8 +38,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void Hide()
     {
-//        buttons.SetActive(false);
-//        active = false;
         this.gameObject.SetActive(false);
     }
 
@@ -64,14 +49,31 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetMusic(float volume)
     {
-        GameAudioMixer.SetFloat("musicVol", volume);
-        PlayerPrefs.SetFloat("musicVol", volume);
+        if (volume == -20)
+        {
+            GameAudioMixer.SetFloat("musicVol", -80);
+            PlayerPrefs.SetFloat("musicVol", -80);
+        }
+        else
+        {
+            GameAudioMixer.SetFloat("musicVol", volume);
+            PlayerPrefs.SetFloat("musicVol", volume);
+        }
     }
 
     public void SetSFX(float volume)
     {
-        GameAudioMixer.SetFloat("sfxVol", volume);
-        PlayerPrefs.SetFloat("sfxVol", volume);
+        if(volume == -20)
+        {
+            GameAudioMixer.SetFloat("sfxVol", -80);
+            PlayerPrefs.SetFloat("sfxVol", -80);
+        }
+        else
+        {
+            GameAudioMixer.SetFloat("sfxVol", volume);
+            PlayerPrefs.SetFloat("sfxVol", volume);
+
+        }
     }
 
     public void SetDanish()
@@ -113,43 +115,9 @@ public class SettingsMenu : MonoBehaviour
         credits.gameObject.SetActive(true);
         buttons.SetActive(false);
         back.gameObject.SetActive(false);
-       // showCredits = true;
         image.gameObject.SetActive(false);
     }
 
-    void OnGUI()
-    {
-        if (showCredits)
-        {
-            w = Screen.width;
-            h = Screen.height;
-
-            Rect windowRect = new Rect(5,5,w-10, h-10);
-                        
-            windowRect = GUI.Window(0, windowRect, Credits, "");
-        }
-    }
-
-    void Credits(int windowID)
-    {
-        float elementheight = (h / members.Count) - 1;
-        float elementwidth = w - 15;
-        int n = 0;
-        foreach (string member in members)
-        {
-            GUI.Label(new Rect(0, 5 + elementheight * n, elementwidth, elementheight), member, tex);
-            n += 1;
-        }
-        if (GUI.Button(new Rect(0, 0, w - 5, h - 5), ""))
-        { 
-            clicksound.Play();
-            credits.gameObject.SetActive(false);
-            buttons.SetActive(true);
-            back.gameObject.SetActive(true);
-            showCredits = false;
-            image.gameObject.SetActive(true);
-        }
-    }
     public void ReturnFromCredits()
     {
         clicksound.Play();

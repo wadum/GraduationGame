@@ -5,9 +5,9 @@ using UnityEditor;
 public class PlayerPrefsControl : MonoBehaviour
 {
 
-    public static List<string> IntKeys = new List<string>(){ TutorialController.PlayerPrefAlreadySeen, StoreScreenController.PurchasedLevels, TutorialControllerLevel2.PlayerPrefAlreadySeen };
+    public static List<string> IntKeys = new List<string>(){ "Playing5", "Playing7", "Playing9",TutorialController.PlayerPrefAlreadySeen, StoreScreenController.PurchasedLevels, TutorialControllerLevel2.PlayerPrefAlreadySeen };
 	public static List<string> FloatKeys = new List<string>() { "masterVol", "sfxVol", "musicVol" };
-    public static List<string> StringKeys = new List<string>() { "LastLevel" };
+    public static List<string> StringKeys = new List<string>() { "LastLevel" , I18n.PlayerPrefKey};
 
     [MenuItem("PlayerPrefs/Delete All")]
     public static void DeletePlayePrefs()

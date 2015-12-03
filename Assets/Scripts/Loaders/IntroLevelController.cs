@@ -14,6 +14,14 @@ public class IntroLevelController : MonoBehaviour
 
     float fadeout;
 
+    void OnEnable()
+    {
+        if (PlayerPrefs.GetString(I18n.PlayerPrefKey) != "")
+        {
+            PlayAnimations();
+        }
+    }
+
     public void StartText()
     {
         STC.Show("IntroScene");
