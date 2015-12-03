@@ -73,6 +73,23 @@ public class Level99EnemySpawnController : MonoBehaviour {
         Enemy.GetComponent<NavMeshAgent>().SetDestination(_player.transform.position);
     }
 
+    public void SpawnEnemyAtPos(Transform Pos)
+    {
+        // Enable this to make sure enemies does not spawn on top of each other.
+
+        /*int initPos = spawnPos;
+        while (!_spawnPoints[spawnPos].AmIFree(enemies))
+        {
+            spawnPos = (spawnPos + 1) % _spawnPoints.Length;
+            if (initPos == spawnPos)
+                return;
+        }*/
+        EnemiesSpawned++;
+        GameObject Enemy = (GameObject)Instantiate(EnemyPrefab, Pos.position, Quaternion.identity);
+        enemies.Add(Enemy);
+        Enemy.GetComponent<NavMeshAgent>().SetDestination(_player.transform.position);
+    }
+
     public void KillEnemy (GameObject enemy)
     {
         enemies.Remove(enemy);
