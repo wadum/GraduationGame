@@ -14,7 +14,8 @@ public class SoundMaster : MonoBehaviour {
 
 	void Start()
 	{
-		transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
+        if(GameObject.FindGameObjectWithTag("Player"))
+    		transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
 		transform.localPosition = Vector3.zero;
 	}
 

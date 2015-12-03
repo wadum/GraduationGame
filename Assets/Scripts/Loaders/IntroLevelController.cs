@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 
 public class IntroLevelController : MonoBehaviour
 {
+    public float SyncWaitTime = 1f;
     public StoryTextController STC;
     public GameObject[] AnimationToEnable;
     public GameObject IntroObject;
@@ -11,26 +13,24 @@ public class IntroLevelController : MonoBehaviour
     public Camera oldCamera;
     public bool Skipable;
     public Button button;
+    public bool GoToMenu;
 
     float fadeout;
 
-    /*void OnEnable()
+    void OnEnable()
     {
-        if (PlayerPrefs.GetString(I18n.PlayerPrefKey) != "")
+        // If we already picked a language, we wont repick it.
+        if (PlayerPrefs.GetString(I18n.PlayerPrefKey) == I18n.LanguageKeys.Danish.ToString() || PlayerPrefs.GetString(I18n.PlayerPrefKey) == I18n.LanguageKeys.English.ToString())
         {
+            if(IntroObject)
+                IntroObject.SetActive(false); // LanguagePicker and StoryText
             PlayAnimations();
         }
-    }*/
-
-    public void StartText()
-    {
-        STC.Show("IntroScene");
     }
 
-    public void PlayAnimations() // called from close button of storytext or language picker when the storytext is disabled
+    IEnumerator WaitAndPlay()
     {
-        if(Application.loadedLevel == 4)
-        {
+            yield return new WaitForSeconds(SyncWaitTime);
             if (oldCamera)
                 oldCamera.gameObject.SetActive(false);
             Skipable = true;
@@ -39,12 +39,22 @@ public class IntroLevelController : MonoBehaviour
             {
                 ani.SetActive(true);
             }
-            IntroObject.SetActive(false); // LanguagePicker and StoryText
-            canva.worldCamera = animationCamera;
-            return;
-        }
-        Skipable = true;
-        button.gameObject.SetActive(false);
+            if(IntroObject)
+                IntroObject.SetActive(false); // LanguagePicker and StoryText
+            if(animationCamera)
+                canva.worldCamera = animationCamera;
+        yield return null;
+    }
+
+    public void StartText()
+    {
+        STC.Show("IntroScene");
+    }
+
+    public void PlayAnimations() // called from close button of storytext or language picker when the storytext is disabled
+    {
+        StartCoroutine(WaitAndPlay());
+        return;
     }
 
     void Update()
@@ -67,6 +77,9 @@ public class IntroLevelController : MonoBehaviour
 
     public void SkipAnimation()
     {
-        Application.LoadLevel(Application.loadedLevel + 1);
+        if (!GoToMenu)
+            Application.LoadLevel(Application.loadedLevel + 1);
+        else
+            Application.LoadLevel(3);
     }
 }
