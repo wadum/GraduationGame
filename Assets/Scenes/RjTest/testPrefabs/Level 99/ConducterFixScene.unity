@@ -162,7 +162,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 91113222}
+  m_GameObject: {fileID: 0}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &138222574 stripped
 MonoBehaviour:
@@ -338,22 +338,6 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1659626718}
-    - target: {fileID: 11483570, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 975628307}
-    - target: {fileID: 11483570, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartChainLightning
-      objectReference: {fileID: 0}
-    - target: {fileID: 11458002, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1699362806}
-    - target: {fileID: 11458002, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartShield
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
   m_IsPrefabParent: 0
@@ -463,12 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c2e392ecd070d459b45a8abc58b202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &645850069 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11448934, guid: 0bd92e8229b9dc740922a442a2ccd321,
-    type: 2}
-  m_PrefabInternal: {fileID: 1284211962}
-  m_Script: {fileID: 11500000, guid: 8b5e9b8d827a72344a9d67f9607515ee, type: 3}
 --- !u!1001 &668249306
 Prefab:
   m_ObjectHideFlags: 0
@@ -515,6 +493,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7e1a7d206d2e0f4a87e41e393df85a7, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &668249307 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 104310, guid: c7e1a7d206d2e0f4a87e41e393df85a7, type: 2}
+  m_PrefabInternal: {fileID: 668249306}
 --- !u!1 &687252901
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,21 +662,6 @@ Animator:
   m_PrefabParentObject: {fileID: 9567284, guid: c7e1a7d206d2e0f4a87e41e393df85a7,
     type: 2}
   m_PrefabInternal: {fileID: 668249306}
---- !u!1 &975628302 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 115732, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
-  m_PrefabInternal: {fileID: 459751525}
---- !u!114 &975628307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 975628302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1108522263 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 116174, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
@@ -997,6 +964,8 @@ MonoBehaviour:
   Cam: {fileID: 1659626718}
   PlayerAnimator: {fileID: 859963801}
   Player: {fileID: 63146762}
+  LightningGenerators:
+  - {fileID: 668249307}
   DeathDetection: {fileID: 1598139360}
   Overlays:
   - {fileID: 1108522263}
@@ -1033,7 +1002,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1659626714}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
 --- !u!20 &1659626718
 Camera:
@@ -1134,22 +1103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c2e392ecd070d459b45a8abc58b202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1699362801 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 137992, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
-  m_PrefabInternal: {fileID: 459751525}
---- !u!114 &1699362806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1699362801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85fef8a7e16601549a81277fc3907f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level99Shield: {fileID: 645850069}
 --- !u!1 &1708482618
 GameObject:
   m_ObjectHideFlags: 0
