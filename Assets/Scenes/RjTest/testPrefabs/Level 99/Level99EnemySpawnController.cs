@@ -16,7 +16,7 @@ public class Level99EnemySpawnController : MonoBehaviour {
     public CapsuleCollider DeathDetection;
 
     float _backupRespawnTimer;
-    List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
     Level99SpawnPoint[] _spawnPoints;
     GameObject _player;
 

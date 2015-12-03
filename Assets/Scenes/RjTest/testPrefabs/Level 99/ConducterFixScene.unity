@@ -162,7 +162,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 91113222}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &138222574 stripped
 MonoBehaviour:
@@ -334,6 +334,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 11497470, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
+      propertyPath: Level99Shield
+      value: 
+      objectReference: {fileID: 1793574502}
     - target: {fileID: 22362190, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
       propertyPath: m_Camera
       value: 
@@ -949,6 +953,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 196504, guid: a9f6cdaaafe90a44894724cad7a5b070, type: 2}
   RespawnTimer: 5
   DeathDetection: {fileID: 1598139360}
+  enemies: []
   CurrentGems: {fileID: 138222574}
 --- !u!114 &1656402212
 MonoBehaviour:
@@ -1002,7 +1007,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1659626714}
   m_Enabled: 1
 --- !u!20 &1659626718
 Camera:
@@ -1355,6 +1360,12 @@ CapsuleCollider:
   m_Height: 7.88000011
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1793574502 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11448934, guid: 0bd92e8229b9dc740922a442a2ccd321,
+    type: 2}
+  m_PrefabInternal: {fileID: 1284211962}
+  m_Script: {fileID: 11500000, guid: 8b5e9b8d827a72344a9d67f9607515ee, type: 3}
 --- !u!1 &1803558326
 GameObject:
   m_ObjectHideFlags: 0
