@@ -8,14 +8,23 @@ public class lvl99ShieldController : MonoBehaviour {
 
     public Level99EnemySpawnController SpawnController;
 
+    CapsuleCollider EnemyKillingCollider;
+
+    void Start()
+    {
+        EnemyKillingCollider = GetComponent<CapsuleCollider>();
+    }
+
     public void ActivateShield()
     {
         SmallShieldState.SetActive(false);
         BigShieldState.SetActive(true);
+        EnemyKillingCollider.enabled = true;
     }
     public void DeactivateShield()
     {
         BigShieldState.SetActive(false);
+        EnemyKillingCollider.enabled = false;
         SmallShieldState.SetActive(true);
     }
 

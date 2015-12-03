@@ -14,6 +14,10 @@ public class Lvl99Shield : MonoBehaviour {
     IEnumerator ShieldDuration()
     {
         Level99Shield.ActivateShield();
+        yield return new WaitForSeconds(0.5f);
+        Level99RotateAroundPosition[] particles = Level99Shield.BigShieldState.GetComponentsInChildren<Level99RotateAroundPosition>();
+        foreach (Level99RotateAroundPosition ParticlePart in particles)
+            ParticlePart.enabled = true;
         yield return new WaitForSeconds(Level99UIController.ShieldLevel);
         Level99Shield.DeactivateShield();
     }
