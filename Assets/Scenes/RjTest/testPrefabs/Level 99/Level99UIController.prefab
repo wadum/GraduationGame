@@ -313,6 +313,7 @@ GameObject:
   - 114: {fileID: 11406502}
   - 114: {fileID: 11483570}
   - 114: {fileID: 11411212}
+  - 114: {fileID: 11430590}
   m_Layer: 5
   m_Name: Power1
   m_TagString: Untagged
@@ -670,6 +671,7 @@ GameObject:
   - 222: {fileID: 22214194}
   - 114: {fileID: 11419374}
   - 114: {fileID: 11458002}
+  - 114: {fileID: 11497470}
   m_Layer: 5
   m_Name: Power2
   m_TagString: Untagged
@@ -2764,6 +2766,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11430590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveSeconds: 0
 --- !u!114 &11431374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2883,7 +2897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3525b5e50104ca6b569578646a87c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveSeconds: 0
+  ActiveSeconds: 10
 --- !u!114 &11437506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3733,8 +3747,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 11497470}
+        m_MethodName: StartShield
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4812,7 +4826,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11411212}
+      - m_Target: {fileID: 11430590}
         m_MethodName: StartChainLightning
         m_Mode: 1
         m_Arguments:
@@ -4977,7 +4991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveSeconds: 0
+  ActiveSeconds: 10
 --- !u!114 &11487960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5278,6 +5292,17 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Chain Lightning
+--- !u!114 &11497470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85fef8a7e16601549a81277fc3907f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11497726
 MonoBehaviour:
   m_ObjectHideFlags: 1
