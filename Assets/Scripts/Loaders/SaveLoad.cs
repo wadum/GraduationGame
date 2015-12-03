@@ -175,7 +175,7 @@ public class SaveLoad : MonoBehaviour {
     // Instead of deleting the file, we can simply overwrite it with blank data
     public void Reset()
     {
-        PlayerPrefs.GetInt("Playing" + Application.loadedLevel, 0);
+        PlayerPrefs.SetInt("Playing" + Application.loadedLevel, 0);
         // If there's data, we clear it out
         if (_SaveData.Count > 0)
             _SaveData.Clear();
@@ -224,6 +224,7 @@ public class SaveLoad : MonoBehaviour {
         {
             if (File.Exists(Application.persistentDataPath + "/save" + i + ".save"))
             {
+                PlayerPrefs.SetInt("Playing" + i, 0);
                 File.Delete(Application.persistentDataPath + "/save" + i + ".save");
             }
         }
@@ -231,6 +232,7 @@ public class SaveLoad : MonoBehaviour {
 
     public void ResetLevel(int level)
     {
+        PlayerPrefs.SetInt("Playing" + level, 0);
         if (File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
         {
             File.Delete(Application.persistentDataPath + "/save" + level + ".save");

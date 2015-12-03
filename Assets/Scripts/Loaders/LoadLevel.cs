@@ -22,6 +22,7 @@ public class LoadLevel : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+
         crystalclick = GetComponent<AudioSource>();
     }
 
@@ -50,8 +51,8 @@ public class LoadLevel : MonoBehaviour
                     {
                         script.Restart.SetActive(true);
                         script.Continue.text = I18n.GetInstance().Translate("resume");
-
                     }
+
                     button.gameObject.SetActive(false);
                 }
             }
@@ -61,13 +62,7 @@ public class LoadLevel : MonoBehaviour
 
     public void Enable()
     {
-        if (level == 5)
-        {
-            this.gameObject.layer = LayerMask.NameToLayer("Default");
-            this.gameObject.AddComponent<MeshCollider>();
-            return;
-        }
-        if (File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
+        if (level == 5 || File.Exists(Application.persistentDataPath + "/save" + level + ".save"))
         {
             this.gameObject.layer = LayerMask.NameToLayer("Default");
             this.gameObject.AddComponent<MeshCollider>();
