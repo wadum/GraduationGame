@@ -27,12 +27,14 @@ public class Level99ChainLightning : MonoBehaviour
 			return;
 		_s.GemsSpend += Cost;
 		Active = true;
+		GetComponent<Image>().color = new Color(0xAC/255f, 0xFF/255f, 0xB0/255f, 0xFF/255f);
 		StartCoroutine(DisableAfterSeconds());
     }
 
 	IEnumerator DisableAfterSeconds()
 	{
 		yield return new WaitForSeconds(ActiveSeconds);
+		GetComponent<Image>().color = Color.white;
 		Active = false;
 	}
 }
