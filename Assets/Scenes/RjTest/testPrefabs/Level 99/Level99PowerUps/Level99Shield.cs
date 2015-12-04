@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Level99Shield : MonoBehaviour {
@@ -8,10 +9,22 @@ public class Level99Shield : MonoBehaviour {
     public static bool Shield;
     public lvl99ShieldController level99Shield;
 
+	public int Cost;
+	public Text CostText;
+	
+	Level99EnemySpawnController _s;
+	
+	void Start()
+	{
+		CostText.text = Cost.ToString();
+		_s = FindObjectOfType<Level99EnemySpawnController>();
+	}
+
     public void StartShield()
     {
-		if(ChoosinMenu.activeInHierarchy)
+		if(ChoosinMenu.activeInHierarchy || _s.AvailableGems < Cost)
 			return;
+		_s.GemsSpend += Cost;
         Shield = true;
         StartCoroutine(ShieldDuration());
     }
