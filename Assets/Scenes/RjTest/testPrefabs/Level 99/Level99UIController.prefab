@@ -312,7 +312,6 @@ GameObject:
   - 222: {fileID: 22245114}
   - 114: {fileID: 11406502}
   - 114: {fileID: 11483570}
-  - 114: {fileID: 11480074}
   m_Layer: 5
   m_Name: Power1
   m_TagString: Untagged
@@ -704,7 +703,6 @@ GameObject:
   - 222: {fileID: 22214194}
   - 114: {fileID: 11419374}
   - 114: {fileID: 11458002}
-  - 114: {fileID: 11497470}
   m_Layer: 5
   m_Name: Power2
   m_TagString: Untagged
@@ -848,7 +846,6 @@ GameObject:
   - 222: {fileID: 22290712}
   - 114: {fileID: 11463538}
   - 114: {fileID: 11428250}
-  - 114: {fileID: 11448708}
   m_Layer: 5
   m_Name: Power3
   m_TagString: Untagged
@@ -3041,18 +3038,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11463538}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11448708}
-        m_MethodName: StartForkedLightning
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11428806
@@ -3374,6 +3360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChoosinMenu: {fileID: 114578}
   ActiveSeconds: 10
+  Cost: 30
+  CostText: {fileID: 11415754}
 --- !u!114 &11437278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3882,19 +3870,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &11448708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a3525b5e50104ca6b569578646a87c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChoosinMenu: {fileID: 0}
-  ActiveSeconds: 10
 --- !u!114 &11448800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4412,18 +4387,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11419374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11497470}
-        m_MethodName: StartShield
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11458154
@@ -5535,19 +5499,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerUpChoosin: {fileID: 114578}
---- !u!114 &11480074
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e673c8db83c99b8419d35303d4c0610b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChoosinMenu: {fileID: 0}
-  ActiveSeconds: 10
 --- !u!114 &11480574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5666,18 +5617,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11406502}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11480074}
-        m_MethodName: StartChainLightning
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11483742
@@ -5863,6 +5803,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChoosinMenu: {fileID: 114578}
   ActiveSeconds: 10
+  Cost: 20
+  CostText: {fileID: 11458154}
 --- !u!114 &11487960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6249,19 +6191,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &11497470
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 137992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85fef8a7e16601549a81277fc3907f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChoosinMenu: {fileID: 0}
-  Level99Shield: {fileID: 0}
 --- !u!114 &11497726
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -74,7 +74,6 @@ public class Level99DragableButton : MonoBehaviour {
 	IEnumerator Dragging()
 	{
 		while(true){
-			Debug.Log("Dragging");
 			Vector2 pos;
 			RectTransformUtility.ScreenPointToLocalPointInRectangle(_c.transform as RectTransform, Input.mousePosition, _c.worldCamera, out pos);
 			transform.position = _c.transform.TransformPoint(pos);
