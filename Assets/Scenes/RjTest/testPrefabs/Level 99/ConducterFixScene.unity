@@ -239,7 +239,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 315833668}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -342,7 +342,16 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1659626718}
-    m_RemovedComponents: []
+    - target: {fileID: 11483570, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 684350210}
+    - target: {fileID: 11483570, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartPowerball
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11480074, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &591697300
@@ -382,7 +391,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 591697300}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -435,7 +444,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 620501435}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -501,6 +510,21 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 104310, guid: c7e1a7d206d2e0f4a87e41e393df85a7, type: 2}
   m_PrefabInternal: {fileID: 668249306}
+--- !u!1 &684350208 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 115732, guid: a2cf33f39205fac49909ec143b6de041, type: 2}
+  m_PrefabInternal: {fileID: 459751525}
+--- !u!114 &684350210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 684350208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51fb9d0a632619449cf0c5424e90ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &687252901
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +562,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 687252901}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -595,7 +619,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 404368, guid: a9f6cdaaafe90a44894724cad7a5b070, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 196504, guid: a9f6cdaaafe90a44894724cad7a5b070, type: 2}
       propertyPath: m_IsActive
@@ -633,7 +657,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 854219989}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -758,6 +782,56 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f00f549d5428b2419ab8e4cc0ed9b6e, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1463499644
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.82999992
+      objectReference: {fileID: 0}
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.71000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 431024, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 11431418, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: SpawnController
+      value: 
+      objectReference: {fileID: 1656402211}
+    - target: {fileID: 116602, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1469634125
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +869,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1469634125}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -977,6 +1051,7 @@ MonoBehaviour:
   - {fileID: 1974044634}
   - {fileID: 2032750363}
   - {fileID: 1738078375}
+  PowerBallPrefab: {fileID: 116602, guid: 7fdfd28a025304946be854abf12b0822, type: 2}
 --- !u!1 &1659626714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1167,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1661230491}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -1145,7 +1220,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1708482618}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -1300,7 +1375,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1751452859}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1
@@ -1607,7 +1682,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1925171007}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .800000012
   m_Height: 6
   m_Direction: 1

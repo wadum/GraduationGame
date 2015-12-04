@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Lvl99Shield : MonoBehaviour {
+public class Level99Shield : MonoBehaviour {
 
     public static bool Shield;
-    public lvl99ShieldController Level99Shield;
+    public lvl99ShieldController level99Shield;
 
     public void StartShield()
     {
@@ -13,12 +13,12 @@ public class Lvl99Shield : MonoBehaviour {
     }
     IEnumerator ShieldDuration()
     {
-        Level99Shield.ActivateShield();
+        level99Shield.ActivateShield();
         yield return new WaitForSeconds(0.5f);
-        Level99RotateAroundPosition[] particles = Level99Shield.BigShieldState.GetComponentsInChildren<Level99RotateAroundPosition>();
+        Level99RotateAroundPosition[] particles = level99Shield.BigShieldState.GetComponentsInChildren<Level99RotateAroundPosition>();
         foreach (Level99RotateAroundPosition ParticlePart in particles)
             ParticlePart.enabled = true;
         yield return new WaitForSeconds(Level99UIController.ShieldLevel);
-        Level99Shield.DeactivateShield();
+        level99Shield.DeactivateShield();
     }
 }
