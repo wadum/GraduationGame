@@ -116,6 +116,7 @@ public class Level99EnemySpawnController : MonoBehaviour {
     {
         EnemiesSpawned = 0;
         EnemiesKilled = 0;
+        GemsSpend = 0;
         RespawnTimer = _backupRespawnTimer;
         enemies.ForEach(e => { Destroy(e); });
         enemies = new List<GameObject>();
