@@ -26,6 +26,7 @@ public class Level99PowerBall : MonoBehaviour {
 		_s.GemsSpend += Cost;
         PowerBall = true;
         StartCoroutine(PowerBallDuration());
+		GetComponent<Image>().color = new Color(0xAC/255f, 0xFF/255f, 0xB0/255f, 0xFF/255f);
     }
     IEnumerator PowerBallDuration()
     {
@@ -33,5 +34,6 @@ public class Level99PowerBall : MonoBehaviour {
         {
             yield return null;
         }
+		GetComponent<Image>().color = Color.white;
     }
 }

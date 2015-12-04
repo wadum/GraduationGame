@@ -27,6 +27,7 @@ public class Level99Shield : MonoBehaviour {
 		_s.GemsSpend += Cost;
         Shield = true;
         StartCoroutine(ShieldDuration());
+		GetComponent<Image>().color = new Color(0xAC/255f, 0xFF/255f, 0xB0/255f, 0xFF/255f);
     }
     IEnumerator ShieldDuration()
     {
@@ -37,5 +38,6 @@ public class Level99Shield : MonoBehaviour {
             ParticlePart.enabled = true;
         yield return new WaitForSeconds(Level99UIController.ShieldLevel);
         level99Shield.DeactivateShield();
+		GetComponent<Image>().color = Color.white;
     }
 }
