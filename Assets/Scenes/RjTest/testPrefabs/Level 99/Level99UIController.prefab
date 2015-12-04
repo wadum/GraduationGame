@@ -312,7 +312,6 @@ GameObject:
   - 222: {fileID: 22245114}
   - 114: {fileID: 11406502}
   - 114: {fileID: 11483570}
-  - 114: {fileID: 11429062}
   m_Layer: 5
   m_Name: Power1
   m_TagString: Untagged
@@ -1383,8 +1382,6 @@ GameObject:
   - 222: {fileID: 22276848}
   - 114: {fileID: 11463248}
   - 114: {fileID: 11412462}
-  - 114: {fileID: 11408446}
-  - 114: {fileID: 11469268}
   m_Layer: 5
   m_Name: Heaven Fury
   m_TagString: Untagged
@@ -1420,8 +1417,6 @@ GameObject:
   - 222: {fileID: 22296946}
   - 114: {fileID: 11477280}
   - 114: {fileID: 11449004}
-  - 114: {fileID: 11479872}
-  - 114: {fileID: 11406860}
   m_Layer: 5
   m_Name: Lazer Beam
   m_TagString: Untagged
@@ -1955,7 +1950,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 99999999
+  m_Text: 0
 --- !u!114 &11401740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2133,53 +2128,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11406860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11479872}
-          m_MethodName: StartDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11479872}
-          m_MethodName: StopDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!114 &11407282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2233,18 +2181,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fa426aec30649d0ad5db989c0bb5bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PowerUpChoosin: {fileID: 114578}
---- !u!114 &11408446
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 182982}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60fa426aec30649d0ad5db989c0bb5bd, type: 3}
@@ -2329,7 +2265,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 11463248}
   m_OnClick:
     m_PersistentCalls:
@@ -3134,17 +3070,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Forked Lightning
---- !u!114 &11429062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b51fb9d0a632619449cf0c5424e90ca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11429502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3929,7 +3854,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 11477280}
   m_OnClick:
     m_PersistentCalls:
@@ -4210,6 +4135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChoosinMenu: {fileID: 114578}
   level99Shield: {fileID: 0}
+  Cost: 80
+  CostText: {fileID: 11415546}
 --- !u!114 &11453762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4983,53 +4910,6 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: $back$
---- !u!114 &11469268
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 182982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11408446}
-          m_MethodName: StartDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11408446}
-          m_MethodName: StopDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!114 &11470200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5134,6 +5014,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51fb9d0a632619449cf0c5424e90ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChoosinMenu: {fileID: 114578}
+  Cost: 60
+  CostText: {fileID: 11437278}
 --- !u!114 &11473390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5511,18 +5394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TranslationKey: master
---- !u!114 &11479872
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fa426aec30649d0ad5db989c0bb5bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PowerUpChoosin: {fileID: 114578}
 --- !u!114 &11480574
 MonoBehaviour:
   m_ObjectHideFlags: 1

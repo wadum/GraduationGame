@@ -11,6 +11,7 @@ public class Level99EnemySpawnController : MonoBehaviour {
 		get { return _enemiesKilled; } 
 		set { CurrentGems.text = (value - GemsSpend).ToString(); _enemiesKilled = value; } }
     public GameObject EnemyPrefab;
+	public GameObject EnemyPrefabFast;
 
 	private int _gemsSpend;
 	public int GemsSpend {
@@ -76,7 +77,7 @@ public class Level99EnemySpawnController : MonoBehaviour {
                 return;
         }*/
         EnemiesSpawned++;
-        GameObject Enemy = (GameObject) Instantiate(EnemyPrefab, _spawnPoints[spawnPos].transform.position, Quaternion.identity);
+		GameObject Enemy = (GameObject) Instantiate(Random.Range(0,100) > 20 ? EnemyPrefab : EnemyPrefabFast, _spawnPoints[spawnPos].transform.position, Quaternion.identity);
         enemies.Add(Enemy);
         Enemy.GetComponent<NavMeshAgent>().SetDestination(_player.transform.position);
     }
@@ -93,7 +94,7 @@ public class Level99EnemySpawnController : MonoBehaviour {
                 return;
         }*/
         EnemiesSpawned++;
-        GameObject Enemy = (GameObject)Instantiate(EnemyPrefab, Pos.position, Quaternion.identity);
+        GameObject Enemy = (GameObject)Instantiate(Random.Range(0,100) > 20 ? EnemyPrefab : EnemyPrefabFast, Pos.position, Quaternion.identity);
         enemies.Add(Enemy);
         Enemy.GetComponent<NavMeshAgent>().SetDestination(_player.transform.position);
     }
