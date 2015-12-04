@@ -4,11 +4,15 @@ using System.Linq;
 
 public class Level99ChainLightning : MonoBehaviour
 {
+	public GameObject ChoosinMenu;
+
 	public float ActiveSeconds;
     public static bool Active;
 
     public void StartChainLightning()
     {
+		if(ChoosinMenu.activeInHierarchy)
+			return;
 		Active = true;
 		StartCoroutine(DisableAfterSeconds());
     }

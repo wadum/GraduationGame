@@ -3,11 +3,15 @@ using System.Collections;
 
 public class Lvl99Shield : MonoBehaviour {
 
+	public GameObject ChoosinMenu;
+
     public static bool Shield;
     public lvl99ShieldController Level99Shield;
 
     public void StartShield()
     {
+		if(ChoosinMenu.activeInHierarchy)
+			return;
         Shield = true;
         StartCoroutine(ShieldDuration());
     }
