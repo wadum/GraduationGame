@@ -8,8 +8,16 @@ public class Level99EnemySpawnController : MonoBehaviour {
     public int EnemiesSpawned;
     private int _enemiesKilled;
     public int EnemiesKilled {
-        get { return _enemiesKilled; } set { CurrentGems.text = value.ToString(); _enemiesKilled = value; } }
+		get { return _enemiesKilled; } 
+		set { CurrentGems.text = (value - GemsSpend).ToString(); _enemiesKilled = value; } }
     public GameObject EnemyPrefab;
+
+	private int _gemsSpend;
+	public int GemsSpend {
+		get { return _gemsSpend; } 
+		set { CurrentGems.text = (EnemiesKilled - value).ToString(); _gemsSpend = value; } }
+
+	public int AvailableGems{ get { return EnemiesKilled - GemsSpend; } }
 
     public float RespawnTimer = 5f;
 
