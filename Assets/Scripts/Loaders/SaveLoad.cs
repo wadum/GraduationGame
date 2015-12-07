@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.UI;
 
 public class SaveLoad : MonoBehaviour {
 
@@ -72,12 +73,24 @@ public class SaveLoad : MonoBehaviour {
     // When loading a level, we check if it's a special case level, like the intro or the main menu, in which case we do not save.
     void OnLevelWasLoaded(int level)
     {
-        if(level == 11)
+        if (level == 2)
+            return;
+
+        CanvasScaler[] scalers = GameObject.FindObjectsOfType<CanvasScaler>();
+        foreach (CanvasScaler scale in scalers)
+            {
+                if (scale.uiScaleMode == CanvasScaler.ScaleMode.ScaleWithScreenSize)
+                    {
+                        scale.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+                        scale.matchWidthOrHeight = Screen.width > Screen.height ? 1 : 0;
+                        //(condition) ? [true path] : [false path];
+                    }
+            }
+
+        if (level == 11)
         {
             return;
         }
-        if (level == 2)
-            return;
         PlayerPrefs.SetInt("LastLevel", Application.loadedLevel);
         // 4 = Intro, 3 = Main menu, 10 = Ending, if the build order changes, this also needs to be adjusted, alternative is by name, but they are just as liekly to change or be misspelled.
         // 6 & 8 are cutscenes.

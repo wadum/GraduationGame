@@ -47,7 +47,7 @@ public class SecretLevelSelector : MonoBehaviour {
             if (SecretSequence[index] == level.Value)
                 index++;
             else
-                index = 0;
+                index = SecretSequence[0] == level.Value ? 1 : 0;
         }
 
         Application.LoadLevel("ConducterFixScene");
