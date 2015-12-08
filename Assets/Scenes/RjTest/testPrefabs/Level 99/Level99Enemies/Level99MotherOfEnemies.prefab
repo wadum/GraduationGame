@@ -1671,6 +1671,7 @@ GameObject:
   - 23: {fileID: 2363850}
   - 54: {fileID: 5414840}
   - 136: {fileID: 13676870}
+  - 114: {fileID: 11421710}
   m_Layer: 0
   m_Name: Level99MotherOfEnemies
   m_TagString: Wind
@@ -1812,7 +1813,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196504}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: -2.02999997, y: .0166854858, z: -2.71000004}
+  m_LocalPosition: {x: -3.85630345, y: .00834274292, z: 2.66818047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 485816}
@@ -3334,6 +3335,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22b8d827101bcd4385b9b1c7848c37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11421710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c297228d76560a448d81bddd2ac5b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {fileID: 2100000, guid: 12802803ada0db64fab74a5af9cddd46, type: 2}
+  EnemiesToSpawn: 2
 --- !u!114 &11493480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3391,7 +3405,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2962be367a54feb4899770e8e3a42ae1, type: 2}
+  - {fileID: 2100000, guid: 12802803ada0db64fab74a5af9cddd46, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3427,7 +3441,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2962be367a54feb4899770e8e3a42ae1, type: 2}
+  - {fileID: 2100000, guid: 12802803ada0db64fab74a5af9cddd46, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3488,7 +3502,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2962be367a54feb4899770e8e3a42ae1, type: 2}
+  - {fileID: 2100000, guid: 12802803ada0db64fab74a5af9cddd46, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3579,7 +3593,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196504}

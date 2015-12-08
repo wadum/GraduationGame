@@ -72,12 +72,16 @@ public class SaveLoad : MonoBehaviour {
     // When loading a level, we check if it's a special case level, like the intro or the main menu, in which case we do not save.
     void OnLevelWasLoaded(int level)
     {
+        if(level == 11)
+        {
+            return;
+        }
         if (level == 2)
             return;
         PlayerPrefs.SetInt("LastLevel", Application.loadedLevel);
         // 4 = Intro, 3 = Main menu, 10 = Ending, if the build order changes, this also needs to be adjusted, alternative is by name, but they are just as liekly to change or be misspelled.
         // 6 & 8 are cutscenes.
-		if (Application.loadedLevel == 3 || Application.loadedLevel == 4 || Application.loadedLevel == 10)// || Application.loadedLevel == 6 || Application.loadedLevel == 8)
+		if (Application.loadedLevel == 3 || Application.loadedLevel == 4 || Application.loadedLevel == 10 || Application.loadedLevel == 11)// || Application.loadedLevel == 6 || Application.loadedLevel == 8)
             // We simple set the interval for saving to 0, and we do not save.
             SaveLoad.saveLoad.SaveInterval = 0f;
         else
