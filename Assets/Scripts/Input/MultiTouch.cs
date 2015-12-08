@@ -41,23 +41,21 @@ public class MultiTouch : MonoBehaviour
         _instance = this;
     }
 
-    void Start()
-    {
+    private void Start() {
         _prevVolume = TapAndHoldCharge.volume;
         var gui = GameObject.FindGameObjectWithTag("Gui");
-        if (!gui)
-        {
+        if (!gui) {
             Debug.Log("No tagged canvas Gui, getting canvas by fallback...");
             var canvas = FindObjectOfType<Canvas>();
-            if (canvas){
+            if (canvas) {
                 gui = canvas.gameObject;
-			}
+            }
             else
                 Debug.Log("No canvas found for fallback.");
         }
         if (gui)
             _guiCaster = gui.GetComponentInChildren<GraphicRaycaster>();
-        
+
         if (!_guiCaster)
             Debug.Log("GraphicRaycaster could not be gotten from canvas, ui blocking will not be available.");
 
@@ -65,12 +63,12 @@ public class MultiTouch : MonoBehaviour
         GameObject.FindGameObjectsWithTag("Terrain").ToList().ForEach(obj => obj.layer = LayerMask.NameToLayer(TapAndHoldIgnoreLayer));
     }
 
-    void OnEnable() {
-		_tapAndHoldIndicator = GameObject.FindGameObjectWithTag("Gui").GetComponentInChildren<RadialSlider>();
+    private void OnEnable() {
+        _tapAndHoldIndicator = GameObject.FindGameObjectWithTag("Gui").GetComponentInChildren<RadialSlider>();
         StartCoroutine(AwaitInput());
     }
 
-    void OnDisable() {
+    private void OnDisable() {
         StopAllCoroutines();
         SetTapAndHoldValue(0, false);
     }
@@ -80,12 +78,9 @@ public class MultiTouch : MonoBehaviour
         var tapCharge = 0f;
         var currentTapChargeVelocity = 0f;
         const float baseDechargeAcceleration = 7f;
-        Func<float, float> normalizeCharge = charge =>
-            charge >= TapHoldSeconds ? 1f :
-            charge <= 0f ? 0f :
-            charge / TapHoldSeconds;
+        Func<float, float> normalizeCharge = charge => charge >= TapHoldSeconds? 1f: charge <= 0f? 0f: charge/TapHoldSeconds;
 
-		var firedTapAndHold = false;
+        var firedTapAndHold = false;
 
         while (true) {
             // We calculate the current tapCharge based on the information from the last frame.
@@ -95,7 +90,7 @@ public class MultiTouch : MonoBehaviour
                     currentTapChargeVelocity = 0f;
                 }
 
-                tapCharge += Time.deltaTime * currentTapChargeVelocity;
+                tapCharge += Time.deltaTime*currentTapChargeVelocity;
 
                 if (tapCharge > TapHoldSeconds) {
                     tapCharge = TapHoldSeconds;
@@ -116,7 +111,6 @@ public class MultiTouch : MonoBehaviour
             }
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Began) {
-
                 var touch = touches[0];
                 if (InteractableObjectInRange(touch.position)) {
                     _tapAndHoldIndicator.SetPosition(touch.position);
@@ -132,7 +126,7 @@ public class MultiTouch : MonoBehaviour
 
             if (touches.Count == 1 && touches[0].phase == TouchPhase.Ended) {
                 if (tapCharge <= TapHoldSeconds && !firedTapAndHold)
-					HandleTap(touches[0].position);
+                    HandleTap(touches[0].position);
 
                 if (firedTapAndHold) {
                     tapCharge = 0;
@@ -150,7 +144,7 @@ public class MultiTouch : MonoBehaviour
 
                 if (InteractableObjectInRange(touch.position)) {
                     SetTapAndHoldValue(normalizeCharge(tapCharge), true);
-    				_tapAndHoldIndicator.SetPosition(touch.position);
+                    _tapAndHoldIndicator.SetPosition(touch.position);
                 }
                 else {
                     if (!firedTapAndHold) {
@@ -160,14 +154,14 @@ public class MultiTouch : MonoBehaviour
                     }
                 }
 
-				if(tapCharge >= TapHoldSeconds && !firedTapAndHold){
-					var position = touch.position;
+                if (tapCharge >= TapHoldSeconds && !firedTapAndHold) {
+                    var position = touch.position;
                     firedTapAndHold = true;
-	                HandleTapAndHold(position);
+                    HandleTapAndHold(position);
 
-	                yield return null;
-	                continue;
-				}
+                    yield return null;
+                    continue;
+                }
             }
 
             if (touches.Count > 1 || touches.Any(t => t.phase == TouchPhase.Moved && t.deltaPosition.magnitude > SwipeSensitivity)) {
@@ -193,13 +187,12 @@ public class MultiTouch : MonoBehaviour
     }
 
     private void SetTapAndHoldValue(float val, bool touching) {
-        if (!_tapAndHoldIndicator || !TapAndHoldCharge) 
+        if (!_tapAndHoldIndicator || !TapAndHoldCharge)
             return;
 
         if (val <= 0) {
             _tapAndHoldIndicator.SetValue(0);
-            if (TapAndHoldCharge.isPlaying)
-            {
+            if (TapAndHoldCharge.isPlaying) {
                 StopCoroutine("StopSound");
                 StartCoroutine("StopSound", TapAndHoldCharge);
             }
@@ -208,8 +201,7 @@ public class MultiTouch : MonoBehaviour
 
         if (val >= 1) {
             _tapAndHoldIndicator.SetValue(1);
-            if (TapAndHoldCharge.isPlaying)
-            {
+            if (TapAndHoldCharge.isPlaying) {
                 StopCoroutine("StopSound");
                 StartCoroutine("StopSound", TapAndHoldCharge);
             }
@@ -218,25 +210,22 @@ public class MultiTouch : MonoBehaviour
 
         _tapAndHoldIndicator.SetValue(val);
 
-        if (touching && !TapAndHoldCharge.isPlaying){
-			TapAndHoldCharge.time = TapAndHoldCharge.clip.length * val;
+        if (touching && !TapAndHoldCharge.isPlaying) {
+            TapAndHoldCharge.time = TapAndHoldCharge.clip.length*val;
             StopCoroutine("StopSound");
             TapAndHoldCharge.volume = _prevVolume;
             TapAndHoldCharge.Play();
-		}
-        if (!touching && TapAndHoldCharge.isPlaying)
-        {
+        }
+        if (!touching && TapAndHoldCharge.isPlaying) {
             StopCoroutine("StopSound");
             StartCoroutine("StopSound", TapAndHoldCharge);
         }
     }
 
-    private IEnumerator StopSound(AudioSource a)
-    {
+    private IEnumerator StopSound(AudioSource a) {
         float time = Time.time + VolumeFadeTime;
-        var amount = _prevVolume / (Time.deltaTime / VolumeFadeTime);
-        while (time > Time.time)
-        {
+        var amount = _prevVolume/(Time.deltaTime/VolumeFadeTime);
+        while (time > Time.time) {
             a.volume -= amount;
             yield return null;
         }
@@ -284,35 +273,31 @@ public class MultiTouch : MonoBehaviour
         }
 
         var obj = hit.Value.transform.gameObject;
-		List<Func<RaycastHit, bool>> handlers;
+        List<Func<RaycastHit, bool>> handlers;
         if (TapEventHandlers.TryGetValue(obj.tag, out handlers))
-            foreach(var handler in handlers) {
+            foreach (var handler in handlers) {
                 handler(hit.Value);
-		}
+            }
 
-		if (!GameOverlayController.gameOverlayController.IsCurrentlySelected(obj))
-			GameOverlayController.gameOverlayController.DeactivateSlider();
+        if (!GameOverlayController.gameOverlayController.IsCurrentlySelected(obj))
+            GameOverlayController.gameOverlayController.DeactivateSlider();
     }
 
-    private void HandleTapAndHold(Vector3 position)
-    {
+    private void HandleTapAndHold(Vector3 position) {
         _tapAndHoldIndicator.SetValue(2);
 
         var hit = Raycast(position, TapAndHoldIgnoreBitMask);
-		List<Func<RaycastHit, bool>> handlers;
+        List<Func<RaycastHit, bool>> handlers;
         if (hit.HasValue && TapAndHoldEventHandlers.TryGetValue(hit.Value.collider.tag, out handlers))
-            if (handlers.Any(h => !h(hit.Value)))
-            {
+            if (handlers.Any(h => !h(hit.Value))) {
                 _tapAndHoldIndicator.TransitionWrong();
                 TapAndHoldFail.Play();
             }
-            else
-            {
+            else {
                 _tapAndHoldIndicator.TransitionRight();
                 TapAndHoldSucces.Play();
             }
-        else
-        {
+        else {
             _tapAndHoldIndicator.TransitionWrong();
             TapAndHoldFail.Play();
         }
@@ -320,8 +305,7 @@ public class MultiTouch : MonoBehaviour
     #endregion
 
     #region registration of handlers
-	public static Func<RaycastHit, bool> RegisterTapHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
-    {
+    public static Func<RaycastHit, bool> RegisterTapHandlerByTag(string objTag, Func<RaycastHit, bool> handler) {
         if (string.IsNullOrEmpty(objTag))
             return handler;
 
@@ -333,8 +317,7 @@ public class MultiTouch : MonoBehaviour
         return handler;
     }
 
-	public static Func<RaycastHit, bool> RegisterTapAndHoldHandlerByTag(string objTag, Func<RaycastHit, bool> handler)
-    {
+    public static Func<RaycastHit, bool> RegisterTapAndHoldHandlerByTag(string objTag, Func<RaycastHit, bool> handler) {
         if (string.IsNullOrEmpty(objTag))
             return handler;
 
@@ -401,11 +384,10 @@ public class MultiTouch : MonoBehaviour
     #endregion
 
     #region private helpers
-    private List<Touch> GetTouches()
-    {
+    private List<Touch> GetTouches() {
         var touches = Input.touches.ToList();
 
-        if (SimulateMouseTapInEditor && Application.isEditor) {
+        if ((SimulateMouseTapInEditor && Application.isEditor) || (SystemInfo.deviceType == DeviceType.Desktop && !Application.isEditor)) {
             var fake = MouseToTouch.GetTouch(SwipeSensitivity);
             if (fake.HasValue)
                 touches.Add(fake.Value);
@@ -417,15 +399,11 @@ public class MultiTouch : MonoBehaviour
     private static RaycastHit? Raycast(Vector3 position, int? layerMask = null) {
         var ray = Camera.main.ScreenPointToRay(position);
         RaycastHit hit;
-        
-        if (layerMask.HasValue)
-            return Physics.Raycast(ray, out hit, float.PositiveInfinity, layerMask.Value)?
-                (RaycastHit?)hit :
-                null;
 
-        return Physics.Raycast(ray, out hit)?
-            (RaycastHit?)hit :
-            null;
+        if (layerMask.HasValue)
+            return Physics.Raycast(ray, out hit, float.PositiveInfinity, layerMask.Value)? (RaycastHit?) hit: null;
+
+        return Physics.Raycast(ray, out hit)? (RaycastHit?) hit: null;
     }
 
     /// <summary>
@@ -437,12 +415,11 @@ public class MultiTouch : MonoBehaviour
     /// </summary>
     /// <param name="pointer">The position of the pointer in screen pixel coordinates</param>
     /// <returns>Whether or not the pointer is over an active ui element</returns>
-    private bool IsPointerOverGui(Vector2 pointer)
-    {
+    private bool IsPointerOverGui(Vector2 pointer) {
         if (!_guiCaster)
             return false;
 
-        var fakePointerEvent = new PointerEventData(EventSystem.current) {position = pointer};;
+        var fakePointerEvent = new PointerEventData(EventSystem.current) {position = pointer};
         var hits = new List<RaycastResult>();
         _guiCaster.Raycast(fakePointerEvent, hits);
 
