@@ -275,7 +275,7 @@ public class CharacterJumping : MonoBehaviour
         if (lookDirection != Vector3.zero) {
             var lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
             while (Vector3.Angle(lookDirection, transform.forward) > 0.1f) {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 5f);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * 140f);
                 yield return null;
             }
         }
